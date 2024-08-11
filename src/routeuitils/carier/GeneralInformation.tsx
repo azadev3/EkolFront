@@ -1,0 +1,124 @@
+import React from "react";
+import { useRecoilValue } from "recoil";
+import { SelectedLanguageState } from "../../recoil/Atoms";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { Baseurl } from "../../Baseurl";
+import { v4 as uuidv4 } from "uuid";
+import { useTranslate } from "../../context/TranslateContext";
+
+interface GeneralInformationData {
+  backgroundImage: string;
+  title: string;
+}
+
+interface WhyEkolDataType {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface RecruitmentProcessType {
+  order: string;
+  title: string;
+  description: string;
+}
+
+const GeneralInformation: React.FC = () => {
+  const { translations } = useTranslate();
+
+  // FETCH CAREER BACKGROUND TİTLE SECTİON DATA (general information image data)
+  const selectedlang = useRecoilValue(SelectedLanguageState);
+
+  const { data: careerOpportunitiesBackgroundData } = useQuery<GeneralInformationData>({
+    queryKey: ["careerOpportunitiesBackgroundDataKey", selectedlang],
+    queryFn: async () => {
+      const response = await axios.get(`${Baseurl}/careerOpportunitiesBackgroundForFront`, {
+        headers: {
+          "Accept-Language": selectedlang,
+        },
+      });
+      return response.data;
+    },
+    staleTime: 1000000,
+  });
+
+  // FETCH CAREER WHY ECOL DATA
+  const { data: whyEcolData } = useQuery<WhyEkolDataType[]>({
+    queryKey: ["whyEcolDataKey", selectedlang],
+    queryFn: async () => {
+      const response = await axios.get(`${Baseurl}/whyecolfront`, {
+        headers: {
+          "Accept-Language": selectedlang,
+        },
+      });
+      return response.data;
+    },
+    staleTime: 1000000,
+  });
+
+  // FETCH CAREER RECRUİTMENT PROCESS
+  const { data: recruitmentData } = useQuery<RecruitmentProcessType[]>({
+    queryKey: ["recruitmentDataKey", selectedlang],
+    queryFn: async () => {
+      const response = await axios.get(`${Baseurl}/recruitmentprocessfront`, {
+        headers: {
+          "Accept-Language": selectedlang,
+        },
+      });
+      return response.data;
+    },
+    staleTime: 1000000,
+  });
+
+  return (
+    <section className="general-information">
+      {careerOpportunitiesBackgroundData && Object.values(careerOpportunitiesBackgroundData).length > 0
+        ? Object.values(careerOpportunitiesBackgroundData).map((item: GeneralInformationData) => (
+            <div key={uuidv4()} className="wrapper-image-general">
+              <img src={`http://localhost:3000${item?.backgroundImage}`} alt={`${uuidv4()}-image`} />
+              <h4>{item?.title}</h4>
+            </div>
+          ))
+        : ""}
+
+      <div className="why-ekol-section">
+        <h2>{translations["niye_ekol"]}</h2>
+
+        <div className="grid-ekol-item">
+          {whyEcolData && whyEcolData.length > 0
+            ? whyEcolData.map((item: WhyEkolDataType) => (
+                <div className="item" key={uuidv4()}>
+                  <div className="icon-mini">
+                    <img src={`http://localhost:3000${item?.icon}`} alt={`${uuidv4()}-icon`} title={item?.title} />
+                  </div>
+                  <strong>{item?.title}</strong>
+                  <p>{item?.description}</p>
+                </div>
+              ))
+            : ""}
+        </div>
+      </div>
+
+      <div className="recruitment-process">
+        <h4>{translations["ise_qebul_prosesi"]}</h4>
+
+        <div className="process">
+          {recruitmentData && recruitmentData.length > 0
+            ? recruitmentData.map((item: RecruitmentProcessType) => (
+                <div key={uuidv4()} className="process-item">
+                  <div className="order-number">
+                    <span>{item?.order}</span>
+                  </div>
+                  <h5>{item?.title}</h5>
+                  <p>{item?.description}</p>
+                </div>
+              ))
+            : ""}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default GeneralInformation;
