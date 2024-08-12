@@ -119,7 +119,7 @@ const Hero: React.FC = () => {
             {hasHero
               ? heroData.map((item: HeroDataType, index: number) => (
                   <SwiperSlide key={index}>
-                    <img src={`http://localhost:3000${item?.image}`} alt={`${item?._id}-image`} />
+                    <img src={`https://ekol-server.onrender.com${item?.image}`} alt={`${item?._id}-image`} />
                     <div className="slide-content">
                       <div className="left">
                         <h1>{item?.title}</h1>
@@ -139,7 +139,7 @@ const Hero: React.FC = () => {
                           ? SocialsData.map((item: SocialsType) => (
                               <Link key={item?._id} to={item?.link} className="icon">
                                 <img
-                                  src={`http://localhost:3000${item?.icon}`}
+                                  src={`https://ekol-server.onrender.com${item?.icon}`}
                                   alt={`${item?._id}-icon`}
                                   title={item?.link}
                                 />

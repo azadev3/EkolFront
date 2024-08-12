@@ -1,1 +1,2 @@
-export const Baseurl = "http://localhost:3000/api";
+// export const Baseurl = "https://ekol-server.onrender.com/api";
+export const Baseurl = "https://ekol-server.onrender.com/api";

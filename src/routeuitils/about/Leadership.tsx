@@ -62,7 +62,7 @@ const Leadership: React.FC = () => {
                     >
                       <div className="profile">
                         <img
-                          src={`http://localhost:3000${item?.profile}`}
+                          src={`https://ekol-server.onrender.com${item?.profile}`}
                           alt={`${item?._id}-profile`}
                           title={item?.nameSurname}
                         />

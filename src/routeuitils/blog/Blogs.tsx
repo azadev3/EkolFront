@@ -70,7 +70,7 @@ const Blogs: React.FC = () => {
               ? blogData.slice(0, paginate).map((item: BlogType, index: number) => (
                   <article className="blog-item-blogpage" key={index}>
                     <div className="image-blog">
-                      <img src={`http://localhost:3000${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
+                      <img src={`https://ekol-server.onrender.com${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
                     </div>
 
                     <div className="descriptions-blog">

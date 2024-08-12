@@ -45,7 +45,7 @@ const WhoWeAre: React.FC = () => {
                 <h2>{item?.title}</h2>
 
                 <div className="image-container">
-                  <img src={`http://localhost:3000${item?.image}`} alt={`${item?._id}-img`} title={item?.title} />
+                  <img src={`https://ekol-server.onrender.com${item?.image}`} alt={`${item?._id}-img`} title={item?.title} />
                 </div>
 
                 <div className="description-container">

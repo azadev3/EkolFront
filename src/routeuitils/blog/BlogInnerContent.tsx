@@ -123,7 +123,7 @@ const BlogInnerContent: React.FC = () => {
                 <div className="content-inner-blog-image-wrapper">
                   <img
                     loading="lazy"
-                    src={`http://localhost:3000${innerBlogItem?.image}`}
+                    src={`https://ekol-server.onrender.com${innerBlogItem?.image}`}
                     title={innerBlogItem?.title}
                   />
                 </div>

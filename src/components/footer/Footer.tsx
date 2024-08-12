@@ -183,7 +183,7 @@ const Footer: React.FC = () => {
                       {SocialsData.map((links: SocialsType) => (
                         <Link target="_blank" key={links._id} to={links.link} className="link-social">
                           <img
-                            src={`http://localhost:3000${links.icon}`}
+                            src={`https://ekol-server.onrender.com${links.icon}`}
                             alt={`${links._id}-icon`}
                             title={links.link}
                           />

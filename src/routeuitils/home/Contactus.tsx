@@ -126,7 +126,7 @@ const Contactus: React.FC = () => {
                   {item?.telephones?.map((item: Telephones, indextwo: number) => (
                     <div key={indextwo} className="information-box">
                       <div className="left-icon">
-                        <img src={`http://localhost:3000${item?.logo}`} alt={`${indextwo}-logo`} title={item?.title} />
+                        <img src={`https://ekol-server.onrender.com${item?.logo}`} alt={`${indextwo}-logo`} title={item?.title} />
                       </div>
                       <div className="right-items">
                         <strong>{item?.title}</strong>
@@ -140,7 +140,7 @@ const Contactus: React.FC = () => {
                   <div key={Math.random()} className="information-box">
                     <div className="left-icon">
                       <img
-                        src={`http://localhost:3000${item?.faks.logo}`}
+                        src={`https://ekol-server.onrender.com${item?.faks.logo}`}
                         alt={`${index}-logo`}
                         title={item?.faks.title}
                       />
@@ -156,7 +156,7 @@ const Contactus: React.FC = () => {
                   <div key={Math.random()} className="information-box">
                     <div className="left-icon">
                       <img
-                        src={`http://localhost:3000${item?.location.logo}`}
+                        src={`https://ekol-server.onrender.com${item?.location.logo}`}
                         alt={`${index}-logo`}
                         title={item?.location.title}
                       />
@@ -172,7 +172,7 @@ const Contactus: React.FC = () => {
                   <div key={Math.random()} className="information-box">
                     <div className="left-icon">
                       <img
-                        src={`http://localhost:3000${item?.email.logo}`}
+                        src={`https://ekol-server.onrender.com${item?.email.logo}`}
                         alt={`${index}-logo`}
                         title={item?.email.title}
                       />

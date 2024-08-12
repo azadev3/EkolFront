@@ -76,7 +76,7 @@ const ServicesActivity: React.FC = () => {
                 <div className="service-image-container">
                   {hasServicesData && serviceImage && (
                     <img
-                      src={`http://localhost:3000${serviceImage}`}
+                      src={`https://ekol-server.onrender.com${serviceImage}`}
                       alt={`service-${selectedService}-image`}
                       loading="lazy"
                     />

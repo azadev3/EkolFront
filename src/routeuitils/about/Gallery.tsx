@@ -74,7 +74,7 @@ const Gallery: React.FC = () => {
                   key={uuidv4()}
                   >
                   <img
-                    src={`http://localhost:3000${item?.backgroundImage}`}
+                    src={`https://ekol-server.onrender.com${item?.backgroundImage}`}
                     alt={`${item?._id}-image`}
                     title={item?.title}
                   />

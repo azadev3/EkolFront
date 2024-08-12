@@ -76,7 +76,7 @@ const App: React.FC = () => {
             return _id === item?._id ? item?.pdf : "";
           })
         : "";
-    const url: any = findUrl ? `http://localhost:3000${findUrl?.pdf}` : "";
+    const url: any = findUrl ? `https://ekol-server.onrender.com${findUrl?.pdf}` : "";
     const link = document.createElement("a");
     link.href = url;
     link.download = url.split("/").pop();
@@ -181,7 +181,7 @@ const App: React.FC = () => {
         <div className="leadership-modal" ref={leadershipModalRef}>
           <div className="top-profile-and-user-info">
             <div className="profile">
-              <img src={isLeadershipData ? `http://localhost:3000${isLeadershipData?.profile}` : ""} alt="" />
+              <img src={isLeadershipData ? `https://ekol-server.onrender.com${isLeadershipData?.profile}` : ""} alt="" />
             </div>
             <div className="right-description">
               <div className="top">

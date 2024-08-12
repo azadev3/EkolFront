@@ -47,7 +47,7 @@ const InnerImages: React.FC = () => {
             {isTrueImages ? displayInnerItems?.images?.map((innerimages: Images) => (
               <div key={innerimages?._id} className="innerimage-item">
                 <img
-                  src={innerimages.image ? `http://localhost:3000${innerimages?.image}` : ""}
+                  src={innerimages.image ? `https://ekol-server.onrender.com${innerimages?.image}` : ""}
                   alt={`${innerimages?._id}-image`}
                   loading="lazy"
                 />
