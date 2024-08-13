@@ -11,6 +11,7 @@ import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import DOMPurify from "dompurify";
 import Loader from "../../Loader";
+import { useTranslate } from "../../context/TranslateContext";
 
 export type ServicesContentType = {
   title: string;
@@ -61,16 +62,19 @@ const ServicesActivity: React.FC = () => {
     return "";
   }, [selectedService, hasServicesData, servicesPageData]);
 
+  const { translations } = useTranslate();
+
+
   return (
     <section className="servicesActivity-section">
       <div className="servicesActivity">
-        <Breadcrumb prevpage="Ana səhifə" uri="Xidmətlər" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_xidmetler']} />
 
         {isLoading ? (
           <Loader />
         ) : (
           <div className="container-servicesActivity">
-            <h2>Xidmətlər</h2>
+            <h2>{translations['xidmetler_title']}</h2>
             <div className="container-services">
               <div className="service-items">
                 <div className="service-image-container">

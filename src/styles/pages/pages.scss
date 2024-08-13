@@ -380,7 +380,6 @@
               height: auto;
             }
           }
-          
         }
       }
     }
@@ -430,7 +429,6 @@
               height: auto;
             }
           }
-
         }
       }
     }
@@ -1128,7 +1126,7 @@
           .blog-item-blogpage {
             animation: animatePag 100ms ease-in-out forwards normal;
             width: 100%;
-            height: 538px;
+            height: auto;
             display: flex;
             background: #ffffff;
             border-radius: 4px;
@@ -1215,6 +1213,7 @@
                 position: relative;
                 margin-top: 8px;
                 a {
+                  padding: 0px 18px;
                   text-decoration: none;
                   color: #004238;
                   font-weight: 500;
@@ -1897,14 +1896,14 @@
           width: 100%;
           height: 100%;
         }
-        
+
         .swiper-slide {
           height: 50px;
           text-align: center;
           cursor: pointer;
           font-size: 18px;
-          background: #F0F4EE;
-          color: #000000CC;
+          background: #f0f4ee;
+          color: #000000cc;
           font-weight: 400;
           font-size: 16px;
           padding: 12px 24px;
@@ -1915,25 +1914,23 @@
           &:active {
             transform: scale(0.98);
           }
-        
+
           &.actived {
-            color: #FFFFFF;
+            color: #ffffff;
             font-weight: 500;
             font-size: 16px;
-            background-color: #30B258;
+            background-color: #30b258;
             cursor: auto;
-            border-radius: 4px; 
+            border-radius: 4px;
           }
         }
-        
-        
+
         .swiper-slide img {
           display: block;
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
-
       }
 
       .container-contact {
@@ -1976,26 +1973,26 @@
               @include flex();
               position: relative;
               border-radius: 4px;
-             .map-wrapper {
-              width: 100%;
-              height: 100%;
-              @include flex();
-              overflow: hidden;
-              .loader-container {
-                position: absolute;
+              .map-wrapper {
                 width: 100%;
                 height: 100%;
                 @include flex();
-                .loader {
+                overflow: hidden;
+                .loader-container {
+                  position: absolute;
+                  width: 100%;
+                  height: 100%;
                   @include flex();
+                  .loader {
+                    @include flex();
+                  }
+                }
+                iframe {
+                  width: 100%;
+                  height: 100%;
+                  border-radius: 4px;
                 }
               }
-              iframe {
-                width: 100%;
-                height: 100%;
-                border-radius: 4px;
-              }
-             }
 
               .contact-information-box {
                 position: absolute;
@@ -2727,6 +2724,7 @@
 
           .item-service {
             width: 100%;
+            min-width: 100%;
             height: auto;
             background: #ffffff;
             box-shadow: 4px 0px 12px 0px #0000000a;
@@ -3431,8 +3429,8 @@
               font-weight: 400;
               font-size: 16px;
               @include noneOverflow();
-              -webkit-line-clamp: 2;
-              line-clamp: 2;
+              -webkit-line-clamp: 1;
+              line-clamp: 1;
             }
             .dot {
               width: 6px;
@@ -3441,12 +3439,14 @@
               border-radius: 100px;
             }
             .time-and-view {
+              width: 100%;
               display: flex;
               align-items: center;
               justify-content: flex-start;
               margin-left: calc(20px - 8px);
               gap: 12px;
               article {
+                width: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;
@@ -3454,10 +3454,11 @@
                 p {
                   color: #000000cc;
                   font-weight: 400;
+                  text-wrap: nowrap;
                   font-size: 14px;
                   @include noneOverflow();
-                  -webkit-line-clamp: 1;
-                  line-clamp: 1;
+                  -webkit-line-clamp: 2;
+                  line-clamp: 2;
                 }
                 img {
                   width: 24px;
@@ -3468,6 +3469,7 @@
           }
         }
         .request-btn {
+          padding: 0px 18px;
           text-decoration: none;
           min-width: 134px;
           height: 48px;
@@ -3616,6 +3618,7 @@
             min-width: 134px;
             text-decoration: none;
             height: 48px;
+            padding: 0px 18px;
             border-radius: 4px;
             display: flex;
             align-items: center;

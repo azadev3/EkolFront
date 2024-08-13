@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import DOMPurify from 'dompurify';
+import { useTranslate } from "../../context/TranslateContext";
 
 interface OurWorksInnerInterface {
   title: string,
@@ -48,13 +49,15 @@ const OurWorks: React.FC = () => {
     setSelectItem(i);
   };
 
+  const { translations } = useTranslate();
+
   return (
     <section className="ourworks-section">
       <div className="works">
-        <Breadcrumb prevpage="Ana səhifə" uri="Gördüyümüz işlər" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['gorduyumuz_isler_title']} />
 
         <div className="container-works">
-          <h2>Gördüyümüz işlər</h2>
+          <h2>{translations['gorduyumuz_isler_title']}</h2>
 
           <div className="grid-works">
             <div className="navigation-content">

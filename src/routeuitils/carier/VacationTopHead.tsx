@@ -6,6 +6,7 @@ import { Baseurl } from "../../Baseurl";
 import { useQuery } from "@tanstack/react-query";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useRecoilValue } from "recoil";
+import { useTranslate } from "../../context/TranslateContext";
 
 const VacationTopHead: React.FC = () => {
   const { vacid } = useParams<{ vacid: string }>();
@@ -29,6 +30,8 @@ const VacationTopHead: React.FC = () => {
   const innerVacancy = vacationData?.find((item: Vacations) => {
     return vacid?.toLowerCase() === item?.title.toLowerCase();
   });
+
+  const { translations } = useTranslate();
 
   return (
     <article className="vacation-top-description">
@@ -57,7 +60,7 @@ const VacationTopHead: React.FC = () => {
       <Link
         to={`/karyera/${innerVacancy?.title?.toLowerCase()}/${innerVacancy?.title?.toLowerCase()}`}
         className="request-btn">
-        Müraciət et
+        {translations['muraciet_et_title']}
       </Link>
     </article>
   );

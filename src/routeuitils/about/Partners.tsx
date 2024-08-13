@@ -55,7 +55,7 @@ const Partners: React.FC = () => {
   return (
     <section className="partner-section">
       <div className="partners">
-        <Breadcrumb prevpage="Ana səhifə" uri="Partnyorlar" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_partnyorlar']} />
 
         <div className="partners-container">
           <h2>{translations["partners_title"]}</h2>

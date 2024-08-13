@@ -131,7 +131,7 @@ const Contactus: React.FC = () => {
                       <div className="right-items">
                         <strong>{item?.title}</strong>
                         <div className="links">
-                          <Link to="">{item?.value}</Link>
+                          <Link to={`tel:${item?.value}`}>{item?.value}</Link>
                         </div>
                       </div>
                     </div>
@@ -148,7 +148,7 @@ const Contactus: React.FC = () => {
                     <div className="right-items">
                       <strong>{item?.faks.title}</strong>
                       <div className="links">
-                        <Link to="">{item?.faks.value}</Link>
+                        <Link to={`tel:${item?.faks.value}`}>{item?.faks.value}</Link>
                       </div>
                     </div>
                   </div>
@@ -180,7 +180,7 @@ const Contactus: React.FC = () => {
                     <div className="right-items">
                       <strong>{item?.email.title}</strong>
                       <div className="links">
-                        <Link to="">{item?.email.value}</Link>
+                        <Link to={`mailto:${item.email.value}`}>{item?.email.value}</Link>
                       </div>
                     </div>
                   </div>

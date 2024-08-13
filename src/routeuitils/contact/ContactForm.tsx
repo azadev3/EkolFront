@@ -89,13 +89,25 @@ const ContactForm: React.FC = () => {
   return (
     <section className="contact-section">
       <div className="contact">
-        <Breadcrumb prevpage="Ana səhifə" uri="Əlaqə" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_elaqe']} />
 
         <div className="container-contact">
           <h2>{translations["bizimle_elaqe"]}</h2>
 
           <div className="container-locations">
-            <Swiper className="mySwiper" slidesPerView={9} spaceBetween={12}>
+            <Swiper className="mySwiper" spaceBetween={12}
+            breakpoints={{
+              268: {
+                slidesPerView: 2,
+              },
+              568: {
+                slidesPerView: 3,
+              },
+              968: {
+                slidesPerView: 9,
+              }
+            }}
+            >
               {hasLocationData &&
                 locationData?.map((item: LocationInterface) => (
                   <SwiperSlide
@@ -159,19 +171,19 @@ const ContactForm: React.FC = () => {
 
           <section className="form-area">
             <div className="left-texts">
-              <h3>Müraciət et, əlaqə saxlayaq!</h3>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <h3>{translations['form_title']}</h3>
+              <p>{translations['form_paragraph']}</p>
             </div>
 
             <div className="form">
               <form ref={formRef} onSubmit={handleSubmitForm}>
                 <div className="field-input">
                   <img src="/pers.png" alt="pers" />
-                  <input className="name_surname" name="name_surname" placeholder="Ad və soyad" type="text" required />
+                  <input className="name_surname" name="name_surname" placeholder={translations['form_namesurname']} type="text" required />
                 </div>
                 <div className="field-input">
                   <img src="/email.png" alt="email" />
-                  <input className="email" name="email" placeholder="Email" type="email" required />
+                  <input className="email" name="email" placeholder={translations['form_email']} type="email" required />
                 </div>
                 <div className="field-input">
                   <select name="prefix" required>
@@ -192,14 +204,14 @@ const ContactForm: React.FC = () => {
                   />
                 </div>
                 <div className="field-input">
-                  <textarea className="record" name="record" placeholder="Qeyd:" required />
+                  <textarea className="record" name="record" placeholder={translations['form_record']} required />
                 </div>
                 <button
                   style={{ cursor: loading ? "auto" : "pointer", background: loading ? "transparent" : "" }}
                   disabled={loading}
                   type="submit"
                   className="send">
-                  {loading ? <Loader /> : "Göndər"}
+                  {loading ? <Loader /> : translations['send_button']}
                 </button>
               </form>
             </div>

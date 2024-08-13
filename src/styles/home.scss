@@ -500,6 +500,8 @@
             text-align: start;
           }
           p {
+            max-width: 460px;
+            max-height: 50px;
             text-align: start;
             color: #000000cc;
             font-weight: 400;
@@ -508,6 +510,9 @@
             @include noneOverflow();
             -webkit-line-clamp: 5;
             line-clamp: 5;
+            img {
+              display: none;
+            }
           }
 
           .show-more {
@@ -517,6 +522,7 @@
             background-color: #30b258;
             border-radius: 4px;
             min-width: 128px;
+            padding: 0px 18px;
             height: 48px;
             text-decoration: none;
             color: #ffffff;
@@ -686,6 +692,8 @@
               justify-content: flex-end;
               position: relative;
               a {
+              padding: 0px 18px;
+
                 text-decoration: none;
                 color: #004238;
                 font-weight: 500;
@@ -759,6 +767,7 @@
           position: absolute;
           z-index: 10;
           right: 6px;
+          padding: 0px 18px;
           min-width: 106px;
           height: 44px;
           @include flex();
@@ -838,7 +847,7 @@
 
         .contact-information-box {
           position: absolute;
-          z-index: 100;
+          z-index: 90;
           left: 12px;
           top: 12px;
           bottom: 12px;

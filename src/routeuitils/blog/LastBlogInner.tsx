@@ -6,6 +6,7 @@ import axios from "axios";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useRecoilValue } from "recoil";
 import moment from "moment";
+import { useTranslate } from "../../context/TranslateContext";
 
 type LastBlogType = {
   _id: number;
@@ -85,14 +86,17 @@ const LastBlogInner: React.FC = () => {
   }, [selectedlang]);
 
   const navigate = useNavigate();
+  const { translations } = useTranslate();
+
+
 
   return (
     <section className="last-blog-inner-content-section">
       <div className="blogs-inner">
-        <Breadcrumb prevpage="Ana səhifə" uri="Bloqlar" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_xeberler']} />
 
         <div className="container-blogs-inner">
-          <h2>Bloqlar</h2>
+          <h2>{translations['blog_title']}</h2>
 
           <div className="col-blogs-inner">
             <h3>{lastBlogItem?.title}</h3>

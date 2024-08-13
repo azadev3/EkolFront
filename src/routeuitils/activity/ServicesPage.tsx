@@ -8,6 +8,7 @@ import { ServicesContentType } from "./ServicesActivity";
 import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import Loader from "../../Loader";
+import { useTranslate } from "../../context/TranslateContext";
 
 const ServicesPage: React.FC = () => {
   //Fetch services
@@ -28,16 +29,18 @@ const ServicesPage: React.FC = () => {
 
   const hasServicesPageData = servicesPageData && servicesPageData?.length > 0;
 
+  const { translations } = useTranslate();
+
   return (
     <section className="servicespage-section">
       <div className="servicespage">
-        <Breadcrumb prevpage="Ana səhifə" uri="Xidmətlər" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_xidmetler']} />
 
         {isLoading ? (
           <Loader />
         ) : (
           <div className="container-servicespage">
-            <h2>Xidmətlər</h2>
+            <h2>{translations['xidmetler_title']}</h2>
             <div className="container-services-grid">
               {hasServicesPageData &&
                 servicesPageData?.map((item: ServicesContentType, i: number) => (
@@ -48,7 +51,7 @@ const ServicesPage: React.FC = () => {
                         <p dangerouslySetInnerHTML={{ __html: item.description.slice(0, 200) }} />
                       </article>
                       <Link to={`/fealiyyet/xidmetler/${item?.title}`} className="btn-more">
-                        <span>Ətraflı bax</span>
+                        <span>{translations['etrafli_bax_button']}</span>
                         <img src="/righte.svg" alt="right" />
                       </Link>
                     </div>

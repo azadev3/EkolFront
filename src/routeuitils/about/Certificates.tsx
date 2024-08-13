@@ -7,6 +7,7 @@ import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import DOMPurify from "dompurify";
 import Loader from "../../Loader";
+import { useTranslate } from "../../context/TranslateContext";
 
 interface Certificates {
   _id: string;
@@ -32,13 +33,15 @@ const Certificates: React.FC = () => {
 
   const hasCertificatesData = certificatesData && certificatesData?.length > 0;
 
+  const { translations } = useTranslate();
+
   return (
     <section className="certificates-section">
       {isLoading ? (
         <Loader />
       ) : (
         <div className="certificates">
-          <Breadcrumb prevpage="Ana səhifə" uri="Sertifikatlar" />
+          <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_sertifikatlar']} />
 
           {hasCertificatesData
             ? certificatesData?.map((item: Certificates) => (

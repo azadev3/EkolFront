@@ -10,6 +10,7 @@ import axios from "axios";
 import moment from "moment";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Loader";
+import { useTranslate } from "../../context/TranslateContext";
 
 const Blogs: React.FC = () => {
   //pagination
@@ -57,13 +58,15 @@ const Blogs: React.FC = () => {
     return formattedDate;
   };
 
+  const { translations } = useTranslate();
+
   return (
     <section className="blogs-section">
       <div className="blogs">
-        <Breadcrumb prevpage="Ana səhifə" uri="Bloqlar" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_xeberler']} />
 
         <div className="container-blogs">
-          <h2>Bloqlar</h2>
+          <h2>{translations['blog_title']}</h2>
 
           <section className="blog-grid-blogpage">
             {blogData && blogData.length > 0

@@ -7,22 +7,19 @@ import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import { useTranslate } from "../../context/TranslateContext";
 import { FaAngleDown } from "react-icons/fa6";
-import { useRecoilState } from "recoil";
-import { isMobileState } from "../../recoil/Atoms";
-import MobileHeader from "./MobileHeader";
 
 export interface Logo {
   _id: string;
   logo: string;
 }
 
-export type submenuType = {
+type submenuType = {
   id: number;
   title: string;
   to?: string;
 };
 
-export type HeaderElementType = {
+type HeaderElementType = {
   id: number;
   title: string;
   to: string;
@@ -30,7 +27,7 @@ export type HeaderElementType = {
   submenu?: submenuType[];
 };
 
-const Header: React.FC = () => {
+const ScrollHeader: React.FC = () => {
   const { translations } = useTranslate();
 
   const HeaderItems: HeaderElementType[] = [
@@ -129,29 +126,9 @@ const Header: React.FC = () => {
     return () => document.removeEventListener("mousedown", outsideClicked);
   }, []);
 
-  const [isMobile, setIsMobile] = useRecoilState(isMobileState);
-
-  React.useEffect(() => {
-    const controlSize = () => {
-      if (window.innerWidth <= 968) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
-    };
-
-    controlSize();
-
-    window.addEventListener("resize", controlSize);
-    return () => window.removeEventListener("resize", controlSize);
-  }, []);
-
   return (
-    <header className="header-wrapper">
-      {isMobile ? (
-        <MobileHeader />
-      ) : (
-        <div className="header">
+    <header className="scroll-header">
+      <div className="scroller">
         <Link to="/" className="logo-header">
           {LogoIcon && LogoIcon.length > 0
             ? LogoIcon.map((logo: Logo) => (
@@ -166,8 +143,8 @@ const Header: React.FC = () => {
         </Link>
 
         <nav className="left-navigation" ref={liRef}>
-          {HeaderItems?.map((item: HeaderElementType) => (
-            <ul key={item?.id}>
+          {HeaderItems?.map((item: HeaderElementType, i: number) => (
+            <ul key={i}>
               <li className="links" onClick={() => handleDropdownMenu(item?.id)}>
                 {item.submenu ? (
                   <span className="title-dropdown">{item.title}</span>
@@ -196,9 +173,8 @@ const Header: React.FC = () => {
           </div>
         </section>
       </div>
-      )}
     </header>
   );
 };
 
-export default Header;
+export default ScrollHeader;

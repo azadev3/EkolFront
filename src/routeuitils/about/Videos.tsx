@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import Loader from "../../Loader";
+import { useTranslate } from "../../context/TranslateContext";
 
 type VideosType = {
   _id: string;
@@ -33,13 +34,17 @@ const Videos: React.FC = () => {
     }
   }, [videoData]);
 
+
+  const { translations } = useTranslate();
+
+
   return (
     <section className="videos-section">
       <div className="videos">
-        <Breadcrumb prevpage="Ana səhifə" uri="Videolar" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_videos']} />
 
         <div className="container-videos">
-          <h2>Videolar</h2>
+          <h2>{translations['nav_haqqimizda_videos']}</h2>
           {isLoading ? (
             <Loader />
           ) : isError ? (

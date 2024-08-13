@@ -31,7 +31,7 @@ export const GallerySelectItem: GalleryPageDataType[] = [
   },
   {
     id: 2,
-    title: "Videolar",
+    title: "{translations['nav_haqqimizda_videos']}",
     route: "/about/gallery/videos",
     image: "/imgtwo.svg",
   },
@@ -59,7 +59,7 @@ const Gallery: React.FC = () => {
   return (
     <section className="gallery-section">
       <div className="gallery">
-        <Breadcrumb prevpage="Ana səhifə" uri="Qalereya" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['gallery_page_title']} />
 
         <div className="container-gallery">
           <h2>{translations["gallery_page_title"]}</h2>

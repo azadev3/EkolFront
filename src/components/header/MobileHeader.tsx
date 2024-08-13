@@ -1,36 +1,42 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import { LuListMinus } from "react-icons/lu";
+import { RiCloseLine } from "react-icons/ri";
+import { useQuery } from "@tanstack/react-query";
+import { Baseurl } from "../../Baseurl";
+import axios from "axios";
+import { FaAngleDown } from "react-icons/fa6";
+import { useTranslate } from "../../context/TranslateContext";
 import Search from "./headeruitil/Search";
 import Language from "./headeruitil/Language";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { Baseurl } from "../../Baseurl";
-import { useTranslate } from "../../context/TranslateContext";
-import { FaAngleDown } from "react-icons/fa6";
-import { useRecoilState } from "recoil";
-import { isMobileState } from "../../recoil/Atoms";
-import MobileHeader from "./MobileHeader";
+import { isHomePageState } from "../../App";
+import { useRecoilValue } from "recoil";
 
 export interface Logo {
   _id: string;
   logo: string;
 }
 
-export type submenuType = {
+type submenuType = {
   id: number;
   title: string;
   to?: string;
 };
 
-export type HeaderElementType = {
+type HeaderElementType = {
   id: number;
   title: string;
   to: string;
   icon?: React.JSX.Element | JSX.Element;
   submenu?: submenuType[];
 };
+const MobileHeader: React.FC = () => {
+  const [toggleMenu, setToggleMenu] = React.useState<boolean>(false);
 
-const Header: React.FC = () => {
+  const handleToggleMenu = () => {
+    setToggleMenu((prevMenu) => !prevMenu);
+  };
+
   const { translations } = useTranslate();
 
   const HeaderItems: HeaderElementType[] = [
@@ -102,7 +108,6 @@ const Header: React.FC = () => {
     queryKey: ["logoIconKey"],
     queryFn: async () => {
       const response = await axios.get(`${Baseurl}/logo`);
-      console.log(response.data, "logo");
       return response.data;
     },
     staleTime: 900000,
@@ -129,30 +134,12 @@ const Header: React.FC = () => {
     return () => document.removeEventListener("mousedown", outsideClicked);
   }, []);
 
-  const [isMobile, setIsMobile] = useRecoilState(isMobileState);
-
-  React.useEffect(() => {
-    const controlSize = () => {
-      if (window.innerWidth <= 968) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
-    };
-
-    controlSize();
-
-    window.addEventListener("resize", controlSize);
-    return () => window.removeEventListener("resize", controlSize);
-  }, []);
+  const isHomePage = useRecoilValue(isHomePageState);
 
   return (
-    <header className="header-wrapper">
-      {isMobile ? (
-        <MobileHeader />
-      ) : (
-        <div className="header">
-        <Link to="/" className="logo-header">
+    <div className="mobile-header">
+      <div className={`toggle-menu ${toggleMenu ? "active" : ""}`}>
+        <Link to="" className="logo-mobile">
           {LogoIcon && LogoIcon.length > 0
             ? LogoIcon.map((logo: Logo) => (
                 <img
@@ -165,10 +152,14 @@ const Header: React.FC = () => {
             : ""}
         </Link>
 
-        <nav className="left-navigation" ref={liRef}>
+        <nav className="left-navigation-mobile" ref={liRef}>
           {HeaderItems?.map((item: HeaderElementType) => (
             <ul key={item?.id}>
-              <li className="links" onClick={() => handleDropdownMenu(item?.id)}>
+              <li
+                className="links"
+                onClick={() => {
+                  handleDropdownMenu(item?.id);
+                }}>
                 {item.submenu ? (
                   <span className="title-dropdown">{item.title}</span>
                 ) : (
@@ -179,7 +170,12 @@ const Header: React.FC = () => {
               {dropdown === item.id && item.submenu && (
                 <div className="dropdown-menu" ref={dropdownMenuRef}>
                   {item?.submenu?.map((item: submenuType) => (
-                    <NavLink onClick={() => setDropdown(null)} to={item.to ? item.to : ""} key={item?.id}>
+                    <NavLink
+                      onClick={() => {
+                        setDropdown(null), setToggleMenu(false);
+                      }}
+                      to={item.to ? item.to : ""}
+                      key={item?.id}>
                       {item.title}
                     </NavLink>
                   ))}
@@ -189,16 +185,30 @@ const Header: React.FC = () => {
           ))}
         </nav>
 
-        <section className="right-header-area">
-          <div className="language-and-search-button">
-            <Search />
-            <Language />
-          </div>
-        </section>
+        <div className="lang-and-search-mobile">
+          <Search />
+          <Language />
+        </div>
       </div>
+      <Link to="" className="logo-mobile">
+        {LogoIcon && LogoIcon.length > 0
+          ? LogoIcon.map((logo: Logo) => (
+              <img
+                key={logo._id}
+                src={`https://ekol-server.onrender.com${logo.logo}`}
+                alt={`${logo._id}-logo`}
+                title={logo._id}
+              />
+            ))
+          : ""}{" "}
+      </Link>
+      {toggleMenu ? (
+        <RiCloseLine className="list-icon" onClick={handleToggleMenu} color={isHomePage ? "white" : "black"} />
+      ) : (
+        <LuListMinus className="list-icon" onClick={handleToggleMenu} color={isHomePage ? "white" : "black"} />
       )}
-    </header>
+    </div>
   );
 };
 
-export default Header;
+export default MobileHeader;

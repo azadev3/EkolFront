@@ -3,7 +3,7 @@ import { isHomePageState } from '../../../App';
 import { atom, useRecoilState, useRecoilValue } from 'recoil';
 
 export const searchModalState = atom<boolean>({
-  key: "searchModalStateKey",
+  key: "searchModalState",
   default: false,
 });
 

@@ -9,6 +9,7 @@ import { SelectedLanguageState } from "../../recoil/Atoms";
 import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import Loader from "../../Loader";
+import { useTranslate } from "../../context/TranslateContext";
 export type VacationsType = {
   id: string;
   vacationName: string;
@@ -456,6 +457,8 @@ const Vacations: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const { translations } = useTranslate(); 
+
   return (
     <React.Fragment>
       {isLoading ? (
@@ -465,10 +468,10 @@ const Vacations: React.FC = () => {
           <div className="search-area">
             <div className="search-input">
               <IoIosSearch className="search-icon" />
-              <input type="search" placeholder="Vakansiyanın adı" onChange={handleSearchVacations} value={inputValue} />
+              <input type="search" placeholder={translations['vakansiyanin_adi_title']} onChange={handleSearchVacations} value={inputValue} />
             </div>
             <button className="search-btn" onClick={handleButtonClick}>
-              Axtar
+              {translations['search_button_title']}
             </button>
           </div>
 

@@ -12,6 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Loader";
 import { toast } from "react-toastify";
 import moment from "moment";
+import { useTranslate } from "../../context/TranslateContext";
 
 const VacationFormSchema = yup.object().shape({
   name: yup.string().required("Ad qeyd edilməyib"),
@@ -98,11 +99,13 @@ const RequestVacation: React.FC = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
   //if sended the request set new success component
   const [newComponent, setNewComponent] = React.useState<boolean>(false);
+  const { translations } = useTranslate();
+
 
   return (
     <section className="vacations-request">
       <div className="vacationrequest">
-        <Breadcrumb prevpage="Ana səhifə" uri={requestVacation?.title || ""} />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={requestVacation?.title || ""} />
         {newComponent ? (
           <div className="success-container">
             <div className="content">
@@ -110,10 +113,10 @@ const RequestVacation: React.FC = () => {
                 <div className="verify">
                   <img src="/success.svg" alt="success" />
                 </div>
-                <p>Müraciətiniz uğurla göndərildi</p>
+                <p>{translations['muracietiniz_ugurla_gonderildi']}</p>
               </div>
               <Link to='/' className="get-home">
-              <span>Ana səhifəyə qayıt</span>
+              <span>{translations['ana_sehifeye_qayit_title']}</span>
               <img src="/r.svg" alt="icon-right" />
               </Link>
             </div>
@@ -140,10 +143,10 @@ const RequestVacation: React.FC = () => {
                         {requestVacation?.startDate || ""} - {requestVacation?.endDate || ""}
                       </p>
                     </article>
-                    <article>
+                    {/* <article>
                       <img src="/eyy.png" alt="views" title="Baxış sayı" />
                       <p>112 baxış</p>
-                    </article>
+                    </article> */}
                   </div>
                 </div>
               </div>
@@ -206,15 +209,15 @@ const RequestVacation: React.FC = () => {
                 {({ setFieldValue }) => (
                   <Form>
                     <div className="field-input">
-                      <Field type="text" placeholder="Ad" name="name" />
+                      <Field type="text" placeholder={translations['name']} name="name" />
                       <ErrorMessage name="name" component="p" className="error-msg" />
                     </div>
                     <div className="field-input">
-                      <Field type="text" placeholder="Soyad" name="surname" />
+                      <Field type="text" name="surname" placeholder={translations['soyad']} />
                       <ErrorMessage name="surname" component="p" className="error-msg" />
                     </div>
                     <div className="field-input">
-                      <Field style={{ paddingLeft: "55px" }} type="email" placeholder="Email" name="email" />
+                      <Field style={{ paddingLeft: "55px" }} type="email" placeholder={translations['form_email']} name="email" />
                       <img src="/em.svg" alt="email_icon" />
                       <ErrorMessage name="email" component="p" className="error-msg" />
                     </div>
@@ -224,7 +227,7 @@ const RequestVacation: React.FC = () => {
                       <ErrorMessage name="telephone" component="p" className="error-msg" />
                     </div>
                     <div className="field-file">
-                      <label htmlFor="cv">CV üçün klik edin</label>
+                      <label htmlFor="cv">{translations['cv_ucun_click_edin']}</label>
                       <div className="upload-cv">
                         <input
                           type="file"
@@ -240,23 +243,23 @@ const RequestVacation: React.FC = () => {
                           <div className="preview-cv">
                             {cvName && (
                               <p>
-                                Seçilən fayl: <strong>{cvName}</strong>
+                                {translations['secilen_fayl_title']} <strong>{cvName}</strong>
                               </p>
                             )}
                             {cvSize > 0 && (
                               <p>
-                                Fayl ölçüsü: <strong>{(cvSize / 1024 / 1024).toFixed(2)}</strong> MB
+                                {translations['fayl_olcusu_title']} <strong>{(cvSize / 1024 / 1024).toFixed(2)}</strong> MB
                               </p>
                             )}
-                            <span>Dəyişmək üçün kliklə</span>
+                            <span>{translations['deyismek_ucun_clickle']}</span>
                           </div>
                         ) : (
                           <React.Fragment>
                             <article>
                               <img src="/sncq.png" alt="sncq" />
-                              <span>CV faylın seç</span>
+                              <span>{translations['cv_faylini_sec']}</span>
                             </article>
-                            <p>Yüklədiyiniz fayl PDF, DOC, DOCX formatında olmalı ( max 3 mb)</p>
+                            <p>{translations['file_required_title']}</p>
                           </React.Fragment>
                         )}
                       </div>
@@ -264,7 +267,7 @@ const RequestVacation: React.FC = () => {
                       <ErrorMessage name="cv" component="p" className="error-msg" />
                     </div>
                     <div className="field-file">
-                      <label htmlFor="profile">Şəkil üçün klik edin</label>
+                      <label htmlFor="profile">{translations['sekil_ucun_click_edin']}</label>
                       <div className="upload-profile">
                         <input
                           type="file"
@@ -277,7 +280,7 @@ const RequestVacation: React.FC = () => {
                         />
                         <article>
                           <img src="/imigg.png" alt="sncq" />
-                          <span>Dəyişmək üçün kliklə</span>
+                          <span>{translations['deyismek_ucun_clickle']}</span>
                         </article>
                         <p>PNG, JPG (Max 3 mb)</p>
                         {previewImage && (
@@ -293,7 +296,7 @@ const RequestVacation: React.FC = () => {
                       disabled={loading}
                       type="submit"
                       className={`sendVacationFormButton ${loading ? "deactive-btn" : ""}`}>
-                      {loading ? <Loader /> : "Göndər"}
+                      {loading ? <Loader /> : `${translations['send_button']}`}
                     </button>
                   </Form>
                 )}

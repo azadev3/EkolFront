@@ -8,6 +8,8 @@ import { Baseurl } from "../../Baseurl";
 import { useRecoilValue } from "recoil";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useQuery } from "@tanstack/react-query";
+import DOMPurify from "dompurify";
+import { useTranslate } from "../../context/TranslateContext";
 
 type ServicesDataType = {
   id: string;
@@ -23,7 +25,7 @@ const Services: React.FC = () => {
   const { data: servicesData } = useQuery<ServicesDataType[]>({
     queryKey: ["servicesDataKey", selectedlang],
     queryFn: async () => {
-      const response = await axios.get(`${Baseurl}/servicesFront`, {
+      const response = await axios.get(`${Baseurl}/servicespagefront`, {
         headers: {
           "Accept-Language": selectedlang,
         },
@@ -46,6 +48,9 @@ const Services: React.FC = () => {
       swiperRef.current?.slideNext();
     }
   };
+
+  const { translations } = useTranslate();
+  
   return (
     <section className="services-section">
       <div className="services">
@@ -71,9 +76,9 @@ const Services: React.FC = () => {
                   </div>
                   <div className="left">
                     <h3>{item?.title}</h3>
-                    <p>{item?.description}</p>
-                    <Link to="" className="show-more">
-                      Ətraflı bax
+                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}/>
+                    <Link to={`/fealiyyet/xidmetler/${item?.title}`} className="show-more">
+                    {translations['etrafli_bax_button']}
                     </Link>
                   </div>
                   {item?.image && (

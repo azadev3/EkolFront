@@ -28,27 +28,27 @@ export const TopCardRightDataItem: TopCardRightData[] = [
   {
     id: 1,
     title: "Gördüyümüz işlər",
-    to: "",
+    to: "/about/workwedo",
   },
   {
     id: 2,
     title: "Sertifikatlar",
-    to: "",
+    to: "/about/certificates",
   },
   {
     id: 3,
     title: "Lisenziya",
-    to: "",
+    to: "/about/lisanses",
   },
   {
     id: 4,
     title: "Struktur",
-    to: "",
+    to: "/about/structure",
   },
   {
     id: 5,
     title: "Rəhbərlik",
-    to: "",
+    to: "/about/leadership",
   },
 ];
 

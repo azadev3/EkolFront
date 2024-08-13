@@ -31,30 +31,37 @@ const Footer: React.FC = () => {
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_struktur"]}`,
+          to: "/about/structure"
         },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_rehberlik"]}`,
+          to: "/about/leadership"
         },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_lisenziyalar"]}`,
+          to: "/about/lisanses"
         },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_sertifikatlar"]}`,
+          to: "/about/certificates",
         },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_partnyorlar"]}`,
+          to: "/about/partners"
         },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_qalereya"]}`,
+          to: "/about/gallery"
         },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_ourworks"]}`,
+          to: "/about/workwedo"
         },
       ],
     },
@@ -65,14 +72,17 @@ const Footer: React.FC = () => {
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_xidmetler"]}`,
+          to: "/fealiyyet/xidmetler",
         },
         {
           id: uuidv4(),
           title: `${translations["nav_saheler"]}`,
+          to: "/fealiyyet/sosialheyat"
         },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_avadanliqlar"]}`,
+          to: "/fealiyyet/avadanliqlar"
         },
       ],
     },
@@ -83,18 +93,22 @@ const Footer: React.FC = () => {
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_satinalma"]}`,
+          to: "/satinalma"
         },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_sosialheyat"]}`,
+          to: "/fealiyyet/sosialheyat"
         },
         {
           id: uuidv4(),
           title: `${translations["blog_title"]}`,
+          to: "/xeberler"
         },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_cariers"]}`,
+          to: "/karyera"
         },
       ],
     },
@@ -168,7 +182,7 @@ const Footer: React.FC = () => {
                     <h4 className="title-nav">{item.title}</h4>
                     <div className="links-nav">
                       {item.footerNavItems.map((links: FooterNavLinkType) => (
-                        <Link key={links.id} to="" className="link">
+                        <Link key={links.id} to={links.to ? links.to : ""} className="link">
                           {links.title}
                         </Link>
                       ))}

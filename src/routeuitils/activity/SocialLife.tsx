@@ -11,6 +11,7 @@ import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import Loader from "../../Loader";
 import DOMPurify from "dompurify";
+import { useTranslate } from "../../context/TranslateContext";
 
 type SocialLifeCarouselDataType = {
   _id: string;
@@ -57,14 +58,15 @@ const SocialLife: React.FC = () => {
   const hasCarouselData = SocialLifeCarouselData && SocialLifeCarouselData?.length > 0;
   const hasSocialLifeData = socialLifeData && socialLifeData?.length > 0;
 
+  const { translations } = useTranslate();
 
   return (
     <section className="social-life-section">
       <div className="sociallife">
-        <Breadcrumb prevpage="Ana səhifə" uri="Sosial həyat" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_sosialheyat']} />
 
         <div className="container-sociallife">
-          <h2>Sosial həyat</h2>
+          <h2>{translations['nav_haqqimizda_sosialheyat']}</h2>
 
           <div className="container-descriptions">
             <div className="wrapperimg-carousel">

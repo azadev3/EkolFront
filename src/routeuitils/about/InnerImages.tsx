@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import Loader from "../../Loader";
+import { useTranslate } from "../../context/TranslateContext";
 
 
 const InnerImages: React.FC = () => {
@@ -33,11 +34,12 @@ const InnerImages: React.FC = () => {
   const displayInnerItems = ImagesAndCategoriesData?.find((item: CategoriesAndImages) => item?.categoryName.trim() === imagename?.trim());
 
   const isTrueImages = displayInnerItems?.images && displayInnerItems?.images.length > 0;
+  const { translations } = useTranslate();
 
   return (
     <section className="innerimage-section">
       <div className="innerimages">
-        <Breadcrumb prevpage="Ana səhifə" uri="Qalereya" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['gallery_page_title']} />
         {isLoading ? (
           <Loader />
         ) : (

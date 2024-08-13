@@ -6,9 +6,10 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Loader";
 import { Baseurl } from "../../Baseurl";
 import axios from "axios";
+import { useTranslate } from "../../context/TranslateContext";
 
 export const LeadershipModalState = atom<string>({
-  key: "leadershipModalStateKey",
+  key: "leadershipModalState",
   default: "",
 });
 
@@ -43,16 +44,19 @@ const Leadership: React.FC = () => {
   const handleLeadershipModal = (_id: string) => {
     setLeadershipModal(_id);
   } 
+
+  const { translations } = useTranslate();
+
   return (
     <section className="leadership-section">
       <div className="leadership">
-        <Breadcrumb prevpage="Ana səhifə" uri="Rəhbərlik" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_rehberlik']} />
 
         {managementLoading ? (
           <Loader />
         ) : (
           <div className="container-leadership">
-            <h2>Rəhbərlik</h2>
+            <h2>{translations['nav_haqqimizda_rehberlik']}</h2>
 
             <div className="grid-leadership">
               {managementData && managementData.length > 0

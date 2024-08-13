@@ -8,6 +8,7 @@ import { Baseurl } from "../../Baseurl";
 import { v4 as uuidv4 } from "uuid";
 import Loader from "../../Loader";
 import DOMPurify from "dompurify";
+import { useTranslate } from "../../context/TranslateContext";
 
 interface EquipmentsDataType {
   description: string;
@@ -30,10 +31,13 @@ const Tools: React.FC = () => {
     },
   });
 
+  const { translations } = useTranslate();
+
+
   return (
     <section className="tools-section">
       <div className="tools">
-        <Breadcrumb prevpage="Ana səhifə" uri="Avadanlıqlar" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_avadanliqlar']} />
 
         {isLoading ? (
           <Loader />

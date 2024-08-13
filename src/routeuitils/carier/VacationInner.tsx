@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // import { VacationsData, VacationsType } from "./Vacations";
 import Breadcrumb from "../../Breadcrumb";
 import VacationTopHead from "./VacationTopHead";
@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import DOMPurify from "dompurify";
+import { useTranslate } from "../../context/TranslateContext";
 
 const VacationInner: React.FC = () => {
   const { vacid } = useParams<{ lang: string, vacid: string }>();
@@ -36,11 +37,12 @@ const VacationInner: React.FC = () => {
   // Secury control and initial value
   const description = innerVacancy?.description || "";
 
+  const { translations } = useTranslate();
 
   return (
     <section className="vacations-inner-section">
       <div className="vacationsinner">
-        <Breadcrumb prevpage="Ana səhifə" uri="Karyera imkanları" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['karyera_imkanlari']} />
         <div className="container-inner-vac">
           <VacationTopHead />
           <div
@@ -51,7 +53,7 @@ const VacationInner: React.FC = () => {
           />
         </div>
 
-        <div className="other-vacations">
+        {/* <div className="other-vacations">
           <div className="head-title">
             <h2>Oxşar vakansiyalar</h2>
             <Link to="/karyera" className="all-vacations">
@@ -60,7 +62,7 @@ const VacationInner: React.FC = () => {
           </div>
 
           <div className="grid-other-vacation"></div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

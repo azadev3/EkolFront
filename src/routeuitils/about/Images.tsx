@@ -377,7 +377,7 @@ const Images: React.FC = () => {
   return (
     <section className="images-section-gallery-page">
       <div className="images">
-        <Breadcrumb prevpage="Ana səhifə" uri="Şəkillər" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_sekiller']} />
 
         <div className="container-images">
           <h2>{translations['nav_haqqimizda_sekiller']}</h2>

@@ -10,6 +10,7 @@ import moment from "moment";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Loader";
 import { v4 as uuidv4 } from 'uuid';
+import { useTranslate } from "../../context/TranslateContext";
 
 type LastBlogType = {
   _id: number;
@@ -106,14 +107,15 @@ const BlogInnerContent: React.FC = () => {
   };
 
   const innerBlogItem = blogDatas?.find((item: BlogType) => item?.title.toLowerCase() === blogtitle?.toLowerCase());
+  const { translations } = useTranslate();
 
   return (
     <section className="blog-inner-content-section">
       <div className="blogs-inner">
-        <Breadcrumb prevpage="Ana səhifə" uri="Bloqlar" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_xeberler']} />
 
         <div className="container-blogs-inner">
-          <h2>Bloqlar</h2>
+          <h2>{translations['blog_title']}</h2>
 
           <div className="col-blogs-inner">
             <h3>{innerBlogItem?.title}</h3>

@@ -6,6 +6,7 @@ import { SelectedLanguageState } from "../../recoil/Atoms";
 import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import Loader from "../../Loader";
+import { useTranslate } from "../../context/TranslateContext";
 
 type WhoWeAreType = {
   _id: string;
@@ -34,10 +35,12 @@ const WhoWeAre: React.FC = () => {
     return <Loader />;
   }
 
+  const { translations } = useTranslate();
+
   return (
     <section className="who-we-are-section">
       <div className="whoweare">
-        <Breadcrumb prevpage="Ana səhifə" uri="Biz kimik?" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_bizkimik']} />
 
         {WhoWeAreData && WhoWeAreData.length > 0
           ? WhoWeAreData.map((item: WhoWeAreType, index: number) => (

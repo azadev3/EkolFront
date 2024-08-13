@@ -9,9 +9,10 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import { useRecoilValue } from "recoil";
-import { SelectedLanguageState } from "../../recoil/Atoms";
+import { ScrollHeaderState, SelectedLanguageState } from "../../recoil/Atoms";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Loader";
+import ScrollHeader from "../../components/header/ScrollHeader";
 
 type HeroSocials = {
   id: string;
@@ -95,10 +96,16 @@ const Hero: React.FC = () => {
     }
   };
 
+  const scrollHeader = useRecoilValue(ScrollHeaderState);
+
   return (
     <section className="hero-wrapper">
       <div className="hero">
-        <Header />
+        {scrollHeader ? (
+          <ScrollHeader />
+        ) : (
+          <Header />
+        )}
         {isLoading ? (
           <Loader />
         ) : isError ? (

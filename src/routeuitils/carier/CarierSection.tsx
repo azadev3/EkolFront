@@ -32,7 +32,7 @@ const CarierSection: React.FC = () => {
   return (
     <section className="carier-section">
       <div className="carier">
-        <Breadcrumb prevpage="Ana səhifə" uri="Karyera imkanları" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['karyera_imkanlari']} />
 
         <div className="container-carier">
           <h2>{translations["karyera_imkanlari"]}</h2>

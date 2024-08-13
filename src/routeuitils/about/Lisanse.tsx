@@ -7,6 +7,7 @@ import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import Loader from "../../Loader";
 import DOMPurify from "dompurify";
+import { useTranslate } from "../../context/TranslateContext";
 
 interface LisanseItemType {
   _id: string;
@@ -32,10 +33,13 @@ const Lisanse: React.FC = () => {
 
   const hasLisanseData = lisanseData && lisanseData?.length > 0;
 
+  const { translations } = useTranslate();
+
+
   return (
     <section className="lisanse-section">
       <div className="lisanse">
-        <Breadcrumb prevpage="Ana səhifə" uri="Lisenziya" />
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_lisenziyalar']} />
 
         {isLoading ? (
           <Loader />

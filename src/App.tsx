@@ -23,16 +23,19 @@ import "react-toastify/dist/ReactToastify.css";
 import { PurchaseInterface, PurchaseModalState } from "./routeuitils/purchase/PurchaseSection";
 import axios from "axios";
 import { Baseurl } from "./Baseurl";
-import { SelectedLanguageState } from "./recoil/Atoms";
+import { ScrollHeaderState, SelectedLanguageState } from "./recoil/Atoms";
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import { LeadershipModalState, Management } from "./routeuitils/about/Leadership";
 import DOMPurify from "dompurify";
 import { searchModalState } from "./components/header/headeruitil/Search";
 import SearchModal from "./components/header/headeruitil/SearchModal";
+import ScrollHeader from "./components/header/ScrollHeader";
+import "./styles/responsive.scss";
+import { useTranslate } from "./context/TranslateContext";
 
 export const isHomePageState = atom<boolean>({
-  key: "isHomePageStateKey",
+  key: "isHomePageState",
   default: false,
 });
 
@@ -140,6 +143,24 @@ const App: React.FC = () => {
     };
   }, []);
 
+  //scroll header activated
+  const [scrollHeader, setScrollHeader] = useRecoilState(ScrollHeaderState);
+
+  React.useEffect(() => {
+    const controlscroll = () => {
+      if (window.scrollY >= 100) {
+        setScrollHeader(true);
+      } else {
+        setScrollHeader(false);
+      }
+    };
+
+    window.addEventListener("scroll", controlscroll);
+    return () => window.removeEventListener("scroll", controlscroll);
+  }, []);
+
+  const { translations } = useTranslate();
+
   return (
     <div className="app">
       {/* purchase modal */}
@@ -171,7 +192,7 @@ const App: React.FC = () => {
                 handleDownloadPdf(isPurchaseData?._id);
               }
             }}>
-            Pdf yüklə
+            {translations['pdf_yukle_title']}
           </button>
         </div>
       </div>
@@ -181,7 +202,10 @@ const App: React.FC = () => {
         <div className="leadership-modal" ref={leadershipModalRef}>
           <div className="top-profile-and-user-info">
             <div className="profile">
-              <img src={isLeadershipData ? `https://ekol-server.onrender.com${isLeadershipData?.profile}` : ""} alt="" />
+              <img
+                src={isLeadershipData ? `https://ekol-server.onrender.com${isLeadershipData?.profile}` : ""}
+                alt=""
+              />
             </div>
             <div className="right-description">
               <div className="top">
@@ -194,7 +218,7 @@ const App: React.FC = () => {
                     <img src="/education.svg" alt="education" />
                   </div>
                   <article className="texts">
-                    <span>Təhsil</span>
+                    <span>{translations['tehsil_title']}</span>
                     <p>{isLeadershipData ? isLeadershipData?.education : ""}</p>
                   </article>
                 </div>
@@ -203,7 +227,7 @@ const App: React.FC = () => {
                     <img src="/profiession.svg" alt="education" />
                   </div>
                   <article className="texts">
-                    <span>İş</span>
+                    <span>{translations['iş_title']}</span>
                     <p>{isLeadershipData ? isLeadershipData?.job : ""}</p>
                   </article>
                 </div>
@@ -227,7 +251,7 @@ const App: React.FC = () => {
       </div>
 
       <ToastContainer autoClose={2000} pauseOnHover={false} transition={Bounce} />
-      {!isHomePage && <Header />}
+      {!isHomePage && !scrollHeader ? <Header /> : !isHomePage && scrollHeader ? <ScrollHeader /> : ""}
 
       <Routes>
         <Route path="/" element={<Home />} />

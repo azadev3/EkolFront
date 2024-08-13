@@ -10,9 +10,10 @@ import { Baseurl } from "../../Baseurl";
 import moment from "moment";
 import "moment/locale/az";
 import Loader from "../../Loader";
+import { useTranslate } from "../../context/TranslateContext";
 
 export const PurchaseModalState = atom<string>({
-  key: 'purchaseModalStateKey',
+  key: "purchaseModalState",
   default: "",
 });
 
@@ -509,16 +510,18 @@ const PurchaseSection: React.FC = () => {
     setPurchaseModal(_id);
   };
 
+  const { translations } = useTranslate();
+
   return (
     <section className="purchase-section">
       <div className="purchase">
-        <Breadcrumb prevpage="Ana səhifə" uri="Satınalma" />
+        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations['nav_haqqimizda_satinalma']} />
 
         {isLoading ? (
           <Loader />
         ) : (
           <div className="container-purchase">
-            <h2>Satınalma</h2>
+            <h2>{translations['nav_haqqimizda_satinalma']}</h2>
             <div className="grid-purchase">
               {hasPurchase &&
                 Purchases.slice(0, paginate).map((item: PurchaseInterface) => (
@@ -528,7 +531,7 @@ const PurchaseSection: React.FC = () => {
                       <p>{item?.description}</p>
                     </article>
                     <div className="link-btn" onClick={() => openPurchaseModal(item?._id)}>
-                      Daha ətraflı
+                      {translations['daha_etrafli_button']}
                     </div>
                   </div>
                 ))}
