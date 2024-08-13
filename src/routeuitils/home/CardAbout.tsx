@@ -106,7 +106,7 @@ const CardAbout: React.FC = () => {
                   <article
                     key={index}
                     className="right-descriptions"
-                    style={{ backgroundImage: `url(https://ekol-server.onrender.com${item?.image})` }}>
+                    style={{ backgroundImage: `url(https://ekol-server-1.onrender.com${item?.image})` }}>
                     <div className="links">
                       {TopCardRightDataItem.map((item: TopCardRightData) => (
                         <Link to={item?.to} key={item?.id} className="right-nav-link">

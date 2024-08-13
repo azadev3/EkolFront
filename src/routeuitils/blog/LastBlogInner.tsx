@@ -104,7 +104,7 @@ const LastBlogInner: React.FC = () => {
             <div className="contents">
               <div className="left">
                 <div className="content-inner-blog-image-wrapper">
-                  <img loading="lazy" src={`https://ekol-server.onrender.com${lastBlogItem?.image}`} title={lastBlogItem?.title} />
+                  <img loading="lazy" src={`https://ekol-server-1.onrender.com${lastBlogItem?.image}`} title={lastBlogItem?.title} />
                 </div>
 
                 <div className="description-content">

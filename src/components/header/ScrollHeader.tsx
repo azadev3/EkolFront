@@ -134,7 +134,7 @@ const ScrollHeader: React.FC = () => {
             ? LogoIcon.map((logo: Logo) => (
                 <img
                   key={logo._id}
-                  src={`https://ekol-server.onrender.com${logo.logo}`}
+                  src={`https://ekol-server-1.onrender.com${logo.logo}`}
                   alt={`${logo._id}-logo`}
                   title={logo._id}
                 />
