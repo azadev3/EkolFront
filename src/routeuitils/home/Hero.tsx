@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import Header from "../../components/header/Header";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -115,13 +115,19 @@ const Hero: React.FC = () => {
           </p>
         ) : (
           <Swiper
+            autoplay={{
+              delay: 1500,
+              pauseOnMouseEnter: true
+            }}
+            speed={3000}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
             pagination={{
               dynamicBullets: true,
+              clickable: true
             }}
-            modules={[Pagination]}
+            modules={[Pagination, Autoplay]}
             className="mySwiper">
             {hasHero
               ? heroData.map((item: HeroDataType, index: number) => (

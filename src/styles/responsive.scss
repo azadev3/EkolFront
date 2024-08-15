@@ -702,6 +702,27 @@
 }
 
 @media only screen and (max-width: 568px) {
+  .app .page-navigator .currentpage {
+    font-size: 9px;
+  }
+  .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .right .share-post .bottom {
+    align-items: flex-start;
+  }
+  .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .right .share-post .bottom .view {
+    border-left: none;
+    padding-left: 0;
+  }
+  .app .page-navigator .dot, .app .page-navigator .dotsm {
+    width: 3px;
+    height: 3px;
+  }
+  .app .page-navigator .prevpage {
+    font-size: 11px;
+  }
+  .app .page-navigator {
+    margin-top: 24px;
+    gap: 4px;
+  }
   .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner h2 {
     font-size: 24px;
   }

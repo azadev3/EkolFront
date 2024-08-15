@@ -8,24 +8,34 @@ const CardSubscribe: React.FC = () => {
   const { translations } = useTranslate();
 
   const [email, setEmail] = React.useState<string>("");
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   const getEmail = async () => {
     if (email.length !== 0) {
+      setLoading(true);
       const data = {
         email: email,
       };
       const response = await axios.post(`${Baseurl}/emails`, data);
-      if (response.data) {
-        console.log(response.data);
-        toast.success("Uğurlu!", {
-          position: "bottom-right",
-        });
-        setEmail("");
-      } else {
-        console.log(response.status);
-        toast.success("Ups! Error...", {
-          position: "bottom-right",
-        });
+      try {
+        if (response.data) {
+          toast.success("Uğurlu!", {
+            position: "bottom-right",
+          });
+          if (inputRef && inputRef.current) {
+            inputRef.current.value = "";
+          }
+        } else {
+          console.log(response.status);
+          toast.success("Ups! Error...", {
+            position: "bottom-right",
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -38,15 +48,16 @@ const CardSubscribe: React.FC = () => {
         <div className="input-email">
           <img src="../letter.svg" alt="email-icon" title="Email" />
           <input
+            ref={inputRef}
             type="email"
-            required
+            required={true}
             placeholder={translations["form_email"]}
             onChange={(e) => {
               setEmail(e.target.value);
             }}
           />
           <button className="get-subscribe-button" onClick={getEmail}>
-            {translations["subscribe_button"]}
+            {loading ? "Loading..." : translations["subscribe_button"]}
           </button>
         </div>
       </div>

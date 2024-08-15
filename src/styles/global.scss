@@ -1226,12 +1226,12 @@
           .result-item-blog {
             gap: 24px;
             .description {
+              max-height: 60px !important;
+              overflow: hidden !important;
               h2, h1, p {
                 font-size: 12px;
                 max-width: 600px;
               }
-              max-height: 60px !important;
-              overflow: hidden !important;
             }
           }
           
@@ -1267,5 +1267,21 @@
     pointer-events: all;
     user-select: auto;
     transform: translateX(0);
+  }
+}
+
+.home-page .blog-section .blogs .blog-grid-section .blog-item .descriptions-blog h4 {
+  -webkit-line-clamp: 1 !important;
+  line-clamp: 1 !important;
+}
+.home-page .blog-section .blogs .blog-grid-section .blog-item .descriptions-blog {
+  min-height: 135px !important;
+  max-height: 135px !important;
+}
+.home-page .blog-section .blogs .blog-grid-section .blog-item .descriptions-blog .description {
+  div {
+    h1, h2, h3 {
+      font-size: 16px !important;
+    }
   }
 }
