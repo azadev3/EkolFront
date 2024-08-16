@@ -147,16 +147,18 @@ const App: React.FC = () => {
   const [scrollHeader, setScrollHeader] = useRecoilState(ScrollHeaderState);
 
   React.useEffect(() => {
-    const controlscroll = () => {
+    const controlScroll = () => {
       if (window.scrollY >= 100) {
-        setScrollHeader(true);
+          setScrollHeader(true);
+        
       } else {
         setScrollHeader(false);
       }
     };
 
-    window.addEventListener("scroll", controlscroll);
-    return () => window.removeEventListener("scroll", controlscroll);
+    window.addEventListener("scroll", controlScroll);
+
+    return () => window.removeEventListener("scroll", controlScroll);
   }, []);
 
   const { translations } = useTranslate();
@@ -192,7 +194,7 @@ const App: React.FC = () => {
                 handleDownloadPdf(isPurchaseData?._id);
               }
             }}>
-            {translations['pdf_yukle_title']}
+            {translations["pdf_yukle_title"]}
           </button>
         </div>
       </div>
@@ -218,7 +220,7 @@ const App: React.FC = () => {
                     <img src="/education.svg" alt="education" />
                   </div>
                   <article className="texts">
-                    <span>{translations['tehsil_title']}</span>
+                    <span>{translations["tehsil_title"]}</span>
                     <p>{isLeadershipData ? isLeadershipData?.education : ""}</p>
                   </article>
                 </div>
@@ -227,7 +229,7 @@ const App: React.FC = () => {
                     <img src="/profiession.svg" alt="education" />
                   </div>
                   <article className="texts">
-                    <span>{translations['iş_title']}</span>
+                    <span>{translations["iş_title"]}</span>
                     <p>{isLeadershipData ? isLeadershipData?.job : ""}</p>
                   </article>
                 </div>
@@ -251,7 +253,7 @@ const App: React.FC = () => {
       </div>
 
       <ToastContainer autoClose={2000} pauseOnHover={false} transition={Bounce} />
-      {!isHomePage && !scrollHeader ? <Header /> : !isHomePage && scrollHeader ? <ScrollHeader /> : ""}
+      {!isHomePage && (scrollHeader ? <ScrollHeader /> : <Header />)}
 
       <Routes>
         <Route path="/" element={<Home />} />

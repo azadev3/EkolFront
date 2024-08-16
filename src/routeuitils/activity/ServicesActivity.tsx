@@ -79,11 +79,15 @@ const ServicesActivity: React.FC = () => {
               <div className="service-items">
                 <div className="service-image-container">
                   {hasServicesData && serviceImage && (
-                    <img
+                    serviceImage?.length === 0 ? (
+                      <Loader />
+                    ) : (
+                      <img
                       src={`https://ekol-server-1.onrender.com${serviceImage}`}
                       alt={`service-${selectedService}-image`}
                       loading="lazy"
                     />
+                    )
                   )}
                 </div>
 
