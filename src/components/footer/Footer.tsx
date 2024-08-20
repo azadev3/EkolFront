@@ -17,7 +17,7 @@ type FooterNavLinkType = {
 interface FooterElementsType {
   id: string;
   title: string;
-  footerNavItems: FooterNavLinkType[];
+  footerNavItems?: FooterNavLinkType[];
 }
 
 const Footer: React.FC = () => {
@@ -31,17 +31,17 @@ const Footer: React.FC = () => {
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_struktur"]}`,
-          to: "/about/structure"
+          to: "/about/structure",
         },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_rehberlik"]}`,
-          to: "/about/leadership"
+          to: "/about/leadership",
         },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_lisenziyalar"]}`,
-          to: "/about/lisanses"
+          to: "/about/lisanses",
         },
         {
           id: uuidv4(),
@@ -51,17 +51,17 @@ const Footer: React.FC = () => {
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_partnyorlar"]}`,
-          to: "/about/partners"
+          to: "/about/partners",
         },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_qalereya"]}`,
-          to: "/about/gallery"
+          to: "/about/gallery",
         },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_ourworks"]}`,
-          to: "/about/workwedo"
+          to: "/about/workwedo",
         },
       ],
     },
@@ -77,40 +77,34 @@ const Footer: React.FC = () => {
         {
           id: uuidv4(),
           title: `${translations["nav_saheler"]}`,
-          to: "/fealiyyet/sosialheyat"
+          to: "/fealiyyet/sosialheyat",
         },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_avadanliqlar"]}`,
-          to: "/fealiyyet/avadanliqlar"
+          to: "/fealiyyet/avadanliqlar",
         },
       ],
     },
     {
       id: uuidv4(),
-      title: "Xəbərlər",
+      title: `${translations['nav_media']}`,
       footerNavItems: [
         {
           id: uuidv4(),
-          title: `${translations["nav_haqqimizda_satinalma"]}`,
-          to: "/satinalma"
+          title: `${translations["nav_haqqimizda_xeberler"]}`,
+          to: "/xeberler",
         },
         {
           id: uuidv4(),
-          title: `${translations["nav_haqqimizda_sosialheyat"]}`,
-          to: "/fealiyyet/sosialheyat"
-        },
-        {
-          id: uuidv4(),
-          title: `${translations["blog_title"]}`,
-          to: "/xeberler"
-        },
-        {
-          id: uuidv4(),
-          title: `${translations["nav_haqqimizda_cariers"]}`,
-          to: "/karyera"
+          title: `${translations["nav_haqqimizda_qalereya"]}`,
+          to: "/about/gallery",
         },
       ],
+    },
+    {
+      id: uuidv4(),
+      title: `${translations['nav_haqqimizda_satinalma']}`,
     },
     {
       id: uuidv4(),
@@ -118,15 +112,15 @@ const Footer: React.FC = () => {
       footerNavItems: [
         {
           id: uuidv4(),
-          title: `${translations["nav_haqqimizda_satinalma"]}`,
-        },
-        {
-          id: uuidv4(),
-          title: `${translations["nav_haqqimizda_hesabatlar"]}`,
-        },
-        {
-          id: uuidv4(),
           title: `${translations["nav_haqqimizda_elaqe"]}`,
+        },
+        {
+          id: uuidv4(),
+          title: `${translations["nav_haqqimizda_sosialheyat"]}`,
+        },
+        {
+          id: uuidv4(),
+          title: `${translations["karyera_imkanlari"]}`,
         },
       ],
     },
@@ -176,12 +170,12 @@ const Footer: React.FC = () => {
 
           <nav className="footer-navigations">
             {FooterElements.map((item: FooterElementsType, index: number) => {
-              if (index !== 4) {
+              if (index !== 5) {
                 return (
                   <div key={item.id} className="footer-nav-link-content">
                     <h4 className="title-nav">{item.title}</h4>
                     <div className="links-nav">
-                      {item.footerNavItems.map((links: FooterNavLinkType) => (
+                      {item?.footerNavItems?.map((links: FooterNavLinkType) => (
                         <Link key={links.id} to={links.to ? links.to : ""} className="link">
                           {links.title}
                         </Link>
@@ -189,15 +183,14 @@ const Footer: React.FC = () => {
                     </div>
                   </div>
                 );
-              } else if (index === 4 && SocialsData && SocialsData.length > 0) {
+              } else if (index === 5 && SocialsData && SocialsData.length > 0) {
                 return (
                   <div key={item.id} className="footer-nav-link-content">
-                    <h4 className="title-nav">{item.title}</h4>
                     <div className="links-nav-social">
                       {SocialsData.map((links: SocialsType) => (
-                        <Link target="_blank" key={links._id} to={links.link} className="link-social">
+                        <Link target="_blank" key={links?._id} to={links?.link} className="link-social">
                           <img
-                            src={`https://ekol-server-1.onrender.com${links.icon}`}
+                            src={`https://ekol-server-1.onrender.com${links?.icon}`}
                             alt={`${links._id}-icon`}
                             title={links.link}
                           />

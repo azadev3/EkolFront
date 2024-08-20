@@ -6,12 +6,6 @@ export const SelectedLanguageState = atom<string>({
      default: "az",
 });
 
-//scroll header state
-export const ScrollHeaderState = atom<boolean>({
-     key: "scrollHeaderState",
-     default: false,
-});
-
 //is mobile 
 export const isMobileState = atom<boolean>({
      key: "isMobileState",

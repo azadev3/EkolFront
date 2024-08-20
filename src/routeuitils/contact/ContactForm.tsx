@@ -10,7 +10,6 @@ import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslate } from "../../context/TranslateContext";
 import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { toast } from "react-toastify";
 
 interface LocationInterface {
@@ -93,33 +92,18 @@ const ContactForm: React.FC = () => {
 
         <div className="container-contact">
           <h2>{translations["bizimle_elaqe"]}</h2>
-
           <div className="container-locations">
-            <Swiper className="mySwiper" spaceBetween={12}
-            breakpoints={{
-              268: {
-                slidesPerView: 2,
-              },
-              568: {
-                slidesPerView: 3,
-              },
-              968: {
-                slidesPerView: 9,
-              }
-            }}
-            >
               {hasLocationData &&
                 locationData?.map((item: LocationInterface) => (
-                  <SwiperSlide
+                  <div
                     key={item._id}
-                    className={selectedActive === item._id ? "actived" : ""}
+                    className={`swiper-slide ${selectedActive === item._id ? "actived" : ""}`}
                     onClick={() => {
                       handleActiveLocation(item._id);
                     }}>
                     {item.title}
-                  </SwiperSlide>
+                  </div>
                 ))}
-            </Swiper>
           </div>
 
           <section className="contact-us-section">

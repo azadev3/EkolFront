@@ -144,7 +144,7 @@ const BlogInnerContent: React.FC = () => {
               </div>
 
               <div className="right">
-                <h5>Ən son bloqlar</h5>
+                <h5>Ən son xəbərlər</h5>
                 <div className="grid-last-blog">
                   {lastBlogs && lastBlogs.length > 0
                     ? lastBlogs.map((item: LastBlogType) => (
@@ -163,7 +163,7 @@ const BlogInnerContent: React.FC = () => {
                     : ""}
                   <div className="button-content">
                     <button className="all-blogs" onClick={() => navigate("/xeberler")}>
-                      Bütün bloqlar
+                      Bütün xəbərlər
                     </button>
                   </div>
                 </div>

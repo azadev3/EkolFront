@@ -48,7 +48,6 @@ const Gallery: React.FC = () => {
           "Accept-Language": selectedlang,
         },
       });
-      console.log(response.data, "dropdonwgallery");
       return response.data;
     },
   });

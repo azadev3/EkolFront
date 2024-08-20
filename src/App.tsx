@@ -20,15 +20,15 @@ import Yearly from "./routeuitils/calculations/Yearly";
 import LastBlogInner from "./routeuitils/blog/LastBlogInner";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ScrollHeaderState } from "./recoil/Atoms";
 import { LeadershipModalState } from "./routeuitils/about/Leadership";
 import { searchModalState } from "./components/header/headeruitil/Search";
 import SearchModal from "./components/header/headeruitil/SearchModal";
-import ScrollHeader from "./components/header/ScrollHeader";
 import "./styles/responsive.scss";
 import PurchaseModal from "./modals/PurchaseModal";
 import { PurchaseModalState } from "./routeuitils/purchase/PurchaseSection";
 import LeadershipModal from "./modals/LeadershipModal";
+import useScroll from "./context/useScroll";
+import ScrollHeader from "./ScrollHeader";
 
 export const isHomePageState = atom<boolean>({
   key: "isHomePageState",
@@ -55,23 +55,9 @@ const App: React.FC = () => {
   //search modal
   const [searchModal, _] = useRecoilState(searchModalState);
 
-  //scroll header activated
-  const [scrollHeader, setScrollHeader] = useRecoilState(ScrollHeaderState);
-  React.useEffect(() => {
-    const controlScroll = () => {
-      if (window.scrollY >= 100) {
-        setScrollHeader(true);
-      } else {
-        setScrollHeader(false);
-      }
-    };
-
-    window.addEventListener("scroll", controlScroll);
-
-    return () => window.removeEventListener("scroll", controlScroll);
-  }, []);
-
   const purchaseModal = useRecoilValue(PurchaseModalState);
+
+  const isScrolled = useScroll();
 
   return (
     <div className="app">
@@ -91,8 +77,8 @@ const App: React.FC = () => {
       </div>
 
       <ToastContainer autoClose={2000} pauseOnHover={false} transition={Bounce} />
-      {!isHomePage && (scrollHeader ? <ScrollHeader /> : <Header />)}
-
+      {!isHomePage && <Header />}
+      {isScrolled ? <ScrollHeader /> : ""} 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about/*" element={<About />} />

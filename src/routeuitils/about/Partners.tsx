@@ -26,7 +26,6 @@ const Partners: React.FC = () => {
       });
       if (response.data) {
         setPartners(response.data);
-        console.log(response.data, "geldi partnyorlar!");
       } else {
         response.status;
       }
@@ -63,11 +62,11 @@ const Partners: React.FC = () => {
             {partners &&
               partners.length > 0 &&
               displayedPartners.map((item: PartnersType, i: number) => (
-                <div key={item._id} className="partners-item">
+                <div key={i} className="partners-item">
                   <div className="logo-wrap">
                   <img src={`https://ekol-server-1.onrender.com${item?.logo}`} alt={`${i}-logo`} title={item?.title} />
                   </div>
-                  <span>{item.title}</span>
+                  <span>{item?.title}</span>
                 </div>
               ))}
           </div>

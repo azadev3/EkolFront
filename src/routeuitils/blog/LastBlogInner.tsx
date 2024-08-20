@@ -67,7 +67,6 @@ const LastBlogInner: React.FC = () => {
         },
       });
       if (response.data) {
-        console.log(response.data, "last blogs datas");
         setLastBlogs(response.data);
       } else {
         console.log(response.status);
@@ -118,7 +117,7 @@ const LastBlogInner: React.FC = () => {
               </div>
 
               <div className="right">
-                <h5>Ən son bloqlar</h5>
+                <h5>Ən son xəbərlər</h5>
                 <div className="grid-last-blog">
                   {lastBlogs && lastBlogs.length > 0
                     ? lastBlogs?.map((item: LastBlogType) => (
@@ -137,7 +136,7 @@ const LastBlogInner: React.FC = () => {
                     : ""}
                   <div className="button-content">
                     <button className="all-blogs" onClick={() => navigate("/xeberler")}>
-                      Bütün bloqlar
+                      Bütün xəbərlər
                     </button>
                   </div>
                 </div>

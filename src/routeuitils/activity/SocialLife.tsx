@@ -49,7 +49,6 @@ const SocialLife: React.FC = () => {
           "Accept-Language": selectedLang,
         },
       });
-      console.log(response.data, "dsss");
       return response.data;
     },
     staleTime: 1000000,

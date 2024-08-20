@@ -6,6 +6,9 @@
 }
 
 @media only screen and (max-width: 1230px) {
+  .scrolled-header {
+    display: none !important;
+  }
   .app .header-wrapper .header .left-navigation,
   .app .header-wrapper .scroller .left-navigation,
   .app .scroll-header .header .left-navigation,

@@ -10,6 +10,7 @@ import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useQuery } from "@tanstack/react-query";
 import DOMPurify from "dompurify";
 import { useTranslate } from "../../context/TranslateContext";
+import { Autoplay, Pagination } from "swiper/modules";
 
 type ServicesDataType = {
   id: string;
@@ -58,25 +59,19 @@ const Services: React.FC = () => {
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
-          direction={"vertical"}
+          direction={"horizontal"}
           pagination={{
             clickable: true,
+            dynamicBullets: true,
           }}
+          modules={[Pagination, Autoplay]}
           className="mySwiper">
           {servicesData && servicesData.length > 0
             ? servicesData.map((item: ServicesDataType, index: number) => (
                 <SwiperSlide key={index}>
-                  <div className="button-swiper">
-                    <button className="prev" onClick={handlePrev}>
-                      <img src="/prev.svg" alt="prev-slide-button" title="Əvvəlki" />
-                    </button>
-                    <button className="next" onClick={handleNext}>
-                      <img src="/next.svg" alt="next-slide-button" title="Sonrakı" />
-                    </button>
-                  </div>
                   <div className="left">
                     <h3>{item?.title}</h3>
-                    <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}/>
+                    <div className="elements" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}/>
                     <Link to={`/fealiyyet/xidmetler/${item?.title}`} className="show-more">
                     {translations['etrafli_bax_button']}
                     </Link>
@@ -90,6 +85,14 @@ const Services: React.FC = () => {
               ))
             : ""}
         </Swiper>
+        <div className="button-swiper">
+                    <button className="prev" onClick={handlePrev}>
+                      <img src="/lefet.svg" alt="prev-slide-button" title="Əvvəlki" />
+                    </button>
+                    <button className="next" onClick={handleNext}>
+                      <img src="/righet.svg" alt="next-slide-button" title="Sonrakı" />
+                    </button>
+                  </div>
       </div>
     </section>
   );

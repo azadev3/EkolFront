@@ -8,10 +8,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import { useRecoilValue } from "recoil";
-import { ScrollHeaderState, SelectedLanguageState } from "../../recoil/Atoms";
+import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Loader";
-import ScrollHeader from "../../components/header/ScrollHeader";
 
 export interface SocialsType {
   _id: string;
@@ -55,7 +54,6 @@ const Hero: React.FC = () => {
     queryKey: ["socialData"],
     queryFn: async () => {
       const response = await axios.get(`${Baseurl}/socialsfront`);
-      console.log(response.data, "socaisl");
       return response.data;
     },
     staleTime: 9000000,
@@ -76,12 +74,10 @@ const Hero: React.FC = () => {
     }
   };
 
-  const scrollHeader = useRecoilValue(ScrollHeaderState);
-
   return (
     <section className="hero-wrapper">
       <div className="hero">
-        {scrollHeader ? <ScrollHeader /> : <Header />}
+        <Header />
         {isLoading ? (
           <Loader />
         ) : isError ? (
@@ -91,16 +87,15 @@ const Hero: React.FC = () => {
           </p>
         ) : (
           <Swiper
-            autoplay={{
-              delay: 1500,
-              pauseOnMouseEnter: true,
-            }}
-            speed={3000}
+            // autoplay={{
+            //   delay: 1500,
+            //   pauseOnMouseEnter: true,
+            // }}
+            speed={1800}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
             pagination={{
-              dynamicBullets: true,
               clickable: true,
             }}
             modules={[Pagination, Autoplay]}
@@ -117,14 +112,6 @@ const Hero: React.FC = () => {
                       <div className="left">
                         <h1>{item?.title}</h1>
                         <p>{item?.description}</p>
-                        <div className="buttons">
-                          <button className="swiper-prev" onClick={handlePrev}>
-                            <img src="../prevwhite.svg" alt="prev" />
-                          </button>
-                          <button className="swiper-next" onClick={handleNext}>
-                            <img src="../prevnext.svg" alt="next" />
-                          </button>
-                        </div>
                       </div>
 
                       <div className="right-socials">
@@ -144,6 +131,15 @@ const Hero: React.FC = () => {
                   </SwiperSlide>
                 ))
               : ""}
+
+            <div className="buttons">
+              <button className="swiper-prev" onClick={handlePrev}>
+                <img src="../prevwhite.svg" alt="prev" />
+              </button>
+              <button className="swiper-next" onClick={handleNext}>
+                <img src="../prevnext.svg" alt="next" />
+              </button>
+            </div>
           </Swiper>
         )}
       </div>

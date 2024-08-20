@@ -102,10 +102,9 @@ const Header: React.FC = () => {
     queryKey: ["logoIconKey"],
     queryFn: async () => {
       const response = await axios.get(`${Baseurl}/logo`);
-      console.log(response.data, "logo");
       return response.data;
     },
-    staleTime: 900000,
+    staleTime: 9000000,
   });
 
   const [dropdown, setDropdown] = React.useState<number | null>(null);

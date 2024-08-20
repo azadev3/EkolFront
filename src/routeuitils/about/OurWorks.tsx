@@ -27,8 +27,6 @@ const OurWorks: React.FC = () => {
           "Accept-Language": selectedlang,
         },
       });
-      console.log(response.data, "dropdonwgallery");
-      console.log(response.data, 'ourworks-inner')
       return response.data;
     },
     staleTime: 1000000,
@@ -64,7 +62,6 @@ const OurWorks: React.FC = () => {
               {OurWorksInnerData && OurWorksInnerData.length > 0 ? OurWorksInnerData.map((item: OurWorksInnerInterface) => (
                 <div key={uuidv4()} className="item-navigation" onClick={() => handleSelectItem(item?.title)}>
                   <div className="left-order-num-and-title">
-                    <span>1</span>
                     <p>{item?.title}</p>
                   </div>
                   <img src="/arrow.svg" className="arrowimg" alt="" />
