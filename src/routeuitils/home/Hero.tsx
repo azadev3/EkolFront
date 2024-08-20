@@ -1,5 +1,4 @@
 import React from "react";
-import { v4 as uuidv4 } from "uuid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -14,12 +13,6 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Loader";
 import ScrollHeader from "../../components/header/ScrollHeader";
 
-type HeroSocials = {
-  id: string;
-  hrefing: string;
-  icon: string;
-};
-
 export interface SocialsType {
   _id: string;
   icon: string;
@@ -33,29 +26,16 @@ interface HeroDataType {
   image: string;
 }
 
-export const HeroSocialData: HeroSocials[] = [
-  {
-    id: uuidv4(),
-    hrefing: "",
-    icon: "../face.svg",
-  },
-  {
-    id: uuidv4(),
-    hrefing: "",
-    icon: "../linkedin.svg",
-  },
-  {
-    id: uuidv4(),
-    hrefing: "",
-    icon: "../instagram.svg",
-  },
-];
-
 const Hero: React.FC = () => {
   const selectedlang = useRecoilValue(SelectedLanguageState);
 
   //hero
-  const { data: heroData, isLoading, isError, error } = useQuery<HeroDataType[]>({
+  const {
+    data: heroData,
+    isLoading,
+    isError,
+    error,
+  } = useQuery<HeroDataType[]>({
     queryKey: ["heroDataKey", selectedlang],
     queryFn: async () => {
       const response = await axios.get(`${Baseurl}/herofront`, {
@@ -101,11 +81,7 @@ const Hero: React.FC = () => {
   return (
     <section className="hero-wrapper">
       <div className="hero">
-        {scrollHeader ? (
-          <ScrollHeader />
-        ) : (
-          <Header />
-        )}
+        {scrollHeader ? <ScrollHeader /> : <Header />}
         {isLoading ? (
           <Loader />
         ) : isError ? (
@@ -117,7 +93,7 @@ const Hero: React.FC = () => {
           <Swiper
             autoplay={{
               delay: 1500,
-              pauseOnMouseEnter: true
+              pauseOnMouseEnter: true,
             }}
             speed={3000}
             onSwiper={(swiper) => {
@@ -125,14 +101,18 @@ const Hero: React.FC = () => {
             }}
             pagination={{
               dynamicBullets: true,
-              clickable: true
+              clickable: true,
             }}
             modules={[Pagination, Autoplay]}
             className="mySwiper">
             {hasHero
               ? heroData.map((item: HeroDataType, index: number) => (
                   <SwiperSlide key={index}>
-                    <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${item?._id}-image`} />
+                    <img
+                      src={`https://ekol-server-1.onrender.com${item?.image}`}
+                      alt={`${item?._id}-image`}
+                      loading="lazy"
+                    />
                     <div className="slide-content">
                       <div className="left">
                         <h1>{item?.title}</h1>

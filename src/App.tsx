@@ -20,19 +20,15 @@ import Yearly from "./routeuitils/calculations/Yearly";
 import LastBlogInner from "./routeuitils/blog/LastBlogInner";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { PurchaseInterface, PurchaseModalState } from "./routeuitils/purchase/PurchaseSection";
-import axios from "axios";
-import { Baseurl } from "./Baseurl";
-import { ScrollHeaderState, SelectedLanguageState } from "./recoil/Atoms";
-import { useQuery } from "@tanstack/react-query";
-import moment from "moment";
-import { LeadershipModalState, Management } from "./routeuitils/about/Leadership";
-import DOMPurify from "dompurify";
+import { ScrollHeaderState } from "./recoil/Atoms";
+import { LeadershipModalState } from "./routeuitils/about/Leadership";
 import { searchModalState } from "./components/header/headeruitil/Search";
 import SearchModal from "./components/header/headeruitil/SearchModal";
 import ScrollHeader from "./components/header/ScrollHeader";
 import "./styles/responsive.scss";
-import { useTranslate } from "./context/TranslateContext";
+import PurchaseModal from "./modals/PurchaseModal";
+import { PurchaseModalState } from "./routeuitils/purchase/PurchaseSection";
+import LeadershipModal from "./modals/LeadershipModal";
 
 export const isHomePageState = atom<boolean>({
   key: "isHomePageState",
@@ -40,6 +36,7 @@ export const isHomePageState = atom<boolean>({
 });
 
 const App: React.FC = () => {
+
   //if location / or homepage route, hidden main header component
   const location = useLocation();
 
@@ -52,105 +49,18 @@ const App: React.FC = () => {
     }
   }, [location]);
 
-  //purchase modal
-  const [purchaseModal, setPurchaseModal] = useRecoilState(PurchaseModalState);
-
-  const selectedLang = useRecoilValue(SelectedLanguageState);
-
-  //fetch purchases
-  const { data: Purchases } = useQuery<PurchaseInterface[]>({
-    queryKey: ["purchasesKey", selectedLang],
-    queryFn: async () => {
-      const response = await axios.get(`${Baseurl}/purchasefront`, {
-        headers: {
-          "Accept-Language": selectedLang,
-        },
-      });
-      return response.data;
-    },
-    staleTime: 1000000,
-  });
-
-  //download pdf for purchases
-  const handleDownloadPdf = async (_id: string) => {
-    const findUrl: any =
-      Purchases && Purchases?.length > 0
-        ? Purchases?.find((item: PurchaseInterface) => {
-            return _id === item?._id ? item?.pdf : "";
-          })
-        : "";
-    const url: any = findUrl ? `https://ekol-server-1.onrender.com${findUrl?.pdf}` : "";
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = url.split("/").pop();
-    link.click();
-  };
-
-  //outside click purchases and leadership modal
-  const purchaseModalRef = React.useRef<HTMLDivElement | null>(null);
-  const leadershipModalRef = React.useRef<HTMLDivElement | null>(null);
-
-  const isPurchaseData: any =
-    Purchases && Purchases?.length > 0
-      ? Purchases?.find((item: PurchaseInterface) => {
-          return purchaseModal === item?._id;
-        })
-      : [];
-
   //leadership modal
-  const [leadershipModal, setLeadershipModal] = useRecoilState(LeadershipModalState);
-  const { data: managementData } = useQuery({
-    queryKey: ["managementDataKey", selectedLang],
-    queryFn: async () => {
-      const response = await axios.get(`${Baseurl}/managementfront`, {
-        headers: {
-          "Accept-Language": selectedLang,
-        },
-      });
-      return response.data;
-    },
-    staleTime: 1000000,
-  });
-
-  const isLeadershipData: any =
-    managementData && managementData?.length > 0
-      ? managementData?.find((item: Management) => {
-          return leadershipModal === item?._id;
-        })
-      : [];
+  const leadershipModal = useRecoilValue(LeadershipModalState);
 
   //search modal
   const [searchModal, _] = useRecoilState(searchModalState);
 
-  React.useEffect(() => {
-    const outsideClicked = (e: MouseEvent) => {
-      if (purchaseModalRef?.current && !purchaseModalRef?.current?.contains(e.target as Node)) {
-        setPurchaseModal("");
-      }
-    };
-
-    const outsideClickedLeaderShip = (e: MouseEvent) => {
-      if (leadershipModalRef?.current && !leadershipModalRef?.current?.contains(e.target as Node)) {
-        setLeadershipModal("");
-      }
-    };
-
-    document.addEventListener("mousedown", outsideClicked);
-    document.addEventListener("mousedown", outsideClickedLeaderShip);
-    return () => {
-      document.removeEventListener("mousedown", outsideClicked);
-      document.removeEventListener("mousedown", outsideClickedLeaderShip);
-    };
-  }, []);
-
   //scroll header activated
   const [scrollHeader, setScrollHeader] = useRecoilState(ScrollHeaderState);
-
   React.useEffect(() => {
     const controlScroll = () => {
       if (window.scrollY >= 100) {
-          setScrollHeader(true);
-        
+        setScrollHeader(true);
       } else {
         setScrollHeader(false);
       }
@@ -161,90 +71,18 @@ const App: React.FC = () => {
     return () => window.removeEventListener("scroll", controlScroll);
   }, []);
 
-  const { translations } = useTranslate();
+  const purchaseModal = useRecoilValue(PurchaseModalState);
 
   return (
     <div className="app">
       {/* purchase modal */}
       <div className={`overlay-purchase-modal ${purchaseModal ? "active" : ""}`}>
-        <div className={`purchase-modal ${purchaseModal ? "active" : ""}`} ref={purchaseModalRef}>
-          <section className="header-modal">
-            <h1>{isPurchaseData ? isPurchaseData.title : ""}</h1>
-            <img
-              src="/close.svg"
-              title="Bağla"
-              alt="close"
-              className="close-icon"
-              onClick={() => setPurchaseModal("")}
-            />
-          </section>
-
-          <article className="content-area">
-            <div className="date">
-              <span>{isPurchaseData ? moment(isPurchaseData?.createdAt).format("LL") : ""}</span>
-            </div>
-
-            <p>{isPurchaseData ? isPurchaseData?.description : ""}</p>
-          </article>
-
-          <button
-            className="download-pdf-btn"
-            onClick={() => {
-              if (isPurchaseData && isPurchaseData._id) {
-                handleDownloadPdf(isPurchaseData?._id);
-              }
-            }}>
-            {translations["pdf_yukle_title"]}
-          </button>
-        </div>
+        <PurchaseModal />
       </div>
 
       {/* leadership modal */}
       <div className={`overlay-leadership-modal ${leadershipModal ? "active" : ""}`}>
-        <div className="leadership-modal" ref={leadershipModalRef}>
-          <div className="top-profile-and-user-info">
-            <div className="profile">
-              <img
-                src={isLeadershipData ? `https://ekol-server-1.onrender.com${isLeadershipData?.profile}` : ""}
-                alt=""
-              />
-            </div>
-            <div className="right-description">
-              <div className="top">
-                <h3>{isLeadershipData ? isLeadershipData?.nameSurname : ""}</h3>
-                <p>{isLeadershipData ? isLeadershipData?.job : ""}</p>
-              </div>
-              <div className="job-and-education">
-                <div className="item-education">
-                  <div className="icon">
-                    <img src="/education.svg" alt="education" />
-                  </div>
-                  <article className="texts">
-                    <span>{translations["tehsil_title"]}</span>
-                    <p>{isLeadershipData ? isLeadershipData?.education : ""}</p>
-                  </article>
-                </div>
-                <div className="item-education">
-                  <div className="icon">
-                    <img src="/profiession.svg" alt="education" />
-                  </div>
-                  <article className="texts">
-                    <span>{translations["iş_title"]}</span>
-                    <p>{isLeadershipData ? isLeadershipData?.job : ""}</p>
-                  </article>
-                </div>
-              </div>
-            </div>
-          </div>
-          {isLeadershipData && isLeadershipData?.description ? (
-            <div
-              className="description-info"
-              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(isLeadershipData?.description) }}
-            />
-          ) : (
-            <p>Hələ ki, istifadəçi bir açıqlama bildirməyib.</p>
-          )}
-        </div>
+        <LeadershipModal />
       </div>
 
       {/* search modal */}
