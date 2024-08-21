@@ -9,8 +9,9 @@ import { useRecoilValue } from "recoil";
 import moment from "moment";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Loader";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { useTranslate } from "../../context/TranslateContext";
+import { SocialsType } from "../home/Hero";
 
 type LastBlogType = {
   _id: number;
@@ -50,13 +51,19 @@ export const SocialsForBlogItem: SocialsForBlogs[] = [
 ];
 
 const BlogInnerContent: React.FC = () => {
+  const { translations } = useTranslate();
+
   const { blogtitle } = useParams<{ blogtitle: string }>();
   const selectedlang = useRecoilValue(SelectedLanguageState);
   const navigate = useNavigate();
 
   // Fetch blog data
-  const { data: blogDatas, isLoading: blogLoading, error: blogError } = useQuery({
-    queryKey: ['blogDatasInner', selectedlang],
+  const {
+    data: blogDatas,
+    isLoading: blogLoading,
+    error: blogError,
+  } = useQuery({
+    queryKey: ["blogDatasInner", selectedlang],
     queryFn: async () => {
       try {
         const response = await axios.get(`${Baseurl}/blogfront`, {
@@ -64,18 +71,22 @@ const BlogInnerContent: React.FC = () => {
             "Accept-Language": selectedlang,
           },
         });
-        return response.data; 
+        return response.data;
       } catch (error) {
         console.error(error);
         throw error;
       }
     },
-    staleTime: 900000, 
+    staleTime: 900000,
   });
 
   // Fetch last blogs
-  const { data: lastBlogs, isLoading: lastBlogsLoading, error: lastBlogsError } = useQuery({
-    queryKey: ['lastBlogs', selectedlang],
+  const {
+    data: lastBlogs,
+    isLoading: lastBlogsLoading,
+    error: lastBlogsError,
+  } = useQuery({
+    queryKey: ["lastBlogs", selectedlang],
     queryFn: async () => {
       try {
         const response = await axios.get(`${Baseurl}/lastblogs`, {
@@ -89,8 +100,27 @@ const BlogInnerContent: React.FC = () => {
         throw error;
       }
     },
-    staleTime: 900000, 
+    staleTime: 900000,
   });
+
+  //socials
+  const { data: SocialsData } = useQuery<SocialsType[]>({
+    queryKey: ["socialData"],
+    queryFn: async () => {
+      const response = await axios.get(`${Baseurl}/socialsfront`);
+      console.log(response.data, "sociaaals");
+      return response.data;
+    },
+    staleTime: 9000000,
+  });
+
+  // Formatted createdAt date
+  const DateDisplay = ({ createdAt }: { createdAt: string }) => {
+    const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
+    return <span>{formattedDate}</span>;
+  };
+
+  const innerBlogItem = blogDatas?.find((item: BlogType) => item?.title.toLowerCase() === blogtitle?.toLowerCase());
 
   if (blogLoading || lastBlogsLoading) {
     return <Loader />;
@@ -100,22 +130,13 @@ const BlogInnerContent: React.FC = () => {
     return "Bir hata oluştu.";
   }
 
-  // Formatted createdAt date
-  const DateDisplay = ({ createdAt }: { createdAt: string }) => {
-    const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
-    return <span>{formattedDate}</span>;
-  };
-
-  const innerBlogItem = blogDatas?.find((item: BlogType) => item?.title.toLowerCase() === blogtitle?.toLowerCase());
-  const { translations } = useTranslate();
-
   return (
     <section className="blog-inner-content-section">
       <div className="blogs-inner">
-        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_xeberler']} />
+        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_xeberler"]} />
 
         <div className="container-blogs-inner">
-          <h2>{translations['blog_title']}</h2>
+          <h2>{translations["blog_title"]}</h2>
 
           <div className="col-blogs-inner">
             <h3>{innerBlogItem?.title}</h3>
@@ -132,7 +153,11 @@ const BlogInnerContent: React.FC = () => {
 
                 <div className="description-content">
                   <span className="time-span">
-                    {innerBlogItem && innerBlogItem.createdAt ? <DateDisplay createdAt={innerBlogItem.createdAt} /> : ""}
+                    {innerBlogItem && innerBlogItem.createdAt ? (
+                      <DateDisplay createdAt={innerBlogItem.createdAt} />
+                    ) : (
+                      ""
+                    )}
                   </span>
                   {innerBlogItem && innerBlogItem.description && (
                     <div
@@ -155,7 +180,9 @@ const BlogInnerContent: React.FC = () => {
                           <div className="title">{item.title}</div>
 
                           <div className="time-and-icon">
-                            <span className="time">{item.createdAt ? <DateDisplay createdAt={item.createdAt} /> : ""}</span>
+                            <span className="time">
+                              {item.createdAt ? <DateDisplay createdAt={item.createdAt} /> : ""}
+                            </span>
                             <img src="/arrow.svg" alt="arrow-icon" />
                           </div>
                         </Link>
@@ -171,11 +198,32 @@ const BlogInnerContent: React.FC = () => {
                   <span>Xəbəri paylaş:</span>
                   <div className="bottom">
                     <div className="socials">
-                      {SocialsForBlogItem.map((item: SocialsForBlogs) => (
-                        <Link to={item.to} key={uuidv4()} className="icon-wrap">
-                          <img src={item.icon} alt={`${item.id}-icon`} title={item.to} />
-                        </Link>
-                      ))}
+                      {SocialsData && SocialsData.length > 0
+                        ? SocialsData.map((item: SocialsType) => (
+                            <Link
+                              style={{
+                                background: "#30b258",
+                                padding: "7px",
+                                borderRadius: "100px",
+                                minWidth: "30px",
+                                width: "30px",
+                                height: "30px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                overflow: "hidden",
+                              }}
+                              key={item?._id}
+                              to={item?.link}
+                              className="icon">
+                              <img
+                                src={`https://ekol-server-1.onrender.com${item?.icon}`}
+                                alt={`${item?._id}-icon`}
+                                title={item?.link}
+                              />
+                            </Link>
+                          ))
+                        : ""}
                     </div>
                     <div className="view">
                       <div className="eye-wrap">

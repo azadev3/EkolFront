@@ -7,6 +7,8 @@ import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useRecoilValue } from "recoil";
 import moment from "moment";
 import { useTranslate } from "../../context/TranslateContext";
+import { useQuery } from "@tanstack/react-query";
+import { SocialsType } from "../home/Hero";
 
 type LastBlogType = {
   _id: number;
@@ -56,6 +58,17 @@ const LastBlogInner: React.FC = () => {
     return formattedDate;
   };
 
+  //socials
+  const { data: SocialsData } = useQuery<SocialsType[]>({
+    queryKey: ["socialData"],
+    queryFn: async () => {
+      const response = await axios.get(`${Baseurl}/socialsfront`);
+      console.log(response.data, "sociaaals");
+      return response.data;
+    },
+    staleTime: 9000000,
+  });
+
   //last blogs
   const [lastBlogs, setLastBlogs] = React.useState<LastBlogType[]>([]);
 
@@ -87,15 +100,13 @@ const LastBlogInner: React.FC = () => {
   const navigate = useNavigate();
   const { translations } = useTranslate();
 
-
-
   return (
     <section className="last-blog-inner-content-section">
       <div className="blogs-inner">
-        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_xeberler']} />
+        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_xeberler"]} />
 
         <div className="container-blogs-inner">
-          <h2>{translations['blog_title']}</h2>
+          <h2>{translations["blog_title"]}</h2>
 
           <div className="col-blogs-inner">
             <h3>{lastBlogItem?.title}</h3>
@@ -103,7 +114,11 @@ const LastBlogInner: React.FC = () => {
             <div className="contents">
               <div className="left">
                 <div className="content-inner-blog-image-wrapper">
-                  <img loading="lazy" src={`https://ekol-server-1.onrender.com${lastBlogItem?.image}`} title={lastBlogItem?.title} />
+                  <img
+                    loading="lazy"
+                    src={`https://ekol-server-1.onrender.com${lastBlogItem?.image}`}
+                    title={lastBlogItem?.title}
+                  />
                 </div>
 
                 <div className="description-content">
@@ -144,11 +159,32 @@ const LastBlogInner: React.FC = () => {
                   <span>Xəbəri paylaş:</span>
                   <div className="bottom">
                     <div className="socials">
-                      {SocialsForBlogItem.map((item: SocialsForBlogs) => (
-                        <Link to={item?.to} key={item?.id} className="icon-wrap">
-                          <img src={item?.icon} alt={`${item?.id}-icon`} title={item?.to} />
-                        </Link>
-                      ))}
+                      {SocialsData && SocialsData.length > 0
+                        ? SocialsData.map((item: SocialsType) => (
+                            <Link
+                              style={{
+                                background: "#30b258",
+                                padding: "7px",
+                                borderRadius: "100px",
+                                minWidth: "30px",
+                                width: "30px",
+                                height: "30px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                overflow: "hidden",
+                              }}
+                              key={item?._id}
+                              to={item?.link}
+                              className="icon">
+                              <img
+                                src={`https://ekol-server-1.onrender.com${item?.icon}`}
+                                alt={`${item?._id}-icon`}
+                                title={item?.link}
+                              />
+                            </Link>
+                          ))
+                        : ""}
                     </div>
                     <div className="view">
                       <div className="eye-wrap">
