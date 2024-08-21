@@ -24,7 +24,7 @@ export const TranslateContextProvider: React.FC<{ children: React.ReactNode }> =
 
   const {
     data: translateData,
-    isLoading: translateDataLoading,
+    isLoading,
     error,
   } = useQuery({
     queryKey: ["translateDataKey", selectedlang],
@@ -45,17 +45,27 @@ export const TranslateContextProvider: React.FC<{ children: React.ReactNode }> =
         return translatedTexts;
       } catch (error) {
         console.error("Error fetching translations:", error);
-        throw error; // Error handling for `useQuery`
+        throw new Error("Failed to load translations. Please try again later.");
       }
     },
     staleTime: 3000000,
+    retry: 2, 
   });
 
-  if (translateDataLoading) return <Loader />;
-  if (error) return <div>Error fetching translations</div>;
+  if (isLoading) return <Loader />;
+
+  if (error) {
+    return (
+      <div style={{ color: "red", padding: "20px", textAlign: "center" }}>
+        Something went wrong while fetching translations. Please try again later.
+      </div>
+    );
+  }
 
   return (
-    <TranslateContext.Provider value={{ translations: translateData || {} }}>{children}</TranslateContext.Provider>
+    <TranslateContext.Provider value={{ translations: translateData || {} }}>
+      {children}
+    </TranslateContext.Provider>
   );
 };
 

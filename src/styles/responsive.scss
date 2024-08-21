@@ -192,6 +192,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-top: 16px;
+    padding-bottom: 16px;
     .logo-mobile {
       width: 140px;
       display: flex;
@@ -215,11 +217,11 @@
     .toggle-menu {
       overflow-y: auto;
       position: fixed;
-      z-index: 1000;
+      z-index: 10000;
       width: 80%;
       left: 0;
       top: 0;
-      height: 100%;
+      height: 100vh;
       background-color: wheat;
       padding: 24px;
       display: flex;
@@ -705,6 +707,61 @@
 }
 
 @media only screen and (max-width: 568px) {
+  .home-page .services-section .services .swiper-slide .right {
+    min-height: 300px;
+    max-height: 300px;
+  }
+  .home-page .services-section .services .elements {
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    max-height: 100px;
+    min-height: 100px;
+  }
+  .home-page .contact-us-section .contact-us .map-contact .contact-information-box {
+    position: unset;
+  }
+  .home-page .contact-us-section .contact-us .map-contact {
+    flex-direction: column;
+    gap: 62px;
+    height: auto;
+  }
+  .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content {
+    &:nth-child(4) {
+      display: none;
+    }
+  }
+  .footer-wrapper .footer .top-footer .footer-navigations {
+    column-gap: 10px;
+    row-gap: 80px;
+  }
+  .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content .links-nav-social {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .home-page .contact-us-section .contact-us .map-contact .contact-information-box {
+    height: auto !important;
+    min-height: unset;
+    max-height: unset;
+  }
+  .home-page .contact-us-section {
+    height: auto;
+  }
+  .home-page .contact-us-section .contact-us .map-contact iframe {
+    height: 280px;
+  }
+  .home-page .services-section .services .swiper-slide .left h3 {
+    font-size: 21px;
+  }
+  .home-page .services-section .services .button-swiper {
+    display: none;
+  }
+  .home-page .services-section .services .swiper-pagination-fraction, .home-page .services-section .services .swiper-pagination-custom, .home-page .services-section .services .swiper-horizontal > .swiper-pagination-bullets, .home-page .services-section .services .swiper-pagination-bullets.swiper-pagination-horizontal {
+    display: none;
+  }
+  .home-page .services-section .services .elements {
+    ul, h1, h2, h3, h4, h5, li, a, ol, table, br, strong {
+      display: none;
+    }
+  }
   .app .page-navigator .currentpage {
     font-size: 9px;
   }
@@ -987,5 +1044,11 @@
   }
   .contact-page .contact-section .contact .container-contact .form-area {
     padding: 8px;
+  }
+}
+
+@media only screen and (max-width: 340px) {
+  .footer-wrapper .footer .top-footer .footer-navigations {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
