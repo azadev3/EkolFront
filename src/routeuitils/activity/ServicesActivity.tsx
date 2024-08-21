@@ -97,7 +97,19 @@ const ServicesActivity: React.FC = () => {
                     slidesPerView={4.5}
                     navigation={true}
                     modules={[Navigation]}
-                    className="mySwiper">
+                    className="mySwiper"
+                    breakpoints={{
+                      268: {
+                        slidesPerView: 1.2,
+                      },
+                      568: {
+                        slidesPerView: 2.3,
+                      },
+                      968: {
+                        slidesPerView: 4.5,
+                      }
+                    }}
+                    >
                     {hasServicesData &&
                       servicesPageData?.map((item, i) => (
                         <SwiperSlide

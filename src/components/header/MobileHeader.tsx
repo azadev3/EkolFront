@@ -136,6 +136,27 @@ const MobileHeader: React.FC = () => {
 
   const isHomePage = useRecoilValue(isHomePageState);
 
+  //if open toggle menu on the mobile, remove vertical scrolling
+  React.useEffect(() => {
+    const body = document.querySelector("body");
+  
+    if (body) {
+      if (toggleMenu) {
+        body.style.overflowY = "hidden"; 
+      } else {
+        body.style.overflowY = "auto"; 
+      }
+    }
+  
+    return () => {
+      if (body) {
+        body.style.overflowY = "auto";
+      }
+    };
+  }, [toggleMenu]); 
+  
+
+
   return (
     <div className="mobile-header">
       <div className={`toggle-menu ${toggleMenu ? "active" : ""}`}>
