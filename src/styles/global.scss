@@ -1436,3 +1436,17 @@ h1 {
   }
 
 }
+
+.about-page .certificates-section .certificates .container-certificates .description-certificates p img {
+  overflow: hidden !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+.carier-page .carier-section .carier .container-carier .carier-content-area .content-carier .general-information .recruitment-process .process .process-item {
+  justify-content: flex-start !important;
+}
+.overlay-purchase-modal .purchase-modal .download-pdf-btn {
+  width: auto !important;
+  min-width: unset !important;
+  max-width: unset !important;
+}
