@@ -8,6 +8,7 @@ import { Baseurl } from "../../Baseurl";
 import DOMPurify from "dompurify";
 import Loader from "../../Loader";
 import { useTranslate } from "../../context/TranslateContext";
+import Lisanse from "./Lisanse";
 
 interface Certificates {
   _id: string;
@@ -57,6 +58,8 @@ const Certificates: React.FC = () => {
             : ""}
         </div>
       )}
+
+      <Lisanse />
     </section>
   );
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import Breadcrumb from "../../Breadcrumb";
 import { useRecoilValue } from "recoil";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useQuery } from "@tanstack/react-query";
@@ -7,8 +6,6 @@ import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import Loader from "../../Loader";
 import DOMPurify from "dompurify";
-import { useTranslate } from "../../context/TranslateContext";
-
 interface LisanseItemType {
   _id: string;
   title: string;
@@ -33,14 +30,9 @@ const Lisanse: React.FC = () => {
 
   const hasLisanseData = lisanseData && lisanseData?.length > 0;
 
-  const { translations } = useTranslate();
-
-
   return (
     <section className="lisanse-section">
       <div className="lisanse">
-        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_lisenziyalar']} />
-
         {isLoading ? (
           <Loader />
         ) : (

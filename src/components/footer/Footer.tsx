@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/footer.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { useQuery } from "@tanstack/react-query";
 import { Baseurl } from "../../Baseurl";
@@ -30,8 +30,8 @@ const Footer: React.FC = () => {
       footerNavItems: [
         {
           id: uuidv4(),
-          title: `${translations["nav_haqqimizda_struktur"]}`,
-          to: "/about/structure",
+          title: `${translations["nav_haqqimizda_bizkimik"]}`,
+          to: "/about",
         },
         {
           id: uuidv4(),
@@ -40,8 +40,8 @@ const Footer: React.FC = () => {
         },
         {
           id: uuidv4(),
-          title: `${translations["nav_haqqimizda_lisenziyalar"]}`,
-          to: "/about/lisanses",
+          title: `${translations["nav_haqqimizda_struktur"]}`,
+          to: "/about/structure",
         },
         {
           id: uuidv4(),
@@ -52,11 +52,6 @@ const Footer: React.FC = () => {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_partnyorlar"]}`,
           to: "/about/partners",
-        },
-        {
-          id: uuidv4(),
-          title: `${translations["nav_haqqimizda_qalereya"]}`,
-          to: "/about/gallery",
         },
         {
           id: uuidv4(),
@@ -76,8 +71,8 @@ const Footer: React.FC = () => {
         },
         {
           id: uuidv4(),
-          title: `${translations["nav_saheler"]}`,
-          to: "/fealiyyet/sosialheyat",
+          title: `${translations["karyera_imkanlari"]}`,
+          to: "/karyera"
         },
         {
           id: uuidv4(),
@@ -100,6 +95,11 @@ const Footer: React.FC = () => {
           title: `${translations["nav_haqqimizda_qalereya"]}`,
           to: "/about/gallery",
         },
+        {
+          id: uuidv4(),
+          title: `${translations["nav_haqqimizda_sosialheyat"]}`,
+          to: "/fealiyyet/sosialheyat"
+        },
       ],
     },
     {
@@ -114,14 +114,8 @@ const Footer: React.FC = () => {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_elaqe"]}`,
         },
-        {
-          id: uuidv4(),
-          title: `${translations["nav_haqqimizda_sosialheyat"]}`,
-        },
-        {
-          id: uuidv4(),
-          title: `${translations["karyera_imkanlari"]}`,
-        },
+
+       
       ],
     },
     {
@@ -157,6 +151,9 @@ const Footer: React.FC = () => {
     staleTime: 900000,
   });
 
+  const navigate = useNavigate();
+
+
   return (
     <footer className="footer-wrapper">
       <div className="footer">
@@ -173,7 +170,14 @@ const Footer: React.FC = () => {
               if (index !== 5) {
                 return (
                   <div key={item.id} className="footer-nav-link-content">
-                    <h4 className="title-nav">{item.title}</h4>
+                    <h4 className="title-nav"
+                    style={{ cursor: index === 3 ? "pointer" : "auto" }}
+                    onClick={() => {
+                      if(index === 3) {
+                        navigate("/satinalma");
+                      }
+                    }}
+                    >{item.title}</h4>
                     <div className="links-nav">
                       {item?.footerNavItems?.map((links: FooterNavLinkType) => (
                         <Link key={links.id} to={links.to ? links.to : ""} className="link">

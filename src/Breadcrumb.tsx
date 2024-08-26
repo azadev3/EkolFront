@@ -1,6 +1,7 @@
 import React from "react";
 import { useMatch, useNavigate } from "react-router-dom";
 import { useTranslate } from "./context/TranslateContext";
+import { HiArrowNarrowRight } from "react-icons/hi";
 
 type Props = {
   uri: string | undefined;
@@ -24,11 +25,7 @@ const Breadcrumb: React.FC<Props> = ({ uri, prevpage }) => {
         <span className="prevpage" onClick={() => navigate("/")}>
           {prevpage}
         </span>
-        <span
-          className="dot"
-          style={{
-            backgroundColor: isLocationInnerImage ? "#00000080" : "",
-          }}></span>
+        <HiArrowNarrowRight />
         <span
           onClick={() =>
             navigate(isLocationInnerImage ? "/about/gallery/images" : isLocationInnerBlog ? "/xeberler" : "")

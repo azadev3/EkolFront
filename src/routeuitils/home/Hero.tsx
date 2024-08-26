@@ -4,7 +4,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 import Header from "../../components/header/Header";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import { useRecoilValue } from "recoil";
@@ -49,17 +48,6 @@ const Hero: React.FC = () => {
 
   const hasHero = heroData && heroData?.length > 0;
 
-  //socials
-  const { data: SocialsData } = useQuery<SocialsType[]>({
-    queryKey: ["socialData"],
-    queryFn: async () => {
-      const response = await axios.get(`${Baseurl}/socialsfront`);
-      console.log(response.data, 'sociaaals')
-      return response.data;
-    },
-    staleTime: 9000000,
-  });
-
   //prev - next swiper button clicked
   const swiperRef = React.useRef<any>(null);
 
@@ -88,10 +76,10 @@ const Hero: React.FC = () => {
           </p>
         ) : (
           <Swiper
-            // autoplay={{
-            //   delay: 1500,
-            //   pauseOnMouseEnter: true,
-            // }}
+            autoplay={{
+              delay: 1500,
+              pauseOnMouseEnter: true,
+            }}
             speed={1800}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
@@ -113,20 +101,6 @@ const Hero: React.FC = () => {
                       <div className="left">
                         <h1>{item?.title}</h1>
                         <p>{item?.description}</p>
-                      </div>
-
-                      <div className="right-socials">
-                        {SocialsData && SocialsData.length > 0
-                          ? SocialsData.map((item: SocialsType) => (
-                              <Link key={item?._id} to={item?.link} className="icon">
-                                <img
-                                  src={`https://ekol-server-1.onrender.com${item?.icon}`}
-                                  alt={`${item?._id}-icon`}
-                                  title={item?.link}
-                                />
-                              </Link>
-                            ))
-                          : ""}
                       </div>
                     </div>
                   </SwiperSlide>

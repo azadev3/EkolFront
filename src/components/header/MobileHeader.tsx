@@ -39,6 +39,7 @@ const MobileHeader: React.FC = () => {
 
   const { translations } = useTranslate();
 
+
   const HeaderItems: HeaderElementType[] = [
     { id: 1, title: `${translations["nav_anasehife"]}`, to: "/" },
     {
@@ -50,12 +51,10 @@ const MobileHeader: React.FC = () => {
         { id: 1, title: `${translations["nav_haqqimizda_bizkimik"]}`, to: "/about" },
         { id: 2, title: `${translations["nav_haqqimizda_rehberlik"]}`, to: "/about/leadership" },
         { id: 3, title: `${translations["nav_haqqimizda_struktur"]}`, to: "/about/structure" },
-        { id: 4, title: `${translations["nav_haqqimizda_lisenziyalar"]}`, to: "/about/lisanses" },
         { id: 5, title: `${translations["nav_haqqimizda_sertifikatlar"]}`, to: "/about/certificates" },
         { id: 6, title: `${translations["nav_haqqimizda_partnyorlar"]}`, to: "/about/partners" },
         { id: 7, title: `${translations["nav_haqqimizda_ourworks"]}`, to: "/about/workwedo" },
-        { id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
-        { id: 9, title: `${translations["nav_haqqimizda_hesabatlar"]}`, to: "/hesabatlar" },
+        // { id: 9, title: `${translations["nav_haqqimizda_hesabatlar"]}`, to: "/hesabatlar" },
       ],
     },
     {
@@ -65,20 +64,16 @@ const MobileHeader: React.FC = () => {
       icon: <FaAngleDown className="down-icon" />,
       submenu: [
         {
-          id: 1,
-          title: `${translations["nav_haqqimizda_sosialheyat"]}`,
-          to: "/fealiyyet/sosialheyat",
-        },
-        {
-          id: 2,
+          id: 32,
           title: `${translations["nav_haqqimizda_avadanliqlar"]}`,
           to: "/fealiyyet/avadanliqlar",
         },
         {
-          id: 3,
+          id: 33,
           title: `${translations["nav_haqqimizda_xidmetler"]}`,
           to: "/fealiyyet/xidmetler",
         },
+        { id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
       ],
     },
     {
@@ -97,6 +92,11 @@ const MobileHeader: React.FC = () => {
           id: 2,
           title: `${translations["nav_haqqimizda_qalereya"]}`,
           to: "/about/gallery",
+        },
+        {
+          id: 3,
+          title: `${translations["nav_haqqimizda_sosialheyat"]}`,
+          to: "/fealiyyet/sosialheyat",
         },
       ],
     },

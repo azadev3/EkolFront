@@ -10,6 +10,7 @@ import { FaAngleDown } from "react-icons/fa6";
 import { useRecoilState } from "recoil";
 import { isMobileState } from "../../recoil/Atoms";
 import MobileHeader from "./MobileHeader";
+import ShareButton from "./headeruitil/ShareButton";
 
 export interface Logo {
   _id: string;
@@ -44,12 +45,10 @@ const Header: React.FC = () => {
         { id: 1, title: `${translations["nav_haqqimizda_bizkimik"]}`, to: "/about" },
         { id: 2, title: `${translations["nav_haqqimizda_rehberlik"]}`, to: "/about/leadership" },
         { id: 3, title: `${translations["nav_haqqimizda_struktur"]}`, to: "/about/structure" },
-        { id: 4, title: `${translations["nav_haqqimizda_lisenziyalar"]}`, to: "/about/lisanses" },
         { id: 5, title: `${translations["nav_haqqimizda_sertifikatlar"]}`, to: "/about/certificates" },
         { id: 6, title: `${translations["nav_haqqimizda_partnyorlar"]}`, to: "/about/partners" },
         { id: 7, title: `${translations["nav_haqqimizda_ourworks"]}`, to: "/about/workwedo" },
-        { id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
-        { id: 9, title: `${translations["nav_haqqimizda_hesabatlar"]}`, to: "/hesabatlar" },
+        // { id: 9, title: `${translations["nav_haqqimizda_hesabatlar"]}`, to: "/hesabatlar" },
       ],
     },
     {
@@ -59,20 +58,16 @@ const Header: React.FC = () => {
       icon: <FaAngleDown className="down-icon" />,
       submenu: [
         {
-          id: 1,
-          title: `${translations["nav_haqqimizda_sosialheyat"]}`,
-          to: "/fealiyyet/sosialheyat",
-        },
-        {
-          id: 2,
+          id: 32,
           title: `${translations["nav_haqqimizda_avadanliqlar"]}`,
           to: "/fealiyyet/avadanliqlar",
         },
         {
-          id: 3,
+          id: 33,
           title: `${translations["nav_haqqimizda_xidmetler"]}`,
           to: "/fealiyyet/xidmetler",
         },
+        { id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
       ],
     },
     {
@@ -91,6 +86,11 @@ const Header: React.FC = () => {
           id: 2,
           title: `${translations["nav_haqqimizda_qalereya"]}`,
           to: "/about/gallery",
+        },
+        {
+          id: 3,
+          title: `${translations["nav_haqqimizda_sosialheyat"]}`,
+          to: "/fealiyyet/sosialheyat",
         },
       ],
     },
@@ -151,50 +151,51 @@ const Header: React.FC = () => {
         <MobileHeader />
       ) : (
         <div className="header">
-        <Link to="/" className="logo-header">
-          {LogoIcon && LogoIcon.length > 0
-            ? LogoIcon.map((logo: Logo) => (
-                <img
-                  key={logo._id}
-                  src={`https://ekol-server-1.onrender.com${logo.logo}`}
-                  alt={`${logo._id}-logo`}
-                  title={logo._id}
-                />
-              ))
-            : ""}
-        </Link>
+          <Link to="/" className="logo-header">
+            {LogoIcon && LogoIcon.length > 0
+              ? LogoIcon.map((logo: Logo) => (
+                  <img
+                    key={logo._id}
+                    src={`https://ekol-server-1.onrender.com${logo.logo}`}
+                    alt={`${logo._id}-logo`}
+                    title={logo._id}
+                  />
+                ))
+              : ""}
+          </Link>
 
-        <nav className="left-navigation" ref={liRef}>
-          {HeaderItems?.map((item: HeaderElementType) => (
-            <ul key={item?.id}>
-              <li className="links" onClick={() => handleDropdownMenu(item?.id)}>
-                {item.submenu ? (
-                  <span className="title-dropdown">{item.title}</span>
-                ) : (
-                  <NavLink to={item?.to}>{item.title}</NavLink>
+          <nav className="left-navigation" ref={liRef}>
+            {HeaderItems?.map((item: HeaderElementType) => (
+              <ul key={item?.id}>
+                <li className="links" onClick={() => handleDropdownMenu(item?.id)}>
+                  {item.submenu ? (
+                    <span className="title-dropdown">{item.title}</span>
+                  ) : (
+                    <NavLink to={item?.to}>{item.title}</NavLink>
+                  )}
+                  <span style={{ transform: dropdown === item.id ? "rotate(180deg)" : "" }}>{item.icon}</span>
+                </li>
+                {dropdown === item.id && item.submenu && (
+                  <div className="dropdown-menu" ref={dropdownMenuRef}>
+                    {item?.submenu?.map((item: submenuType) => (
+                      <NavLink onClick={() => setDropdown(null)} to={item.to ? item.to : ""} key={item?.id}>
+                        {item.title}
+                      </NavLink>
+                    ))}
+                  </div>
                 )}
-                <span style={{ transform: dropdown === item.id ? "rotate(180deg)" : "" }}>{item.icon}</span>
-              </li>
-              {dropdown === item.id && item.submenu && (
-                <div className="dropdown-menu" ref={dropdownMenuRef}>
-                  {item?.submenu?.map((item: submenuType) => (
-                    <NavLink onClick={() => setDropdown(null)} to={item.to ? item.to : ""} key={item?.id}>
-                      {item.title}
-                    </NavLink>
-                  ))}
-                </div>
-              )}
-            </ul>
-          ))}
-        </nav>
+              </ul>
+            ))}
+          </nav>
 
-        <section className="right-header-area">
-          <div className="language-and-search-button">
-            <Search />
-            <Language />
-          </div>
-        </section>
-      </div>
+          <section className="right-header-area">
+            <div className="language-and-search-button">
+              <Search />
+              <Language />
+              <ShareButton />
+            </div>
+          </section>
+        </div>
       )}
     </header>
   );
