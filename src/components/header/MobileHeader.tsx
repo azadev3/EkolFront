@@ -11,6 +11,7 @@ import Search from "./headeruitil/Search";
 import Language from "./headeruitil/Language";
 import { isHomePageState } from "../../App";
 import { useRecoilValue } from "recoil";
+import DarkMode from "./headeruitil/DarkMode";
 
 export interface Logo {
   _id: string;
@@ -214,6 +215,7 @@ const MobileHeader: React.FC = () => {
         <div className="lang-and-search-mobile">
           <Search />
           <Language />
+          <DarkMode />
         </div>
       </div>
       <Link to="" className="logo-mobile">

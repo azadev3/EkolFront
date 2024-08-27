@@ -763,7 +763,7 @@ $whitedarktwo: #8b9f9c;
   @include HeaderWrapperStyle();
   @include pageNavigator();
   transition: 100ms ease-in-out;
-  
+
   &.dark {
     background-color: $maindarkcolor;
     .home-page .card-about-section .card-about .top-card-area {
@@ -1470,6 +1470,16 @@ $whitedarktwo: #8b9f9c;
     .home-page .hero-wrapper .hero .swiper-slide img {
       filter: brightness(0.4);
     }
+
+
+    .mobile-header .toggle-menu {
+      background-color: black;
+      box-shadow: 0px 0px 200px 0px rgba(0, 255, 81, 0.628);
+    }
+    .mobile-header .toggle-menu .left-navigation-mobile ul .dropdown-menu {
+      background-color: #303030;
+    }
+
   }
 }
 

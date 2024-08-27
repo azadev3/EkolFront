@@ -389,6 +389,30 @@
             color: black;
           }
         }
+        
+      .dark-mode-btn {
+        cursor: pointer;
+        transition: 100ms ease-in-out;
+        min-width: 40px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+        border-radius: 4px;
+        background-color: #004238;
+        &:hover {
+          background-color: #00423838;
+        }
+        &:active {
+          transform: scale(0.99);
+        }
+        .moon-icon {
+          font-size: 24px;
+          color: white;
+        }
+      }
       }
 
       &.active {

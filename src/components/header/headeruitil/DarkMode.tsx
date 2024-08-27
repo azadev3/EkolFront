@@ -1,21 +1,21 @@
-import React from 'react'
+import React from "react";
 import { IoMoonOutline } from "react-icons/io5";
-import { atom, useRecoilState } from 'recoil';
+import { atom, useRecoilState } from "recoil";
+import { IoMdSunny } from "react-icons/io";
 
 export const DarkModeState = atom<boolean>({
-     key: "DarkModeState",
-     default: false,
-})
+  key: "DarkModeState",
+  default: false,
+});
 
-const DarkMode:React.FC = () => {
-
-     const [_, setMode] = useRecoilState(DarkModeState);
+const DarkMode: React.FC = () => {
+  const [mode, setMode] = useRecoilState(DarkModeState);
 
   return (
-    <div className='dark-mode-btn' onClick={() => setMode((prev) => !prev)}>
-     <IoMoonOutline className='moon-icon'/>
+    <div className="dark-mode-btn" onClick={() => setMode((prev) => !prev)}>
+      {mode ?  <IoMdSunny className="moon-icon" /> : <IoMoonOutline className="moon-icon" />}
     </div>
-  )
-}
+  );
+};
 
-export default DarkMode
+export default DarkMode;
