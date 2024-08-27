@@ -29,6 +29,10 @@ import { PurchaseModalState } from "./routeuitils/purchase/PurchaseSection";
 import LeadershipModal from "./modals/LeadershipModal";
 import useScroll from "./context/useScroll";
 import ScrollHeader from "./ScrollHeader";
+import { DarkModeState } from "./components/header/headeruitil/DarkMode";
+import NewBlogPage from "./routes/NewBlogPage";
+import NewBlogInnerC from "./routes/NewBlogInnerC";
+import LastNewBlogInner from "./routeuitils/newblogpage/LastNewBlogInner";
 
 export const isHomePageState = atom<boolean>({
   key: "isHomePageState",
@@ -36,7 +40,6 @@ export const isHomePageState = atom<boolean>({
 });
 
 const App: React.FC = () => {
-
   //if location / or homepage route, hidden main header component
   const location = useLocation();
 
@@ -59,8 +62,23 @@ const App: React.FC = () => {
 
   const isScrolled = useScroll();
 
+  const [mode, setMode] = useRecoilState(DarkModeState);
+
+  React.useEffect(() => {
+    const darkmode = localStorage.getItem("modekol");
+    if (darkmode === "true") {
+      setMode(true);
+    } else {
+      setMode(false);
+    }
+  }, [setMode]);
+
+  React.useEffect(() => {
+    localStorage.setItem("modekol", JSON.stringify(mode));
+  }, [mode]);
+
   return (
-    <div className="app">
+    <div className={`app ${mode ? "dark" : ""}`}>
       {/* purchase modal */}
       <div className={`overlay-purchase-modal ${purchaseModal ? "active" : ""}`}>
         <PurchaseModal />
@@ -78,10 +96,20 @@ const App: React.FC = () => {
 
       <ToastContainer autoClose={2000} pauseOnHover={false} transition={Bounce} />
       {!isHomePage && <Header />}
-      {isScrolled ? <ScrollHeader /> : ""} 
+      {isScrolled ? <ScrollHeader /> : ""}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about/*" element={<About />} />
+        <Route path="/bloq" element={<NewBlogPage />} />
+        <Route path="/bloq/:newblogtitle" element={<NewBlogInnerC />} />
+        <Route
+          path="/bloq/en-son/:lastnewblogtitle"
+          element={
+            <div className="last-blog-inner-page">
+              <LastNewBlogInner />
+            </div>
+          }
+        />
         <Route path="/xeberler" element={<Blog />} />
         <Route path="/xeberler/:blogtitle" element={<BlogInner />} />
         <Route

@@ -18,7 +18,6 @@ import DOMPurify from "dompurify";
 const SearchModal = () => {
   const { translations } = useTranslate();
 
-
   const HeaderItems: HeaderElementType[] = [
     { id: 1, title: `${translations["nav_anasehife"]}`, to: "/" },
     {
@@ -77,11 +76,15 @@ const SearchModal = () => {
           title: `${translations["nav_haqqimizda_sosialheyat"]}`,
           to: "/fealiyyet/sosialheyat",
         },
+        {
+          id: 4,
+          title: `${translations["newblog_title"]}`,
+          to: "/bloq",
+        },
       ],
     },
     { id: 6, title: `${translations["nav_haqqimizda_elaqe"]}`, to: "/elaqe" },
   ];
-
 
   const [searchModal, setSearchModal] = useRecoilState(searchModalState);
 
@@ -162,13 +165,13 @@ const SearchModal = () => {
   return (
     <section className={`search-modal ${searchModal ? "active" : ""}`} ref={modalRef}>
       <div className="head-modal">
-        <h2>{translations['saytda_axtaris_et_title']}</h2>
+        <h2>{translations["saytda_axtaris_et_title"]}</h2>
         <IoClose className="closeicon" onClick={() => setSearchModal(false)} />
       </div>
 
       <div className="search-input">
         <div className="input-area">
-          <input type="search" placeholder={translations['search_placeholder_title']} onChange={handleSearch} />
+          <input type="search" placeholder={translations["search_placeholder_title"]} onChange={handleSearch} />
           <IoSearch className="searchicon" />
         </div>
 
@@ -181,7 +184,7 @@ const SearchModal = () => {
               onClick={() => {
                 setCollapseHeaderItems(!collapseHeaderItems);
               }}>
-              <span className="name-result">{translations['search_basliqlar_title']}</span>
+              <span className="name-result">{translations["search_basliqlar_title"]}</span>
               <FaCaretDown className="down" style={{ transform: `${collapseHeaderItems ? "rotate(-180deg)" : ""}` }} />
             </div>
             <div className="results-area">
@@ -199,7 +202,11 @@ const SearchModal = () => {
                     </article>
                     <div className="submenus">
                       {items.submenu?.map((sub: submenuType) => (
-                        <Link onClick={() => setSearchModal(false)} key={sub.to} title={`${sub.title}'a get`} to={sub.to ? sub.to : ""}>
+                        <Link
+                          onClick={() => setSearchModal(false)}
+                          key={sub.to}
+                          title={`${sub.title}'a get`}
+                          to={sub.to ? sub.to : ""}>
                           {sub.title}
                         </Link>
                       ))}
@@ -212,7 +219,7 @@ const SearchModal = () => {
           {/* Another section (future use) */}
           <div className={`another-section-results ${collapseAnotherSection ? "collapsed" : ""}`}>
             <div className="head" title="Yığ" onClick={() => setCollapseAnotherSection(!collapseAnotherSection)}>
-              <span className="name-result">{translations['blog_title']}</span>
+              <span className="name-result">{translations["blog_title"]}</span>
               <FaCaretDown
                 className="down"
                 style={{ transform: `${collapseAnotherSection ? "rotate(-180deg)" : ""}` }}
@@ -221,16 +228,22 @@ const SearchModal = () => {
             <div className="results-area-blog">
               {filterItemsBlogs && filterItemsBlogs?.length > 0
                 ? filterItemsBlogs.map((items: BlogType, i: number) => (
-                    <div className="result-item-blog" key={i} onClick={() => {
-                      navigate(`/xeberler/${items?.title.toLowerCase()}`);
-                      setSearchModal(false);
-                    }}>
+                    <div
+                      className="result-item-blog"
+                      key={i}
+                      onClick={() => {
+                        navigate(`/xeberler/${items?.title.toLowerCase()}`);
+                        setSearchModal(false);
+                      }}>
                       <article className="head-item-title">
                         <MdLocationSearching className="icon-result" />
                         <span>{items?.title}</span>
                       </article>
-                      <div className="description" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(items?.description) }}/>
-                    </div> 
+                      <div
+                        className="description"
+                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(items?.description) }}
+                      />
+                    </div>
                   ))
                 : ""}
             </div>

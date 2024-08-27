@@ -21,39 +21,11 @@ type LastBlogType = {
   createdAt: string;
 };
 
-type SocialsForBlogs = {
-  id: number;
-  icon: string;
-  to: string;
-};
-
-export const SocialsForBlogItem: SocialsForBlogs[] = [
-  {
-    id: 1,
-    icon: "/facee.svg",
-    to: "",
-  },
-  {
-    id: 2,
-    icon: "/wppp.svg",
-    to: "",
-  },
-  {
-    id: 3,
-    icon: "/tgg.svg",
-    to: "",
-  },
-  {
-    id: 4,
-    icon: "/t.svg",
-    to: "",
-  },
-];
 
 const BlogInnerContent: React.FC = () => {
   const { translations } = useTranslate();
 
-  const { blogtitle } = useParams<{ blogtitle: string }>();
+  const { newblogtitle } = useParams<{ newblogtitle: string }>();
   const selectedlang = useRecoilValue(SelectedLanguageState);
   const navigate = useNavigate();
 
@@ -108,7 +80,6 @@ const BlogInnerContent: React.FC = () => {
     queryKey: ["socialData"],
     queryFn: async () => {
       const response = await axios.get(`${Baseurl}/socialsfront`);
-      console.log(response.data, "sociaaals");
       return response.data;
     },
     staleTime: 9000000,
@@ -120,7 +91,7 @@ const BlogInnerContent: React.FC = () => {
     return <span>{formattedDate}</span>;
   };
 
-  const innerBlogItem = blogDatas?.find((item: BlogType) => item?.title.toLowerCase() === blogtitle?.toLowerCase());
+  const innerBlogItem = blogDatas?.find((item: BlogType) => item?.title.toLowerCase() === newblogtitle?.toLowerCase());
 
   if (blogLoading || lastBlogsLoading) {
     return <Loader />;

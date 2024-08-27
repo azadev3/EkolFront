@@ -346,6 +346,30 @@
           }
         }
       }
+
+      .dark-mode-btn {
+        cursor: pointer;
+        transition: 100ms ease-in-out;
+        min-width: 40px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+        border-radius: 4px;
+        background-color: #004238;
+        &:hover {
+          background-color: #00423838;
+        }
+        &:active {
+          transform: scale(0.99);
+        }
+        .moon-icon {
+          font-size: 24px;
+          color: white;
+        }
+      }
     }
   }
 }
@@ -655,6 +679,29 @@
         }
       }
 
+      .dark-mode-btn {
+        cursor: pointer;
+        transition: 100ms ease-in-out;
+        min-width: 40px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+        border-radius: 4px;
+        background-color: #004238;
+        &:hover {
+          background-color: #00423838;
+        }
+        &:active {
+          transform: scale(0.99);
+        }
+        .moon-icon {
+          font-size: 24px;
+          color: white;
+        }
+      }
     }
   }
 }
@@ -701,6 +748,10 @@ h1 {
   font-size: 16px;
 }
 
+$maindarkcolor: #1d1c26;
+$whitedark: #d8d8d8;
+$whitedarktwo: #8b9f9c;
+
 .app {
   width: 100%;
   min-height: 100vh;
@@ -711,6 +762,715 @@ h1 {
   background: #f6f6f6;
   @include HeaderWrapperStyle();
   @include pageNavigator();
+  transition: 100ms ease-in-out;
+  
+  &.dark {
+    background-color: $maindarkcolor;
+    .home-page .card-about-section .card-about .top-card-area {
+      background-color: transparent;
+    }
+    .home-page .services-section .services .swiper-slide {
+      background-color: $maindarkcolor;
+    }
+    .home-page .services-section .services .swiper-slide .left h3 {
+      color: $whitedark;
+    }
+    .home-page .services-section .services .elements {
+      * {
+        color: $whitedark !important;
+      }
+    }
+
+    .home-page .card-about-section .card-about .bottom-card-area .item-card {
+      background-color: $maindarkcolor;
+    }
+    .home-page .card-about-section .card-about .bottom-card-area .item-card h3 {
+      color: $whitedarktwo;
+    }
+
+    .home-page .card-about-section .card-about .bottom-card-area .item-card p {
+      color: $whitedarktwo;
+    }
+    .home-page .blog-section .blogs .head-titles h3 {
+      color: $whitedark;
+    }
+    .home-page .blog-section .blogs .blog-grid-section .blog-item .descriptions-blog {
+      * {
+        color: $whitedark !important;
+      }
+    }
+    .home-page .card-for-subscribtion-section .card-for-subscribtion {
+      background-color: $maindarkcolor;
+    }
+    .scrolled-header {
+      background-color: $maindarkcolor;
+      border-bottom: 3px solid #404040;
+    }
+    .home-page .card-about-section .card-about .top-card-area .left-descriptions {
+      * {
+        color: $whitedark !important;
+      }
+    }
+    .footer-wrapper {
+      background-color: $maindarkcolor;
+      * {
+        color: $whitedark !important;
+      }
+    }
+    .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content .title-nav {
+      border-bottom: 2px solid #d4d4d417;
+    }
+    .footer-wrapper .footer .top-footer {
+      border-bottom: 2px solid #d4d4d417;
+    }
+    .home-page .contact-us-section .contact-us .map-contact .contact-information-box {
+      background-color: $maindarkcolor;
+      * {
+        color: $whitedark !important;
+      }
+    }
+    .home-page .contact-us-section .contact-us h3 {
+      color: $whitedark;
+    }
+    .home-page .card-for-subscribtion-section .card-for-subscribtion .input-email input {
+      background-color: transparent;
+      border: 2px solid #cecece80;
+      border-radius: 12px;
+      color: $whitedark;
+      &::placeholder {
+        color: $whitedark;
+      }
+    }
+    .page-navigator {
+      * {
+        color: $whitedarktwo !important;
+      }
+    }
+    .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner h2 {
+      color: $whitedark;
+    }
+    .blog-inner-page
+      .blog-inner-content-section
+      .blogs-inner
+      .container-blogs-inner
+      .col-blogs-inner
+      .contents
+      .right
+      .grid-last-blog {
+      background-color: transparent;
+      * {
+        color: $whitedark !important;
+      }
+    }
+    .blog-inner-page
+      .blog-inner-content-section
+      .blogs-inner
+      .container-blogs-inner
+      .col-blogs-inner
+      .contents
+      .right
+      .share-post {
+      background-color: transparent;
+      * {
+        color: $whitedark;
+      }
+    }
+    .blog-inner-page
+      .blog-inner-content-section
+      .blogs-inner
+      .container-blogs-inner
+      .col-blogs-inner
+      .contents
+      .right
+      .share-post
+      .bottom
+      .view
+      .view-count {
+      color: $whitedarktwo;
+    }
+    .last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner h2 {
+      color: $whitedark;
+    }
+    .last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner h3 {
+      color: $whitedark;
+    }
+    .last-blog-inner-page
+      .last-blog-inner-content-section
+      .blogs-inner
+      .container-blogs-inner
+      .col-blogs-inner
+      .contents
+      .left
+      .description-content
+      .time-span {
+      color: $whitedark !important;
+    }
+
+    .last-blog-inner-page
+      .last-blog-inner-content-section
+      .blogs-inner
+      .container-blogs-inner
+      .col-blogs-inner
+      .contents
+      .left
+      .description-content
+      .description-area {
+      * {
+        color: $whitedark !important;
+      }
+    }
+    .last-blog-inner-page
+      .last-blog-inner-content-section
+      .blogs-inner
+      .container-blogs-inner
+      .col-blogs-inner
+      .contents
+      .right
+      .share-post {
+      background-color: transparent;
+      * {
+        color: $whitedarktwo !important;
+      }
+    }
+    .last-blog-inner-page
+      .last-blog-inner-content-section
+      .blogs-inner
+      .container-blogs-inner
+      .col-blogs-inner
+      .contents
+      .right
+      .grid-last-blog {
+      background-color: transparent;
+      * {
+        color: $whitedark !important;
+      }
+    }
+    .last-blog-inner-page
+      .last-blog-inner-content-section
+      .blogs-inner
+      .container-blogs-inner
+      .col-blogs-inner
+      .contents
+      .right
+      h5 {
+      color: $whitedark;
+    }
+
+    .header-wrapper {
+      background-color: $maindarkcolor;
+      border-bottom: 4px solid #7676760d;
+      * {
+        color: $whitedark !important;
+      }
+    }
+    .header-wrapper .header .right-header-area .language-and-search-button .select-language {
+      color: $maindarkcolor !important;
+    }
+    .header-wrapper .header .right-header-area .share-media {
+      background-color: transparent;
+    }
+
+    .header-wrapper .header .right-header-area .share-media .modal-share {
+      background-color: $maindarkcolor;
+      border: 3px solid #bbbbbb80;
+    }
+    .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner h3 {
+      color: $whitedark;
+    }
+    .blog-inner-page
+      .blog-inner-content-section
+      .blogs-inner
+      .container-blogs-inner
+      .col-blogs-inner
+      .contents
+      .right
+      h5 {
+      color: $whitedark;
+    }
+    .blog-inner-page
+      .blog-inner-content-section
+      .blogs-inner
+      .container-blogs-inner
+      .col-blogs-inner
+      .contents
+      .left
+      .description-content
+      .time-span {
+      color: $whitedark;
+    }
+    .blog-inner-page
+      .blog-inner-content-section
+      .blogs-inner
+      .container-blogs-inner
+      .col-blogs-inner
+      .contents
+      .left
+      .description-content
+      p {
+      color: $whitedark;
+    }
+    .blog-page-wrapper .blogs-section .blogs .container-blogs .blog-grid-blogpage .blog-item-blogpage {
+      background-color: transparent;
+      border: 2px solid #d4d4d410;
+      * {
+        color: $whitedark !important;
+      }
+    }
+
+    .header-wrapper .header .left-navigation ul .dropdown-menu {
+      background-color: #404040;
+    }
+    .scrolled-header .header .left-navigation ul .dropdown-menu {
+      background-color: #404040;
+      * {
+        color: $whitedark;
+      }
+    }
+    .blog-page-wrapper .blogs-section .blogs .container-blogs h2 {
+      color: $whitedark;
+    }
+    .home-page .hero-wrapper .hero .header-wrapper .header .left-navigation ul .dropdown-menu {
+      background-color: #404040;
+    }
+    .about-page .who-we-are-section .whoweare .container-whoweare h2 {
+      color: $whitedark;
+    }
+    .about-page .who-we-are-section .whoweare .container-whoweare .description-container {
+      background-color: $maindarkcolor;
+      * {
+        color: $whitedark !important;
+      }
+    }
+
+    .about-page .leadership-section .leadership .container-leadership h2 {
+      color: $whitedark;
+    }
+    .about-page .leadership-section .leadership .container-leadership .grid-leadership .leadership-grid-item {
+      background-color: $maindarkcolor;
+      border: 2px solid #d4d4d410;
+      * {
+        color: $whitedark !important;
+      }
+    }
+
+    .overlay-leadership-modal .leadership-modal {
+      background-color: $maindarkcolor;
+      border: 2px solid #d4d4d4e1;
+      * {
+        color: $whitedark !important;
+      }
+    }
+
+    .about-page .structure-section .structure .content-structure h2 {
+      color: $whitedark;
+    }
+    .about-page
+      .structure-section
+      .structure
+      .content-structure
+      .other-refactors
+      .item-department
+      .container-item
+      .item {
+      background-color: #404040;
+      * {
+        color: $whitedark !important;
+      }
+    }
+    .about-page .certificates-section .certificates .container-certificates h2 {
+      color: $whitedark;
+    }
+    .about-page .lisanse-section .lisanse .container-lisanse h2 {
+      color: $whitedark;
+    }
+    .about-page .lisanse-section .lisanse .container-lisanse .description-area-lisanse {
+      * {
+        color: $whitedark !important;
+      }
+    }
+    .about-page .certificates-section .certificates .container-certificates .description-certificates {
+      * {
+        color: $whitedark !important;
+      }
+    }
+
+    .about-page .partner-section .partners .partners-container h2 {
+      color: $whitedark;
+    }
+    .about-page .partner-section .partners .partners-container .content-partners .partners-item {
+      background-color: transparent;
+      border: 2px solid #d4d4d410;
+    }
+    .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content {
+      background-color: #404040;
+    }
+    .about-page
+      .ourworks-section
+      .works
+      .container-works
+      .grid-works
+      .navigation-description-content
+      .description-content {
+      color: white !important;
+      * {
+        color: white !important;
+      }
+    }
+    .about-page .ourworks-section .works .container-works .grid-works .navigation-content {
+      background-color: transparent;
+      border: 2px solid #d4d4d410;
+    }
+    .about-page .ourworks-section .works .container-works .grid-works .navigation-content .item-navigation {
+      border-bottom: none;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.072);
+      }
+      * {
+        color: $whitedark !important;
+      }
+    }
+
+    .about-page .ourworks-section .works .container-works h2 {
+      color: $whitedark;
+    }
+
+    .activity-page .tools-section .tools .container-tools h2 {
+      color: $whitedark;
+    }
+    .activity-page .tools-section .tools .container-tools .container-descriptions {
+      * {
+        color: $whitedark !important;
+      }
+    }
+    .activity-page .servicespage-section .servicespage .container-servicespage .container-services-grid .item-service {
+      background-color: transparent;
+      border: 2px solid #d4d4d410;
+      * {
+        color: $whitedark !important;
+      }
+    }
+    .activity-page .servicespage-section .servicespage .container-servicespage h2 {
+      color: $whitedark;
+    }
+
+    .activity-page .servicesActivity-section .servicesActivity .container-servicesActivity h2 {
+      color: $whitedark;
+    }
+
+    .activity-page
+      .servicesActivity-section
+      .servicesActivity
+      .container-servicesActivity
+      .container-services
+      .service-items
+      .navigator-content {
+      background-color: transparent;
+    }
+    .activity-page
+      .servicesActivity-section
+      .servicesActivity
+      .container-servicesActivity
+      .container-services
+      .service-items
+      .navigator-content
+      .swiper-slide {
+      background-color: black;
+      color: white;
+      * {
+        color: white;
+      }
+    }
+    .activity-page
+      .servicesActivity-section
+      .servicesActivity
+      .container-servicesActivity
+      .container-services
+      .service-items
+      .content {
+      color: $whitedark;
+      * {
+        color: $whitedark;
+      }
+    }
+
+    .carier-page .carier-section .carier .container-carier h2 {
+      color: $whitedark;
+    }
+    .carier-page .carier-section .carier .container-carier .carier-content-area .navigation .navigation-item {
+      color: $whitedark;
+    }
+
+    .carier-page
+      .carier-section
+      .carier
+      .container-carier
+      .carier-content-area
+      .content-carier
+      .general-information
+      .why-ekol-section
+      h2 {
+      color: $whitedark;
+    }
+    .carier-page
+      .carier-section
+      .carier
+      .container-carier
+      .carier-content-area
+      .content-carier
+      .general-information
+      .why-ekol-section
+      .grid-ekol-item
+      .item {
+      background-color: transparent;
+      * {
+        color: $whitedark;
+      }
+    }
+    .carier-page
+      .carier-section
+      .carier
+      .container-carier
+      .carier-content-area
+      .content-carier
+      .general-information
+      .recruitment-process
+      h4 {
+      color: $whitedark;
+    }
+
+    .carier-page
+      .carier-section
+      .carier
+      .container-carier
+      .carier-content-area
+      .content-carier
+      .general-information
+      .recruitment-process
+      .process {
+      background-color: transparent;
+      * {
+        color: $whitedark;
+      }
+    }
+
+    .carier-page
+      .carier-section
+      .carier
+      .container-carier
+      .carier-content-area
+      .content-carier
+      .vacations
+      .search-area {
+      background-color: transparent;
+    }
+
+    .carier-page
+      .carier-section
+      .carier
+      .container-carier
+      .carier-content-area
+      .content-carier
+      .vacations
+      .vacations-grid
+      .vacation-item {
+      background-color: transparent;
+      border: 2px solid #d4d4d410;
+      * {
+        color: $whitedark;
+      }
+    }
+    .vacations-inner-section .vacationsinner .container-inner-vac .vacation-top-description {
+      background-color: transparent;
+      * {
+        color: $whitedark;
+      }
+    }
+    .vacations-inner-section .vacationsinner .container-inner-vac .vacation-top-description .texts .titles {
+      color: $whitedark;
+      * {
+        color: $whitedark;
+      }
+    }
+    .vacations-inner-section .vacationsinner .container-inner-vac .vacation-inner-content {
+      color: $whitedark;
+      * {
+        color: $whitedark;
+      }
+    }
+
+    .vacations-request .vacationrequest .container-vacation-request .vacation-top-description {
+      background-color: transparent;
+      * {
+        color: $whitedark;
+      }
+    }
+
+    .vacations-request .vacationrequest .container-vacation-request .vacation-top-description .texts .titles {
+      color: $whitedark;
+      * {
+        color: $whitedark;
+      }
+    }
+    .vacations-request .vacationrequest .container-vacation-request .form-vac-request {
+      background-color: transparent;
+      * {
+        input {
+          background-color: transparent;
+          border: none;
+          color: $whitedark;
+          &::placeholder {
+            color: $whitedark;
+          }
+        }
+      }
+    }
+    .vacations-request .vacationrequest .container-vacation-request .form-vac-request form .field-input img,
+    .vacations-request .vacationrequest .container-vacation-request .form-vac-request form .field-input span {
+      color: $whitedark;
+    }
+    .vacations-request .vacationrequest .container-vacation-request .form-vac-request form .field-file label {
+      color: $whitedark;
+    }
+
+    .vacations-request .vacationrequest .container-vacation-request .form-vac-request form .field-file .upload-cv,
+    .vacations-request .vacationrequest .container-vacation-request .form-vac-request form .field-file .upload-profile {
+      background-color: transparent;
+      * {
+        color: $whitedark;
+      }
+    }
+
+    .purchase-page .purchase-section .purchase .container-purchase .grid-purchase .purchase-item {
+      background-color: transparent;
+      * {
+        color: $whitedark;
+      }
+      .link-btn {
+        background-color: transparent;
+      }
+    }
+    .purchase-page .purchase-section .purchase .container-purchase h2 {
+      color: $whitedark;
+    }
+
+    .overlay-purchase-modal .purchase-modal {
+      background-color: #404040;
+      * {
+        color: rgb(0, 0, 0) !important;
+      }
+    }
+    .overlay-purchase-modal .purchase-modal .header-modal {
+      background-color: #303030;
+    }
+    .about-page .gallery-section .gallery .container-gallery h2 {
+      color: $whitedark;
+    }
+
+    .about-page .images-section-gallery-page .images .container-images h2 {
+      color: $whitedark;
+    }
+
+    .about-page .innerimage-section .innerimages .container-innerimages h2 {
+      color: $whitedark;
+    }
+
+    .activity-page .social-life-section .sociallife .container-sociallife h2 {
+      color: $whitedark;
+    }
+    .activity-page
+      .social-life-section
+      .sociallife
+      .container-sociallife
+      .container-descriptions
+      .spor
+      .descriptions-spor {
+      color: $whitedark;
+      * {
+        color: $whitedark;
+      }
+    }
+
+    .contact-page .contact-section .contact .container-contact h2 {
+      color: $whitedark;
+    }
+
+    .contact-page .contact-section .contact .container-locations .swiper-slide {
+      background-color: #404040;
+      color: $whitedark;
+    }
+
+    .contact-page .contact-section .contact .container-contact .form-area {
+      background-color: transparent;
+      * {
+        color: $whitedark;
+      }
+    }
+
+    .search-modal-overlay .search-modal {
+      background-color: rgb(15, 14, 14);
+    }
+
+    .search-modal-overlay .search-modal .head-modal h2 {
+      color: $whitedark;
+    }
+
+    .search-modal-overlay .search-modal .search-input .results {
+      background-color: transparent;
+    }
+    .search-modal-overlay .search-modal .search-input .results .header-item-results .results-area .result-item,
+    .search-modal-overlay .search-modal .search-input .results .header-item-results .results-area .result-item-blog,
+    .search-modal-overlay .search-modal .search-input .results .header-item-results .results-area-blog .result-item,
+    .search-modal-overlay
+      .search-modal
+      .search-input
+      .results
+      .header-item-results
+      .results-area-blog
+      .result-item-blog,
+    .search-modal-overlay .search-modal .search-input .results .another-section-results .results-area .result-item,
+    .search-modal-overlay .search-modal .search-input .results .another-section-results .results-area .result-item-blog,
+    .search-modal-overlay .search-modal .search-input .results .another-section-results .results-area-blog .result-item,
+    .search-modal-overlay
+      .search-modal
+      .search-input
+      .results
+      .another-section-results
+      .results-area-blog
+      .result-item-blog {
+      background-color: $maindarkcolor;
+      color: $whitedark;
+      * {
+        color: $whitedark;
+      }
+    }
+    .search-modal-overlay .search-modal .search-input .results .header-item-results .head .name-result,
+    .search-modal-overlay .search-modal .search-input .results .another-section-results .head .name-result {
+      color: $whitedark;
+    }
+
+    .search-modal-overlay .search-modal .search-input .input-area input {
+      background-color: transparent;
+      color: white;
+    }
+    .search-modal-overlay .search-modal .head-modal .closeicon {
+      color: $whitedark;
+    }
+
+    .home-page
+      .hero-wrapper
+      .hero
+      .header-wrapper
+      .header
+      .right-header-area
+      .language-and-search-button
+      .select-language {
+      color: $whitedark !important;
+    }
+
+    .home-page .hero-wrapper .hero .swiper-slide img {
+      filter: brightness(0.4);
+    }
+  }
 }
 
 //loader
@@ -1611,7 +2371,7 @@ h1 {
         }
       }
 
-        .share-media {
+      .share-media {
         display: flex;
         position: relative;
         user-select: none;
@@ -1697,6 +2457,29 @@ h1 {
         }
       }
 
+      .dark-mode-btn {
+        cursor: pointer;
+        transition: 100ms ease-in-out;
+        min-width: 40px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+        border-radius: 4px;
+        background-color: #004238;
+        &:hover {
+          background-color: #00423838;
+        }
+        &:active {
+          transform: scale(0.99);
+        }
+        .moon-icon {
+          font-size: 24px;
+          color: white;
+        }
+      }
     }
   }
 }
@@ -1738,4 +2521,10 @@ h1 {
 .about-page .certificates-section .certificates .container-certificates .description-certificates p {
   display: flex !important;
   flex-wrap: wrap !important;
+}
+.about-page .gallery-section .gallery .container-gallery .grid-select-page .item-gallery-select .title-select {
+  z-index: 10 !important;
+}
+.contact-page .contact-section .contact .container-locations {
+  gap: 24px;
 }

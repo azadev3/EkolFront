@@ -12,6 +12,7 @@ import Search from "./components/header/headeruitil/Search";
 import Language from "./components/header/headeruitil/Language";
 import MobileHeader, { Logo } from "./components/header/MobileHeader";
 import ShareButton from "./components/header/headeruitil/ShareButton";
+import DarkMode from "./components/header/headeruitil/DarkMode";
 
 const ScrollHeader: React.FC = () => {
   const { translations } = useTranslate();
@@ -74,6 +75,11 @@ const ScrollHeader: React.FC = () => {
           title: `${translations["nav_haqqimizda_sosialheyat"]}`,
           to: "/fealiyyet/sosialheyat",
         },
+        {
+          id: 4,
+          title: `${translations["newblog_title"]}`,
+          to: "/bloq"
+        }
       ],
     },
     { id: 6, title: `${translations["nav_haqqimizda_elaqe"]}`, to: "/elaqe" },
@@ -176,6 +182,7 @@ const ScrollHeader: React.FC = () => {
                 <Search />
                 <Language />
                 <ShareButton />
+                <DarkMode />
               </div>
             </section>
           </div>

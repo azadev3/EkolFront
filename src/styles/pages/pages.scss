@@ -1247,7 +1247,6 @@
     }
   }
 }
-
 .blog-inner-page {
   width: 100%;
   height: auto;
@@ -1876,6 +1875,162 @@
     }
   }
 }
+
+.NewBlogPage-wrapper {
+  width: 100%;
+  height: auto;
+  padding-left: 100px;
+  padding-right: 100px;
+  .newblogpage-section {
+    @include SectionStyle();
+    .blogs-newblogpage {
+      @include InnerStyle();
+
+      .container-newblogpage {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        margin-top: 40px;
+        h2 {
+          color: #000000;
+          font-weight: 700;
+          font-size: 48px;
+        }
+
+        .newblogpage-grid-blogpage {
+          margin-top: 40px;
+          width: 100%;
+          height: auto;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          justify-items: flex-start;
+          align-items: flex-start;
+          gap: 20px;
+          .newblogpage-item-blogpage {
+            animation: animatePag 100ms ease-in-out forwards normal;
+            width: 100%;
+            height: auto;
+            display: flex;
+            background: #ffffff;
+            border-radius: 4px;
+            padding: 0px 0px 20px 0px;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 24px;
+            flex-direction: column;
+            @keyframes animatePag {
+              from {
+                opacity: 0;
+                transform: translateY(-5px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0px);
+              }
+            }
+            .image-newblogpage {
+              width: 100%;
+              height: 300px;
+              @include flex();
+              overflow: hidden;
+              border-radius: 8px 8px 0px 0px;
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 8px 8px 0px 0px;
+              }
+            }
+
+            .descriptions-newblogpage {
+              width: 100%;
+              height: auto;
+              display: flex;
+              align-items: flex-start;
+              justify-content: flex-start;
+              flex-direction: column;
+              gap: 12px;
+              padding-left: 15px;
+              padding-right: 15px;
+
+              span {
+                color: #00000099;
+                font-weight: 400;
+                font-size: 14px;
+                @include noneOverflow();
+                -webkit-line-clamp: 1;
+                line-clamp: 1;
+                max-width: 300px;
+              }
+
+              h4 {
+                color: #000000;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 28px;
+                max-width: 368px;
+                @include noneOverflow();
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
+                text-align: start;
+              }
+              .description {
+                max-width: 368px;
+                max-height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                text-align: start !important;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+              }
+
+              .show-more-btn {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                position: relative;
+                margin-top: 8px;
+                a {
+                  padding: 0px 18px;
+                  text-decoration: none;
+                  color: #004238;
+                  font-weight: 500;
+                  font-size: 16px;
+                  cursor: pointer;
+                  transition: 100ms ease-in-out;
+                  &:hover {
+                    color: #30b258;
+                  }
+                }
+
+                &::after {
+                  content: "";
+                  position: absolute;
+                  width: 92px;
+                  height: 4px;
+                  background-color: #004238;
+                  left: 0;
+                  z-index: 10;
+                }
+              }
+            }
+          }
+        }
+
+        @include PaginationButtonStyle();
+      }
+    }
+  }
+}
+
 
 .contact-page {
   width: 100%;
@@ -2680,19 +2835,19 @@
               }
               div {
                 margin-top: 28px;
-              width: 100%;
-              height: auto;
-              display: flex;
-              align-items: flex-start;
-              justify-content: flex-start;
-              flex-direction: column;
-              gap: 12px;
-              img {
-                width: 300px;
-                height: 300px;
-                object-fit: cover;
-                border-radius: 8px;
-              }
+                width: 100%;
+                height: auto;
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-direction: column;
+                gap: 12px;
+                img {
+                  width: 300px;
+                  height: 300px;
+                  object-fit: cover;
+                  border-radius: 8px;
+                }
               }
             }
           }

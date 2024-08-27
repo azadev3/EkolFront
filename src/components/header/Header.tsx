@@ -11,6 +11,7 @@ import { useRecoilState } from "recoil";
 import { isMobileState } from "../../recoil/Atoms";
 import MobileHeader from "./MobileHeader";
 import ShareButton from "./headeruitil/ShareButton";
+import DarkMode from "./headeruitil/DarkMode";
 
 export interface Logo {
   _id: string;
@@ -92,6 +93,11 @@ const Header: React.FC = () => {
           title: `${translations["nav_haqqimizda_sosialheyat"]}`,
           to: "/fealiyyet/sosialheyat",
         },
+        {
+          id: 4,
+          title: `${translations["newblog_title"]}`,
+          to: "/bloq"
+        }
       ],
     },
     { id: 6, title: `${translations["nav_haqqimizda_elaqe"]}`, to: "/elaqe" },
@@ -193,6 +199,7 @@ const Header: React.FC = () => {
               <Search />
               <Language />
               <ShareButton />
+              <DarkMode />
             </div>
           </section>
         </div>

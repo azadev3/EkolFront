@@ -98,6 +98,11 @@ const MobileHeader: React.FC = () => {
           title: `${translations["nav_haqqimizda_sosialheyat"]}`,
           to: "/fealiyyet/sosialheyat",
         },
+        {
+          id: 4,
+          title: `${translations["newblog_title"]}`,
+          to: "/bloq"
+        }
       ],
     },
     { id: 6, title: `${translations["nav_haqqimizda_elaqe"]}`, to: "/elaqe" },

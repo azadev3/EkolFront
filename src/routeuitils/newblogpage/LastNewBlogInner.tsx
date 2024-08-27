@@ -18,8 +18,8 @@ type LastBlogType = {
   createdAt: string;
 };
 
-const LastBlogInner: React.FC = () => {
-  const { lastblogtitle } = useParams<{ lastblogtitle: string }>();
+const LastNewBlogInner: React.FC = () => {
+  const { lastnewblogtitle } = useParams<{ lastnewblogtitle: string }>();
 
   const selectedlang = useRecoilValue(SelectedLanguageState);
 
@@ -34,7 +34,6 @@ const LastBlogInner: React.FC = () => {
     queryKey: ["socialData"],
     queryFn: async () => {
       const response = await axios.get(`${Baseurl}/socialsfront`);
-      console.log(response.data, "sociaaals");
       return response.data;
     },
     staleTime: 9000000,
@@ -45,7 +44,7 @@ const LastBlogInner: React.FC = () => {
 
   const fetchLastBlogs = async () => {
     try {
-      const response = await axios.get(`${Baseurl}/lastblogs`, {
+      const response = await axios.get(`${Baseurl}/lastnewblog`, {
         headers: {
           "Accept-Language": selectedlang,
         },
@@ -61,7 +60,7 @@ const LastBlogInner: React.FC = () => {
   };
 
   const lastBlogItem = lastBlogs?.find(
-    (item: LastBlogType) => item?.title.toLowerCase() === lastblogtitle?.toLowerCase()
+    (item: LastBlogType) => item?.title.toLowerCase() === lastnewblogtitle?.toLowerCase()
   );
 
   React.useEffect(() => {
@@ -74,10 +73,10 @@ const LastBlogInner: React.FC = () => {
   return (
     <section className="last-blog-inner-content-section">
       <div className="blogs-inner">
-        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_xeberler"]} />
+        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["newblog_title"]} />
 
         <div className="container-blogs-inner">
-          <h2>{translations["blog_title"]}</h2>
+          <h2>{translations["newblog_title"]}</h2>
 
           <div className="col-blogs-inner">
             <h3>{lastBlogItem?.title}</h3>
@@ -103,7 +102,7 @@ const LastBlogInner: React.FC = () => {
               </div>
 
               <div className="right">
-                <h5>Ən son xəbərlər</h5>
+                <h5>Ən son bloqlar</h5>
                 <div className="grid-last-blog">
                   {lastBlogs && lastBlogs.length > 0
                     ? lastBlogs?.map((item: LastBlogType) => (
@@ -122,12 +121,12 @@ const LastBlogInner: React.FC = () => {
                     : ""}
                   <div className="button-content">
                     <button className="all-blogs" onClick={() => navigate("/xeberler")}>
-                      Bütün xəbərlər
+                      Bütün bloqlar
                     </button>
                   </div>
                 </div>
                 <div className="share-post">
-                  <span>Xəbəri paylaş:</span>
+                  <span>Bloqu paylaş:</span>
                   <div className="bottom">
                     <div className="socials">
                       {SocialsData && SocialsData.length > 0
@@ -174,4 +173,4 @@ const LastBlogInner: React.FC = () => {
   );
 };
 
-export default LastBlogInner;
+export default LastNewBlogInner;

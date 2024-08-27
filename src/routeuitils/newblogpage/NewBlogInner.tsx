@@ -1,13 +1,16 @@
 import React from "react";
 import Breadcrumb from "../../Breadcrumb";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { BlogType } from "../home/BlogSection";
 import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useRecoilValue } from "recoil";
 import moment from "moment";
-import { useTranslate } from "../../context/TranslateContext";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../Loader";
+import { v4 as uuidv4 } from "uuid";
+import { useTranslate } from "../../context/TranslateContext";
 import { SocialsType } from "../home/Hero";
 
 type LastBlogType = {
@@ -18,16 +21,58 @@ type LastBlogType = {
   createdAt: string;
 };
 
-const LastBlogInner: React.FC = () => {
-  const { lastblogtitle } = useParams<{ lastblogtitle: string }>();
+const NewBlogInner: React.FC = () => {
+  const { translations } = useTranslate();
 
+  const { newblogtitle } = useParams<{ newblogtitle: string }>();
   const selectedlang = useRecoilValue(SelectedLanguageState);
+  const navigate = useNavigate();
 
-  //formatted created at
-  const DateDisplay = ({ createdAt }: any) => {
-    const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
-    return formattedDate;
-  };
+  // Fetch blog data
+  const {
+    data: newBlogDatasInner,
+    isLoading: blogLoading,
+    error: blogError,
+  } = useQuery({
+    queryKey: ["newBlogDatasInner", selectedlang],
+    queryFn: async () => {
+      try {
+        const response = await axios.get(`${Baseurl}/newblogfront`, {
+          headers: {
+            "Accept-Language": selectedlang,
+          },
+        });
+        return response.data;
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    },
+    staleTime: 900000,
+  });
+
+  // Fetch last blogs
+  const {
+    data: lastBlogs,
+    isLoading: lastBlogsLoading,
+    error: lastBlogsError,
+  } = useQuery({
+    queryKey: ["lastBlogsForNew", selectedlang],
+    queryFn: async () => {
+      try {
+        const response = await axios.get(`${Baseurl}/lastnewblog`, {
+          headers: {
+            "Accept-Language": selectedlang,
+          },
+        });
+        return response.data;
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    },
+    staleTime: 900000,
+  });
 
   //socials
   const { data: SocialsData } = useQuery<SocialsType[]>({
@@ -40,94 +85,88 @@ const LastBlogInner: React.FC = () => {
     staleTime: 9000000,
   });
 
-  //last blogs
-  const [lastBlogs, setLastBlogs] = React.useState<LastBlogType[]>([]);
-
-  const fetchLastBlogs = async () => {
-    try {
-      const response = await axios.get(`${Baseurl}/lastblogs`, {
-        headers: {
-          "Accept-Language": selectedlang,
-        },
-      });
-      if (response.data) {
-        setLastBlogs(response.data);
-      } else {
-        console.log(response.status);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  // Formatted createdAt date
+  const DateDisplay = ({ createdAt }: { createdAt: string }) => {
+    const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
+    return <span>{formattedDate}</span>;
   };
 
-  const lastBlogItem = lastBlogs?.find(
-    (item: LastBlogType) => item?.title.toLowerCase() === lastblogtitle?.toLowerCase()
-  );
+  const innerBlogItem = newBlogDatasInner?.find((item: BlogType) => item?.title.toLowerCase() === newblogtitle?.toLowerCase());
 
-  React.useEffect(() => {
-    fetchLastBlogs();
-  }, [selectedlang]);
+  if (blogLoading || lastBlogsLoading) {
+    return <Loader />;
+  }
 
-  const navigate = useNavigate();
-  const { translations } = useTranslate();
+  if (blogError || lastBlogsError) {
+    return "Bir hata oluştu.";
+  }
 
   return (
-    <section className="last-blog-inner-content-section">
+    <section className="blog-inner-content-section">
       <div className="blogs-inner">
-        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_xeberler"]} />
+        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["newblog_title"]} />
 
         <div className="container-blogs-inner">
-          <h2>{translations["blog_title"]}</h2>
+          <h2>{translations["newblog_title"]}</h2>
 
           <div className="col-blogs-inner">
-            <h3>{lastBlogItem?.title}</h3>
+            <h3>{innerBlogItem?.title}</h3>
 
             <div className="contents">
               <div className="left">
                 <div className="content-inner-blog-image-wrapper">
                   <img
                     loading="lazy"
-                    src={`https://ekol-server-1.onrender.com${lastBlogItem?.image}`}
-                    title={lastBlogItem?.title}
+                    src={`https://ekol-server-1.onrender.com${innerBlogItem?.image}`}
+                    title={innerBlogItem?.title}
                   />
                 </div>
 
                 <div className="description-content">
                   <span className="time-span">
-                    {lastBlogItem && lastBlogItem.createdAt ? DateDisplay(lastBlogItem?.createdAt) : ""}
+                    {innerBlogItem && innerBlogItem.createdAt ? (
+                      <DateDisplay createdAt={innerBlogItem.createdAt} />
+                    ) : (
+                      ""
+                    )}
                   </span>
-                  {lastBlogItem && lastBlogItem.description && (
-                    <div className="description-area" dangerouslySetInnerHTML={{ __html: lastBlogItem?.description }} />
+                  {innerBlogItem && innerBlogItem.description && (
+                    <div
+                      className="description-area"
+                      dangerouslySetInnerHTML={{ __html: innerBlogItem?.description }}
+                    />
                   )}
                 </div>
               </div>
 
               <div className="right">
-                <h5>Ən son xəbərlər</h5>
+                <h5>Ən son bloqlar</h5>
                 <div className="grid-last-blog">
                   {lastBlogs && lastBlogs.length > 0
-                    ? lastBlogs?.map((item: LastBlogType) => (
+                    ? lastBlogs.map((item: LastBlogType) => (
                         <Link
-                          to={`/xeberler/en-son-bloglar/${item?.title.toLowerCase()}`}
-                          key={item?._id}
+                          to={`/bloq/en-son/${item?.title.toLowerCase()}`}
+                          key={uuidv4()}
                           className="item-last-blog">
-                          <div className="title">{item?.title}</div>
+                          <div className="title">{item.title}</div>
 
                           <div className="time-and-icon">
-                            <span className="time">{item.createdAt ? DateDisplay(item?.createdAt) : ""}</span>
+                            <span className="time">
+                              {item.createdAt ? <DateDisplay createdAt={item.createdAt} /> : ""}
+                            </span>
                             <img src="/arrow.svg" alt="arrow-icon" />
                           </div>
                         </Link>
                       ))
                     : ""}
                   <div className="button-content">
-                    <button className="all-blogs" onClick={() => navigate("/xeberler")}>
-                      Bütün xəbərlər
+                    <button className="all-blogs" onClick={() => navigate("/bloq")}>
+                      Bütün bloqlar
                     </button>
                   </div>
                 </div>
                 <div className="share-post">
-                  <span>Xəbəri paylaş:</span>
+                  <span>Bloqu paylaş:</span>
                   <div className="bottom">
                     <div className="socials">
                       {SocialsData && SocialsData.length > 0
@@ -174,4 +213,4 @@ const LastBlogInner: React.FC = () => {
   );
 };
 
-export default LastBlogInner;
+export default NewBlogInner;

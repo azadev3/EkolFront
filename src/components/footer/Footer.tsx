@@ -7,6 +7,7 @@ import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import { SocialsType } from "../../routeuitils/home/Hero";
 import { useTranslate } from "../../context/TranslateContext";
+import { Logo } from "../header/MobileHeader";
 
 type FooterNavLinkType = {
   id: string;
@@ -71,19 +72,19 @@ const Footer: React.FC = () => {
         },
         {
           id: uuidv4(),
-          title: `${translations["karyera_imkanlari"]}`,
-          to: "/karyera"
+          title: `${translations["nav_haqqimizda_avadanliqlar"]}`,
+          to: "/fealiyyet/avadanliqlar",
         },
         {
           id: uuidv4(),
-          title: `${translations["nav_haqqimizda_avadanliqlar"]}`,
-          to: "/fealiyyet/avadanliqlar",
+          title: `${translations["karyera_imkanlari"]}`,
+          to: "/karyera",
         },
       ],
     },
     {
       id: uuidv4(),
-      title: `${translations['nav_media']}`,
+      title: `${translations["nav_media"]}`,
       footerNavItems: [
         {
           id: uuidv4(),
@@ -98,13 +99,18 @@ const Footer: React.FC = () => {
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_sosialheyat"]}`,
-          to: "/fealiyyet/sosialheyat"
+          to: "/fealiyyet/sosialheyat",
+        },
+        {
+          id: uuidv4(),
+          title: `${translations["newblog_title"]}`,
+          to: "/bloq",
         },
       ],
     },
     {
       id: uuidv4(),
-      title: `${translations['nav_haqqimizda_satinalma']}`,
+      title: `${translations["nav_haqqimizda_satinalma"]}`,
     },
     {
       id: uuidv4(),
@@ -114,8 +120,6 @@ const Footer: React.FC = () => {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_elaqe"]}`,
         },
-
-       
       ],
     },
     {
@@ -153,6 +157,15 @@ const Footer: React.FC = () => {
 
   const navigate = useNavigate();
 
+  // FETCH LOGO
+  const { data: LogoIcon } = useQuery({
+    queryKey: ["logoIconKey"],
+    queryFn: async () => {
+      const response = await axios.get(`${Baseurl}/logo`);
+      return response.data;
+    },
+    staleTime: 9000000,
+  });
 
   return (
     <footer className="footer-wrapper">
@@ -160,7 +173,16 @@ const Footer: React.FC = () => {
         <div className="top-footer">
           <article className="left-logo-and-description">
             <Link to="/" className="logo-footer">
-              <img src="../footerlogo.svg" alt="Footerlogo" title="Ekol" />
+              {LogoIcon && LogoIcon.length > 0
+                ? LogoIcon.map((logo: Logo) => (
+                    <img
+                      key={logo._id}
+                      src={`https://ekol-server-1.onrender.com${logo.logo}`}
+                      alt={`${logo._id}-logo`}
+                      title={logo._id}
+                    />
+                  ))
+                : ""}{" "}
             </Link>
             <p className="footer-description">{translations["footer_paragraph_text"]}</p>
           </article>
@@ -170,14 +192,16 @@ const Footer: React.FC = () => {
               if (index !== 5) {
                 return (
                   <div key={item.id} className="footer-nav-link-content">
-                    <h4 className="title-nav"
-                    style={{ cursor: index === 3 ? "pointer" : "auto" }}
-                    onClick={() => {
-                      if(index === 3) {
-                        navigate("/satinalma");
-                      }
-                    }}
-                    >{item.title}</h4>
+                    <h4
+                      className="title-nav"
+                      style={{ cursor: index === 3 ? "pointer" : "auto" }}
+                      onClick={() => {
+                        if (index === 3) {
+                          navigate("/satinalma");
+                        }
+                      }}>
+                      {item.title}
+                    </h4>
                     <div className="links-nav">
                       {item?.footerNavItems?.map((links: FooterNavLinkType) => (
                         <Link key={links.id} to={links.to ? links.to : ""} className="link">

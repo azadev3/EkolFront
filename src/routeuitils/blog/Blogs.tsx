@@ -44,14 +44,7 @@ const Blogs: React.FC = () => {
     staleTime: 1000000,
   });
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  if (error) {
-    return "Bir hata oluştu.";
-  }
-
+  
   //formatted created at
   const DateDisplay = ({ createdAt }: any) => {
     const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
@@ -59,6 +52,15 @@ const Blogs: React.FC = () => {
   };
 
   const { translations } = useTranslate();
+
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return "Bir hata oluştu.";
+  }
 
   return (
     <section className="blogs-section">
