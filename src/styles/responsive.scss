@@ -6,6 +6,36 @@
 }
 
 @media only screen and (max-width: 1230px) {
+  .purch-announcement-wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .search-area .input-search {
+    max-width: unset;
+    width: 100%;
+  }
+  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .search-area {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase th, .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase td {
+    padding: 18px 12px;
+    font-size: 13.5px;
+  }
+  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase th.order, .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase td.order {
+    width: auto;
+    font-size: 13px;
+  }
+  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter .link-filter {
+    font-size: 14px;
+  }
+  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase {
+    overflow: auto;
+  }
+  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase th, .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase td {
+    text-wrap: nowrap;
+  }
+  
   .scrolled-header {
     display: none !important;
   }
@@ -176,6 +206,19 @@
 }
 
 @media only screen and (max-width: 968px) {
+  .purch-rules-wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .purch-rules-wrapper .purch-rules-section .purch-rules .container-purch-rules h2 {
+    font-size: 30px;
+  }
+  .purch-rules-wrapper .purch-rules-section .purch-rules .container-purch-rules .centered-section {
+    margin-top: 150px;
+  }
+  .purch-rules-wrapper .purch-rules-section .purch-rules .container-purch-rules .centered-section h3 {
+    font-size: 15px;
+  }
   .activity-page .tools-section .tools .container-tools .container-descriptions div {
     width: 100%;
   }
@@ -735,6 +778,22 @@
 }
 
 @media only screen and (max-width: 568px) {
+  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+  }
+  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement h2 {
+    font-size: 30px;
+  }
+  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter .link-filter {
+    width: 100%;
+    min-width: unset;
+    max-width: unset;
+  }
   .home-page .card-about-section .card-about .top-card-area .left-descriptions h2 {
     line-height: normal;
   }

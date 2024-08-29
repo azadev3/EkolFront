@@ -40,7 +40,6 @@ const MobileHeader: React.FC = () => {
 
   const { translations } = useTranslate();
 
-
   const HeaderItems: HeaderElementType[] = [
     { id: 1, title: `${translations["nav_anasehife"]}`, to: "/" },
     {
@@ -77,11 +76,18 @@ const MobileHeader: React.FC = () => {
         { id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
       ],
     },
+
     {
       id: 4,
       title: `${translations["nav_haqqimizda_satinalma"]}`,
-      to: "/satinalma",
+      to: "",
+      icon: <FaAngleDown className="down-icon" />,
+      submenu: [
+        { id: 1, title: `${translations["nav_haqqimizda_satinalma_elanlari"]}`, to: "/satinalmaelanlari" },
+        { id: 2, title: `${translations["nav_haqqimizda_satinalma_qaydalari"]}`, to: "/satinalmaqaydalari" },
+      ],
     },
+
     {
       id: 5,
       title: "Media",
@@ -102,8 +108,8 @@ const MobileHeader: React.FC = () => {
         {
           id: 4,
           title: `${translations["newblog_title"]}`,
-          to: "/bloq"
-        }
+          to: "/bloq",
+        },
       ],
     },
     { id: 6, title: `${translations["nav_haqqimizda_elaqe"]}`, to: "/elaqe" },
@@ -145,23 +151,21 @@ const MobileHeader: React.FC = () => {
   //if open toggle menu on the mobile, remove vertical scrolling
   React.useEffect(() => {
     const body = document.querySelector("body");
-  
+
     if (body) {
       if (toggleMenu) {
-        body.style.overflowY = "hidden"; 
+        body.style.overflowY = "hidden";
       } else {
-        body.style.overflowY = "auto"; 
+        body.style.overflowY = "auto";
       }
     }
-  
+
     return () => {
       if (body) {
         body.style.overflowY = "auto";
       }
     };
-  }, [toggleMenu]); 
-  
-
+  }, [toggleMenu]);
 
   return (
     <div className="mobile-header">

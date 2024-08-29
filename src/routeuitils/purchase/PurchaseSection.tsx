@@ -17,6 +17,11 @@ export const PurchaseModalState = atom<string>({
   default: "",
 });
 
+export const PurchaseAnnouncementModalState = atom<string>({
+  key: "PurchaseAnnouncementModalState",
+  default: "",
+});
+
 export interface PurchaseInterface {
   _id: string;
   title: string;

@@ -25,7 +25,7 @@ import { searchModalState } from "./components/header/headeruitil/Search";
 import SearchModal from "./components/header/headeruitil/SearchModal";
 import "./styles/responsive.scss";
 import PurchaseModal from "./modals/PurchaseModal";
-import { PurchaseModalState } from "./routeuitils/purchase/PurchaseSection";
+import { PurchaseAnnouncementModalState, PurchaseModalState } from "./routeuitils/purchase/PurchaseSection";
 import LeadershipModal from "./modals/LeadershipModal";
 import useScroll from "./context/useScroll";
 import ScrollHeader from "./ScrollHeader";
@@ -33,6 +33,9 @@ import { DarkModeState } from "./components/header/headeruitil/DarkMode";
 import NewBlogPage from "./routes/NewBlogPage";
 import NewBlogInnerC from "./routes/NewBlogInnerC";
 import LastNewBlogInner from "./routeuitils/newblogpage/LastNewBlogInner";
+import PurchaseAnnouncements from "./components/features/PurchaseAnnouncements";
+import PurchaseRules from "./components/features/PurchaseRules";
+import PurchaseAnnouncementModal from "./modals/PurchaseAnnouncementModal";
 
 export const isHomePageState = atom<boolean>({
   key: "isHomePageState",
@@ -60,6 +63,8 @@ const App: React.FC = () => {
 
   const purchaseModal = useRecoilValue(PurchaseModalState);
 
+  const purchaseAnnouncementModal = useRecoilValue(PurchaseAnnouncementModalState);
+
   const isScrolled = useScroll();
 
   const [mode, setMode] = useRecoilState(DarkModeState);
@@ -79,6 +84,13 @@ const App: React.FC = () => {
 
   return (
     <div className={`app ${mode ? "dark" : ""}`}>
+
+      {/* purchase announcement modal (new feature) */}
+      <div className={`overlay-purchase-modal ${purchaseAnnouncementModal ? "active" : ""}`}>
+        <PurchaseAnnouncementModal />
+      </div>
+
+
       {/* purchase modal */}
       <div className={`overlay-purchase-modal ${purchaseModal ? "active" : ""}`}>
         <PurchaseModal />
@@ -128,6 +140,10 @@ const App: React.FC = () => {
           <Route path="rublukhesabatlar" element={<Quarterly />} />
           <Route path="illikhesabatlar" element={<Yearly />} />
         </Route>
+
+        {/* satinalma elanlari - qaydalari */}
+        <Route path="/satinalmaelanlari" element={<PurchaseAnnouncements />} />
+        <Route path="/satinalmaqaydalari" element={<PurchaseRules />} />
       </Routes>
       <Footer />
     </div>

@@ -766,6 +766,35 @@ $whitedarktwo: #8b9f9c;
 
   &.dark {
     background-color: $maindarkcolor;
+
+    .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase th, .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase td {
+      background-color: #2b2e3e;
+      color: $whitedark;
+    }
+    .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .search-area .input-search input {
+      color: white;
+      &::placeholder {
+        color: white;
+      }
+    }
+    .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .search-area .input-search .search-icon {
+      color: white;
+    }
+    .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter .link-filter {
+      color: white;
+    }
+    .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement h2 {
+      color: $whitedark;
+    }
+    .purch-rules-wrapper .purch-rules-section .purch-rules .container-purch-rules h2 {
+      color: $whitedark;
+    }
+    .purch-rules-wrapper .purch-rules-section .purch-rules .container-purch-rules .centered-section h3 {
+      color: $whitedark;
+    }
+    .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .search-area .input-search {
+      border: 1px solid #e1e1e11a;
+    }
     .home-page .card-about-section .card-about .top-card-area {
       background-color: transparent;
     }
@@ -2537,4 +2566,20 @@ $whitedarktwo: #8b9f9c;
 }
 .contact-page .contact-section .contact .container-locations {
   gap: 24px;
+}
+
+
+.modal-purch {
+  width: 100%;
+  max-width: 815px;
+  height: 100%;
+  background-color: white;
+  padding: 40px 28px;
+}
+
+.content-area-texts-announcements {
+  p {
+    font-size: 16px !important;
+    line-height: 36px !important;
+  }
 }

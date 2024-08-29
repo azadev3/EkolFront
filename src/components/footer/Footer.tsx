@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/footer.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { useQuery } from "@tanstack/react-query";
 import { Baseurl } from "../../Baseurl";
@@ -111,6 +111,10 @@ const Footer: React.FC = () => {
     {
       id: uuidv4(),
       title: `${translations["nav_haqqimizda_satinalma"]}`,
+      footerNavItems: [
+        { id: uuidv4(), title: `${translations["nav_haqqimizda_satinalma_elanlari"]}`, to: "/satinalmaelanlari" },
+        { id: uuidv4(), title: `${translations["nav_haqqimizda_satinalma_qaydalari"]}`, to: "/satinalmaqaydalari" },
+      ],
     },
     {
       id: uuidv4(),
@@ -155,8 +159,6 @@ const Footer: React.FC = () => {
     staleTime: 900000,
   });
 
-  const navigate = useNavigate();
-
   // FETCH LOGO
   const { data: LogoIcon } = useQuery({
     queryKey: ["logoIconKey"],
@@ -194,12 +196,7 @@ const Footer: React.FC = () => {
                   <div key={item.id} className="footer-nav-link-content">
                     <h4
                       className="title-nav"
-                      style={{ cursor: index === 3 ? "pointer" : "auto" }}
-                      onClick={() => {
-                        if (index === 3) {
-                          navigate("/satinalma");
-                        }
-                      }}>
+                      >
                       {item.title}
                     </h4>
                     <div className="links-nav">
