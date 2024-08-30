@@ -54,10 +54,17 @@ const SearchModal = () => {
         { id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
       ],
     },
+  
     {
       id: 4,
       title: `${translations["nav_haqqimizda_satinalma"]}`,
-      to: "/satinalma",
+      to: "",
+      icon: <FaAngleDown className="down-icon" />,
+      submenu: [
+        { id: 1, title: `${translations["nav_haqqimizda_satinalma_elanlari"]}`, to: "/satinalmaelanlari" },
+        { id: 2, title: `${translations["nav_haqqimizda_satinalma_qaydalari"]}`, to: "/satinalmaqaydalari" },
+        { id: 3, title: `${translations["nav_haqqimizda_satinalma_elaqe"]}`, to: "/satinalma_elaqe" },
+      ],
     },
     {
       id: 5,

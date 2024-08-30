@@ -36,6 +36,7 @@ import LastNewBlogInner from "./routeuitils/newblogpage/LastNewBlogInner";
 import PurchaseAnnouncements from "./components/features/PurchaseAnnouncements";
 import PurchaseRules from "./components/features/PurchaseRules";
 import PurchaseAnnouncementModal from "./modals/PurchaseAnnouncementModal";
+import PurchaseContact from "./components/features/PurchaseContact";
 
 export const isHomePageState = atom<boolean>({
   key: "isHomePageState",
@@ -144,6 +145,8 @@ const App: React.FC = () => {
         {/* satinalma elanlari - qaydalari */}
         <Route path="/satinalmaelanlari" element={<PurchaseAnnouncements />} />
         <Route path="/satinalmaqaydalari" element={<PurchaseRules />} />
+        <Route path="/satinalma_elaqe" element={<PurchaseContact />} />
+
       </Routes>
       <Footer />
     </div>

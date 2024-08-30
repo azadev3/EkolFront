@@ -206,6 +206,16 @@
 }
 
 @media only screen and (max-width: 968px) {
+  .purch-contact-wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact h2{
+    font-size: 30px;
+  }
+  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase {
+    width: 100%;
+  }
   .purch-rules-wrapper {
     padding-left: 24px;
     padding-right: 24px;
@@ -778,6 +788,12 @@
 }
 
 @media only screen and (max-width: 568px) {
+  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .legal-and-natural-person-checkbox {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .company-and-voen, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .requested-person-name-surname, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .mobile-and-job-tel-number, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .other-email, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .country-and-job, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .enterprise-name-and-part, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .company-and-voen, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .requested-person-name-surname, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .mobile-and-job-tel-number, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .other-email, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .country-and-job, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .enterprise-name-and-part {
+    grid-template-columns: repeat(1,1fr);
+  }
   .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
