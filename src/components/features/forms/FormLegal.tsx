@@ -6,6 +6,11 @@ import { radioValueState } from "../PurchaseContact";
 import axios from "axios";
 import { Baseurl } from "../../../Baseurl";
 
+export type C = {
+  _id: string;
+  countries: { country: string; _id: string }[];
+};
+
 export type CountryTypes = {
   id: string;
   country: string;
@@ -67,6 +72,21 @@ export const TypeOfRequestData: TypeOfRequest[] = [
 ];
 
 const FormLegal: React.FC = () => {
+  const [countryData, setCountryData] = React.useState<C[]>([]);
+
+  const getData = async () => {
+    try {
+      const response = await axios.get(`${Baseurl}/purchaseCountries`);
+      if (response.data) {
+        setCountryData(response.data);
+      } else {
+        console.log(response.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //if user selected SECOND RESPONSIBLE PERSON render new form
   const [innerForm, setInnerForm] = React.useState<boolean>(false);
 
@@ -179,6 +199,10 @@ const FormLegal: React.FC = () => {
       console.log(error);
     }
   };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <form className="form-legal" acceptCharset="UTF-8" onSubmit={handleSubmit}>
@@ -324,13 +348,17 @@ const FormLegal: React.FC = () => {
             id="country"
             value={country}
             onChange={(e: ChangeEvent<HTMLSelectElement>) => setCountry(e.target.value)}>
-            {Countries && Countries?.length > 0 ? (
-              Countries?.map((country: CountryTypes) => (
-                <option value={country?.country} key={country?.id}>
-                  {country?.country}
-                </option>
-              ))
-            ) : (
+            {countryData && countryData?.length > 0 ? 
+              countryData?.map((data: C) =>
+                data.countries && data.countries?.length > 0
+                  ? data.countries?.map((c) => (
+                      <option value={c?.country} key={c?._id}>
+                        {c.country}
+                      </option>
+                    ))
+                  : ""
+              )
+             : (
               <option value="">Ölkə yoxdur</option>
             )}
           </select>

@@ -1,8 +1,7 @@
 import React, { ChangeEvent, FormEvent } from "react";
 // import ReCAPTCHA from "react-google-recaptcha";
 import {
-  Countries,
-  CountryTypes,
+  C,
   EnterprisePart,
   EnterprisePartTypes,
   TypeOfRequest,
@@ -12,14 +11,29 @@ import { Baseurl } from "../../../Baseurl";
 import axios from "axios";
 
 const FormNatural: React.FC = () => {
-  //reCAPTCHA
-//   const RECAPTCHA_SITE_KEY = "6LfhhDIqAAAAAMeMLpnKC2ys9LikCnlFJnnKBvQX";
-//   const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
+  const [countryData, setCountryData] = React.useState<C[]>([]);
 
-//   const handleCaptchaChange = (value: string | null) => {
-//     setCaptchaValue(value);
-//     console.log("Captcha value:", value);
-//   };
+  const getData = async () => {
+    try {
+      const response = await axios.get(`${Baseurl}/purchaseCountries`);
+      if (response.data) {
+        setCountryData(response.data);
+      } else {
+        console.log(response.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //reCAPTCHA
+  //   const RECAPTCHA_SITE_KEY = "6LfhhDIqAAAAAMeMLpnKC2ys9LikCnlFJnnKBvQX";
+  //   const [captchaValue, setCaptchaValue] = React.useState<string | null>(null);
+
+  //   const handleCaptchaChange = (value: string | null) => {
+  //     setCaptchaValue(value);
+  //     console.log("Captcha value:", value);
+  //   };
 
   //form natural values for server
   //or is form legal or natural
@@ -91,6 +105,10 @@ const FormNatural: React.FC = () => {
       console.log(error);
     }
   };
+
+  React.useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <form className="form-natural" acceptCharset="UTF-8" onSubmit={handleSubmit}>
@@ -187,16 +205,22 @@ const FormNatural: React.FC = () => {
             Ölkə
             <span>*</span>
           </label>
+
           <select
             name="country"
             id="country"
+            value={country}
             onChange={(e: ChangeEvent<HTMLSelectElement>) => setCountry(e.target.value)}>
-            {Countries && Countries?.length > 0 ? (
-              Countries?.map((country: CountryTypes) => (
-                <option value={country?.country} key={country?.id}>
-                  {country?.country}
-                </option>
-              ))
+            {countryData && countryData?.length > 0 ? (
+              countryData?.map((data: C) =>
+                data.countries && data.countries?.length > 0
+                  ? data.countries?.map((c) => (
+                      <option value={c?.country} key={c?._id}>
+                        {c.country}
+                      </option>
+                    ))
+                  : ""
+              )
             ) : (
               <option value="">Ölkə yoxdur</option>
             )}
@@ -306,7 +330,7 @@ const FormNatural: React.FC = () => {
           id="message"
           onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}></textarea>
       </section>
-{/* 
+      {/* 
       <div className="captcha-container">
         <ReCAPTCHA sitekey={RECAPTCHA_SITE_KEY} onChange={handleCaptchaChange} />
       </div> */}
