@@ -748,7 +748,7 @@ h1 {
   font-size: 16px;
 }
 
-$maindarkcolor: #1d1c26;
+$maindarkcolor: #262626;
 $whitedark: #d8d8d8;
 $whitedarktwo: #8b9f9c;
 
@@ -762,7 +762,7 @@ $whitedarktwo: #8b9f9c;
   background: #f6f6f6;
   @include HeaderWrapperStyle();
   @include pageNavigator();
-  transition: 100ms ease-in-out;
+  transition: 250ms ease-in-out;
 
   &.dark {
     background-color: $maindarkcolor;
@@ -2584,8 +2584,8 @@ $whitedarktwo: #8b9f9c;
   }
 }
 .about-page .certificates-section .certificates .container-certificates .description-certificates p {
-  display: flex !important;
-  flex-wrap: wrap !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
 }
 .about-page .gallery-section .gallery .container-gallery .grid-select-page .item-gallery-select .title-select {
   z-index: 10 !important;
