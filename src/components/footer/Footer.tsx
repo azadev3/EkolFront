@@ -75,11 +75,6 @@ const Footer: React.FC = () => {
           title: `${translations["nav_haqqimizda_avadanliqlar"]}`,
           to: "/fealiyyet/avadanliqlar",
         },
-        {
-          id: uuidv4(),
-          title: `${translations["karyera_imkanlari"]}`,
-          to: "/karyera",
-        },
       ],
     },
     {
@@ -119,12 +114,13 @@ const Footer: React.FC = () => {
     },
     {
       id: uuidv4(),
-      title: `${translations["nav_diger_kecidler"]}`,
+      title: `${translations["nav_haqqimizda_elaqe"]}`,
       footerNavItems: [
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_elaqe"]}`,
         },
+        { id: uuidv4(), title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
       ],
     },
     {
@@ -195,11 +191,7 @@ const Footer: React.FC = () => {
               if (index !== 5) {
                 return (
                   <div key={item.id} className="footer-nav-link-content">
-                    <h4
-                      className="title-nav"
-                      >
-                      {item.title}
-                    </h4>
+                    <h4 className="title-nav">{item.title}</h4>
                     <div className="links-nav">
                       {item?.footerNavItems?.map((links: FooterNavLinkType) => (
                         <Link key={links.id} to={links.to ? links.to : ""} className="link">

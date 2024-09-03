@@ -68,7 +68,6 @@ const Header: React.FC = () => {
           title: `${translations["nav_haqqimizda_xidmetler"]}`,
           to: "/fealiyyet/xidmetler",
         },
-        { id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
       ],
     },
     {
@@ -106,7 +105,13 @@ const Header: React.FC = () => {
         },
       ],
     },
-    { id: 6, title: `${translations["nav_haqqimizda_elaqe"]}`, to: "/elaqe" },
+    {
+      id: 6,
+      title: `${translations["nav_haqqimizda_elaqe"]}`,
+      to: "/",
+      icon: <FaAngleDown className="down-icon" />,
+      submenu: [{ id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" }],
+    },
   ];
 
   // FETCH LOGO
