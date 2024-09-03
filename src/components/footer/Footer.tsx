@@ -59,6 +59,7 @@ const Footer: React.FC = () => {
           title: `${translations["nav_haqqimizda_ourworks"]}`,
           to: "/about/workwedo",
         },
+        { id: uuidv4(), title: `${translations["nav_haqqimizda_hesabatlar"]}`, to: "/hesabatlar/rublukhesabatlar" },
       ],
     },
     {

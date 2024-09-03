@@ -36,7 +36,7 @@ const Header: React.FC = () => {
   const { translations } = useTranslate();
 
   const HeaderItems: HeaderElementType[] = [
-    { id: 1, title: `${translations["nav_anasehife"]}`, to: "/" },
+    // { id: 1, title: `${translations["nav_anasehife"]}`, to: "/" },
     {
       id: 2,
       title: `${translations["nav_haqqimizda"]}`,
@@ -49,7 +49,7 @@ const Header: React.FC = () => {
         { id: 5, title: `${translations["nav_haqqimizda_sertifikatlar"]}`, to: "/about/certificates" },
         { id: 6, title: `${translations["nav_haqqimizda_partnyorlar"]}`, to: "/about/partners" },
         { id: 7, title: `${translations["nav_haqqimizda_ourworks"]}`, to: "/about/workwedo" },
-        // { id: 9, title: `${translations["nav_haqqimizda_hesabatlar"]}`, to: "/hesabatlar" },
+        { id: 9, title: `${translations["nav_haqqimizda_hesabatlar"]}`, to: "/hesabatlar/rublukhesabatlar" },
       ],
     },
     {

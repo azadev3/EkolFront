@@ -47,7 +47,7 @@
 @mixin Header {
   .header {
     width: 100%;
-    max-width: 1340px;
+    max-width: 1240px;
     margin: auto;
     height: 90px;
     display: flex;
@@ -769,44 +769,541 @@ $whitedarktwo: #8b9f9c;
     .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact h2 {
       color: $whitedark;
     }
-    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .legal-and-natural-person-checkbox .legal label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .legal-and-natural-person-checkbox .natural label {
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .legal-and-natural-person-checkbox
+      .legal
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .legal-and-natural-person-checkbox
+      .natural
+      label {
       color: mediumslateblue;
     }
-    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .request-pdf .input-field input[type=file], .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .request-pdf .input-field input[type=file] {
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .request-pdf
+      .input-field
+      input[type="file"],
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .request-pdf
+      .input-field
+      input[type="file"] {
       color: $whitedark;
     }
-    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .second-responsible-person .check label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .second-responsible-person .check label {
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .second-responsible-person
+      .check
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .second-responsible-person
+      .check
+      label {
       color: $whitedark;
     }
-    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .request-pdf label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .request-pdf label {
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .request-pdf
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .request-pdf
+      label {
       color: $whitedark;
     }
-    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .request-pdf .input-field input[type=file]:hover, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .request-pdf .input-field input[type=file] {
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .request-pdf
+      .input-field
+      input[type="file"]:hover,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .request-pdf
+      .input-field
+      input[type="file"] {
       color: $whitedark;
     }
-    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .location label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .enterprise label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .typeofrequest label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .message label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .location label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .enterprise label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .typeofrequest label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .message label {
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .location
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .enterprise
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .typeofrequest
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .message
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .location
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .enterprise
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .typeofrequest
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .message
+      label {
       color: $whitedark;
     }
-    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .company-and-voen .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .requested-person-name-surname .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .mobile-and-job-tel-number .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .other-email .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .country-and-job .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .enterprise-name-and-part .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .company-and-voen .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .requested-person-name-surname .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .mobile-and-job-tel-number .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .other-email .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .country-and-job .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .enterprise-name-and-part .input-field label {
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .company-and-voen
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .requested-person-name-surname
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .mobile-and-job-tel-number
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .other-email
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .country-and-job
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .enterprise-name-and-part
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .company-and-voen
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .requested-person-name-surname
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .mobile-and-job-tel-number
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .other-email
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .country-and-job
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .enterprise-name-and-part
+      .input-field
+      label {
       color: $whitedark;
     }
-    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .company-and-voen .input-field input, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .company-and-voen .input-field select, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .requested-person-name-surname .input-field input, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .requested-person-name-surname .input-field select, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .mobile-and-job-tel-number .input-field input, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .mobile-and-job-tel-number .input-field select, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .other-email .input-field input, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .other-email .input-field select, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .country-and-job .input-field input, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .country-and-job .input-field select, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .enterprise-name-and-part .input-field input, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .enterprise-name-and-part .input-field select, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .company-and-voen .input-field input, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .company-and-voen .input-field select, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .requested-person-name-surname .input-field input, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .requested-person-name-surname .input-field select, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .mobile-and-job-tel-number .input-field input, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .mobile-and-job-tel-number .input-field select, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .other-email .input-field input, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .other-email .input-field select, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .country-and-job .input-field input, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .country-and-job .input-field select, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .enterprise-name-and-part .input-field input, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .enterprise-name-and-part .input-field select {
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .company-and-voen
+      .input-field
+      input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .company-and-voen
+      .input-field
+      select,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .requested-person-name-surname
+      .input-field
+      input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .requested-person-name-surname
+      .input-field
+      select,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .mobile-and-job-tel-number
+      .input-field
+      input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .mobile-and-job-tel-number
+      .input-field
+      select,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .other-email
+      .input-field
+      input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .other-email
+      .input-field
+      select,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .country-and-job
+      .input-field
+      input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .country-and-job
+      .input-field
+      select,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .enterprise-name-and-part
+      .input-field
+      input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .enterprise-name-and-part
+      .input-field
+      select,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .company-and-voen
+      .input-field
+      input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .company-and-voen
+      .input-field
+      select,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .requested-person-name-surname
+      .input-field
+      input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .requested-person-name-surname
+      .input-field
+      select,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .mobile-and-job-tel-number
+      .input-field
+      input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .mobile-and-job-tel-number
+      .input-field
+      select,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .other-email
+      .input-field
+      input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .other-email
+      .input-field
+      select,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .country-and-job
+      .input-field
+      input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .country-and-job
+      .input-field
+      select,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .enterprise-name-and-part
+      .input-field
+      input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .enterprise-name-and-part
+      .input-field
+      select {
       background-color: $whitedark;
     }
-    .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase th, .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase td {
+    .purch-announcement-wrapper
+      .purch-announcement-section
+      .purch-announcement
+      .container-purch-announcement
+      .table-area-purchase
+      th,
+    .purch-announcement-wrapper
+      .purch-announcement-section
+      .purch-announcement
+      .container-purch-announcement
+      .table-area-purchase
+      td {
       background-color: #2b2e3e;
       color: $whitedark;
     }
-    .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .search-area .input-search input {
+    .purch-announcement-wrapper
+      .purch-announcement-section
+      .purch-announcement
+      .container-purch-announcement
+      .search-and-items
+      .search-area
+      .input-search
+      input {
       color: white;
       &::placeholder {
         color: white;
       }
     }
-    .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .search-area .input-search .search-icon {
+    .purch-announcement-wrapper
+      .purch-announcement-section
+      .purch-announcement
+      .container-purch-announcement
+      .search-and-items
+      .search-area
+      .input-search
+      .search-icon {
       color: white;
     }
-    .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter .link-filter {
+    .purch-announcement-wrapper
+      .purch-announcement-section
+      .purch-announcement
+      .container-purch-announcement
+      .search-and-items
+      .right-filter
+      .link-filter {
       color: white;
     }
     .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement h2 {
@@ -818,7 +1315,13 @@ $whitedarktwo: #8b9f9c;
     .purch-rules-wrapper .purch-rules-section .purch-rules .container-purch-rules .centered-section h3 {
       color: $whitedark;
     }
-    .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .search-area .input-search {
+    .purch-announcement-wrapper
+      .purch-announcement-section
+      .purch-announcement
+      .container-purch-announcement
+      .search-and-items
+      .search-area
+      .input-search {
       border: 1px solid #e1e1e11a;
     }
     .home-page .card-about-section .card-about .top-card-area {
@@ -1526,7 +2029,6 @@ $whitedarktwo: #8b9f9c;
       filter: brightness(0.4);
     }
 
-
     .mobile-header .toggle-menu {
       background-color: black;
       box-shadow: 0px 0px 200px 0px rgba(0, 255, 81, 0.628);
@@ -1534,7 +2036,6 @@ $whitedarktwo: #8b9f9c;
     .mobile-header .toggle-menu .left-navigation-mobile ul .dropdown-menu {
       background-color: #303030;
     }
-
   }
 }
 
@@ -2221,7 +2722,7 @@ $whitedarktwo: #8b9f9c;
 
   .header {
     width: 100%;
-    max-width: 1340px;
+    max-width: 1240px;
     margin: auto;
     height: 90px;
     display: flex;
@@ -2594,7 +3095,6 @@ $whitedarktwo: #8b9f9c;
   gap: 24px;
 }
 
-
 .modal-purch {
   width: 100%;
   max-width: 815px;
@@ -2608,4 +3108,8 @@ $whitedarktwo: #8b9f9c;
     font-size: 16px !important;
     line-height: 36px !important;
   }
+}
+.calculations-page .calculation-section .calculation .container-calculation .navigator .yearly,
+.calculations-page .calculation-section .calculation .container-calculation .navigator .quarterly {
+  padding: 8px 28px;
 }

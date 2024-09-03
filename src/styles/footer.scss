@@ -61,13 +61,14 @@
       }
 
       .footer-navigations {
-        max-width: 854px;
+        max-width: 960px;
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         justify-items: flex-end;
         align-items: flex-start;
-        gap: 36px;
+        gap: 24px;
         .footer-nav-link-content {
+          width: 100%;
           display: flex;
           align-items: flex-start;
           justify-content: flex-start;
@@ -86,12 +87,12 @@
             align-items: flex-start;
             justify-content: flex-start;
             flex-direction: column;
-            gap: 16px;
+            gap: 15.5px;
             .link {
               text-wrap: nowrap;
               color: #000000cc;
               font-weight: 400;
-              font-size: 16px;
+              font-size: 14px;
               line-height: normal;
               cursor: pointer;
               transition: 80ms ease-in-out;
