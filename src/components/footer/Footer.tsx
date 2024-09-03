@@ -80,6 +80,15 @@ const Footer: React.FC = () => {
     },
     {
       id: uuidv4(),
+      title: `${translations["nav_haqqimizda_satinalma"]}`,
+      footerNavItems: [
+        { id: uuidv4(), title: `${translations["nav_haqqimizda_satinalma_elanlari"]}`, to: "/satinalmaelanlari" },
+        { id: uuidv4(), title: `${translations["nav_haqqimizda_satinalma_qaydalari"]}`, to: "/satinalmaqaydalari" },
+        { id: uuidv4(), title: `${translations["nav_haqqimizda_satinalma_elaqe"]}`, to: "/satinalma_elaqe" },
+      ],
+    },
+    {
+      id: uuidv4(),
       title: `${translations["nav_media"]}`,
       footerNavItems: [
         {
@@ -102,15 +111,6 @@ const Footer: React.FC = () => {
           title: `${translations["newblog_title"]}`,
           to: "/bloq",
         },
-      ],
-    },
-    {
-      id: uuidv4(),
-      title: `${translations["nav_haqqimizda_satinalma"]}`,
-      footerNavItems: [
-        { id: uuidv4(), title: `${translations["nav_haqqimizda_satinalma_elanlari"]}`, to: "/satinalmaelanlari" },
-        { id: uuidv4(), title: `${translations["nav_haqqimizda_satinalma_qaydalari"]}`, to: "/satinalmaqaydalari" },
-        { id: uuidv4(), title: `${translations["nav_haqqimizda_satinalma_elaqe"]}`, to: "/satinalma_elaqe" },
       ],
     },
     {
