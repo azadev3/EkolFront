@@ -117,7 +117,10 @@ const MobileHeader: React.FC = () => {
       title: `${translations["nav_haqqimizda_elaqe"]}`,
       to: "/",
       icon: <FaAngleDown className="down-icon" />,
-      submenu: [{ id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" }],
+      submenu: [
+        { id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
+        { id: 4343, title: `${translations["nav_haqqimizda_elaqe"]}`, to: "/elaqe" },
+      ],
     },
   ];
 

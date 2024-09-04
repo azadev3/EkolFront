@@ -64,6 +64,7 @@
         justify-content: center;
         position: relative;
         .links {
+          z-index: 1;
           cursor: pointer;
           display: flex;
           align-items: center;
@@ -143,6 +144,7 @@
             }
           }
         }
+
       }
     }
 
@@ -301,17 +303,16 @@
           transform: translateY(-10px);
           transition: 100ms ease-in-out;
           width: 100%;
-          gap: 18px 0px;
-          overflow-y: auto;
+          overflow: hidden;
           background-color: rgba(52, 121, 80, 0.876);
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
           border-radius: 8px;
-          padding: 12px;
+          padding: 24px 0;
           display: grid;
           align-items: center;
           justify-items: center;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(1, 1fr);
 
           .icon {
             width: 40px;
@@ -639,11 +640,11 @@
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
           border-radius: 8px;
-          padding: 12px;
+          padding: 24px 0;
           display: grid;
           align-items: center;
           justify-items: center;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(1, 1fr);
 
           .icon {
             width: 40px;
@@ -2983,11 +2984,11 @@ $whitedarktwo: #8b9f9c;
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
           border-radius: 8px;
-          padding: 12px;
+          padding: 24px 0;
           display: grid;
           align-items: center;
           justify-items: center;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(1, 1fr);
 
           .icon {
             width: 40px;

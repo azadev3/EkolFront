@@ -94,7 +94,10 @@ const ScrollHeader: React.FC = () => {
       title: `${translations["nav_haqqimizda_elaqe"]}`,
       to: "/",
       icon: <FaAngleDown className="down-icon" />,
-      submenu: [{ id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" }],
+      submenu: [
+        { id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
+        { id: 4343, title: `${translations["nav_haqqimizda_elaqe"]}`, to: "/elaqe" },
+      ],
     },
   ];
 
@@ -109,9 +112,16 @@ const ScrollHeader: React.FC = () => {
   });
 
   const [dropdown, setDropdown] = React.useState<number | null>(null);
+  const [hoveringMenu, setHoveringMenu] = React.useState<boolean>(false);
 
   const handleDropdownMenu = (id: number | null) => {
-    setDropdown((prevDropdown) => (prevDropdown ? null : id));
+    setDropdown(id);
+  };
+
+  const handleMouseLeave = () => {
+    if (hoveringMenu) {
+      setDropdown(null);
+    }
   };
 
   const dropdownMenuRef = React.useRef<HTMLDivElement | null>(null);
@@ -169,7 +179,10 @@ const ScrollHeader: React.FC = () => {
             <nav className="left-navigation" ref={liRef}>
               {HeaderItems?.map((item: HeaderElementType) => (
                 <ul key={item?.id}>
-                  <li className="links" onClick={() => handleDropdownMenu(item?.id)}>
+                  <li
+                    className="links"
+                    onMouseEnter={() => handleDropdownMenu(item?.id)}
+                    onMouseLeave={handleMouseLeave}>
                     {item.submenu ? (
                       <span className="title-dropdown">{item.title}</span>
                     ) : (
@@ -178,7 +191,14 @@ const ScrollHeader: React.FC = () => {
                     <span style={{ transform: dropdown === item.id ? "rotate(180deg)" : "" }}>{item.icon}</span>
                   </li>
                   {dropdown === item.id && item.submenu && (
-                    <div className="dropdown-menu" ref={dropdownMenuRef}>
+                    <div
+                      className="dropdown-menu"
+                      ref={dropdownMenuRef}
+                      onMouseEnter={() => setHoveringMenu(true)}
+                      onMouseLeave={() => {
+                        setHoveringMenu(false);
+                        setDropdown(null);
+                      }}>
                       {item?.submenu?.map((item: submenuType) => (
                         <NavLink onClick={() => setDropdown(null)} to={item.to ? item.to : ""} key={item?.id}>
                           {item.title}

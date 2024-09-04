@@ -32,7 +32,7 @@ const ShareButton: React.FC = () => {
       onClick={() => {
         setShareModal((prevModal) => !prevModal);
       }}>
-      <span>Sosial media</span>
+      {/* <span>Sosial media</span> */}
       <IoShareSocialOutline className="share-icon" />
 
       <div className={`modal-share ${shareModal ? "active-modal" : ""}`}>
