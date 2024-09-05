@@ -3114,3 +3114,26 @@ $whitedarktwo: #8b9f9c;
 .calculations-page .calculation-section .calculation .container-calculation .navigator .quarterly {
   padding: 8px 28px;
 }
+
+.about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 12px;
+  p, h1, h2, h3, h4, strong, li, ul, ol, span {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    line-height: 27px;
+    img {
+      width: 100%;
+      max-width: 200px;
+      height: 200px;
+      border-radius: 4px;
+      margin-top: 12px;
+    }
+  }
+}
