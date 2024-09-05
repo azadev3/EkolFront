@@ -761,9 +761,9 @@ $whitedarktwo: #8b9f9c;
   justify-content: flex-start;
   flex-direction: column;
   background: #f6f6f6;
+  transition: 250ms ease-in-out;
   @include HeaderWrapperStyle();
   @include pageNavigator();
-  transition: 250ms ease-in-out;
 
   &.dark {
     background-color: $maindarkcolor;
