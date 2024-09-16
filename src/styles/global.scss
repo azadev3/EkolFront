@@ -3055,7 +3055,21 @@ $whitedarktwo: #8b9f9c;
   overflow: hidden !important;
   width: 100% !important;
   height: 100% !important;
+  object-fit: contain;
 }
+.about-page .lisanse-section .lisanse .container-lisanse .description-area-lisanse p img {
+  overflow: hidden !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+}
+.about-page .lisanse-section .lisanse .container-lisanse .description-area-lisanse p {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  justify-items: flex-start !important;
+  align-items: flex-start !important;
+}
+
 .carier-page
   .carier-section
   .carier
@@ -3087,7 +3101,7 @@ $whitedarktwo: #8b9f9c;
 }
 .about-page .certificates-section .certificates .container-certificates .description-certificates p {
   display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
+  grid-template-columns: repeat(4, 1fr) !important;
 }
 .about-page .gallery-section .gallery .container-gallery .grid-select-page .item-gallery-select .title-select {
   z-index: 10 !important;
