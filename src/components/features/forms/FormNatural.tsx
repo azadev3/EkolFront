@@ -211,6 +211,7 @@ const FormNatural: React.FC = () => {
             id="country"
             value={country}
             onChange={(e: ChangeEvent<HTMLSelectElement>) => setCountry(e.target.value)}>
+              <option value="">Bir ölkə seçin</option>
             {countryData && countryData?.length > 0 ? (
               countryData?.map((data: C) =>
                 data.countries && data.countries?.length > 0
@@ -278,6 +279,7 @@ const FormNatural: React.FC = () => {
             name="enterprisepart"
             id="enterprisepart"
             onChange={(e: ChangeEvent<HTMLSelectElement>) => setEnterprisePart(e.target.value)}>
+              <option value="">Müsabiqə mərhələsi seçin</option>
             {EnterprisePart && EnterprisePart?.length > 0 ? (
               EnterprisePart?.map((enterprise: EnterprisePartTypes) => (
                 <option value={enterprise?.partname} key={enterprise?.id}>
@@ -300,6 +302,7 @@ const FormNatural: React.FC = () => {
           name="typeofrequest"
           id="typeofrequest"
           onChange={(e: ChangeEvent<HTMLSelectElement>) => setTypeOfRequest(e.target.value)}>
+            <option value="">Müraciətin növünü seçin</option>
           {TypeOfRequestData && TypeOfRequestData?.length > 0 ? (
             TypeOfRequestData?.map((reqtype: TypeOfRequest) => (
               <option value={reqtype?.request} key={reqtype?.id}>
