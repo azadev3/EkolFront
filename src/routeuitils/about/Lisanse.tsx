@@ -6,6 +6,18 @@ import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import Loader from "../../Loader";
 import DOMPurify from "dompurify";
+
+// Modal for inner lisanse images
+const ModalLisanseImages = ({ imageSrc, onClose }: any) => {
+  return (
+    <div className="modal-overlay-inner-img" onClick={onClose}>
+      <div className="modal-content-inner-img" onClick={(e) => e.stopPropagation()}>
+        <img src={imageSrc} alt="Modal content" />
+      </div>
+    </div>
+  );
+};
+
 interface LisanseItemType {
   _id: string;
   title: string;
@@ -30,6 +42,24 @@ const Lisanse: React.FC = () => {
 
   const hasLisanseData = lisanseData && lisanseData?.length > 0;
 
+  const [selectedImageLisanse, setSelectedImageLisanse] = React.useState<string | null>(null);
+
+  const handleImageLisanse = (src: string) => {
+    setSelectedImageLisanse(src);
+  };
+
+  const closeModal = () => {
+    setSelectedImageLisanse(null);
+  };
+
+  const handleDescriptionLisanse = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+
+    if (target.tagName === "IMG") {
+      handleImageLisanse((target as HTMLImageElement)?.src);
+    }
+  };
+
   return (
     <section className="lisanse-section">
       <div className="lisanse">
@@ -42,6 +72,7 @@ const Lisanse: React.FC = () => {
                   <React.Fragment key={item?._id}>
                     <h2>{item?.title}</h2>
                     <div
+                      onClick={handleDescriptionLisanse}
                       className="description-area-lisanse"
                       dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
                     />
@@ -51,6 +82,7 @@ const Lisanse: React.FC = () => {
           </div>
         )}
       </div>
+      {selectedImageLisanse && <ModalLisanseImages imageSrc={selectedImageLisanse} onClose={closeModal} />}
     </section>
   );
 };

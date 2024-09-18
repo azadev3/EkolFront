@@ -805,6 +805,12 @@
 }
 
 @media only screen and (max-width: 568px) {
+  .about-page .certificates-section .certificates .container-certificates .description-certificates p {
+    grid-template-columns: repeat(2, 1fr) !important; 
+  }
+  .about-page .lisanse-section .lisanse .container-lisanse .description-area-lisanse p {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
   .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .legal-and-natural-person-checkbox {
     grid-template-columns: repeat(1, 1fr);
   }

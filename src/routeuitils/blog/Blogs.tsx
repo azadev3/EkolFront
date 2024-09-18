@@ -72,7 +72,7 @@ const Blogs: React.FC = () => {
 
           <section className="blog-grid-blogpage">
             {blogData && blogData.length > 0
-              ? blogData.slice(0, paginate).map((item: BlogType, index: number) => (
+              ? blogData.slice(0, paginate).map((item: BlogType, index: string) => (
                   <article className="blog-item-blogpage" key={index}>
                     <div className="image-blog">
                       <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
@@ -83,9 +83,9 @@ const Blogs: React.FC = () => {
                       <h4>{item?.title}</h4>
                       <div className="description">
                         <div dangerouslySetInnerHTML={{ __html: item?.description }} />
-                      </div>{" "}
+                      </div>
                       <div className="show-more-btn">
-                        <Link to={`/xeberler/${item?.title.toLowerCase()}`}>Ətraflı oxu</Link>
+                        <Link to={`/xeberler/${index?.toString()}`}>Ətraflı oxu</Link>
                       </div>
                     </div>
                   </article>

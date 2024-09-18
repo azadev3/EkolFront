@@ -64,35 +64,39 @@ const ServicesActivity: React.FC = () => {
 
   const { translations } = useTranslate();
 
+  const [my_swiper, set_my_swiper] = React.useState<any>();
 
   return (
     <section className="servicesActivity-section">
       <div className="servicesActivity">
-        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_xidmetler']} />
+        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_xidmetler"]} />
 
         {isLoading ? (
           <Loader />
         ) : (
           <div className="container-servicesActivity">
-            <h2>{translations['xidmetler_title']}</h2>
+            <h2>{translations["xidmetler_title"]}</h2>
             <div className="container-services">
               <div className="service-items">
                 <div className="service-image-container">
-                  {hasServicesData && serviceImage && (
-                    serviceImage?.length === 0 ? (
+                  {hasServicesData &&
+                    serviceImage &&
+                    (serviceImage?.length === 0 ? (
                       <Loader />
                     ) : (
                       <img
-                      src={`https://ekol-server-1.onrender.com${serviceImage}`}
-                      alt={`service-${selectedService}-image`}
-                      loading="lazy"
-                    />
-                    )
-                  )}
+                        src={`https://ekol-server-1.onrender.com${serviceImage}`}
+                        alt={`service-${selectedService}-image`}
+                        loading="lazy"
+                      />
+                    ))}
                 </div>
 
                 <div className="navigator-content">
                   <Swiper
+                    onInit={(ev) => {
+                      set_my_swiper(ev);
+                    }}
                     spaceBetween={12}
                     slidesPerView={4.5}
                     navigation={true}
@@ -107,15 +111,17 @@ const ServicesActivity: React.FC = () => {
                       },
                       968: {
                         slidesPerView: 4.5,
-                      }
-                    }}
-                    >
+                      },
+                    }}>
                     {hasServicesData &&
                       servicesPageData?.map((item, i) => (
                         <SwiperSlide
                           className={selectedService === i ? "actived" : ""}
                           key={item.title}
-                          onClick={() => handleSelectService(i)}>
+                          onClick={() => {
+                            handleSelectService(i);
+                            my_swiper?.slideNext();
+                          }}>
                           <span>{item.title}</span>
                         </SwiperSlide>
                       ))}

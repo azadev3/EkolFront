@@ -60,7 +60,7 @@ const LastNewBlogInner: React.FC = () => {
   };
 
   const lastBlogItem = lastBlogs?.find(
-    (item: LastBlogType) => item?.title.toLowerCase() === lastnewblogtitle?.toLowerCase()
+    (_: LastBlogType, i) => i.toString() === lastnewblogtitle?.toString()
   );
 
   React.useEffect(() => {
@@ -105,9 +105,9 @@ const LastNewBlogInner: React.FC = () => {
                 <h5>Ən son bloqlar</h5>
                 <div className="grid-last-blog">
                   {lastBlogs && lastBlogs.length > 0
-                    ? lastBlogs?.map((item: LastBlogType) => (
+                    ? lastBlogs?.map((item: LastBlogType, i) => (
                         <Link
-                          to={`/xeberler/en-son-bloglar/${item?.title.toLowerCase()}`}
+                          to={`/xeberler/en-son-bloglar/${i?.toString()}`}
                           key={item?._id}
                           className="item-last-blog">
                           <div className="title">{item?.title}</div>

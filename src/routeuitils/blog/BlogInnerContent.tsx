@@ -21,11 +21,10 @@ type LastBlogType = {
   createdAt: string;
 };
 
-
 const BlogInnerContent: React.FC = () => {
   const { translations } = useTranslate();
 
-  const { newblogtitle } = useParams<{ newblogtitle: string }>();
+  const { blogtitle } = useParams<{ blogtitle: string }>();
   const selectedlang = useRecoilValue(SelectedLanguageState);
   const navigate = useNavigate();
 
@@ -91,14 +90,16 @@ const BlogInnerContent: React.FC = () => {
     return <span>{formattedDate}</span>;
   };
 
-  const innerBlogItem = blogDatas?.find((item: BlogType) => item?.title.toLowerCase() === newblogtitle?.toLowerCase());
+  const innerBlogItem: BlogType =
+    blogDatas && blogDatas?.find((_: BlogType, index: number) => index.toString() === blogtitle);
 
+  console.log(innerBlogItem);
   if (blogLoading || lastBlogsLoading) {
     return <Loader />;
   }
 
   if (blogError || lastBlogsError) {
-    return "Bir hata oluştu.";
+    return "Bir problem oldu";
   }
 
   return (
@@ -143,9 +144,9 @@ const BlogInnerContent: React.FC = () => {
                 <h5>Ən son xəbərlər</h5>
                 <div className="grid-last-blog">
                   {lastBlogs && lastBlogs.length > 0
-                    ? lastBlogs.map((item: LastBlogType) => (
+                    ? lastBlogs.map((item: LastBlogType, index: string) => (
                         <Link
-                          to={`/xeberler/en-son-bloglar/${item?.title.toLowerCase()}`}
+                          to={`/xeberler/en-son-bloglar/${index?.toString()}`}
                           key={uuidv4()}
                           className="item-last-blog">
                           <div className="title">{item.title}</div>

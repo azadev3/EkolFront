@@ -87,7 +87,7 @@ const NewBlog: React.FC = () => {
                         <div dangerouslySetInnerHTML={{ __html: item?.description }} />
                       </div>{" "}
                       <div className="show-more-btn">
-                        <Link to={`/bloq/${item?.title.toLowerCase()}`}>Ətraflı oxu</Link>
+                        <Link to={`/bloq/${index?.toString()}`}>Ətraflı oxu</Link>
                       </div>
                     </div>
                   </article>

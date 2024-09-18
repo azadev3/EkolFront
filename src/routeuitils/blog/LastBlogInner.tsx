@@ -60,9 +60,9 @@ const LastBlogInner: React.FC = () => {
     }
   };
 
-  const lastBlogItem = lastBlogs?.find(
-    (item: LastBlogType) => item?.title.toLowerCase() === lastblogtitle?.toLowerCase()
-  );
+  const lastBlogItem = lastBlogs && lastBlogs?.find((_, i) => {
+    return i.toString() === lastblogtitle?.toString();
+  });
 
   React.useEffect(() => {
     fetchLastBlogs();
@@ -86,7 +86,6 @@ const LastBlogInner: React.FC = () => {
               <div className="left">
                 <div className="content-inner-blog-image-wrapper">
                   <img
-                    loading="lazy"
                     src={`https://ekol-server-1.onrender.com${lastBlogItem?.image}`}
                     title={lastBlogItem?.title}
                   />
@@ -106,9 +105,9 @@ const LastBlogInner: React.FC = () => {
                 <h5>Ən son xəbərlər</h5>
                 <div className="grid-last-blog">
                   {lastBlogs && lastBlogs.length > 0
-                    ? lastBlogs?.map((item: LastBlogType) => (
+                    ? lastBlogs?.map((item: LastBlogType, i) => (
                         <Link
-                          to={`/xeberler/en-son-bloglar/${item?.title.toLowerCase()}`}
+                          to={`/xeberler/en-son-bloglar/${i?.toString()}`}
                           key={item?._id}
                           className="item-last-blog">
                           <div className="title">{item?.title}</div>

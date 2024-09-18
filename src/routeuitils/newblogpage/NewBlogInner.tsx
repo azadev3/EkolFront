@@ -91,7 +91,7 @@ const NewBlogInner: React.FC = () => {
     return <span>{formattedDate}</span>;
   };
 
-  const innerBlogItem = newBlogDatasInner?.find((item: BlogType) => item?.title.toLowerCase() === newblogtitle?.toLowerCase());
+  const innerBlogItem = newBlogDatasInner?.find((_: BlogType, i:string) => i?.toString() === newblogtitle?.toString());
 
   if (blogLoading || lastBlogsLoading) {
     return <Loader />;
@@ -143,9 +143,9 @@ const NewBlogInner: React.FC = () => {
                 <h5>Ən son bloqlar</h5>
                 <div className="grid-last-blog">
                   {lastBlogs && lastBlogs.length > 0
-                    ? lastBlogs.map((item: LastBlogType) => (
+                    ? lastBlogs.map((item: LastBlogType, i:string) => (
                         <Link
-                          to={`/bloq/en-son/${item?.title.toLowerCase()}`}
+                          to={`/bloq/en-son/${i?.toString()}`}
                           key={uuidv4()}
                           className="item-last-blog">
                           <div className="title">{item.title}</div>

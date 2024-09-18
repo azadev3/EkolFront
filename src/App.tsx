@@ -37,7 +37,6 @@ import PurchaseAnnouncements from "./components/features/PurchaseAnnouncements";
 import PurchaseRules from "./components/features/PurchaseRules";
 import PurchaseAnnouncementModal from "./modals/PurchaseAnnouncementModal";
 import PurchaseContact from "./components/features/PurchaseContact";
-
 export const isHomePageState = atom<boolean>({
   key: "isHomePageState",
   default: false,
@@ -138,8 +137,8 @@ const App: React.FC = () => {
         <Route path="/satinalma" element={<Purchase />} />
         <Route path="/karyera/*" element={<Carier />} />
         <Route path="/hesabatlar" element={<Calculations />}>
-          <Route path="rublukhesabatlar" element={<Quarterly />} />
           <Route path="illikhesabatlar" element={<Yearly />} />
+          <Route path="rublukhesabatlar" element={<Quarterly />} />
         </Route>
 
         {/* satinalma elanlari - qaydalari */}

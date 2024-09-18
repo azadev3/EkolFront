@@ -49,7 +49,7 @@ const Header: React.FC = () => {
         { id: 5, title: `${translations["nav_haqqimizda_sertifikatlar"]}`, to: "/about/certificates" },
         { id: 6, title: `${translations["nav_haqqimizda_partnyorlar"]}`, to: "/about/partners" },
         { id: 7, title: `${translations["nav_haqqimizda_ourworks"]}`, to: "/about/workwedo" },
-        { id: 9, title: `${translations["nav_haqqimizda_hesabatlar"]}`, to: "/hesabatlar/rublukhesabatlar" },
+        { id: 9, title: `${translations["nav_haqqimizda_hesabatlar"]}`, to: "/hesabatlar/illikhesabatlar" },
       ],
     },
     {
@@ -127,32 +127,11 @@ const Header: React.FC = () => {
     staleTime: 9000000,
   });
 
-  const [dropdown, setDropdown] = React.useState<number | null>(null);
-  const [hoveringMenu, setHoveringMenu] = React.useState<boolean>(false);
+  const [dropdownHeader, setDropdownHeader] = React.useState<number | null>(null);
 
-  const handleDropdownMenu = (id: number | null) => {
-    setDropdown(id);
+  const handleDropdownMenuHeader = (id: number | null) => {
+    setDropdownHeader(id);
   };
-
-  const handleMouseLeave = () => {
-    if (hoveringMenu) {
-      setDropdown(null);
-    }
-  };
-  const dropdownMenuRef = React.useRef<HTMLDivElement | null>(null);
-  const liRef = React.useRef<any>(null);
-
-  React.useEffect(() => {
-    const outsideClicked = (e: MouseEvent) => {
-      const hasLi = liRef.current && !liRef.current.contains(e.target as Node);
-      if (dropdownMenuRef.current && !dropdownMenuRef.current.contains(e.target as Node) && hasLi) {
-        setDropdown(null);
-      }
-    };
-
-    document.addEventListener("mousedown", outsideClicked);
-    return () => document.removeEventListener("mousedown", outsideClicked);
-  }, []);
 
   const [isMobile, setIsMobile] = useRecoilState(isMobileState);
 
@@ -190,29 +169,28 @@ const Header: React.FC = () => {
               : ""}
           </Link>
 
-          <nav className="left-navigation" ref={liRef}>
+          <nav className="left-navigation">
             {HeaderItems?.map((item: HeaderElementType) => (
-              <ul key={item?.id}>
-                <li className="links" onMouseEnter={() => handleDropdownMenu(item?.id)} onMouseLeave={handleMouseLeave}>
+              <ul key={item?.id}  onMouseEnter={() => handleDropdownMenuHeader(item?.id)}
+              onMouseLeave={() => setDropdownHeader(null)}>
+                <li
+                  className="links"
+                 >
                   {item.submenu ? (
                     <span className="title-dropdown">{item.title}</span>
                   ) : (
                     <NavLink to={item?.to}>{item.title}</NavLink>
                   )}
-                  <span style={{ transform: dropdown === item.id ? "rotate(180deg)" : "" }}>{item.icon}</span>
+                  <span style={{ transform: dropdownHeader === item.id ? "rotate(180deg)" : "" }}>{item.icon}</span>
                 </li>
-                {dropdown === item.id && item.submenu && (
-                  <div
-                    className="dropdown-menu"
-                    ref={dropdownMenuRef}
-                    onMouseEnter={() => setHoveringMenu(true)}
-                    onMouseLeave={() => {
-                      setHoveringMenu(false);
-                      setDropdown(null);
-                    }}>
-                    {item?.submenu?.map((item: submenuType) => (
-                      <NavLink onClick={() => setDropdown(null)} to={item.to ? item.to : ""} key={item?.id}>
-                        {item.title}
+                {dropdownHeader === item.id && item.submenu && (
+                  <div className="dropdown-menu">
+                    {item?.submenu?.map((submenuItem: submenuType) => (
+                      <NavLink
+                        onClick={() => setDropdownHeader(null)}
+                        to={submenuItem.to ? submenuItem.to : ""}
+                        key={submenuItem?.id}>
+                        {submenuItem.title}
                       </NavLink>
                     ))}
                   </div>
