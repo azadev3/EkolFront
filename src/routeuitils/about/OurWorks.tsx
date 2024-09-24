@@ -15,6 +15,9 @@ interface OurWorksInnerInterface {
 }
 
 const OurWorks: React.FC = () => {
+
+  const { translations } = useTranslate();
+
   // FETCH OUR WORKS DATA
   const selectedlang = useRecoilValue(SelectedLanguageState);
 
@@ -46,7 +49,16 @@ const OurWorks: React.FC = () => {
     setSelectItem(i);
   };
 
-  const { translations } = useTranslate();
+
+  React.useEffect(() => {
+    const contentDivs = document.querySelectorAll(".description-content p");
+
+    contentDivs.forEach((pTag) => {
+      if (pTag.querySelector("img")) {
+        pTag.classList.add("img-grid");
+      }
+    });
+  }, [OurWorksInnerData, selectItem]);
 
   return (
     <section className="ourworks-section">
@@ -76,7 +88,7 @@ const OurWorks: React.FC = () => {
                     if (selectItem === item?.title) {
                       return (
                         <div className="description-content" key={uuidv4()}>
-                          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }} />{" "}
+                          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }} />
                         </div>
                       );
                     }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useRecoilValue } from "recoil";
 import { Baseurl } from "../../Baseurl";
@@ -49,6 +49,8 @@ const BlogSection: React.FC = () => {
     return formattedDate;
   };
 
+  const navigate = useNavigate();
+
   const { translations } = useTranslate();
 
   return (
@@ -65,7 +67,11 @@ const BlogSection: React.FC = () => {
         <section className="blog-grid-section">
           {blogData && blogData.length > 0
             ? blogData.slice(0, 3).map((item: BlogType, index: number) => (
-                <article className="blog-item" key={index}>
+                <article
+                onClick={() => {
+                  navigate(`/xeberler/${index?.toString()}`);
+                }}
+                className="blog-item" key={index}>
                   <div className="image-blog">
                     <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
                   </div>

@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useRecoilValue } from "recoil";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { BlogType } from "../home/BlogSection";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PaginateButton from "../../components/PaginateButton";
 
 const NewBlog: React.FC = () => {
@@ -52,6 +52,8 @@ const NewBlog: React.FC = () => {
     return formattedDate;
   };
 
+  const navigate = useNavigate();
+
   if (isLoading) {
     return <Loader />;
   }
@@ -71,7 +73,11 @@ const NewBlog: React.FC = () => {
           <section className="newblogpage-grid-blogpage">
             {newBlogData && newBlogData.length > 0
               ? newBlogData.slice(0, paginate).map((item: BlogType, index: number) => (
-                  <article className="newblogpage-item-blogpage" key={index}>
+                  <article 
+                  onClick={() => {
+                    navigate(`/bloq/${index?.toString()}`)
+                  }}
+                  className="newblogpage-item-blogpage" key={index}>
                     <div className="image-newblogpage">
                       <img
                         src={`https://ekol-server-1.onrender.com${item?.image}`}
@@ -85,7 +91,7 @@ const NewBlog: React.FC = () => {
                       <h4>{item?.title}</h4>
                       <div className="description">
                         <div dangerouslySetInnerHTML={{ __html: item?.description }} />
-                      </div>{" "}
+                      </div>
                       <div className="show-more-btn">
                         <Link to={`/bloq/${index?.toString()}`}>Ətraflı oxu</Link>
                       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import Breadcrumb from "../../Breadcrumb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useRecoilValue } from "recoil";
 import { useQuery } from "@tanstack/react-query";
@@ -11,6 +11,8 @@ import Loader from "../../Loader";
 import { useTranslate } from "../../context/TranslateContext";
 
 const ServicesPage: React.FC = () => {
+  const { translations } = useTranslate();
+
   //Fetch services
   const selectedLang = useRecoilValue(SelectedLanguageState);
 
@@ -29,29 +31,34 @@ const ServicesPage: React.FC = () => {
 
   const hasServicesPageData = servicesPageData && servicesPageData?.length > 0;
 
-  const { translations } = useTranslate();
+  const navigate = useNavigate();
 
   return (
     <section className="servicespage-section">
       <div className="servicespage">
-        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_xidmetler']} />
+        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_xidmetler"]} />
 
         {isLoading ? (
           <Loader />
         ) : (
           <div className="container-servicespage">
-            <h2>{translations['xidmetler_title']}</h2>
+            <h2>{translations["xidmetler_title"]}</h2>
             <div className="container-services-grid">
               {hasServicesPageData &&
                 servicesPageData?.map((item: ServicesContentType, i: number) => (
-                  <div className="item-service" key={i}>
+                  <div
+                    onClick={() => {
+                      navigate(`/fealiyyet/xidmetler/${item?.title}`);
+                    }}
+                    className="item-service"
+                    key={i}>
                     <div className="texts">
                       <article className="top-text">
                         <h2>{item.title}</h2>
                         <p dangerouslySetInnerHTML={{ __html: item.description.slice(0, 200) }} />
                       </article>
                       <Link to={`/fealiyyet/xidmetler/${item?.title}`} className="btn-more">
-                        <span>{translations['etrafli_bax_button']}</span>
+                        <span>{translations["etrafli_bax_button"]}</span>
                         <img src="/righte.svg" alt="right" />
                       </Link>
                     </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import Breadcrumb from "../../Breadcrumb";
 import { BlogType } from "../home/BlogSection";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PaginateButton from "../../components/PaginateButton";
 import { Baseurl } from "../../Baseurl";
 import { SelectedLanguageState } from "../../recoil/Atoms";
@@ -44,7 +44,6 @@ const Blogs: React.FC = () => {
     staleTime: 1000000,
   });
 
-  
   //formatted created at
   const DateDisplay = ({ createdAt }: any) => {
     const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
@@ -53,6 +52,7 @@ const Blogs: React.FC = () => {
 
   const { translations } = useTranslate();
 
+  const navigate = useNavigate();
 
   if (isLoading) {
     return <Loader />;
@@ -65,17 +65,26 @@ const Blogs: React.FC = () => {
   return (
     <section className="blogs-section">
       <div className="blogs">
-        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_xeberler']} />
+        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_xeberler"]} />
 
         <div className="container-blogs">
-          <h2>{translations['blog_title']}</h2>
+          <h2>{translations["blog_title"]}</h2>
 
           <section className="blog-grid-blogpage">
             {blogData && blogData.length > 0
               ? blogData.slice(0, paginate).map((item: BlogType, index: string) => (
-                  <article className="blog-item-blogpage" key={index}>
+                  <article
+                    onClick={() => {
+                      navigate(`/xeberler/${index?.toString()}`);
+                    }}
+                    className="blog-item-blogpage"
+                    key={index}>
                     <div className="image-blog">
-                      <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
+                      <img
+                        src={`https://ekol-server-1.onrender.com${item?.image}`}
+                        alt={`${index}-blogimg`}
+                        title={item?.title}
+                      />
                     </div>
 
                     <div className="descriptions-blog">
