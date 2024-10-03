@@ -11,6 +11,7 @@ import Loader from "../../Loader";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslate } from "../../context/TranslateContext";
 import { SocialsType } from "../home/Hero";
+import moment from "moment";
 
 type LastBlogType = {
   _id: number;
@@ -152,7 +153,7 @@ const BlogInnerContent: React.FC = () => {
 
                           <div className="time-and-icon">
                             <span className="time">
-                              {item.createdAt ? item?.createdAt : ""}
+                              {item.createdAt ? moment(item?.createdAt).format("DD.MM.YYYY") : ""}
                             </span>
                             <img src="/arrow.svg" alt="arrow-icon" />
                           </div>
