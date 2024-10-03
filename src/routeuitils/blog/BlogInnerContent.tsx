@@ -117,7 +117,7 @@ const BlogInnerContent: React.FC = () => {
                 <div className="content-inner-blog-image-wrapper" style={{ display: innerBlogItem?.image === "" ? "none" : "flex" }}>
                   <img
                     loading="lazy"
-                    src={`https://kaiyi-21d4.onrender.com${innerBlogItem?.image}`}
+                    src={`https://ekol-server-1.onrender.com${innerBlogItem?.image}`}
                     title={innerBlogItem?.title}
                   />
                 </div>
@@ -188,7 +188,7 @@ const BlogInnerContent: React.FC = () => {
                               to={item?.link}
                               className="icon">
                               <img
-                                src={`https://kaiyi-21d4.onrender.com${item?.icon}`}
+                                src={`https://ekol-server-1.onrender.com${item?.icon}`}
                                 alt={`${item?._id}-icon`}
                                 title={item?.link}
                               />

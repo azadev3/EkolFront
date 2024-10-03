@@ -54,7 +54,7 @@ const LeadershipModal: React.FC = () => {
     <div className="leadership-modal" ref={leadershipModalRef}>
       <div className="top-profile-and-user-info">
         <div className="profile">
-          <img src={isLeadershipData ? `https://kaiyi-21d4.onrender.com${isLeadershipData?.profile}` : ""} alt="" />
+          <img src={isLeadershipData ? `https://ekol-server-1.onrender.com${isLeadershipData?.profile}` : ""} alt="" />
         </div>
         <div className="right-description">
           <div className="top">

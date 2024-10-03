@@ -64,7 +64,7 @@ const ServicesPage: React.FC = () => {
                     </div>
 
                     <div className="image">
-                      <img src={`https://kaiyi-21d4.onrender.com${item?.image}`} alt={`${i}_image`} loading="lazy" />
+                      <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${i}_image`} loading="lazy" />
                     </div>
                   </div>
                 ))}

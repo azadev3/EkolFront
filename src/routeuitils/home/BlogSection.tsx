@@ -76,7 +76,7 @@ const BlogSection: React.FC = () => {
                     ""
                   ) : (
                     <div className="image-blog">
-                      <img src={`https://kaiyi-21d4.onrender.com${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
+                      <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
                     </div>
                   )}
                   <div className="descriptions-blog">

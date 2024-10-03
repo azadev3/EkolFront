@@ -86,7 +86,7 @@ const LastBlogInner: React.FC = () => {
               <div className="left">
                 <div className="content-inner-blog-image-wrapper" style={{ display: lastBlogItem?.image === "" ? "none" : "flex" }}>
                   <img
-                    src={`https://kaiyi-21d4.onrender.com${lastBlogItem?.image}`}
+                    src={`https://ekol-server-1.onrender.com${lastBlogItem?.image}`}
                     title={lastBlogItem?.title}
                   />
                 </div>
@@ -148,7 +148,7 @@ const LastBlogInner: React.FC = () => {
                               to={item?.link}
                               className="icon">
                               <img
-                                src={`https://kaiyi-21d4.onrender.com${item?.icon}`}
+                                src={`https://ekol-server-1.onrender.com${item?.icon}`}
                                 alt={`${item?._id}-icon`}
                                 title={item?.link}
                               />

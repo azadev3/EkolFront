@@ -64,7 +64,7 @@ const Partners: React.FC = () => {
               displayedPartners.map((item: PartnersType, i: number) => (
                 <div key={i} className="partners-item">
                   <div className="logo-wrap">
-                  <img src={`https://kaiyi-21d4.onrender.com${item?.logo}`} alt={`${i}-logo`} title={item?.title} />
+                  <img src={`https://ekol-server-1.onrender.com${item?.logo}`} alt={`${i}-logo`} title={item?.title} />
                   </div>
                   <span>{item?.title}</span>
                 </div>

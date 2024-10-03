@@ -97,7 +97,7 @@ const ServicesActivity: React.FC = () => {
                       <Loader />
                     ) : (
                       <img
-                        src={`https://kaiyi-21d4.onrender.com${serviceImage}`}
+                        src={`https://ekol-server-1.onrender.com${serviceImage}`}
                         alt={`service-${selectedService}-image`}
                         loading="lazy"
                       />

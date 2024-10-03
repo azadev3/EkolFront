@@ -81,7 +81,7 @@ const Services: React.FC = () => {
                   </div>
                   {item?.image && (
                     <div className="right">
-                      <img src={`https://kaiyi-21d4.onrender.com${item?.image}`} alt={`${item?.id}-image`} title={item?.title} />
+                      <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${item?.id}-image`} title={item?.title} />
                     </div>
                   )}
                 </SwiperSlide>
