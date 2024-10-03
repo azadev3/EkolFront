@@ -177,7 +177,7 @@ const Footer: React.FC = () => {
                 ? LogoIcon.map((logo: Logo) => (
                     <img
                       key={logo._id}
-                      src={`https://ekol-server-1.onrender.com${logo.logo}`}
+                      src={`https://kaiyi-21d4.onrender.com${logo.logo}`}
                       alt={`${logo._id}-logo`}
                       title={logo._id}
                     />
@@ -209,7 +209,7 @@ const Footer: React.FC = () => {
                       {SocialsData.map((links: SocialsType) => (
                         <Link target="_blank" key={links?._id} to={links?.link} className="link-social">
                           <img
-                            src={`https://ekol-server-1.onrender.com${links?.icon}`}
+                            src={`https://kaiyi-21d4.onrender.com${links?.icon}`}
                             alt={`${links._id}-icon`}
                             title={links.link}
                           />

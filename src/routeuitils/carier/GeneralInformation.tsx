@@ -76,7 +76,7 @@ const GeneralInformation: React.FC = () => {
       {careerOpportunitiesBackgroundData && Object.values(careerOpportunitiesBackgroundData).length > 0
         ? Object.values(careerOpportunitiesBackgroundData).map((item: GeneralInformationData) => (
             <div key={uuidv4()} className="wrapper-image-general">
-              <img src={`https://ekol-server-1.onrender.com${item?.backgroundImage}`} alt={`${uuidv4()}-image`} />
+              <img src={`https://kaiyi-21d4.onrender.com${item?.backgroundImage}`} alt={`${uuidv4()}-image`} />
               <h4>{item?.title}</h4>
             </div>
           ))
@@ -90,7 +90,7 @@ const GeneralInformation: React.FC = () => {
             ? whyEcolData.map((item: WhyEkolDataType) => (
                 <div className="item" key={uuidv4()}>
                   <div className="icon-mini">
-                    <img src={`https://ekol-server-1.onrender.com${item?.icon}`} alt={`${uuidv4()}-icon`} title={item?.title} />
+                    <img src={`https://kaiyi-21d4.onrender.com${item?.icon}`} alt={`${uuidv4()}-icon`} title={item?.title} />
                   </div>
                   <strong>{item?.title}</strong>
                   <p>{item?.description}</p>

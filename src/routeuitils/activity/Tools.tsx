@@ -31,6 +31,16 @@ const Tools: React.FC = () => {
     },
   });
 
+  React.useEffect(() => {
+    const contentDivs = document.querySelectorAll(".container-descriptions p");
+
+    contentDivs.forEach((pTag) => {
+      if (pTag.querySelector("img")) {
+        pTag.classList.add("img-grid");
+      }
+    });
+  }, [EquipmentsData]);
+
   const { translations } = useTranslate();
 
 

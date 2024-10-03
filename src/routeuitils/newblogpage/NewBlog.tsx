@@ -1,7 +1,6 @@
 import React from "react";
 import Breadcrumb from "../../Breadcrumb";
 import { useTranslate } from "../../context/TranslateContext";
-import moment from "moment";
 import Loader from "../../Loader";
 import { Baseurl } from "../../Baseurl";
 import axios from "axios";
@@ -47,10 +46,10 @@ const NewBlog: React.FC = () => {
   });
 
   //formatted created at
-  const DateDisplay = ({ createdAt }: any) => {
-    const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
-    return formattedDate;
-  };
+  // const DateDisplay = ({ created_at }: any) => {
+  //   const formattedDate = moment(created_at).locale("tr").format("DD MMM YYYY");
+  //   return formattedDate;
+  // };
 
   const navigate = useNavigate();
 
@@ -73,21 +72,23 @@ const NewBlog: React.FC = () => {
           <section className="newblogpage-grid-blogpage">
             {newBlogData && newBlogData.length > 0
               ? newBlogData.slice(0, paginate).map((item: BlogType, index: number) => (
-                  <article 
-                  onClick={() => {
-                    navigate(`/bloq/${index?.toString()}`)
-                  }}
-                  className="newblogpage-item-blogpage" key={index}>
-                    <div className="image-newblogpage">
-                      <img
-                        src={`https://ekol-server-1.onrender.com${item?.image}`}
-                        alt={`${index}-blogimg`}
-                        title={item?.title}
-                      />
-                    </div>
+                  <article
+                    onClick={() => {
+                      navigate(`/bloq/${index?.toString()}`);
+                    }}
+                    className={`newblogpage-item-blogpage ${item?.image === "" ? "noimg" : ""}`}
+                    key={index}>
+                    {item?.image === "" ? (
+                      ""
+                    ) : (
+                      <div className="image-newblogpage">
+                        <img src={`https://kaiyi-21d4.onrender.com${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
+                      </div>
+                    )}
+
 
                     <div className="descriptions-newblogpage">
-                      <span>{DateDisplay(item?.createdAt)}</span>
+                      <span>{item.created_at ? item?.created_at : ""}</span>
                       <h4>{item?.title}</h4>
                       <div className="description">
                         <div dangerouslySetInnerHTML={{ __html: item?.description }} />

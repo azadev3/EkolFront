@@ -31,7 +31,7 @@ const Quarterly: React.FC = () => {
           return _id === item?._id ? item?.pdf : "";
         })
       : "";
-    const url: any = findUrl ? `https://ekol-server-1.onrender.com${findUrl?.pdf}` : "";
+    const url: any = findUrl ? `https://kaiyi-21d4.onrender.com${findUrl?.pdf}` : "";
     const link = document.createElement("a");
     link.href = url;
     link.target = "_blank";

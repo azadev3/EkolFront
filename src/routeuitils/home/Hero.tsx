@@ -93,7 +93,7 @@ const Hero: React.FC = () => {
               ? heroData.map((item: HeroDataType, index: number) => (
                   <SwiperSlide key={index}>
                     <img
-                      src={`https://ekol-server-1.onrender.com${item?.image}`}
+                      src={`https://kaiyi-21d4.onrender.com${item?.image}`}
                       alt={`${item?._id}-image`}
                       loading="lazy"
                     />

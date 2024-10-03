@@ -384,7 +384,7 @@ const Images: React.FC = () => {
           <div className="content-images">
             {displayedImagesItem && displayedImagesItem.map((item: CategoriesAndImages, i: number) => (
               <Link to={`/about/gallery/images/${item?.categoryName}`} key={i} className="images-item">
-                <img src={item.categoryImg ? `https://ekol-server-1.onrender.com${item.categoryImg}` : "/galleryimg.svg"} alt="gallery-image" title={item?.categoryName} />
+                <img src={item.categoryImg ? `https://kaiyi-21d4.onrender.com${item.categoryImg}` : "/galleryimg.svg"} alt="gallery-image" title={item?.categoryName} />
                 <span>{item?.categoryName}</span>
               </Link>
             ))}

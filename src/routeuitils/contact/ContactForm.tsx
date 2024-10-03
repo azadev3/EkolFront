@@ -37,7 +37,7 @@ const ContactForm: React.FC = () => {
   });
 
   const [selectedActive, setSelectedActive] = useState<string>("");
-  const [iframeLoading, setIframeLoading] = useState<boolean>(true);
+  const [_, setIframeLoading] = useState<boolean>(true);
 
   React.useEffect(() => {
     if (locationData && locationData.length > 0) {
@@ -71,14 +71,17 @@ const ContactForm: React.FC = () => {
       });
       if (response.data) {
         formRef && formRef?.current && formRef.current?.reset();
-        toast.success("Təşəkkür edirik! Məlumatlarınız şirkətə müvəffəqiyyətlə göndərildi. Ən qısa zamanda sizinlə əlaqə saxlanılacaq.", {
-          position: "top-center"
-        });
+        toast.success(
+          "Təşəkkür edirik! Məlumatlarınız şirkətə müvəffəqiyyətlə göndərildi. Ən qısa zamanda sizinlə əlaqə saxlanılacaq.",
+          {
+            position: "top-center",
+          }
+        );
       }
     } catch (error) {
       console.error(error);
       toast.error("Bir problem oldu...", {
-        position: "top-center"
+        position: "top-center",
       });
     } finally {
       setLoading(false);
@@ -88,22 +91,22 @@ const ContactForm: React.FC = () => {
   return (
     <section className="contact-section">
       <div className="contact">
-        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_elaqe']} />
+        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_elaqe"]} />
 
         <div className="container-contact">
           <h2>{translations["bizimle_elaqe"]}</h2>
           <div className="container-locations">
-              {hasLocationData &&
-                locationData?.map((item: LocationInterface) => (
-                  <div
-                    key={item._id}
-                    className={`swiper-slide ${selectedActive === item._id ? "actived" : ""}`}
-                    onClick={() => {
-                      handleActiveLocation(item._id);
-                    }}>
-                    {item.title}
-                  </div>
-                ))}
+            {hasLocationData &&
+              locationData?.map((item: LocationInterface) => (
+                <div
+                  key={item._id}
+                  className={`swiper-slide ${selectedActive === item._id ? "actived" : ""}`}
+                  onClick={() => {
+                    handleActiveLocation(item._id);
+                  }}>
+                  {item.title}
+                </div>
+              ))}
           </div>
 
           <section className="contact-us-section">
@@ -117,15 +120,11 @@ const ContactForm: React.FC = () => {
                       locationData.map((item) => {
                         if (selectedActive === item._id) {
                           return (
-                            <div key={item._id} className="map-wrapper">
-                              {iframeLoading && <Loader />}
-                              <iframe
-                                loading="lazy"
-                                src={item.mapUrl}
-                                style={{ border: "0" }}
-                                onLoad={() => setIframeLoading(false)}
-                                referrerPolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
+                            <div
+                              key={item._id}
+                              className="map-wrapper"
+                              dangerouslySetInnerHTML={{ __html: item?.mapUrl ? item.mapUrl : "" }}
+                            />
                           );
                         }
                       })}
@@ -155,19 +154,31 @@ const ContactForm: React.FC = () => {
 
           <section className="form-area">
             <div className="left-texts">
-              <h3>{translations['form_title']}</h3>
-              <p>{translations['form_paragraph']}</p>
+              <h3>{translations["form_title"]}</h3>
+              <p>{translations["form_paragraph"]}</p>
             </div>
 
             <div className="form">
               <form ref={formRef} onSubmit={handleSubmitForm}>
                 <div className="field-input">
                   <img src="/pers.png" alt="pers" />
-                  <input className="name_surname" name="name_surname" placeholder={translations['form_namesurname']} type="text" required />
+                  <input
+                    className="name_surname"
+                    name="name_surname"
+                    placeholder={translations["form_namesurname"]}
+                    type="text"
+                    required
+                  />
                 </div>
                 <div className="field-input">
                   <img src="/email.png" alt="email" />
-                  <input className="email" name="email" placeholder={translations['form_email']} type="email" required />
+                  <input
+                    className="email"
+                    name="email"
+                    placeholder={translations["form_email"]}
+                    type="email"
+                    required
+                  />
                 </div>
                 <div className="field-input">
                   <select name="prefix" required>
@@ -188,14 +199,14 @@ const ContactForm: React.FC = () => {
                   />
                 </div>
                 <div className="field-input">
-                  <textarea className="record" name="record" placeholder={translations['form_record']} required />
+                  <textarea className="record" name="record" placeholder={translations["form_record"]} required />
                 </div>
                 <button
                   style={{ cursor: loading ? "auto" : "pointer", background: loading ? "transparent" : "" }}
                   disabled={loading}
                   type="submit"
                   className="send">
-                  {loading ? <Loader /> : translations['send_button']}
+                  {loading ? <Loader /> : translations["send_button"]}
                 </button>
               </form>
             </div>

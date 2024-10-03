@@ -1233,6 +1233,16 @@
               transform: scale(1.05);
               cursor: pointer;
             }
+            &.noimgblog {
+              padding: 24px 0px 24px 0px;
+              height: 100%;
+              justify-content: center;
+              gap: 36px;
+              .descriptions-newblogpage {
+                height: 100%;
+                justify-content: space-between;
+              }
+            }
           }
         }
 
@@ -2009,6 +2019,16 @@
             &:hover {
               transform: scale(1.1);
               cursor: pointer;
+            }
+            &.noimg {
+              padding: 24px 0px 24px 0px;
+              height: 100%;
+              justify-content: center;
+              gap: 36px;
+              .descriptions-newblogpage {
+                height: 100%;
+                justify-content: space-between;
+              }
             }
           }
         }

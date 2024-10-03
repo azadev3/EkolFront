@@ -59,7 +59,7 @@ const Blogs: React.FC = () => {
   }
 
   if (error) {
-    return "Bir hata oluştu.";
+    return "Bir xeta oldu.";
   }
 
   return (
@@ -77,18 +77,18 @@ const Blogs: React.FC = () => {
                     onClick={() => {
                       navigate(`/xeberler/${index?.toString()}`);
                     }}
-                    className="blog-item-blogpage"
+                    className={`blog-item-blogpage ${item?.image === "" ? "noimgblog" : ""}`}
                     key={index}>
-                    <div className="image-blog">
-                      <img
-                        src={`https://ekol-server-1.onrender.com${item?.image}`}
-                        alt={`${index}-blogimg`}
-                        title={item?.title}
-                      />
-                    </div>
+                    {item?.image === "" ? (
+                      ""
+                    ) : (
+                      <div className="image-blog">
+                        <img src={`https://kaiyi-21d4.onrender.com${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
+                      </div>
+                    )}
 
                     <div className="descriptions-blog">
-                      <span>{DateDisplay(item?.createdAt)}</span>
+                      <span>{DateDisplay(item?.created_at)}</span>
                       <h4>{item?.title}</h4>
                       <div className="description">
                         <div dangerouslySetInnerHTML={{ __html: item?.description }} />

@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useEffect } from "react";
 import Breadcrumb from "../../Breadcrumb";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -12,14 +12,17 @@ import { Baseurl } from "../../Baseurl";
 import DOMPurify from "dompurify";
 import Loader from "../../Loader";
 import { useTranslate } from "../../context/TranslateContext";
+import { useParams } from "react-router-dom";
 
 export type ServicesContentType = {
+  id: string; 
   title: string;
   description: string;
   image: string;
 };
 
 const ServicesActivity: React.FC = () => {
+  const { innerserviceid } = useParams<{ innerserviceid: string }>(); 
   const selectedLang = useRecoilValue(SelectedLanguageState);
 
   // Fetch services page data
@@ -43,13 +46,22 @@ const ServicesActivity: React.FC = () => {
     setSelectedService(i);
   }, []);
 
+  useEffect(() => {
+    if (servicesPageData && innerserviceid) {
+      const serviceIndex = servicesPageData.findIndex(service => service.id === innerserviceid);
+      if (serviceIndex !== -1) {
+        setSelectedService(serviceIndex); 
+      }
+    }
+  }, [servicesPageData, innerserviceid]);
+
   // Determine if there is service data available
   const hasServicesData = useMemo(() => servicesPageData && servicesPageData.length > 0, [servicesPageData]);
 
   // Get service image for the selected service
   const serviceImage = useMemo(() => {
     if (hasServicesData && servicesPageData && servicesPageData.length > selectedService) {
-      return servicesPageData && servicesPageData[selectedService]?.image;
+      return servicesPageData[selectedService]?.image;
     }
     return "";
   }, [selectedService, hasServicesData, servicesPageData]);
@@ -85,7 +97,7 @@ const ServicesActivity: React.FC = () => {
                       <Loader />
                     ) : (
                       <img
-                        src={`https://ekol-server-1.onrender.com${serviceImage}`}
+                        src={`https://kaiyi-21d4.onrender.com${serviceImage}`}
                         alt={`service-${selectedService}-image`}
                         loading="lazy"
                       />
@@ -112,16 +124,18 @@ const ServicesActivity: React.FC = () => {
                       968: {
                         slidesPerView: 4.5,
                       },
-                    }}>
+                    }}
+                  >
                     {hasServicesData &&
                       servicesPageData?.map((item, i) => (
                         <SwiperSlide
                           className={selectedService === i ? "actived" : ""}
-                          key={item.title}
+                          key={item.id}
                           onClick={() => {
                             handleSelectService(i);
                             my_swiper?.slideNext();
-                          }}>
+                          }}
+                        >
                           <span>{item.title}</span>
                         </SwiperSlide>
                       ))}

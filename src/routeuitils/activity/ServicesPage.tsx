@@ -48,7 +48,7 @@ const ServicesPage: React.FC = () => {
                 servicesPageData?.map((item: ServicesContentType, i: number) => (
                   <div
                     onClick={() => {
-                      navigate(`/fealiyyet/xidmetler/${item?.title}`);
+                      navigate(`/fealiyyet/xidmetler/${i+1}`);
                     }}
                     className="item-service"
                     key={i}>
@@ -57,14 +57,14 @@ const ServicesPage: React.FC = () => {
                         <h2>{item.title}</h2>
                         <p dangerouslySetInnerHTML={{ __html: item.description.slice(0, 200) }} />
                       </article>
-                      <Link to={`/fealiyyet/xidmetler/${item?.title}`} className="btn-more">
+                      <Link to={`/fealiyyet/xidmetler/${i+1}`} className="btn-more">
                         <span>{translations["etrafli_bax_button"]}</span>
                         <img src="/righte.svg" alt="right" />
                       </Link>
                     </div>
 
                     <div className="image">
-                      <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${i}_image`} loading="lazy" />
+                      <img src={`https://kaiyi-21d4.onrender.com${item?.image}`} alt={`${i}_image`} loading="lazy" />
                     </div>
                   </div>
                 ))}

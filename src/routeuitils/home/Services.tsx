@@ -51,7 +51,7 @@ const Services: React.FC = () => {
   };
 
   const { translations } = useTranslate();
-  
+
   return (
     <section className="services-section">
       <div className="services">
@@ -71,14 +71,17 @@ const Services: React.FC = () => {
                 <SwiperSlide key={index}>
                   <div className="left">
                     <h3>{item?.title}</h3>
-                    <div className="elements" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}/>
-                    <Link to={`/fealiyyet/xidmetler/${item?.title}`} className="show-more">
-                    {translations['etrafli_bax_button']}
+                    <div
+                      className="elements"
+                      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
+                    />
+                    <Link to={`/fealiyyet/xidmetler/${index+1}`} className="show-more">
+                      {translations["etrafli_bax_button"]}
                     </Link>
                   </div>
                   {item?.image && (
                     <div className="right">
-                      <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${item?.id}-image`} title={item?.title} />
+                      <img src={`https://kaiyi-21d4.onrender.com${item?.image}`} alt={`${item?.id}-image`} title={item?.title} />
                     </div>
                   )}
                 </SwiperSlide>
@@ -86,13 +89,13 @@ const Services: React.FC = () => {
             : ""}
         </Swiper>
         <div className="button-swiper">
-                    <button className="prev" onClick={handlePrev}>
-                      <img src="/lefet.svg" alt="prev-slide-button" title="Əvvəlki" />
-                    </button>
-                    <button className="next" onClick={handleNext}>
-                      <img src="/righet.svg" alt="next-slide-button" title="Sonrakı" />
-                    </button>
-                  </div>
+          <button className="prev" onClick={handlePrev}>
+            <img src="/lefet.svg" alt="prev-slide-button" title="Əvvəlki" />
+          </button>
+          <button className="next" onClick={handleNext}>
+            <img src="/righet.svg" alt="next-slide-button" title="Sonrakı" />
+          </button>
+        </div>
       </div>
     </section>
   );

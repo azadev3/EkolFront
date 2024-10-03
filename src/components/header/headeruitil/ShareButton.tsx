@@ -40,7 +40,7 @@ const ShareButton: React.FC = () => {
             ? SocialsData.map((item: SocialsType) => (
                 <Link target="_blank" key={item?._id} to={item?.link} className="icon">
                   <img
-                    src={`https://ekol-server-1.onrender.com${item?.icon}`}
+                    src={`https://kaiyi-21d4.onrender.com${item?.icon}`}
                     alt={`${item?._id}-icon`}
                     title={item?.link}
                   />

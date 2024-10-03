@@ -81,7 +81,7 @@ const SocialLife: React.FC = () => {
                         <Loader />
                       ) : (
                         <SwiperSlide key={item._id}>
-                          <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${i}-image`} title={item?.title} />
+                          <img src={`https://kaiyi-21d4.onrender.com${item?.image}`} alt={`${i}-image`} title={item?.title} />
                           <h5>{item?.title}</h5>
                         </SwiperSlide>
                       )

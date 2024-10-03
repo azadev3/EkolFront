@@ -4,7 +4,6 @@ import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useRecoilValue } from "recoil";
 import { Baseurl } from "../../Baseurl";
 import axios from "axios";
-import moment from "moment";
 import "moment/locale/tr";
 import { useTranslate } from "../../context/TranslateContext";
 import { useQuery } from "@tanstack/react-query";
@@ -21,8 +20,8 @@ export type BlogDataType = {
 export type BlogType = {
   title: string;
   description: string;
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated: string;
   image: string;
 };
 
@@ -43,11 +42,11 @@ const BlogSection: React.FC = () => {
     staleTime: 9000000,
   });
 
-  //formatted created at
-  const DateDisplay = ({ createdAt }: any) => {
-    const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
-    return formattedDate;
-  };
+  // //formatted created at
+  // const DateDisplay = ({ created_at }: any) => {
+  //   const formattedDate = moment(created_at).locale("tr").format("DD MMM YYYY");
+  //   return formattedDate;
+  // };
 
   const navigate = useNavigate();
 
@@ -68,16 +67,20 @@ const BlogSection: React.FC = () => {
           {blogData && blogData.length > 0
             ? blogData.slice(0, 3).map((item: BlogType, index: number) => (
                 <article
-                onClick={() => {
-                  navigate(`/xeberler/${index?.toString()}`);
-                }}
-                className="blog-item" key={index}>
-                  <div className="image-blog">
-                    <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
-                  </div>
-
+                  onClick={() => {
+                    navigate(`/xeberler/${index?.toString()}`);
+                  }}
+                  className="blog-item"
+                  key={index}>
+                  {item?.image === "" ? (
+                    ""
+                  ) : (
+                    <div className="image-blog">
+                      <img src={`https://kaiyi-21d4.onrender.com${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
+                    </div>
+                  )}
                   <div className="descriptions-blog">
-                    <span>{DateDisplay(item?.createdAt)}</span>
+                    <span>{item?.created_at ? item?.created_at : ""}</span>
                     <h4>{item?.title}</h4>
                     <div className="description">
                       <div dangerouslySetInnerHTML={{ __html: item?.description }} />

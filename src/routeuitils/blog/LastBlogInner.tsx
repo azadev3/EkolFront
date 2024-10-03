@@ -15,7 +15,7 @@ type LastBlogType = {
   title: string;
   description: string;
   image: string;
-  createdAt: string;
+  created_at: string;
 };
 
 const LastBlogInner: React.FC = () => {
@@ -24,8 +24,8 @@ const LastBlogInner: React.FC = () => {
   const selectedlang = useRecoilValue(SelectedLanguageState);
 
   //formatted created at
-  const DateDisplay = ({ createdAt }: any) => {
-    const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
+  const DateDisplay = ({ created_at }: any) => {
+    const formattedDate = moment(created_at).locale("tr").format("DD MMM YYYY");
     return formattedDate;
   };
 
@@ -84,16 +84,16 @@ const LastBlogInner: React.FC = () => {
 
             <div className="contents">
               <div className="left">
-                <div className="content-inner-blog-image-wrapper">
+                <div className="content-inner-blog-image-wrapper" style={{ display: lastBlogItem?.image === "" ? "none" : "flex" }}>
                   <img
-                    src={`https://ekol-server-1.onrender.com${lastBlogItem?.image}`}
+                    src={`https://kaiyi-21d4.onrender.com${lastBlogItem?.image}`}
                     title={lastBlogItem?.title}
                   />
                 </div>
 
                 <div className="description-content">
                   <span className="time-span">
-                    {lastBlogItem && lastBlogItem.createdAt ? DateDisplay(lastBlogItem?.createdAt) : ""}
+                    {lastBlogItem && lastBlogItem.created_at ? DateDisplay(lastBlogItem?.created_at) : ""}
                   </span>
                   {lastBlogItem && lastBlogItem.description && (
                     <div className="description-area" dangerouslySetInnerHTML={{ __html: lastBlogItem?.description }} />
@@ -113,7 +113,7 @@ const LastBlogInner: React.FC = () => {
                           <div className="title">{item?.title}</div>
 
                           <div className="time-and-icon">
-                            <span className="time">{item.createdAt ? DateDisplay(item?.createdAt) : ""}</span>
+                            <span className="time">{item.created_at ? DateDisplay(item?.created_at) : ""}</span>
                             <img src="/arrow.svg" alt="arrow-icon" />
                           </div>
                         </Link>
@@ -148,7 +148,7 @@ const LastBlogInner: React.FC = () => {
                               to={item?.link}
                               className="icon">
                               <img
-                                src={`https://ekol-server-1.onrender.com${item?.icon}`}
+                                src={`https://kaiyi-21d4.onrender.com${item?.icon}`}
                                 alt={`${item?._id}-icon`}
                                 title={item?.link}
                               />

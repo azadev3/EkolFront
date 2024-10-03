@@ -6,7 +6,6 @@ import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useRecoilValue } from "recoil";
-import moment from "moment";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Loader";
 import { v4 as uuidv4 } from "uuid";
@@ -85,10 +84,10 @@ const BlogInnerContent: React.FC = () => {
   });
 
   // Formatted createdAt date
-  const DateDisplay = ({ createdAt }: { createdAt: string }) => {
-    const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
-    return <span>{formattedDate}</span>;
-  };
+  // const DateDisplay = ({ createdAt }: { createdAt: string }) => {
+  //   const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
+  //   return <span>{formattedDate}</span>;
+  // };
 
   const innerBlogItem: BlogType =
     blogDatas && blogDatas?.find((_: BlogType, index: number) => index.toString() === blogtitle);
@@ -115,18 +114,18 @@ const BlogInnerContent: React.FC = () => {
 
             <div className="contents">
               <div className="left">
-                <div className="content-inner-blog-image-wrapper">
+                <div className="content-inner-blog-image-wrapper" style={{ display: innerBlogItem?.image === "" ? "none" : "flex" }}>
                   <img
                     loading="lazy"
-                    src={`https://ekol-server-1.onrender.com${innerBlogItem?.image}`}
+                    src={`https://kaiyi-21d4.onrender.com${innerBlogItem?.image}`}
                     title={innerBlogItem?.title}
                   />
                 </div>
 
                 <div className="description-content">
                   <span className="time-span">
-                    {innerBlogItem && innerBlogItem.createdAt ? (
-                      <DateDisplay createdAt={innerBlogItem.createdAt} />
+                    {innerBlogItem && innerBlogItem.created_at ? (
+                      innerBlogItem?.created_at 
                     ) : (
                       ""
                     )}
@@ -153,7 +152,7 @@ const BlogInnerContent: React.FC = () => {
 
                           <div className="time-and-icon">
                             <span className="time">
-                              {item.createdAt ? <DateDisplay createdAt={item.createdAt} /> : ""}
+                              {item.createdAt ? item?.createdAt : ""}
                             </span>
                             <img src="/arrow.svg" alt="arrow-icon" />
                           </div>
@@ -189,7 +188,7 @@ const BlogInnerContent: React.FC = () => {
                               to={item?.link}
                               className="icon">
                               <img
-                                src={`https://ekol-server-1.onrender.com${item?.icon}`}
+                                src={`https://kaiyi-21d4.onrender.com${item?.icon}`}
                                 alt={`${item?._id}-icon`}
                                 title={item?.link}
                               />
