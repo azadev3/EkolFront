@@ -785,6 +785,21 @@ $whitedarktwo: #8b9f9c;
 
   &.dark {
     background-color: $maindarkcolor;
+    .calculations-page .calculation-section .calculation .container-calculation .yearly-calculations .yearly-data-item {
+      background-color: #404040;
+    }
+    .calculations-page .calculation-section .calculation .container-calculation h2 {
+      color: white;
+    }
+    .calculations-page .calculation-section .calculation .container-calculation .quarterly-calculations .quarterly-data-item {
+      background-color: #404040;
+    }
+    .calculations-page .calculation-section .calculation .container-calculation .quarterly-calculations .quarterly-data-item .titledata {
+      color: white;
+    }
+    .calculations-page .calculation-section .calculation .container-calculation .yearly-calculations .yearly-data-item .titledata {
+      color: white;
+    }
     .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact h2 {
       color: $whitedark;
     }
@@ -2240,7 +2255,6 @@ $whitedarktwo: #8b9f9c;
   opacity: 0;
   pointer-events: none;
   user-select: none;
-  transform: translateX(500rem);
   ::-webkit-scrollbar {
     width: 3px;
     background: #000;
@@ -2384,7 +2398,6 @@ $whitedarktwo: #8b9f9c;
     }
   }
   &.active {
-    transform: translateX(0);
     opacity: 1;
     pointer-events: all;
     user-select: auto;
@@ -3407,4 +3420,96 @@ $whitedarktwo: #8b9f9c;
   .item-service:hover {
   transform: scale(1.05);
   cursor: pointer;
+}
+
+.about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content .img-grid {
+  grid-template-columns: repeat(2, 1fr) !important;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it’s on top of everything */
+}
+
+.popup-content {
+  position: relative;
+  background: white;
+  padding: 36px;
+  border-radius: 8px;
+}
+
+.popup-image {
+  max-width: 100%;
+  max-height: 80vh; /* Responsive */
+}
+
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 700;
+  color: red;
+}
+
+.popup-inner-images {
+  width: 100%;
+  transition: 100ms ease-in-out;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  justify-content: center;
+  overflow: hidden;
+  background-color: rgba(68, 68, 68, 0.162);
+  .inner-image-modal {
+    width: 60%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 4px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+.activity-page .servicespage-section .servicespage .container-servicespage .container-services-grid .item-service .image img {
+  filter: none !important;
+}
+
+.home-page .card-about-section .card-about .top-card-area .right-descriptions .links .right-nav-link {
+  background-color: rgb(61 61 61 / 82%);
+  &:hover {
+    background-color: #cecece;
+    * {
+    color: black;
+    }
+  }
+}
+
+.app.dark .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left .description-content p img {
+  width: 100%;
+  height: 100%;
+  transition: 100ms ease-in-out;
+  &:hover {
+    transform: scale(1.04);
+  }
 }

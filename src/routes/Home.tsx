@@ -4,7 +4,7 @@ import CardAbout from "../routeuitils/home/CardAbout";
 import '../styles/home.scss';
 import Services from "../routeuitils/home/Services";
 import BlogSection from "../routeuitils/home/BlogSection";
-import CardSubscribe from "../routeuitils/home/CardSubscribe";
+// import CardSubscribe from "../routeuitils/home/CardSubscribe";
 import Contactus from "../routeuitils/home/Contactus";
 
 const Home: React.FC = () => {
@@ -14,7 +14,7 @@ const Home: React.FC = () => {
       <CardAbout />
       <Services />
       <BlogSection />
-      <CardSubscribe />
+      {/* <CardSubscribe /> */}
       <Contactus />
     </main>
   );

@@ -68,13 +68,13 @@ const Footer: React.FC = () => {
       footerNavItems: [
         {
           id: uuidv4(),
-          title: `${translations["nav_haqqimizda_xidmetler"]}`,
-          to: "/fealiyyet/xidmetler",
+          title: `${translations["nav_haqqimizda_avadanliqlar"]}`,
+          to: "/fealiyyet/avadanliqlar",
         },
         {
           id: uuidv4(),
-          title: `${translations["nav_haqqimizda_avadanliqlar"]}`,
-          to: "/fealiyyet/avadanliqlar",
+          title: `${translations["nav_haqqimizda_xidmetler"]}`,
+          to: "/fealiyyet/xidmetler",
         },
       ],
     },
@@ -101,11 +101,11 @@ const Footer: React.FC = () => {
           title: `${translations["nav_haqqimizda_qalereya"]}`,
           to: "/about/gallery",
         },
-        {
-          id: uuidv4(),
-          title: `${translations["nav_haqqimizda_sosialheyat"]}`,
-          to: "/fealiyyet/sosialheyat",
-        },
+        // {
+        //   id: uuidv4(),
+        //   title: `${translations["nav_haqqimizda_sosialheyat"]}`,
+        //   to: "/fealiyyet/sosialheyat",
+        // },
         {
           id: uuidv4(),
           title: `${translations["newblog_title"]}`,
@@ -117,11 +117,11 @@ const Footer: React.FC = () => {
       id: uuidv4(),
       title: `${translations["nav_haqqimizda_elaqe"]}`,
       footerNavItems: [
+        { id: uuidv4(), title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_elaqe"]}`,
         },
-        { id: uuidv4(), title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
       ],
     },
     {

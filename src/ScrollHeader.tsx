@@ -77,11 +77,11 @@ const ScrollHeader: React.FC = () => {
           title: `${translations["nav_haqqimizda_qalereya"]}`,
           to: "/about/gallery",
         },
-        {
-          id: 3,
-          title: `${translations["nav_haqqimizda_sosialheyat"]}`,
-          to: "/fealiyyet/sosialheyat",
-        },
+        // {
+        //   id: 3,
+        //   title: `${translations["nav_haqqimizda_sosialheyat"]}`,
+        //   to: "/fealiyyet/sosialheyat",
+        // },
         {
           id: 4,
           title: `${translations["newblog_title"]}`,

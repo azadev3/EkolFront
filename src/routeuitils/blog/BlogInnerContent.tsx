@@ -84,12 +84,6 @@ const BlogInnerContent: React.FC = () => {
     staleTime: 9000000,
   });
 
-  // Formatted createdAt date
-  // const DateDisplay = ({ createdAt }: { createdAt: string }) => {
-  //   const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
-  //   return <span>{formattedDate}</span>;
-  // };
-
   const innerBlogItem: BlogType =
     blogDatas && blogDatas?.find((_: BlogType, index: number) => index.toString() === blogtitle);
 

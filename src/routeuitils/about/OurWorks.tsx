@@ -15,12 +15,8 @@ interface OurWorksInnerInterface {
 }
 
 const OurWorks: React.FC = () => {
-
   const { translations } = useTranslate();
-
-  // FETCH OUR WORKS DATA
   const selectedlang = useRecoilValue(SelectedLanguageState);
-
   const { data: OurWorksInnerData } = useQuery<OurWorksInnerInterface[]>({
     queryKey: ["ourWorksInnerDataKey", selectedlang],
     queryFn: async () => {
@@ -34,10 +30,10 @@ const OurWorks: React.FC = () => {
     staleTime: 1000000,
   });
 
-  //rendered items according to selecting navigation content
   const [selectItem, setSelectItem] = React.useState<string>("");
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = React.useState<string>("");
 
-  // Set the initial value when OurWorksInnerData changes
   React.useEffect(() => {
     if (OurWorksInnerData && OurWorksInnerData.length > 0) {
       const initialValue = OurWorksInnerData[0]?.title;
@@ -49,10 +45,18 @@ const OurWorks: React.FC = () => {
     setSelectItem(i);
   };
 
+  const openImagePopup = (src: string) => {
+    setSelectedImage(src);
+    setIsOpen(true);
+  };
+
+  const closeImagePopup = () => {
+    setIsOpen(false);
+    setSelectedImage("");
+  };
 
   React.useEffect(() => {
     const contentDivs = document.querySelectorAll(".description-content p");
-
     contentDivs.forEach((pTag) => {
       if (pTag.querySelector("img")) {
         pTag.classList.add("img-grid");
@@ -88,7 +92,15 @@ const OurWorks: React.FC = () => {
                     if (selectItem === item?.title) {
                       return (
                         <div className="description-content" key={uuidv4()}>
-                          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }} />
+                          <div
+                            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
+                            onClick={(e) => {
+                              const img = e.target as HTMLImageElement;
+                              if (img.tagName === 'IMG') {
+                                openImagePopup(img.src); // Pass the image src to the popup
+                              }
+                            }}
+                          />
                         </div>
                       );
                     }
@@ -98,6 +110,16 @@ const OurWorks: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Pop-Up Modal for Image Display */}
+      {isOpen && (
+        <div className="popup-overlay" onClick={closeImagePopup}>
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <img src={selectedImage} alt="Selected" className="popup-image" />
+            <button className="close-popup" onClick={closeImagePopup}>X</button>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
