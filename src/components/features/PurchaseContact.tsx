@@ -39,10 +39,10 @@ const PurchaseContact: React.FC = () => {
     <main className="purch-contact-wrapper">
       <section className="purch-contact-section">
         <div className="purch-contact">
-          <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_satinalma_elaqe"]} />
+          <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_satinalma_elaqeler"]} />
 
           <div className="container-purch-contact">
-            <h2>{translations["nav_haqqimizda_satinalma_elaqe"]}</h2>
+            <h2>{translations["nav_haqqimizda_satinalma_elaqeler"]}</h2>
 
             <div className="form-for-purchase">
               <div className="legal-and-natural-person-checkbox">

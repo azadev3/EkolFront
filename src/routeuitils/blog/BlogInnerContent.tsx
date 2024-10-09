@@ -11,14 +11,14 @@ import Loader from "../../Loader";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslate } from "../../context/TranslateContext";
 import { SocialsType } from "../home/Hero";
-import moment from "moment";
+// import moment from "moment";
 
 type LastBlogType = {
   _id: number;
   title: string;
   description: string;
   image: string;
-  createdAt: string;
+  created_at: string;
 };
 
 const BlogInnerContent: React.FC = () => {
@@ -65,6 +65,7 @@ const BlogInnerContent: React.FC = () => {
             "Accept-Language": selectedlang,
           },
         });
+        console.log(response.data, "last blogs");
         return response.data;
       } catch (error) {
         console.error(error);
@@ -109,7 +110,9 @@ const BlogInnerContent: React.FC = () => {
 
             <div className="contents">
               <div className="left">
-                <div className="content-inner-blog-image-wrapper" style={{ display: innerBlogItem?.image === "" ? "none" : "flex" }}>
+                <div
+                  className="content-inner-blog-image-wrapper"
+                  style={{ display: innerBlogItem?.image === "" ? "none" : "flex" }}>
                   <img
                     loading="lazy"
                     src={`https://ekol-server-1.onrender.com${innerBlogItem?.image}`}
@@ -119,11 +122,7 @@ const BlogInnerContent: React.FC = () => {
 
                 <div className="description-content">
                   <span className="time-span">
-                    {innerBlogItem && innerBlogItem.created_at ? (
-                      innerBlogItem?.created_at 
-                    ) : (
-                      ""
-                    )}
+                    {innerBlogItem && innerBlogItem.created_at ? innerBlogItem?.created_at : ""}
                   </span>
                   {innerBlogItem && innerBlogItem.description && (
                     <div
@@ -144,11 +143,8 @@ const BlogInnerContent: React.FC = () => {
                           key={uuidv4()}
                           className="item-last-blog">
                           <div className="title">{item.title}</div>
-
                           <div className="time-and-icon">
-                            <span className="time">
-                              {item.createdAt ? moment(item?.createdAt).format("DD.MM.YYYY") : ""}
-                            </span>
+                            <span className="time">{item?.created_at}</span>
                             <img src="/arrow.svg" alt="arrow-icon" />
                           </div>
                         </Link>

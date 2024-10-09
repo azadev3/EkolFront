@@ -6,7 +6,7 @@ import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useRecoilValue } from "recoil";
-import moment from "moment";
+// import moment from "moment";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Loader";
 import { v4 as uuidv4 } from "uuid";
@@ -18,7 +18,7 @@ type LastBlogType = {
   title: string;
   description: string;
   image: string;
-  createdAt: string;
+  created_at: string;
 };
 
 const NewBlogInner: React.FC = () => {
@@ -86,10 +86,10 @@ const NewBlogInner: React.FC = () => {
   });
 
   // Formatted createdAt date
-  const DateDisplay = ({ createdAt }: { createdAt: string }) => {
-    const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
-    return <span>{formattedDate}</span>;
-  };
+  // const DateDisplay = ({ createdAt }: { createdAt: string }) => {
+  //   const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
+  //   return <span>{formattedDate}</span>;
+  // };
 
   const innerBlogItem = newBlogDatasInner?.find((_: BlogType, i:string) => i?.toString() === newblogtitle?.toString());
 
@@ -124,11 +124,7 @@ const NewBlogInner: React.FC = () => {
 
                 <div className="description-content">
                   <span className="time-span">
-                    {innerBlogItem && innerBlogItem.createdAt ? (
-                      <DateDisplay createdAt={innerBlogItem.createdAt} />
-                    ) : (
-                      ""
-                    )}
+                   {innerBlogItem && innerBlogItem?.created_at}
                   </span>
                   {innerBlogItem && innerBlogItem.description && (
                     <div
@@ -152,7 +148,7 @@ const NewBlogInner: React.FC = () => {
 
                           <div className="time-and-icon">
                             <span className="time">
-                              {item.createdAt ? <DateDisplay createdAt={item.createdAt} /> : ""}
+                              {item?.created_at}
                             </span>
                             <img src="/arrow.svg" alt="arrow-icon" />
                           </div>

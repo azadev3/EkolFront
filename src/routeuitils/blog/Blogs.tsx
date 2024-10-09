@@ -7,7 +7,7 @@ import { Baseurl } from "../../Baseurl";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useRecoilValue } from "recoil";
 import axios from "axios";
-import moment from "moment";
+// import moment from "moment";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Loader";
 import { useTranslate } from "../../context/TranslateContext";
@@ -45,10 +45,10 @@ const Blogs: React.FC = () => {
   });
 
   //formatted created at
-  const DateDisplay = ({ createdAt }: any) => {
-    const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
-    return formattedDate;
-  };
+  // const DateDisplay = ({ createdAt }: any) => {
+  //   const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
+  //   return formattedDate;
+  // };
 
   const { translations } = useTranslate();
 
@@ -83,12 +83,16 @@ const Blogs: React.FC = () => {
                       ""
                     ) : (
                       <div className="image-blog">
-                        <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
+                        <img
+                          src={`https://ekol-server-1.onrender.com${item?.image}`}
+                          alt={`${index}-blogimg`}
+                          title={item?.title}
+                        />
                       </div>
                     )}
 
                     <div className="descriptions-blog">
-                      <span>{DateDisplay(item?.created_at)}</span>
+                      <span>{item?.created_at || ""}</span>
                       <h4>{item?.title}</h4>
                       <div className="description">
                         <div dangerouslySetInnerHTML={{ __html: item?.description }} />

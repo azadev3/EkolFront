@@ -5,7 +5,7 @@ import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useRecoilValue } from "recoil";
-import moment from "moment";
+// import moment from "moment";
 import { useTranslate } from "../../context/TranslateContext";
 import { useQuery } from "@tanstack/react-query";
 import { SocialsType } from "../home/Hero";
@@ -24,10 +24,10 @@ const LastBlogInner: React.FC = () => {
   const selectedlang = useRecoilValue(SelectedLanguageState);
 
   //formatted created at
-  const DateDisplay = ({ created_at }: any) => {
-    const formattedDate = moment(created_at).locale("tr").format("DD MMM YYYY");
-    return formattedDate;
-  };
+  // const DateDisplay = ({ created_at }: any) => {
+  //   const formattedDate = moment(created_at).locale("tr").format("DD MMM YYYY");
+  //   return formattedDate;
+  // };
 
   //socials
   const { data: SocialsData } = useQuery<SocialsType[]>({
@@ -93,7 +93,7 @@ const LastBlogInner: React.FC = () => {
 
                 <div className="description-content">
                   <span className="time-span">
-                    {lastBlogItem && lastBlogItem.created_at ? DateDisplay(lastBlogItem?.created_at) : ""}
+                    {lastBlogItem ? lastBlogItem.created_at : ""}
                   </span>
                   {lastBlogItem && lastBlogItem.description && (
                     <div className="description-area" dangerouslySetInnerHTML={{ __html: lastBlogItem?.description }} />
@@ -113,7 +113,7 @@ const LastBlogInner: React.FC = () => {
                           <div className="title">{item?.title}</div>
 
                           <div className="time-and-icon">
-                            <span className="time">{item.created_at ? DateDisplay(item?.created_at) : ""}</span>
+                            <span className="time">{item?.created_at ? item?.created_at : ""}</span>
                             <img src="/arrow.svg" alt="arrow-icon" />
                           </div>
                         </Link>

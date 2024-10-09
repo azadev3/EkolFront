@@ -37,6 +37,7 @@ const BlogSection: React.FC = () => {
           "Accept-Language": selectedlang,
         },
       });
+      console.log(response.data, 'salam xeberler')
       return response.data;
     },
     staleTime: 9000000,
@@ -80,7 +81,7 @@ const BlogSection: React.FC = () => {
                     </div>
                   )}
                   <div className="descriptions-blog">
-                    <span>{item?.created_at ? item?.created_at : ""}</span>
+                    <span>{item?.created_at ? item?.created_at : "zzz"}</span>
                     <h4>{item?.title}</h4>
                     <div className="description">
                       <div dangerouslySetInnerHTML={{ __html: item?.description }} />

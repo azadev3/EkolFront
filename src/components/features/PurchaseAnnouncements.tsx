@@ -139,6 +139,12 @@ const PurchaseAnnouncements: React.FC = () => {
   const openPurchModal = (id: string) => {
     setPurchModal(id);
   };
+  const orderByItems =
+    hasPurchData && currentItems
+      ? currentItems?.sort((a: PurchAnnInterface, b: PurchAnnInterface) => {
+          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        })
+      : [];
 
   return (
     <main className="purch-announcement-wrapper">
@@ -158,11 +164,11 @@ const PurchaseAnnouncements: React.FC = () => {
                   <CiSearch className="search-icon" />
                   <input
                     type="text"
-                    placeholder={translations['search_placeholder_title']}
+                    placeholder={translations["search_placeholder_title"]}
                     onChange={handleSearchVacations}
                     value={inputValue}
                   />
-                  <button onClick={handleButtonClick}>{translations['search_button_title']}</button>
+                  <button onClick={handleButtonClick}>{translations["search_button_title"]}</button>
                 </div>
 
                 <div className="right-filter">
@@ -182,15 +188,15 @@ const PurchaseAnnouncements: React.FC = () => {
                   <thead>
                     <tr>
                       <th className="order"></th>
-                      <th>{translations['satinalan_teskilatin_adi']}</th>
-                      <th>{translations['satinalma_predmeti']}</th>
-                      <th>{translations['derc_edilme_tarixi']}</th>
-                      <th>{translations['bitme_tarixi']}</th>
+                      <th>{translations["satinalan_teskilatin_adi"]}</th>
+                      <th>{translations["satinalma_predmeti"]}</th>
+                      <th>{translations["derc_edilme_tarixi"]}</th>
+                      <th>{translations["bitme_tarixi"]}</th>
                     </tr>
                   </thead>
                   <tbody>
                     {hasPurchData && currentItems ? (
-                      currentItems?.map((item: PurchAnnInterface, index: number) => (
+                      orderByItems?.map((item: PurchAnnInterface, index: number) => (
                         <tr key={item?._id} onClick={() => openPurchModal(item?._id)}>
                           <td>{indexOfFirstItem + index + 1}</td>
                           <td>{item?.title}</td>

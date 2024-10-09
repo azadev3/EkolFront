@@ -3513,3 +3513,30 @@ $whitedarktwo: #8b9f9c;
     transform: scale(1.04);
   }
 }
+
+.blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left .description-content .description-area {
+  width: 100%;
+  max-width: unset;
+  p {
+    text-align: justify !important;
+  }
+}
+.blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left .description-content .description-area {
+  width: 100%;
+  p {
+    line-height: 28px;
+    text-align: justify !important;
+  }
+}
+.blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left .description-content .description-area p {
+  width: 100% !important;
+  a {
+    width: 100% !important;
+    strong {
+      width: 100% !important;
+      img {
+        width: 100% !important;
+      }
+    }
+  }
+}

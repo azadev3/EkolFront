@@ -5,7 +5,7 @@ import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useRecoilValue } from "recoil";
-import moment from "moment";
+// import moment from "moment";
 import { useTranslate } from "../../context/TranslateContext";
 import { useQuery } from "@tanstack/react-query";
 import { SocialsType } from "../home/Hero";
@@ -24,10 +24,10 @@ const LastNewBlogInner: React.FC = () => {
   const selectedlang = useRecoilValue(SelectedLanguageState);
 
   //formatted created at
-  const DateDisplay = ({ created_at }: any) => {
-    const formattedDate = moment(created_at).locale("tr").format("DD MMM YYYY");
-    return formattedDate;
-  };
+  // const DateDisplay = ({ created_at }: any) => {
+  //   const formattedDate = moment(created_at).locale("tr").format("DD MMM YYYY");
+  //   return formattedDate;
+  // };
 
   //socials
   const { data: SocialsData } = useQuery<SocialsType[]>({
@@ -59,9 +59,7 @@ const LastNewBlogInner: React.FC = () => {
     }
   };
 
-  const lastBlogItem = lastBlogs?.find(
-    (_: LastBlogType, i) => i.toString() === lastnewblogtitle?.toString()
-  );
+  const lastBlogItem = lastBlogs?.find((_: LastBlogType, i) => i.toString() === lastnewblogtitle?.toString());
 
   React.useEffect(() => {
     fetchLastBlogs();
@@ -83,7 +81,9 @@ const LastNewBlogInner: React.FC = () => {
 
             <div className="contents">
               <div className="left">
-                <div className="content-inner-blog-image-wrapper" style={{ display: lastBlogItem?.image === "" ? "none" : "flex" }}>
+                <div
+                  className="content-inner-blog-image-wrapper"
+                  style={{ display: lastBlogItem?.image === "" ? "none" : "flex" }}>
                   <img
                     loading="lazy"
                     src={`https://ekol-server-1.onrender.com${lastBlogItem?.image}`}
@@ -92,9 +92,7 @@ const LastNewBlogInner: React.FC = () => {
                 </div>
 
                 <div className="description-content">
-                  <span className="time-span">
-                    {lastBlogItem && lastBlogItem.created_at ? DateDisplay(lastBlogItem?.created_at) : ""}
-                  </span>
+                  <span className="time-span">{lastBlogItem?.created_at ? lastBlogItem?.created_at : ""}</span>
                   {lastBlogItem && lastBlogItem.description && (
                     <div className="description-area" dangerouslySetInnerHTML={{ __html: lastBlogItem?.description }} />
                   )}
@@ -106,21 +104,17 @@ const LastNewBlogInner: React.FC = () => {
                 <div className="grid-last-blog">
                   {lastBlogs && lastBlogs.length > 0
                     ? lastBlogs?.map((item: LastBlogType, i) => (
-                        <Link
-                          to={`/xeberler/en-son-bloglar/${i?.toString()}`}
-                          key={item?._id}
-                          className="item-last-blog">
+                        <Link to={`/bloq/en-son/${i?.toString()}`} key={item?._id} className="item-last-blog">
                           <div className="title">{item?.title}</div>
 
                           <div className="time-and-icon">
-                            <span className="time">{item.created_at ? DateDisplay(item?.created_at) : ""}</span>
-                            <img src="/arrow.svg" alt="arrow-icon" />
+                            <span className="time">{item?.created_at}</span> <img src="/arrow.svg" alt="arrow-icon" />
                           </div>
                         </Link>
                       ))
                     : ""}
                   <div className="button-content">
-                    <button className="all-blogs" onClick={() => navigate("/xeberler")}>
+                    <button className="all-blogs" onClick={() => navigate("/bloq")}>
                       Bütün bloqlar
                     </button>
                   </div>
