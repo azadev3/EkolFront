@@ -2,7 +2,7 @@ import React from "react";
 import Breadcrumb from "../../Breadcrumb";
 import { Link, useNavigate } from "react-router-dom";
 import { SelectedLanguageState } from "../../recoil/Atoms";
-import { useRecoilValue } from "recoil";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
 import { useQuery } from "@tanstack/react-query";
 import { ServicesContentType } from "./ServicesActivity";
 import { Baseurl } from "../../Baseurl";
@@ -10,8 +10,15 @@ import axios from "axios";
 import Loader from "../../Loader";
 import { useTranslate } from "../../context/TranslateContext";
 
+export const IsClickedServiceState = atom<any>({
+  key: "isClickedServiceStateKey",
+  default: null,
+});
+
 const ServicesPage: React.FC = () => {
   const { translations } = useTranslate();
+
+  const [_, setSelectedServiceID] = useRecoilState(IsClickedServiceState);
 
   //Fetch services
   const selectedLang = useRecoilValue(SelectedLanguageState);
@@ -48,7 +55,8 @@ const ServicesPage: React.FC = () => {
                 servicesPageData?.map((item: ServicesContentType, i: number) => (
                   <div
                     onClick={() => {
-                      navigate(`/fealiyyet/xidmetler/${i+1}`);
+                      navigate(`/fealiyyet/xidmetler/${i + 1}`);
+                      setSelectedServiceID(i + 1);
                     }}
                     className="item-service"
                     key={i}>
@@ -57,7 +65,7 @@ const ServicesPage: React.FC = () => {
                         <h2>{item.title}</h2>
                         <p dangerouslySetInnerHTML={{ __html: item.description.slice(0, 200) }} />
                       </article>
-                      <Link to={`/fealiyyet/xidmetler/${i+1}`} className="btn-more">
+                      <Link to={`/fealiyyet/xidmetler/${i + 1}`} className="btn-more">
                         <span>{translations["etrafli_bax_button"]}</span>
                         <img src="/righte.svg" alt="right" />
                       </Link>

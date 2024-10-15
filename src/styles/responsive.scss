@@ -805,6 +805,9 @@
 }
 
 @media only screen and (max-width: 568px) {
+  .home-page .hero-wrapper .hero {
+    height: 350px !important;
+  }
   .about-page .certificates-section .certificates .container-certificates .description-certificates p {
     grid-template-columns: repeat(2, 1fr) !important; 
   }

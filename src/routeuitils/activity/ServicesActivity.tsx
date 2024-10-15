@@ -13,17 +13,20 @@ import DOMPurify from "dompurify";
 import Loader from "../../Loader";
 import { useTranslate } from "../../context/TranslateContext";
 import { useParams } from "react-router-dom";
+import { IsClickedServiceState } from "./ServicesPage";
 
 export type ServicesContentType = {
-  id: string; 
+  id: string;
   title: string;
   description: string;
   image: string;
 };
 
 const ServicesActivity: React.FC = () => {
-  const { innerserviceid } = useParams<{ innerserviceid: string }>(); 
+  const { innerserviceid } = useParams<{ innerserviceid: string }>();
   const selectedLang = useRecoilValue(SelectedLanguageState);
+
+  const selectedServiceID = useRecoilValue(IsClickedServiceState);
 
   // Fetch services page data
   const { data: servicesPageData, isLoading } = useQuery<ServicesContentType[]>({
@@ -47,13 +50,20 @@ const ServicesActivity: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (servicesPageData && innerserviceid) {
-      const serviceIndex = servicesPageData.findIndex(service => service.id === innerserviceid);
-      if (serviceIndex !== -1) {
-        setSelectedService(serviceIndex); 
+    if (servicesPageData) {
+      if (innerserviceid) {
+        const serviceIndex = servicesPageData.findIndex((service) => service.id === innerserviceid);
+        if (serviceIndex !== -1) {
+          setSelectedService(serviceIndex);
+        }
+      } else if (selectedServiceID) {
+        const serviceIndex = servicesPageData.findIndex((service) => service.id === selectedServiceID);
+        if (serviceIndex !== -1) {
+          setSelectedService(serviceIndex);
+        }
       }
     }
-  }, [servicesPageData, innerserviceid]);
+  }, [servicesPageData, innerserviceid, selectedServiceID]);
 
   // Determine if there is service data available
   const hasServicesData = useMemo(() => servicesPageData && servicesPageData.length > 0, [servicesPageData]);
@@ -124,18 +134,16 @@ const ServicesActivity: React.FC = () => {
                       968: {
                         slidesPerView: 4.5,
                       },
-                    }}
-                  >
+                    }}>
                     {hasServicesData &&
                       servicesPageData?.map((item, i) => (
                         <SwiperSlide
-                          className={selectedService === i ? "actived" : ""}
+                          className={selectedService === i || selectedServiceID === i ? "actived" : ""}
                           key={item.id}
                           onClick={() => {
                             handleSelectService(i);
                             my_swiper?.slideNext();
-                          }}
-                        >
+                          }}>
                           <span>{item.title}</span>
                         </SwiperSlide>
                       ))}
