@@ -11,7 +11,21 @@ import Loader from "../../Loader";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslate } from "../../context/TranslateContext";
 import { SocialsType } from "../home/Hero";
+import { Swiper, SwiperSlide } from "swiper/react";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+
 // import moment from "moment";
+
+type SwiperDataForImages = {
+  _id: string;
+  selected_blog: string;
+  images: [string];
+};
 
 type LastBlogType = {
   _id: number;
@@ -88,7 +102,28 @@ const BlogInnerContent: React.FC = () => {
   const innerBlogItem: BlogType =
     blogDatas && blogDatas?.find((_: BlogType, index: number) => index.toString() === blogtitle);
 
-  console.log(innerBlogItem);
+  //open fancybox images
+  const [open, setOpen] = React.useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = React.useState<number | null>(null);
+  const handleImageClick = (index: number) => {
+    setCurrentImageIndex(index);
+    setOpen(true); // Lightbox opened
+  };
+
+  const { data } = useQuery<SwiperDataForImages[]>({
+    queryKey: ["blogInnerImgKey", selectedlang],
+    queryFn: async () => {
+      const response = await axios.get(`${Baseurl}/blogimagefront`);
+      return response.data;
+    },
+  });
+
+  const findedImage =
+    data &&
+    data?.find((item: SwiperDataForImages) => {
+      return item?.selected_blog === innerBlogItem?._id;
+    });
+
   if (blogLoading || lastBlogsLoading) {
     return <Loader />;
   }
@@ -128,6 +163,46 @@ const BlogInnerContent: React.FC = () => {
                     <div
                       className="description-area"
                       dangerouslySetInnerHTML={{ __html: innerBlogItem?.description }}
+                    />
+                  )}
+                </div>
+                <div className="description-content-images" style={{ display: findedImage ? "flex" : "none" }}>
+                  <Swiper
+                    spaceBetween={30}
+                    breakpoints={{
+                      268: { slidesPerView: 1 },
+                      568: { slidesPerView: 1.5 },
+                      768: { slidesPerView: 2.5 },
+                      968: { slidesPerView: 3 },
+                    }}
+                    pagination={{ dynamicBullets: true }}
+                    modules={[Pagination]}
+                    className="mySwiper">
+                    {findedImage && findedImage?.images
+                      ? findedImage?.images?.map((imgs, i: number) => (
+                          <SwiperSlide key={i + 2}>
+                            <img
+                              src={`https://ekol-server-1.onrender.com${imgs}`}
+                              alt={`image-${i + 3}`}
+                              onClick={() => handleImageClick(i)}
+                              style={{ cursor: "pointer" }}
+                            />
+                          </SwiperSlide>
+                        ))
+                      : ""}
+                  </Swiper>
+
+                  {/* Lightbox */}
+                  {currentImageIndex !== null && (
+                    <Lightbox
+                      open={open}
+                      close={() => setOpen(false)}
+                      slides={
+                        findedImage && findedImage?.images
+                          ? findedImage?.images?.map((imgs) => ({ src: `https://ekol-server-1.onrender.com${imgs}` }))
+                          : []
+                      }
+                      index={currentImageIndex}
                     />
                   )}
                 </div>

@@ -8,10 +8,19 @@ import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import DOMPurify from "dompurify";
 import { useTranslate } from "../../context/TranslateContext";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 interface OurWorksInnerInterface {
+  _id?: string;
   title: string;
   description: string;
+}
+
+interface OurworksImages {
+  _id: string;
+  images: [string];
+  selected_ourworks: string;
 }
 
 const OurWorks: React.FC = () => {
@@ -64,6 +73,30 @@ const OurWorks: React.FC = () => {
     });
   }, [OurWorksInnerData, selectItem]);
 
+  const { data: ourWorksImgData } = useQuery<OurworksImages[]>({
+    queryKey: ["ourworksimagesKey", selectedlang],
+    queryFn: async () => {
+      const response = await axios.get(`${Baseurl}/ourworksimagesfront`);
+      return response.data;
+    },
+  });
+
+  //open fancybox images
+  const [open, setOpen] = React.useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = React.useState<number | null>(null);
+  const handleImageClick = (index: number) => {
+    setCurrentImageIndex(index);
+    setOpen(true); // Lightbox opened
+  };
+
+  const selectedItemID = OurWorksInnerData?.find((item: OurWorksInnerInterface) => item?.title === selectItem)?._id;
+  
+  const findedImage =
+    ourWorksImgData &&
+    ourWorksImgData.find((item: OurworksImages) => {
+      return item?.selected_ourworks === selectedItemID;
+    });
+  
   return (
     <section className="ourworks-section">
       <div className="works">
@@ -91,12 +124,12 @@ const OurWorks: React.FC = () => {
                 ? OurWorksInnerData.map((item: OurWorksInnerInterface) => {
                     if (selectItem === item?.title) {
                       return (
-                        <div className="description-content" key={uuidv4()}>
+                        <div className="description-content" key={item?._id}>
                           <div
                             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
                             onClick={(e) => {
                               const img = e.target as HTMLImageElement;
-                              if (img.tagName === 'IMG') {
+                              if (img.tagName === "IMG") {
                                 openImagePopup(img.src); // Pass the image src to the popup
                               }
                             }}
@@ -106,6 +139,30 @@ const OurWorks: React.FC = () => {
                     }
                   })
                 : ""}
+
+              <div className="images-for-description" style={{ display: findedImage ? "grid" : "none" }}>
+                {findedImage && findedImage?.images
+                  ? findedImage?.images?.map((imgs, i: number) => (
+                      <div onClick={() => handleImageClick(i)} className="image-wrapper" key={i + 3}>
+                        <img src={`https://ekol-server-1.onrender.com${imgs}`} alt="" />
+                      </div>
+                    ))
+                  : ""}
+              </div>
+
+              {/* Lightbox */}
+              {currentImageIndex !== null && (
+                <Lightbox
+                  open={open}
+                  close={() => setOpen(false)}
+                  slides={
+                    findedImage && findedImage?.images
+                      ? findedImage?.images?.map((imgs) => ({ src: `https://ekol-server-1.onrender.com${imgs}` }))
+                      : []
+                  }
+                  index={currentImageIndex}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -116,7 +173,9 @@ const OurWorks: React.FC = () => {
         <div className="popup-overlay" onClick={closeImagePopup}>
           <div className="popup-content" onClick={(e) => e.stopPropagation()}>
             <img src={selectedImage} alt="Selected" className="popup-image" />
-            <button className="close-popup" onClick={closeImagePopup}>X</button>
+            <button className="close-popup" onClick={closeImagePopup}>
+              X
+            </button>
           </div>
         </div>
       )}

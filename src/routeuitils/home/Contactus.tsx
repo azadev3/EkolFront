@@ -110,7 +110,7 @@ const Contactus: React.FC = () => {
         <div className="map-contact">
           {loadingIframe ? <Loader /> : ""}
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d3006.4228552601785!2d29.0255963!3d41.1034552!3m2!1i1024!2i768!4f13.1!5e0!3m2!1str!2saz!4v1721485213637!5m2!1str!2saz"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.4528712080023!2d49.902672575221686!3d40.37665449498765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307cc666003fed%3A0x1a284e4d42d91c29!2s64%208%20November%20Ave%2C%20AzneftYa%C4%9F!5e0!3m2!1str!2saz!4v1728994157246!5m2!1str!2saz"
             width="600"
             onLoad={() => setLoadingIframe(false)}
             height="450"

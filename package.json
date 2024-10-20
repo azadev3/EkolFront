@@ -25,6 +25,7 @@
     "sass": "^1.77.8",
     "swiper": "^11.1.5",
     "uuidv4": "^6.2.13",
+    "yet-another-react-lightbox": "^3.21.6",
     "yup": "^1.4.0"
   },
   "devDependencies": {

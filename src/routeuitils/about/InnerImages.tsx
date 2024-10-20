@@ -9,6 +9,8 @@ import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import Loader from "../../Loader";
 import { useTranslate } from "../../context/TranslateContext";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 const InnerImages: React.FC = () => {
   const { imagename } = useParams<{ imagename: string }>();
@@ -37,16 +39,18 @@ const InnerImages: React.FC = () => {
   const isTrueImages = displayInnerItems?.images && displayInnerItems?.images.length > 0;
   const { translations } = useTranslate();
 
-  const [modalimg, setModalImg] = React.useState<string | null>(null);
-  const handleModalImage = (id: string) => {
-    setModalImg(id);
+  // State to manage the lightbox
+  const [isLightboxOpen, setIsLightboxOpen] = React.useState<boolean>(false);
+  const [currentImageIndex, setCurrentImageIndex] = React.useState<number>(0);
+
+  const openLightbox = (index: number) => {
+    setCurrentImageIndex(index);
+    setIsLightboxOpen(true);
   };
 
-    // Function to close modal
-    const closeModal = () => {
-      setModalImg(null);
-    };
-  
+  const closeLightbox = () => {
+    setIsLightboxOpen(false);
+  };
 
   return (
     <section className="innerimage-section">
@@ -59,9 +63,9 @@ const InnerImages: React.FC = () => {
             <h2>{displayInnerItems?.categoryName}</h2>
             <div className="grid-innerimages">
               {isTrueImages
-                ? displayInnerItems?.images?.map((innerimages: Images) => (
+                ? displayInnerItems?.images?.map((innerimages: Images, index: number) => (
                     <div
-                      onClick={() => handleModalImage(innerimages?._id)}
+                      onClick={() => openLightbox(index)} // Open lightbox on image click
                       key={innerimages?._id}
                       className="innerimage-item">
                       <img
@@ -76,18 +80,18 @@ const InnerImages: React.FC = () => {
           </div>
         )}
 
-       {/* Modal Popup */}
-       {modalimg && (
-          <div className="popup-inner-images" onClick={closeModal}>
-            <div className="inner-image-modal" onClick={(e) => e.stopPropagation()}>
-              <img
-                src={`https://ekol-server-1.onrender.com${
-                  displayInnerItems?.images?.find((img: Images) => img?._id === modalimg)?.image
-                }`}
-                alt="Modal Image"
-              />
-            </div>
-          </div>
+        {/* Lightbox */}
+        {isTrueImages && (
+          <Lightbox
+            open={isLightboxOpen}
+            close={closeLightbox}
+            slides={
+              displayInnerItems?.images?.map((innerimages: Images) => ({
+                src: `https://ekol-server-1.onrender.com${innerimages?.image}`,
+              })) || []
+            }
+            index={currentImageIndex} // Start the slideshow from the clicked image
+          />
         )}
       </div>
     </section>

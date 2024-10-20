@@ -55,8 +55,8 @@ const ServicesPage: React.FC = () => {
                 servicesPageData?.map((item: ServicesContentType, i: number) => (
                   <div
                     onClick={() => {
-                      navigate(`/fealiyyet/xidmetler/${i + 1}`);
-                      setSelectedServiceID(i + 1);
+                      navigate(`/fealiyyet/xidmetler/${item?._id}`);
+                      setSelectedServiceID(item?._id);
                     }}
                     className="item-service"
                     key={i}>

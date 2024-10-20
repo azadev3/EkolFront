@@ -16,7 +16,7 @@ import { useParams } from "react-router-dom";
 import { IsClickedServiceState } from "./ServicesPage";
 
 export type ServicesContentType = {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   image: string;
@@ -42,24 +42,29 @@ const ServicesActivity: React.FC = () => {
     staleTime: 1000000,
   });
 
-  const [selectedService, setSelectedService] = React.useState<number>(0);
+  const [selectedService, setSelectedService] = React.useState<string>("");
+  const [selectedServiceTwo, setSelectedServiceTwo] = React.useState<string>("");
 
   // Handle service selection
-  const handleSelectService = useCallback((i: number) => {
-    setSelectedService(i);
+  const handleSelectService = useCallback((id: string) => {
+    setSelectedService(id);
   }, []);
 
   useEffect(() => {
     if (servicesPageData) {
       if (innerserviceid) {
-        const serviceIndex = servicesPageData.findIndex((service) => service.id === innerserviceid);
-        if (serviceIndex !== -1) {
+        const serviceIndex = servicesPageData.find(
+          (service: ServicesContentType) => service._id === innerserviceid
+        )?._id;
+        if (serviceIndex) {
           setSelectedService(serviceIndex);
         }
       } else if (selectedServiceID) {
-        const serviceIndex = servicesPageData.findIndex((service) => service.id === selectedServiceID);
-        if (serviceIndex !== -1) {
-          setSelectedService(serviceIndex);
+        const serviceIndex = servicesPageData
+          ? servicesPageData.find((service: ServicesContentType) => service._id === selectedServiceID)?._id
+          : "";
+        if (serviceIndex) {
+          setSelectedServiceTwo(serviceIndex);
         }
       }
     }
@@ -70,16 +75,18 @@ const ServicesActivity: React.FC = () => {
 
   // Get service image for the selected service
   const serviceImage = useMemo(() => {
-    if (hasServicesData && servicesPageData && servicesPageData.length > selectedService) {
-      return servicesPageData[selectedService]?.image;
+    if (hasServicesData && selectedService) {
+      const selectedServiceData = servicesPageData?.find((service) => service._id === selectedService);
+      return selectedServiceData ? selectedServiceData.image : "";
     }
     return "";
   }, [selectedService, hasServicesData, servicesPageData]);
 
   // Get sanitized service description for the selected service
   const serviceDescription = useMemo(() => {
-    if (hasServicesData && servicesPageData && servicesPageData.length > selectedService) {
-      return DOMPurify.sanitize(servicesPageData[selectedService]?.description || "");
+    if (hasServicesData && selectedService) {
+      const selectedServiceData = servicesPageData?.find((service) => service._id === selectedService);
+      return selectedServiceData ? DOMPurify.sanitize(selectedServiceData.description) : "";
     }
     return "";
   }, [selectedService, hasServicesData, servicesPageData]);
@@ -136,12 +143,12 @@ const ServicesActivity: React.FC = () => {
                       },
                     }}>
                     {hasServicesData &&
-                      servicesPageData?.map((item, i) => (
+                      servicesPageData?.map((item) => (
                         <SwiperSlide
-                          className={selectedService === i || selectedServiceID === i ? "actived" : ""}
-                          key={item.id}
+                          className={selectedService === item?._id || selectedServiceTwo === item?._id ? "actived" : ""}
+                          key={item._id}
                           onClick={() => {
-                            handleSelectService(i);
+                            handleSelectService(item?._id);
                             my_swiper?.slideNext();
                           }}>
                           <span>{item.title}</span>

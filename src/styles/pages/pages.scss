@@ -1086,6 +1086,36 @@
               line-height: 28px;
               text-align: start;
             }
+            .images-for-description {
+              margin-top: 36px;
+              width: 100%;
+              height: auto;
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              justify-items: flex-start;
+              align-items: flex-start;
+              gap: 24px;
+              .image-wrapper {
+                cursor: pointer;
+                transition: 300ms ease;
+                width: 100%;
+                height: 250px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 4px;
+                img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  border-radius: 4px;
+                }
+                &:hover {
+                  transform: scale(1.05);
+                  opacity:70%;
+                }
+              }
+            }
           }
         }
       }
@@ -1355,6 +1385,51 @@
                   gap: 16px;
                   li {
                     list-style-type: none;
+                  }
+                }
+              }
+
+              .description-content-images {
+                width: 100%;
+                height: 350px;
+                background-color: transparent;
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .swiper-pagination-bullet-active {
+                  min-width: 16px;
+                  border-radius: 100px;
+                  height: 8px;
+                  background-color: white !important;
+                }
+                .swiper-pagination-bullet {
+                  min-width: 12px;
+                  height: 8px;
+                  border-radius: 100px;
+                  opacity: 1;
+                  background-color: rgb(172, 172, 172);
+                }
+                .swiper {
+                  cursor: grab;
+                  width: 100%;
+                  height: 100%;
+                }
+
+                .swiper-slide {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  overflow: hidden;
+                  transition: 300ms ease !important;
+                  img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 4px;
+                  }
+                  &.swiper-slide-next {
+                    transform: scale(1.2) !important;
                   }
                 }
               }
