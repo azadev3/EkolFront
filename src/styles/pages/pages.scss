@@ -1091,15 +1091,15 @@
               width: 100%;
               height: auto;
               display: grid;
-              grid-template-columns: repeat(3, 1fr);
+              grid-template-columns: repeat(2, 1fr);
               justify-items: flex-start;
               align-items: flex-start;
-              gap: 24px;
+              gap: 12px;
               .image-wrapper {
                 cursor: pointer;
                 transition: 300ms ease;
                 width: 100%;
-                height: 250px;
+                height: 300px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -1112,7 +1112,7 @@
                 }
                 &:hover {
                   transform: scale(1.05);
-                  opacity:70%;
+                  opacity: 70%;
                 }
               }
             }
@@ -1391,45 +1391,32 @@
 
               .description-content-images {
                 width: 100%;
-                height: 350px;
                 background-color: transparent;
                 border-radius: 4px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                .swiper-pagination-bullet-active {
-                  min-width: 16px;
-                  border-radius: 100px;
-                  height: 8px;
-                  background-color: white !important;
-                }
-                .swiper-pagination-bullet {
-                  min-width: 12px;
-                  height: 8px;
-                  border-radius: 100px;
-                  opacity: 1;
-                  background-color: rgb(172, 172, 172);
-                }
-                .swiper {
-                  cursor: grab;
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr);
+                justify-items: flex-start;
+                gap: 18px;
+                align-items: flex-start;
+                .content-img {
+                  border-radius: 6px;
                   width: 100%;
                   height: 100%;
-                }
-
-                .swiper-slide {
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
+                  max-height: 300px;
+                  min-height: 300px;
+                  transition: 300ms ease;
                   overflow: hidden;
-                  transition: 300ms ease !important;
                   img {
+                  transition: 300ms ease;
+                    border-radius: 6px;
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
-                    border-radius: 4px;
                   }
-                  &.swiper-slide-next {
-                    transform: scale(1.2) !important;
+                  &:hover {
+                    img {
+                      transform: scale(1.1);
+                    }
                   }
                 }
               }
@@ -2131,14 +2118,9 @@
         grid-template-columns: repeat(4, 1fr);
         padding: 20px;
 
-        .swiper {
-          width: 100%;
-          height: 100%;
-        }
-
         .swiper-slide {
-          width: auto !important;
-          height: 50px;
+          width: 100% !important;
+          height: 100% !important;
           text-align: center;
           cursor: pointer;
           font-size: 18px;

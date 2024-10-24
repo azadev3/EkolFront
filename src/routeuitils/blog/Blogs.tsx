@@ -54,6 +54,12 @@ const Blogs: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const sortedBlogData = blogData
+    ? [...blogData].sort((a: BlogType, b: BlogType) => {
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+      })
+    : [];
+
   if (isLoading) {
     return <Loader />;
   }
@@ -71,8 +77,8 @@ const Blogs: React.FC = () => {
           <h2>{translations["blog_title"]}</h2>
 
           <section className="blog-grid-blogpage">
-            {blogData && blogData.length > 0
-              ? blogData.slice(0, paginate).map((item: BlogType, index: string) => (
+            {sortedBlogData && sortedBlogData.length > 0
+              ? sortedBlogData.slice(0, paginate).map((item: BlogType, index: any) => (
                   <article
                     onClick={() => {
                       navigate(`/xeberler/${index?.toString()}`);
@@ -106,7 +112,7 @@ const Blogs: React.FC = () => {
               : ""}
           </section>
 
-          {paginate <= blogData?.length && <PaginateButton handlePaginate={handlePaginate} />}
+          {paginate <= sortedBlogData?.length && <PaginateButton handlePaginate={handlePaginate} />}
         </div>
       </div>
     </section>

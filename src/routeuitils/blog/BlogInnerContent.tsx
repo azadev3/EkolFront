@@ -167,30 +167,18 @@ const BlogInnerContent: React.FC = () => {
                   )}
                 </div>
                 <div className="description-content-images" style={{ display: findedImage ? "flex" : "none" }}>
-                  <Swiper
-                    spaceBetween={30}
-                    breakpoints={{
-                      268: { slidesPerView: 1 },
-                      568: { slidesPerView: 1.5 },
-                      768: { slidesPerView: 2.5 },
-                      968: { slidesPerView: 3 },
-                    }}
-                    pagination={{ dynamicBullets: true }}
-                    modules={[Pagination]}
-                    className="mySwiper">
-                    {findedImage && findedImage?.images
-                      ? findedImage?.images?.map((imgs, i: number) => (
-                          <SwiperSlide key={i + 2}>
-                            <img
-                              src={`https://ekol-server-1.onrender.com${imgs}`}
-                              alt={`image-${i + 3}`}
-                              onClick={() => handleImageClick(i)}
-                              style={{ cursor: "pointer" }}
-                            />
-                          </SwiperSlide>
-                        ))
-                      : ""}
-                  </Swiper>
+                  {findedImage && findedImage?.images
+                    ? findedImage?.images?.map((imgs, i: number) => (
+                        <div className="content-img">
+                          <img
+                            src={`https://ekol-server-1.onrender.com${imgs}`}
+                            alt={`image-${i + 3}`}
+                            onClick={() => handleImageClick(i)}
+                            style={{ cursor: "pointer" }}
+                          />
+                        </div>
+                      ))
+                    : ""}
 
                   {/* Lightbox */}
                   {currentImageIndex !== null && (

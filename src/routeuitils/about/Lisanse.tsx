@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useQuery } from "@tanstack/react-query";
@@ -6,17 +6,8 @@ import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import Loader from "../../Loader";
 import DOMPurify from "dompurify";
-
-// Modal for inner lisanse images
-const ModalLisanseImages = ({ imageSrc, onClose }: any) => {
-  return (
-    <div className="modal-overlay-inner-img" onClick={onClose}>
-      <div className="modal-content-inner-img" onClick={(e) => e.stopPropagation()}>
-        <img src={imageSrc} alt="Modal content" />
-      </div>
-    </div>
-  );
-};
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 interface LisanseItemType {
   _id: string;
@@ -25,7 +16,7 @@ interface LisanseItemType {
 }
 
 const Lisanse: React.FC = () => {
-  //fetch lisanse data
+  // Fetch lisanse data
   const selectedlang = useRecoilValue(SelectedLanguageState);
   const { data: lisanseData, isLoading } = useQuery<LisanseItemType[]>({
     queryKey: ["lisanseDataKey", selectedlang],
@@ -42,23 +33,45 @@ const Lisanse: React.FC = () => {
 
   const hasLisanseData = lisanseData && lisanseData?.length > 0;
 
-  const [selectedImageLisanse, setSelectedImageLisanse] = React.useState<string | null>(null);
+  // Lightbox state management
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [lightboxImages, setLightboxImages] = useState<{ src: string }[]>([]);
 
-  const handleImageLisanse = (src: string) => {
-    setSelectedImageLisanse(src);
+  // Handle image click to trigger Lightbox
+  const handleImageLisanse = (_: string, index: number) => {
+    setCurrentImageIndex(index);
+    setIsLightboxOpen(true);
   };
 
   const closeModal = () => {
-    setSelectedImageLisanse(null);
+    setIsLightboxOpen(false);
   };
 
   const handleDescriptionLisanse = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
 
     if (target.tagName === "IMG") {
-      handleImageLisanse((target as HTMLImageElement)?.src);
+      const imgSrc = (target as HTMLImageElement)?.src;
+      const imgIndex = lightboxImages.findIndex((img) => img.src === imgSrc);
+      handleImageLisanse(imgSrc, imgIndex !== -1 ? imgIndex : 0);
     }
   };
+
+  // Preparing the images for Lightbox
+  useEffect(() => {
+    if (hasLisanseData) {
+      const allImages = lisanseData.flatMap((item) => {
+        const div = document.createElement("div");
+        div.innerHTML = item?.description || "";
+        const imgs = Array.from(div.getElementsByTagName("img")).map((img) => ({
+          src: img.src,
+        }));
+        return imgs;
+      });
+      setLightboxImages(allImages);
+    }
+  }, [lisanseData]);
 
   return (
     <section className="lisanse-section">
@@ -68,7 +81,7 @@ const Lisanse: React.FC = () => {
         ) : (
           <div className="container-lisanse">
             {hasLisanseData
-              ? lisanseData?.map((item: LisanseItemType) => (
+              ? lisanseData?.map((item: LisanseItemType, _: number) => (
                   <React.Fragment key={item?._id}>
                     <h2>{item?.title}</h2>
                     <div
@@ -82,7 +95,16 @@ const Lisanse: React.FC = () => {
           </div>
         )}
       </div>
-      {selectedImageLisanse && <ModalLisanseImages imageSrc={selectedImageLisanse} onClose={closeModal} />}
+
+      {/* Lightbox Component */}
+      {isLightboxOpen && (
+        <Lightbox
+          open={isLightboxOpen}
+          close={closeModal}
+          slides={lightboxImages}
+          index={currentImageIndex}
+        />
+      )}
     </section>
   );
 };

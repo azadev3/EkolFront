@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Breadcrumb from "../../Breadcrumb";
 import { useQuery } from "@tanstack/react-query";
 import { useRecoilValue } from "recoil";
@@ -9,17 +9,8 @@ import DOMPurify from "dompurify";
 import Loader from "../../Loader";
 import { useTranslate } from "../../context/TranslateContext";
 import Lisanse from "./Lisanse";
-
-// Modal for inner cert images
-const Modal = ({ imageSrc, onClose }: any) => {
-  return (
-    <div className="modal-overlay-inner-img" onClick={onClose}>
-      <div className="modal-content-inner-img" onClick={(e) => e.stopPropagation()}>
-        <img src={imageSrc} alt="Modal content" />
-      </div>
-    </div>
-  );
-};
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 interface Certificates {
   _id: string;
@@ -28,7 +19,6 @@ interface Certificates {
 }
 
 const Certificates: React.FC = () => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null); 
   const selectedlang = useRecoilValue(SelectedLanguageState);
   const { data: certificatesData, isLoading } = useQuery<Certificates[]>({
     queryKey: ["certificatesDataKey", selectedlang],
@@ -43,24 +33,43 @@ const Certificates: React.FC = () => {
     staleTime: 1000000,
   });
 
-  const hasCertificatesData = certificatesData && certificatesData?.length > 0;
-
+  const hasCertificatesData = certificatesData && certificatesData.length > 0;
   const { translations } = useTranslate();
 
-  const handleImageClick = (src: string) => {
-    setSelectedImage(src);
-  };
+  // Lightbox state management
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [lightboxImages, setLightboxImages] = useState<{ src: string }[]>([]);
 
-  const closeModal = () => {
-    setSelectedImage(null);
+  // Handle image click to trigger Lightbox
+  const handleImageClick = (_: string, index: number) => {
+    setCurrentImageIndex(index);
+    setIsLightboxOpen(true);
   };
 
   const handleDescriptionClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
     if (target.tagName === "IMG") {
-      handleImageClick((target as HTMLImageElement)?.src);
+      const imgSrc = (target as HTMLImageElement).src;
+      const imgIndex = lightboxImages.findIndex((img) => img.src === imgSrc);
+      handleImageClick(imgSrc, imgIndex !== -1 ? imgIndex : 0);
     }
   };
+
+  // Preparing the images for Lightbox
+  useEffect(() => {
+    if (hasCertificatesData) {
+      const allImages = certificatesData.flatMap((item) => {
+        const div = document.createElement("div");
+        div.innerHTML = item?.description || "";
+        const imgs = Array.from(div.getElementsByTagName("img")).map((img) => ({
+          src: img.src,
+        }));
+        return imgs;
+      });
+      setLightboxImages(allImages);
+    }
+  }, [certificatesData]);
 
   return (
     <section className="certificates-section">
@@ -69,17 +78,15 @@ const Certificates: React.FC = () => {
       ) : (
         <div className="certificates">
           <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_sertifikatlar"]} />
-
           {hasCertificatesData
-            ? certificatesData?.map((item: Certificates) => (
+            ? certificatesData.map((item: Certificates, _: number) => (
                 <div className="container-certificates" key={item?._id}>
                   <h2>{item?.title}</h2>
-
                   <div
                     className="description-certificates"
                     onClick={handleDescriptionClick}
                     dangerouslySetInnerHTML={{
-                      __html: DOMPurify.sanitize(item?.description),
+                      __html: DOMPurify.sanitize(item?.description.replace(/<img/g, `<img data-lightbox="gallery"`)),
                     }}
                   />
                 </div>
@@ -87,8 +94,18 @@ const Certificates: React.FC = () => {
             : ""}
         </div>
       )}
-      {selectedImage && <Modal imageSrc={selectedImage} onClose={closeModal} />}
+
       <Lisanse />
+
+      {/* Lightbox Component */}
+      {isLightboxOpen && (
+        <Lightbox
+          open={isLightboxOpen}
+          close={() => setIsLightboxOpen(false)}
+          slides={lightboxImages}
+          index={currentImageIndex}
+        />
+      )}
     </section>
   );
 };
