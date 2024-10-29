@@ -223,6 +223,9 @@
 }
 
 @media only screen and (max-width: 968px) {
+  .contact-page .contact-section .contact .container-locations {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
   .purch-contact-wrapper {
     padding-left: 24px;
     padding-right: 24px;
@@ -805,6 +808,43 @@
 }
 
 @media only screen and (max-width: 568px) {
+  .home-page .contact-us-section .contact-us .map-contact .iframe-div {
+    height: 200px !important;
+  }
+  .home-page .contact-us-section .contact-us .map-contact .contact-information-box {
+    padding: 12px !important;
+  }
+  .home-page .contact-us-section .contact-us .map-contact .contact-information-box .contact-datas .information-box .right-items strong {
+    font-size: 14px !important;
+  }
+  .home-page .contact-us-section .contact-us .map-contact .contact-information-box .contact-datas .information-box .right-items .links a {
+    font-size: 12px !important;
+    line-height: 18px !important;
+  }
+  .home-page .blog-section .blogs .blog-grid-section .blog-item .descriptions-blog .description {
+    display: none !important;
+  }
+  .home-page .blog-section .blogs .blog-grid-section .blog-item {
+    height: 300px !important;
+  }
+  .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .images-for-description {
+    grid-template-columns: repeat(1, 1fr) !important;
+    margin-top: 0 !important;
+  }
+  .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content p, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content h1, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content h2, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content h3, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content h4, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content strong, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content li, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content ul, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content ol, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content span {
+    font-size: 14px !important;
+    line-height: 24px !important;
+  }
+  .about-page .ourworks-section .works .container-works .grid-works .navigation-content .item-navigation .left-order-num-and-title p {
+    font-size: 14px !important;
+    line-height: 24px !important;
+  }
+  .contact-page .contact-section .contact .container-locations .swiper-slide {
+    font-size: 12px !important;
+  }
+  .contact-page .contact-section .contact .container-locations {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
   .about-page .leadership-section .leadership .container-leadership .grid-leadership .leadership-grid-item {
     width: auto !important;
     height: auto !important;
@@ -1230,6 +1270,9 @@
 }
 
 @media only screen and (max-width: 340px) {
+  .contact-page .contact-section .contact .container-locations {
+    grid-template-columns: repeat(1, 1fr);
+  }
   .footer-wrapper .footer .top-footer .footer-navigations {
     grid-template-columns: repeat(1, 1fr);
   }
