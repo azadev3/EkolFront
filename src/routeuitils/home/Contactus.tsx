@@ -78,7 +78,6 @@ export const ContactData: ContactDataType[] = [
 ];
 
 const Contactus: React.FC = () => {
-
   const { translations } = useTranslate();
 
   const selectedlang = useRecoilValue(SelectedLanguageState);
@@ -102,10 +101,13 @@ const Contactus: React.FC = () => {
   return (
     <section className="contact-us-section">
       <div className="contact-us">
-        <h3>{translations['contact_us_title']}</h3>
+        <h3>{translations["con   tact_us_title"]}</h3>
 
         <div className="map-contact">
-          <div className="iframe-div" dangerouslySetInnerHTML={{ __html: ContactData ? map?.replace(/\\"/g, '"') || "" : ""  }} />
+          <div
+            className="iframe-div"
+            dangerouslySetInnerHTML={{ __html: ContactData ? map?.replace(/\\"/g, '"') || "" : "" }}
+          />
 
           <div className="contact-information-box">
             {ContactDatas &&
@@ -115,7 +117,11 @@ const Contactus: React.FC = () => {
                   {item?.telephones?.map((item: Telephones, indextwo: number) => (
                     <div key={indextwo} className="information-box">
                       <div className="left-icon">
-                        <img src={`https://ekol-server-1.onrender.com${item?.logo}`} alt={`${indextwo}-logo`} title={item?.title} />
+                        <img
+                          src={`https://ekol-server-1.onrender.com${item?.logo}`}
+                          alt={`${indextwo}-logo`}
+                          title={item?.title}
+                        />
                       </div>
                       <div className="right-items">
                         <strong>{item?.title}</strong>
