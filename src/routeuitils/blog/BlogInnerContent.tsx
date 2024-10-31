@@ -11,11 +11,9 @@ import Loader from "../../Loader";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslate } from "../../context/TranslateContext";
 import { SocialsType } from "../home/Hero";
-import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
