@@ -201,8 +201,8 @@ const PurchaseAnnouncements: React.FC = () => {
                           <td>{indexOfFirstItem + index + 1}</td>
                           <td>{item?.title}</td>
                           <td>{item?.predmet}</td>
-                          <td>{moment(item?.createdAt).locale("").format("DD.MM.YYYY HH:mm")}</td>
-                          <td>{moment(item?.end_date).locale("").format("DD.MM.YYYY HH:mm")}</td>
+                          <td>{moment(item?.createdAt).format("DD.MM.YYYY HH:mm")}</td>
+                          <td>{item?.end_date}</td>
                         </tr>
                       ))
                     ) : (
