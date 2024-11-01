@@ -90,13 +90,30 @@ const OurWorks: React.FC = () => {
   };
 
   const selectedItemID = OurWorksInnerData?.find((item: OurWorksInnerInterface) => item?.title === selectItem)?._id;
-  
+
   const findedImage =
     ourWorksImgData &&
     ourWorksImgData.find((item: OurworksImages) => {
       return item?.selected_ourworks === selectedItemID;
     });
-  
+
+  const [isMobile, setIsMobile] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    const controlWindow = () => {
+      if (window.innerWidth <= 568) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    controlWindow();
+
+    window.addEventListener("resize", controlWindow);
+    return () => window.removeEventListener("resize", controlWindow);
+  }, []);
+
   return (
     <section className="ourworks-section">
       <div className="works">
@@ -109,7 +126,16 @@ const OurWorks: React.FC = () => {
             <div className="navigation-content">
               {OurWorksInnerData && OurWorksInnerData.length > 0
                 ? OurWorksInnerData.map((item: OurWorksInnerInterface) => (
-                    <div key={uuidv4()} className="item-navigation" onClick={() => handleSelectItem(item?.title)}>
+                    <div
+                      key={uuidv4()}
+                      className="item-navigation"
+                      onClick={() => {
+                        handleSelectItem(item?.title);
+                        if (isMobile) {
+                          const el = document.getElementById("navigation_content");
+                          el?.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }}>
                       <div className="left-order-num-and-title">
                         <p>{item?.title}</p>
                       </div>
@@ -119,7 +145,7 @@ const OurWorks: React.FC = () => {
                 : ""}
             </div>
 
-            <div className="navigation-description-content">
+            <div className="navigation-description-content" id="navigation_content">
               {OurWorksInnerData && OurWorksInnerData.length > 0
                 ? OurWorksInnerData.map((item: OurWorksInnerInterface) => {
                     if (selectItem === item?.title) {
