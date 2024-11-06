@@ -37,8 +37,6 @@ import PurchaseAnnouncements from "./components/features/PurchaseAnnouncements";
 import PurchaseRules from "./components/features/PurchaseRules";
 import PurchaseAnnouncementModal from "./modals/PurchaseAnnouncementModal";
 import PurchaseContact from "./components/features/PurchaseContact";
-import axios from "axios";
-import { Baseurl } from "./Baseurl";
 export const isHomePageState = atom<boolean>({
   key: "isHomePageState",
   default: false,
