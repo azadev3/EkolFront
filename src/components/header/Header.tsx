@@ -35,6 +35,24 @@ export type HeaderElementType = {
 const Header: React.FC = () => {
   const { translations } = useTranslate();
 
+  const [showRehberlik, setShowRehberlik] = React.useState<boolean>(false);
+  const handleCheck = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-rehberlik-front`);
+      if (res.data) {
+        setShowRehberlik(res.data?.showed);
+        console.log(res.data, "slam");
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  React.useEffect(() => {
+    handleCheck();
+  }, [showRehberlik]);
+
   const HeaderItems: HeaderElementType[] = [
     // { id: 1, title: `${translations["nav_anasehife"]}`, to: "/" },
     {
@@ -44,7 +62,7 @@ const Header: React.FC = () => {
       icon: <FaAngleDown className="down-icon" />,
       submenu: [
         { id: 1, title: `${translations["nav_haqqimizda_bizkimik"]}`, to: "/about" },
-        { id: 2, title: `${translations["nav_haqqimizda_rehberlik"]}`, to: "/about/leadership" },
+        { id: 23456789, title: `${translations["nav_haqqimizda_rehberlik"]}`, to: "/about/leadership" },
         { id: 3, title: `${translations["nav_haqqimizda_struktur"]}`, to: "/about/structure" },
         { id: 5, title: `${translations["nav_haqqimizda_sertifikatlar"]}`, to: "/about/certificates" },
         { id: 6, title: `${translations["nav_haqqimizda_partnyorlar"]}`, to: "/about/partners" },
@@ -171,11 +189,11 @@ const Header: React.FC = () => {
 
           <nav className="left-navigation">
             {HeaderItems?.map((item: HeaderElementType) => (
-              <ul key={item?.id}  onMouseEnter={() => handleDropdownMenuHeader(item?.id)}
-              onMouseLeave={() => setDropdownHeader(null)}>
-                <li
-                  className="links"
-                 >
+              <ul
+                key={item?.id}
+                onMouseEnter={() => handleDropdownMenuHeader(item?.id)}
+                onMouseLeave={() => setDropdownHeader(null)}>
+                <li className="links">
                   {item.submenu ? (
                     <span className="title-dropdown">{item.title}</span>
                   ) : (
@@ -185,14 +203,28 @@ const Header: React.FC = () => {
                 </li>
                 {dropdownHeader === item.id && item.submenu && (
                   <div className="dropdown-menu">
-                    {item?.submenu?.map((submenuItem: submenuType) => (
-                      <NavLink
-                        onClick={() => setDropdownHeader(null)}
-                        to={submenuItem.to ? submenuItem.to : ""}
-                        key={submenuItem?.id}>
-                        {submenuItem.title}
-                      </NavLink>
-                    ))}
+                    {item?.submenu?.map((submenuItem: submenuType) => {
+                      if (submenuItem.id === 23456789 && !showRehberlik) {
+                        return (
+                          <NavLink
+                            style={{ display: "none" }}
+                            onClick={() => setDropdownHeader(null)}
+                            to={submenuItem.to ? submenuItem.to : ""}
+                            key={submenuItem?.id}>
+                            {submenuItem.title}
+                          </NavLink>
+                        );
+                      } else {
+                        return (
+                          <NavLink
+                            onClick={() => setDropdownHeader(null)}
+                            to={submenuItem.to ? submenuItem.to : ""}
+                            key={submenuItem?.id}>
+                            {submenuItem.title}
+                          </NavLink>
+                        );
+                      }
+                    })}
                   </div>
                 )}
               </ul>

@@ -40,6 +40,24 @@ const MobileHeader: React.FC = () => {
 
   const { translations } = useTranslate();
 
+  const [showRehberlik, setShowRehberlik] = React.useState<boolean>(false);
+  const handleCheck = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-rehberlik-front`);
+      if (res.data) {
+        setShowRehberlik(res.data?.showed);
+        console.log(res.data, "slam");
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  React.useEffect(() => {
+    handleCheck();
+  }, [showRehberlik]);
+
   const HeaderItems: HeaderElementType[] = [
     // { id: 1, title: `${translations["nav_anasehife"]}`, to: "/" },
     {
@@ -49,7 +67,7 @@ const MobileHeader: React.FC = () => {
       icon: <FaAngleDown className="down-icon" />,
       submenu: [
         { id: 1, title: `${translations["nav_haqqimizda_bizkimik"]}`, to: "/about" },
-        { id: 2, title: `${translations["nav_haqqimizda_rehberlik"]}`, to: "/about/leadership" },
+        { id: 23456789, title: `${translations["nav_haqqimizda_rehberlik"]}`, to: "/about/leadership" },
         { id: 3, title: `${translations["nav_haqqimizda_struktur"]}`, to: "/about/structure" },
         { id: 5, title: `${translations["nav_haqqimizda_sertifikatlar"]}`, to: "/about/certificates" },
         { id: 6, title: `${translations["nav_haqqimizda_partnyorlar"]}`, to: "/about/partners" },
@@ -209,16 +227,32 @@ const MobileHeader: React.FC = () => {
               </li>
               {dropdown === item.id && item.submenu && (
                 <div className="dropdown-menu" ref={dropdownMenuRef}>
-                  {item?.submenu?.map((item: submenuType) => (
-                    <NavLink
-                      onClick={() => {
-                        setDropdown(null), setToggleMenu(false);
-                      }}
-                      to={item.to ? item.to : ""}
-                      key={item?.id}>
-                      {item.title}
-                    </NavLink>
-                  ))}
+                  {item?.submenu?.map((item: submenuType) => {
+                    if (item.id === 23456789 && !showRehberlik) {
+                      return (
+                        <NavLink
+                          style={{ display: "none" }}
+                          onClick={() => {
+                            setDropdown(null), setToggleMenu(false);
+                          }}
+                          to={item.to ? item.to : ""}
+                          key={item?.id}>
+                          {item.title}
+                        </NavLink>
+                      );
+                    } else {
+                      return (
+                        <NavLink
+                          onClick={() => {
+                            setDropdown(null), setToggleMenu(false);
+                          }}
+                          to={item.to ? item.to : ""}
+                          key={item?.id}>
+                          {item.title}
+                        </NavLink>
+                      );
+                    }
+                  })}
                 </div>
               )}
             </ul>

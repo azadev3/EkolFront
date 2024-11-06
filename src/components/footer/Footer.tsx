@@ -24,6 +24,24 @@ interface FooterElementsType {
 const Footer: React.FC = () => {
   const { translations } = useTranslate();
 
+  const [showRehberlik, setShowRehberlik] = React.useState<boolean>(false);
+  const handleCheck = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-rehberlik-front`);
+      if (res.data) {
+        setShowRehberlik(res.data?.showed);
+        console.log(res.data, "slam");
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  React.useEffect(() => {
+    handleCheck();
+  }, [showRehberlik]);
+
   const FooterElements: FooterElementsType[] = [
     {
       id: uuidv4(),
@@ -35,7 +53,7 @@ const Footer: React.FC = () => {
           to: "/about",
         },
         {
-          id: uuidv4(),
+          id: "23456789",
           title: `${translations["nav_haqqimizda_rehberlik"]}`,
           to: "/about/leadership",
         },
@@ -182,7 +200,7 @@ const Footer: React.FC = () => {
                       title={logo._id}
                     />
                   ))
-                : ""}{" "}
+                : ""}
             </Link>
             <p className="footer-description">{translations["footer_paragraph_text"]}</p>
           </article>
@@ -194,11 +212,21 @@ const Footer: React.FC = () => {
                   <div key={item.id} className="footer-nav-link-content">
                     <h4 className="title-nav">{item.title}</h4>
                     <div className="links-nav">
-                      {item?.footerNavItems?.map((links: FooterNavLinkType) => (
-                        <Link key={links.id} to={links.to ? links.to : ""} className="link">
-                          {links.title}
-                        </Link>
-                      ))}
+                      {item?.footerNavItems?.map((links: FooterNavLinkType) => {
+                        if (links?.id === "23456789" && !showRehberlik) {
+                          return (
+                            <Link style={{ display: "none" }} key={links.id} to={links.to ? links.to : ""} className="link">
+                              {links.title}
+                            </Link>
+                          );
+                        } else {
+                          return (
+                            <Link key={links.id} to={links.to ? links.to : ""} className="link">
+                              {links.title}
+                            </Link>
+                          );
+                        }
+                      })}
                     </div>
                   </div>
                 );

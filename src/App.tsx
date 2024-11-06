@@ -37,6 +37,8 @@ import PurchaseAnnouncements from "./components/features/PurchaseAnnouncements";
 import PurchaseRules from "./components/features/PurchaseRules";
 import PurchaseAnnouncementModal from "./modals/PurchaseAnnouncementModal";
 import PurchaseContact from "./components/features/PurchaseContact";
+import axios from "axios";
+import { Baseurl } from "./Baseurl";
 export const isHomePageState = atom<boolean>({
   key: "isHomePageState",
   default: false,
@@ -84,12 +86,10 @@ const App: React.FC = () => {
 
   return (
     <div className={`app ${mode ? "dark" : ""}`}>
-
       {/* purchase announcement modal (new feature) */}
       <div className={`overlay-purchase-modal ${purchaseAnnouncementModal ? "active" : ""}`}>
         <PurchaseAnnouncementModal />
       </div>
-
 
       {/* purchase modal */}
       <div className={`overlay-purchase-modal ${purchaseModal ? "active" : ""}`}>
@@ -145,7 +145,6 @@ const App: React.FC = () => {
         <Route path="/satinalmaelanlari" element={<PurchaseAnnouncements />} />
         <Route path="/satinalmaqaydalari" element={<PurchaseRules />} />
         <Route path="/satinalma_elaqe" element={<PurchaseContact />} />
-
       </Routes>
       <Footer />
     </div>
