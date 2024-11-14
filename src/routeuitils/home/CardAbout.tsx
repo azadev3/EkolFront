@@ -83,6 +83,24 @@ const CardAbout: React.FC = () => {
     staleTime: 9000000,
   });
 
+  const [showRehberlik, setShowRehberlik] = React.useState<boolean>(false);
+  const handleCheck = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-rehberlik-front`);
+      if (res.data) {
+        setShowRehberlik(res.data?.showed);
+        console.log(res.data, "slam");
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  React.useEffect(() => {
+    handleCheck();
+  }, [showRehberlik]);
+
   return (
     <section className="card-about-section">
       <div className="card-about">
@@ -108,8 +126,10 @@ const CardAbout: React.FC = () => {
                     className="right-descriptions"
                     style={{ backgroundImage: `url(https://ekol-server-1.onrender.com${item?.image})` }}>
                     <div className="links">
-                      {TopCardRightDataItem.map((item: TopCardRightData) => (
-                        <Link to={item?.to} key={item?.id} className="right-nav-link">
+                      {TopCardRightDataItem.map((item: TopCardRightData, i: number) => (
+                        <Link style={{
+                          display: i === 4 && !showRehberlik ? "none" : ""
+                        }} to={item?.to} key={item?.id} className="right-nav-link">
                           <span>{item?.title}</span>
                           <img src="../iconin.png" alt="icon-right-arrow" />
                         </Link>

@@ -32,14 +32,14 @@ const Structure: React.FC = () => {
     return <Loader />;
   }
 
-  const groupedData = StructureData.reduce((acc: any, item: any) => {
+  const groupedData = StructureData ? StructureData?.reduce((acc: any, item: any) => {
     const { category, title } = item.departments;
     if (!acc[category]) {
       acc[category] = [];
     }
     acc[category].push({ id: uuid(), title });
     return acc;
-  }, {});
+  }, {}) : [];
 
   return (
     <section className="structure-section">

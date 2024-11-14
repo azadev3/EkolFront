@@ -17,6 +17,7 @@ const Breadcrumb: React.FC<Props> = ({ uri, prevpage }) => {
   const isLocationInnerVacation = useMatch("/karyera/:vacid");
   const isLocationInnerVacationReq = useMatch("/karyera/:vacid/:reqid");
 
+  
   const { translations } = useTranslate();
 
   return (
@@ -36,30 +37,30 @@ const Breadcrumb: React.FC<Props> = ({ uri, prevpage }) => {
         </span>
         {isLocationInnerImage ? (
           <React.Fragment>
-            <span className="dot"></span>
+            <HiArrowNarrowRight />
             <span className="currentpage" style={{ textTransform: "capitalize" }}>
               {isLocationInnerImage.params?.imagename}
             </span>
           </React.Fragment>
         ) : isLocationInnerBlog ? (
           <React.Fragment>
-            <span className="dot"></span>
+            <HiArrowNarrowRight />
             <span className="currentpage" style={{ textTransform: "capitalize" }}>
               {isLocationInnerBlog.params?.blogslug}
             </span>
           </React.Fragment>
         ) : isLocationInnerVacation ? (
           <React.Fragment>
-            <span className="dot"></span>
+            <HiArrowNarrowRight />
             <span className="currentpage" style={{ textTransform: "capitalize" }}>
               {isLocationInnerVacation.params?.vacid}
             </span>
           </React.Fragment>
         ) : isLocationInnerVacationReq ? (
           <React.Fragment>
-            <span className="dot"></span>
+            <HiArrowNarrowRight />
             <span className="currentpage" style={{ textTransform: "capitalize" }}>
-              {translations['muraciet_et_title']}
+              {translations["muraciet_et_title"]}
             </span>
           </React.Fragment>
         ) : null}

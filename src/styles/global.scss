@@ -1708,12 +1708,20 @@ $whitedarktwo: #8b9f9c;
         color: white !important;
       }
     }
+    .home-page .services-section .services {
+      border: 1px solid #3f3f3f !important;
+    }
     .about-page .ourworks-section .works .container-works .grid-works .navigation-content {
       background-color: transparent;
       border: 2px solid #d4d4d410;
     }
+    .home-page .card-about-section .card-about {
+      border: 1px solid #3f3f3f !important;
+    }
+    .home-page .services-section .services .swiper-pagination-bullet {
+      background-color: white !important;
+    }
     .about-page .ourworks-section .works .container-works .grid-works .navigation-content .item-navigation {
-      border-bottom: none;
       &:hover {
         background-color: rgba(0, 0, 0, 0.072);
       }
@@ -2060,9 +2068,24 @@ $whitedarktwo: #8b9f9c;
     }
 
     .home-page .hero-wrapper .hero .swiper-slide img {
-      filter: brightness(0.4);
+      filter: none;
     }
 
+    .ourworks-section .works .container-works h2 {
+      color: white;
+    }
+    .ourworks-section .works .container-works .grid-works .navigation-content {
+      background-color: #303030;
+      *{
+        color: #fff !important;
+      }
+    }
+    .ourworks-section .works .container-works .grid-works .navigation-description-content {
+      background-color: #303030;
+      *{
+        color: #fff !important;
+      }
+    }
     .mobile-header .toggle-menu {
       background-color: black;
       box-shadow: 0px 0px 200px 0px rgba(0, 255, 81, 0.628);
