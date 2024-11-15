@@ -18,6 +18,24 @@ import DOMPurify from "dompurify";
 const SearchModal = () => {
   const { translations } = useTranslate();
 
+  const [showRehberlik, setShowRehberlik] = React.useState<boolean>(false);
+  const handleCheck = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-rehberlik-front`);
+      if (res.data) {
+        setShowRehberlik(res.data?.showed);
+        console.log(res.data, "slam");
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  React.useEffect(() => {
+    handleCheck();
+  }, [showRehberlik]);
+
   const HeaderItems: HeaderElementType[] = [
     { id: 1, title: `${translations["nav_anasehife"]}`, to: "/" },
     {
@@ -27,7 +45,7 @@ const SearchModal = () => {
       icon: <FaAngleDown className="down-icon" />,
       submenu: [
         { id: 1, title: `${translations["nav_haqqimizda_bizkimik"]}`, to: "/about" },
-        { id: 2, title: `${translations["nav_haqqimizda_rehberlik"]}`, to: "/about/leadership" },
+        { id: 33444433, title: `${translations["nav_haqqimizda_rehberlik"]}`, to: "/about/leadership" },
         { id: 3, title: `${translations["nav_haqqimizda_struktur"]}`, to: "/about/structure" },
         { id: 5, title: `${translations["nav_haqqimizda_sertifikatlar"]}`, to: "/about/certificates" },
         { id: 6, title: `${translations["nav_haqqimizda_partnyorlar"]}`, to: "/about/partners" },
@@ -54,7 +72,7 @@ const SearchModal = () => {
         { id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
       ],
     },
-  
+
     {
       id: 4,
       title: `${translations["nav_haqqimizda_satinalma"]}`,
@@ -207,16 +225,23 @@ const SearchModal = () => {
                       <MdLocationSearching className="icon-result" />
                       <span>{items?.title}</span>
                     </article>
+
                     <div className="submenus">
-                      {items.submenu?.map((sub: submenuType) => (
-                        <Link
-                          onClick={() => setSearchModal(false)}
-                          key={sub.to}
-                          title={`${sub.title}'a get`}
-                          to={sub.to ? sub.to : ""}>
-                          {sub.title}
-                        </Link>
-                      ))}
+                      {items.submenu?.map((sub: submenuType) => {
+                        if (sub.id === 33444433 && !showRehberlik) {
+                          return null;
+                        }
+
+                        return (
+                          <Link
+                            onClick={() => setSearchModal(false)}
+                            key={sub.to}
+                            title={`${sub.title}'a get`}
+                            to={sub.to ? sub.to : ""}>
+                            {sub.title}
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 ))}
@@ -239,7 +264,7 @@ const SearchModal = () => {
                       className="result-item-blog"
                       key={i}
                       onClick={() => {
-                        navigate(`/xeberler/${items?.title.toLowerCase()}`);
+                        navigate(`/xeberler/${i.toString()}`);
                         setSearchModal(false);
                       }}>
                       <article className="head-item-title">

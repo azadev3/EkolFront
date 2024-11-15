@@ -12,7 +12,7 @@ import { Baseurl } from "../../Baseurl";
 import DOMPurify from "dompurify";
 import Loader from "../../Loader";
 import { useTranslate } from "../../context/TranslateContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IsClickedServiceState } from "./ServicesPage";
 
 export type ServicesContentType = {
@@ -95,10 +95,28 @@ const ServicesActivity: React.FC = () => {
 
   const [my_swiper, set_my_swiper] = React.useState<any>();
 
+  const [serviceName, setServiceName] = React.useState<string>("");
+
+  const navigate = useNavigate();
+
+  // Update service name when selectedService changes
+  useEffect(() => {
+    if (servicesPageData && selectedService) {
+      const selectedServiceData = servicesPageData.find((service) => service._id === selectedService);
+      if (selectedServiceData) {
+        setServiceName(selectedServiceData.title);
+      }
+    }
+  }, [selectedService, servicesPageData]);
+
   return (
     <section className="servicesActivity-section">
       <div className="servicesActivity">
-        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_xidmetler"]} />
+        <Breadcrumb
+          blogTitle={serviceName || ""}
+          prevpage={translations["nav_anasehife"]}
+          uri={translations["nav_haqqimizda_xidmetler"]}
+        />
 
         {isLoading ? (
           <Loader />
@@ -150,6 +168,7 @@ const ServicesActivity: React.FC = () => {
                           onClick={() => {
                             handleSelectService(item?._id);
                             my_swiper?.slideNext();
+                            navigate(`/fealiyyet/xidmetler/${item?._id}`);
                           }}>
                           <span>{item.title}</span>
                         </SwiperSlide>

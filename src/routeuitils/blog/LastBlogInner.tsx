@@ -9,9 +9,12 @@ import { useRecoilValue } from "recoil";
 import { useTranslate } from "../../context/TranslateContext";
 import { useQuery } from "@tanstack/react-query";
 import { SocialsType } from "../home/Hero";
+import { SwiperDataForImages } from "./BlogInnerContent";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 type LastBlogType = {
-  _id: number;
+  _id?: string;
   title: string;
   description: string;
   image: string;
@@ -60,10 +63,13 @@ const LastBlogInner: React.FC = () => {
     }
   };
 
-  const lastBlogItem = lastBlogs && lastBlogs?.find((_, i) => {
-    return i.toString() === lastblogtitle?.toString();
+  const lastBlogItem =
+  lastBlogs &&
+  lastBlogs.find((_: LastBlogType, index: number) => {
+    return index.toString() === lastblogtitle;
   });
 
+    
   React.useEffect(() => {
     fetchLastBlogs();
   }, [selectedlang]);
@@ -71,10 +77,38 @@ const LastBlogInner: React.FC = () => {
   const navigate = useNavigate();
   const { translations } = useTranslate();
 
+  //open fancybox images
+  const [open, setOpen] = React.useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = React.useState<number | null>(null);
+  const handleImageClick = (index: number) => {
+    setCurrentImageIndex(index);
+    setOpen(true); // Lightbox opened
+  };
+
+  const { data } = useQuery<SwiperDataForImages[]>({
+    queryKey: ["blogInnerImgKey", selectedlang],
+    queryFn: async () => {
+      const response = await axios.get(`${Baseurl}/blogimagefront`);
+      return response.data;
+    },
+  });
+
+  const findedImage =
+    data &&
+    data?.find((item: SwiperDataForImages) => {
+      console.log(item.selected_blog === lastblogtitle)
+      return item?.selected_blog === lastBlogItem?._id;
+    });
+
+
   return (
     <section className="last-blog-inner-content-section">
       <div className="blogs-inner">
-        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_xeberler"]} />
+        <Breadcrumb
+          blogTitle={lastBlogItem?.title}
+          prevpage={translations["nav_anasehife"]}
+          uri={translations["nav_haqqimizda_xeberler"]}
+        />
 
         <div className="container-blogs-inner">
           <h2>{translations["blog_title"]}</h2>
@@ -84,19 +118,45 @@ const LastBlogInner: React.FC = () => {
 
             <div className="contents">
               <div className="left">
-                <div className="content-inner-blog-image-wrapper" style={{ display: lastBlogItem?.image === "" ? "none" : "flex" }}>
-                  <img
-                    src={`https://ekol-server-1.onrender.com${lastBlogItem?.image}`}
-                    title={lastBlogItem?.title}
-                  />
+                <div
+                  className="content-inner-blog-image-wrapper"
+                  style={{ display: lastBlogItem?.image === "" ? "none" : "flex" }}>
+                  <img src={`https://ekol-server-1.onrender.com${lastBlogItem?.image}`} title={lastBlogItem?.title} />
                 </div>
 
                 <div className="description-content">
-                  <span className="time-span">
-                    {lastBlogItem ? lastBlogItem.created_at : ""}
-                  </span>
+                  <span className="time-span">{lastBlogItem ? lastBlogItem.created_at : ""}</span>
                   {lastBlogItem && lastBlogItem.description && (
                     <div className="description-area" dangerouslySetInnerHTML={{ __html: lastBlogItem?.description }} />
+                  )}
+                </div>
+
+                <div className="description-content-images" style={{ display: findedImage ? "flex" : "none" }}>
+                  {findedImage && findedImage?.images
+                    ? findedImage?.images?.map((imgs, i: number) => (
+                        <div className="content-img">
+                          <img
+                            src={`https://ekol-server-1.onrender.com${imgs}`}
+                            alt={`image-${i + 3}`}
+                            onClick={() => handleImageClick(i)}
+                            style={{ cursor: "pointer" }}
+                          />
+                        </div>
+                      ))
+                    : ""}
+
+                  {/* Lightbox */}
+                  {currentImageIndex !== null && (
+                    <Lightbox
+                      open={open}
+                      close={() => setOpen(false)}
+                      slides={
+                        findedImage && findedImage?.images
+                          ? findedImage?.images?.map((imgs) => ({ src: `https://ekol-server-1.onrender.com${imgs}` }))
+                          : []
+                      }
+                      index={currentImageIndex}
+                    />
                   )}
                 </div>
               </div>
@@ -160,7 +220,6 @@ const LastBlogInner: React.FC = () => {
                       <div className="eye-wrap">
                         <img src="/ey.svg" alt="eye" title="Baxışlar" />
                       </div>
-                      <p className="view-count">112 baxış</p>
                     </div>
                   </div>
                 </div>

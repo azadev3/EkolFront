@@ -71,7 +71,7 @@ const LastNewBlogInner: React.FC = () => {
   return (
     <section className="last-blog-inner-content-section">
       <div className="blogs-inner">
-        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["newblog_title"]} />
+        <Breadcrumb blogTitle={lastBlogItem?.title} prevpage={translations["nav_anasehife"]} uri={translations["newblog_title"]} />
 
         <div className="container-blogs-inner">
           <h2>{translations["newblog_title"]}</h2>
@@ -150,12 +150,12 @@ const LastNewBlogInner: React.FC = () => {
                           ))
                         : ""}
                     </div>
-                    <div className="view">
+                    {/* <div className="view">
                       <div className="eye-wrap">
                         <img src="/ey.svg" alt="eye" title="Baxışlar" />
                       </div>
                       <p className="view-count">112 baxış</p>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

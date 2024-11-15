@@ -6,18 +6,22 @@ import { HiArrowNarrowRight } from "react-icons/hi";
 type Props = {
   uri: string | undefined;
   prevpage: string;
+  blogTitle?: string;
 };
 
-const Breadcrumb: React.FC<Props> = ({ uri, prevpage }) => {
+const Breadcrumb: React.FC<Props> = ({ uri, prevpage, blogTitle }) => {
   //If the referral is dynamic images inner;
   const isLocationInnerImage = useMatch("/about/gallery/images/:imagename");
   const navigate = useNavigate();
 
   const isLocationInnerBlog = useMatch("/xeberler/:blogslug");
+  const isLocationInnerLastBlog = useMatch("/xeberler/en-son-bloglar/:lastblogtitle");
+  const isLocationBlog = useMatch("/bloq/:newblogtitle");
+  const isLocationLastBlog = useMatch("/bloq/en-son/:lastnewblogtitle");
   const isLocationInnerVacation = useMatch("/karyera/:vacid");
+  const isServicesInPage = useMatch("/fealiyyet/xidmetler/:innerserviceid");
   const isLocationInnerVacationReq = useMatch("/karyera/:vacid/:reqid");
 
-  
   const { translations } = useTranslate();
 
   return (
@@ -42,11 +46,11 @@ const Breadcrumb: React.FC<Props> = ({ uri, prevpage }) => {
               {isLocationInnerImage.params?.imagename}
             </span>
           </React.Fragment>
-        ) : isLocationInnerBlog ? (
+        ) : isLocationInnerBlog || isLocationInnerLastBlog || isLocationBlog || isLocationLastBlog || isServicesInPage ? (
           <React.Fragment>
             <HiArrowNarrowRight />
             <span className="currentpage" style={{ textTransform: "capitalize" }}>
-              {isLocationInnerBlog.params?.blogslug}
+              {blogTitle ? blogTitle : ""}
             </span>
           </React.Fragment>
         ) : isLocationInnerVacation ? (

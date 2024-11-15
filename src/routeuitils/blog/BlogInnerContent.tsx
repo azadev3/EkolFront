@@ -18,7 +18,7 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 // import moment from "moment";
 
-type SwiperDataForImages = {
+export type SwiperDataForImages = {
   _id: string;
   selected_blog: string;
   images: [string];
@@ -132,7 +132,7 @@ const BlogInnerContent: React.FC = () => {
   return (
     <section className="blog-inner-content-section">
       <div className="blogs-inner">
-        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_xeberler"]} />
+        <Breadcrumb blogTitle={innerBlogItem?.title} prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_xeberler"]} />
 
         <div className="container-blogs-inner">
           <h2>{translations["blog_title"]}</h2>
@@ -251,7 +251,6 @@ const BlogInnerContent: React.FC = () => {
                       <div className="eye-wrap">
                         <img src="/ey.svg" alt="eye" title="Baxışlar" />
                       </div>
-                      <p className="view-count">112 baxış</p>
                     </div>
                   </div>
                 </div>

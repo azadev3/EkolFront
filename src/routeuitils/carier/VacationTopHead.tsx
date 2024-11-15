@@ -50,10 +50,10 @@ const VacationTopHead: React.FC = () => {
                 {innerVacancy?.startDate} - {innerVacancy?.endDate}
               </p>
             </article>
-            <article>
+            {/* <article>
               <img src="/eyy.png" alt="views" title="Baxış sayı" />
               <p>112 baxış</p>
-            </article>
+            </article> */}
           </div>
         </div>
       </div>

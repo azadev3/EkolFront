@@ -58,7 +58,7 @@ const NewBlog: React.FC = () => {
   }
 
   if (error) {
-    return "Bir hata oluştu.";
+    return "";
   }
 
   return (

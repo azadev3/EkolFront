@@ -81,7 +81,7 @@ const Blogs: React.FC = () => {
               ? sortedBlogData.slice(0, paginate).map((item: BlogType, index: any) => (
                   <article
                     onClick={() => {
-                      navigate(`/xeberler/${index?.toString()}`);
+                      navigate(`/xeberler/${item._id}`);
                     }}
                     className={`blog-item-blogpage ${item?.image === "" ? "noimgblog" : ""}`}
                     key={index}>
@@ -104,7 +104,7 @@ const Blogs: React.FC = () => {
                         <div dangerouslySetInnerHTML={{ __html: item?.description }} />
                       </div>
                       <div className="show-more-btn">
-                        <Link to={`/xeberler/${index?.toString()}`}>Ətraflı oxu</Link>
+                        <Link to={`/xeberler/${item?._id}`}>Ətraflı oxu</Link>
                       </div>
                     </div>
                   </article>
