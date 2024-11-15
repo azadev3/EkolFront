@@ -70,7 +70,7 @@ const BlogSection: React.FC = () => {
             ? blogData.slice(0, 3).map((item: BlogType, index: number) => (
                 <article
                   onClick={() => {
-                    navigate(`/xeberler/${item?._id}`);
+                    navigate(`/xeberler/${index.toString()}`);
                   }}
                   className="blog-item"
                   key={index}>
@@ -88,7 +88,7 @@ const BlogSection: React.FC = () => {
                       <div dangerouslySetInnerHTML={{ __html: item?.description }} />
                     </div>
                     <div className="show-more-btn">
-                      <Link to={`/xeberler/${item?._id}`}>Ətraflı oxu</Link>
+                      <Link to={`/xeberler/${index.toString()}`}>Ətraflı oxu</Link>
                     </div>
                   </div>
                 </article>

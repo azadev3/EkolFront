@@ -78,10 +78,10 @@ const Blogs: React.FC = () => {
 
           <section className="blog-grid-blogpage">
             {sortedBlogData && sortedBlogData.length > 0
-              ? sortedBlogData.slice(0, paginate).map((item: BlogType, index: any) => (
+              ? sortedBlogData.slice(0, paginate).map((item: BlogType, index: number) => (
                   <article
                     onClick={() => {
-                      navigate(`/xeberler/${item._id}`);
+                      navigate(`/xeberler/${index.toString()}`);
                     }}
                     className={`blog-item-blogpage ${item?.image === "" ? "noimgblog" : ""}`}
                     key={index}>
@@ -104,7 +104,7 @@ const Blogs: React.FC = () => {
                         <div dangerouslySetInnerHTML={{ __html: item?.description }} />
                       </div>
                       <div className="show-more-btn">
-                        <Link to={`/xeberler/${item?._id}`}>Ətraflı oxu</Link>
+                        <Link to={`/xeberler/${index.toString()}`}>Ətraflı oxu</Link>
                       </div>
                     </div>
                   </article>
