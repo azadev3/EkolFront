@@ -199,7 +199,7 @@ const BlogInnerContent: React.FC = () => {
                   {lastBlogs && lastBlogs.length > 0
                     ? lastBlogs.map((item: LastBlogType, index: string) => (
                         <Link
-                          to={`/xeberler/en-son-bloglar/${index?.toString()}`}
+                          to={`/xeberler/en-son-xeberler/${index?.toString()}`}
                           key={uuidv4()}
                           className="item-last-blog">
                           <div className="title">{item.title}</div>

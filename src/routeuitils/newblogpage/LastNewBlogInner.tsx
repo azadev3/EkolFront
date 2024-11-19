@@ -104,7 +104,7 @@ const LastNewBlogInner: React.FC = () => {
                 <div className="grid-last-blog">
                   {lastBlogs && lastBlogs.length > 0
                     ? lastBlogs?.map((item: LastBlogType, i) => (
-                        <Link to={`/bloq/en-son/${i?.toString()}`} key={item?._id} className="item-last-blog">
+                        <Link to={`/bloq/en-son-bloqlar/${i?.toString()}`} key={item?._id} className="item-last-blog">
                           <div className="title">{item?.title}</div>
 
                           <div className="time-and-icon">

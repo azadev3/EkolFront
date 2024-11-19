@@ -167,7 +167,7 @@ const LastBlogInner: React.FC = () => {
                   {lastBlogs && lastBlogs.length > 0
                     ? lastBlogs?.map((item: LastBlogType, i) => (
                         <Link
-                          to={`/xeberler/en-son-bloglar/${i?.toString()}`}
+                          to={`/xeberler/en-son-xeberler/${i?.toString()}`}
                           key={item?._id}
                           className="item-last-blog">
                           <div className="title">{item?.title}</div>

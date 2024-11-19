@@ -1,76 +1,53 @@
 import React from "react";
-import { v4 as uuid } from "uuid";
 import Breadcrumb from "../../Breadcrumb";
-import { useQuery } from "@tanstack/react-query";
 import { useRecoilValue } from "recoil";
 import { SelectedLanguageState } from "../../recoil/Atoms";
+import { useTranslate } from "../../context/TranslateContext";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import Loader from "../../Loader";
-import { useTranslate } from "../../context/TranslateContext";
+
+type DataStr = {
+  image: string;
+};
 
 const Structure: React.FC = () => {
-
   const { translations } = useTranslate();
 
-  const selectedlang = useRecoilValue(SelectedLanguageState);
-
-  const { data: StructureData, isLoading: StructureLoading } = useQuery({
-    queryKey: ["structureDataKey", selectedlang],
+  const {
+    data: dataStr,
+    isLoading,
+    isError,
+  } = useQuery<DataStr[]>({
+    queryKey: ["strDataKey"],
     queryFn: async () => {
-      const response = await axios.get(`${Baseurl}/departmentsfront`, {
-        headers: {
-          "Accept-Language": selectedlang,
-        },
-      });
-      return response.data;
+      const res = await axios.get(`${Baseurl}/structure_img_front`);
+      return res.data;
     },
-    staleTime: 1000000,
+    staleTime: 1000 * 60 * 60,
   });
 
-  if (StructureLoading) {
+  const imageStructure = dataStr && dataStr?.length > 0 && dataStr[0] && dataStr[0]?.image ? dataStr[0]?.image : "";
+
+  if (isLoading) {
     return <Loader />;
   }
 
-  const groupedData = StructureData ? StructureData?.reduce((acc: any, item: any) => {
-    const { category, title } = item.departments;
-    if (!acc[category]) {
-      acc[category] = [];
-    }
-    acc[category].push({ id: uuid(), title });
-    return acc;
-  }, {}) : [];
+  if (isError) {
+    return <p>Have a problem.</p>;
+  }
 
   return (
     <section className="structure-section">
       <div className="structure">
-        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_struktur']} />
+        <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_struktur"]} />
 
         <div className="content-structure">
           <h2>{translations["struktur_title"]}</h2>
-          <div className="director-general">
-            <div className="general">
-              <span>{translations["baş_direktorun_adı"]}</span>
-            </div>
-          </div>
-          <div className="other-refactors">
-            {Object.keys(groupedData).map((category) => (
-              <div className="item-department" key={category}>
-                {groupedData[category].map((item: { id: string; title: string }) => (
-                  <div className="container-item" key={item.id}>
-                    <div className="item">
-                      <span>{item.title}</span>
-                    </div>
-                    {groupedData[category].length > 1 && (
-                      <React.Fragment>
-                        <div className="technic-line"></div>
-                        <div className="technic-line2"></div>
-                      </React.Fragment>
-                    )}
-                  </div>
-                ))}
-              </div>
-            ))}
+
+          <div className="wrapper-structure">
+            <img src={`https://ekol-server-1.onrender.com${imageStructure}`} alt="" />
           </div>
         </div>
       </div>

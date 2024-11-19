@@ -15,9 +15,9 @@ const Breadcrumb: React.FC<Props> = ({ uri, prevpage, blogTitle }) => {
   const navigate = useNavigate();
 
   const isLocationInnerBlog = useMatch("/xeberler/:blogslug");
-  const isLocationInnerLastBlog = useMatch("/xeberler/en-son-bloglar/:lastblogtitle");
+  const isLocationInnerLastBlog = useMatch("/xeberler/en-son-xeberler/:lastblogtitle");
   const isLocationBlog = useMatch("/bloq/:newblogtitle");
-  const isLocationLastBlog = useMatch("/bloq/en-son/:lastnewblogtitle");
+  const isLocationLastBlog = useMatch("/bloq/en-son-bloqlar/:lastnewblogtitle");
   const isLocationInnerVacation = useMatch("/karyera/:vacid");
   const isServicesInPage = useMatch("/fealiyyet/xidmetler/:innerserviceid");
   const isLocationInnerVacationReq = useMatch("/karyera/:vacid/:reqid");

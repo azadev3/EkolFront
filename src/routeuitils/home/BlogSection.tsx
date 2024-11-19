@@ -38,7 +38,7 @@ const BlogSection: React.FC = () => {
           "Accept-Language": selectedlang,
         },
       });
-      console.log(response.data, 'salam xeberler')
+      console.log(response.data, "salam xeberler");
       return response.data;
     },
     staleTime: 9000000,
@@ -78,7 +78,11 @@ const BlogSection: React.FC = () => {
                     ""
                   ) : (
                     <div className="image-blog">
-                      <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
+                      <img
+                        src={`https://ekol-server-1.onrender.com${item?.image}`}
+                        alt={`${index}-blogimg`}
+                        title={item?.title}
+                      />
                     </div>
                   )}
                   <div className="descriptions-blog">

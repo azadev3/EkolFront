@@ -222,111 +222,20 @@
           font-weight: 700;
           font-size: 48px;
         }
-        .director-general {
+
+        .wrapper-structure {
           width: 100%;
           height: auto;
+          margin-top: 24px;
+          background-color: transparent;
+          border-radius: 12px;
           display: flex;
-          align-items: center;
-          justify-content: center;
-          .general {
-            min-width: 164px;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            background: #004238;
-            border-radius: 4px;
-            span {
-              color: #ffffff;
-              font-weight: 600;
-              font-size: 16px;
-              text-align: center;
-            }
-          }
-        }
-
-        .other-refactors {
-          padding-bottom: 60px;
-          width: 100%;
-          height: auto;
-          display: grid;
-          grid-template-columns: repeat(7, 1fr);
-          justify-items: flex-start;
           align-items: flex-start;
-          gap: 20px;
-          .item-department {
-            background-color: transparent;
+          justify-content: flex-start;
+          overflow: hidden;
+          img {
             width: 100%;
-            height: auto;
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-            flex-direction: column;
-
-            .container-item {
-              width: 100%;
-              height: auto;
-              display: flex;
-              align-items: flex-start;
-              justify-content: flex-start;
-              flex-direction: column;
-              position: relative;
-              .item {
-                background-color: #ffffff;
-                border-radius: 4px;
-                width: 100%;
-                min-height: 80px;
-                @include flex();
-                overflow: hidden;
-                margin-top: 20px;
-                text-align: center;
-                padding: 18px 19px;
-                span {
-                  color: #000000;
-                  font-weight: 500;
-                  font-size: 14px;
-                  line-height: 21px;
-                  letter-spacing: -0.5px;
-                  text-wrap: wrap;
-                  text-align: center;
-                }
-              }
-
-              .technic-line,
-              .technic-line2 {
-                width: 2px;
-                height: 50%;
-                background-color: #07695a9f;
-                position: absolute;
-                bottom: 0;
-                right: -10px;
-                &::after {
-                  content: "";
-                  position: absolute;
-                  width: 10px;
-                  height: 2px;
-                  background-color: #07695a9f;
-                  top: 0;
-                  z-index: 1000;
-                  left: -10px;
-                }
-              }
-
-              .technic-line2 {
-                right: -10px;
-                bottom: -50%;
-
-                &::after {
-                  content: none !important;
-                }
-              }
-              &:nth-child(1) {
-                .item span {
-                  color: #004238;
-                }
-              }
-            }
+            height: 100%;
           }
         }
       }
@@ -982,7 +891,6 @@
       }
     }
   }
-
 }
 .ourworks-section {
   @include SectionStyle();
@@ -2780,7 +2688,7 @@
             }
             &:hover {
               img {
-                transform: scale(1.1)
+                transform: scale(1.1);
               }
             }
           }
