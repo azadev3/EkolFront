@@ -7,6 +7,18 @@
   font-family: "Public Sans", sans-serif;
 }
 
+.home-page
+  .contact-us-section
+  .contact-us
+  .map-contact
+  .contact-information-box
+  .contact-datas
+  .information-box
+  .right-items
+  .links {
+  max-width: 250px !important;
+}
+
 @mixin pageNavigator {
   .page-navigator {
     display: flex;
@@ -309,6 +321,7 @@
           transform: translateY(-10px);
           transition: 100ms ease-in-out;
           width: 100%;
+          z-index: 10;
           overflow: hidden;
           background-color: rgba(52, 121, 80, 0.876);
           backdrop-filter: blur(10px);
@@ -351,6 +364,17 @@
             user-select: auto;
             cursor: auto;
           }
+        }
+        &::after {
+          user-select: none;
+          cursor: auto;
+          content: "";
+          width: 100%;
+          height: 200px;
+          background-color: transparent;
+          position: absolute;
+          z-index: 0;
+          inset: 0;
         }
       }
 
@@ -663,6 +687,7 @@
           border-radius: 8px;
           padding: 24px 0;
           display: grid;
+          z-index: 10;
           align-items: center;
           justify-items: center;
           grid-template-columns: repeat(1, 1fr);
@@ -698,6 +723,18 @@
             user-select: auto;
             cursor: auto;
           }
+        }
+
+        &::after {
+          user-select: none;
+          cursor: auto;
+          content: "";
+          width: 100%;
+          height: 200px;
+          background-color: transparent;
+          position: absolute;
+          z-index: 0;
+          inset: 0;
         }
       }
 
@@ -791,13 +828,30 @@ $whitedarktwo: #8b9f9c;
     .calculations-page .calculation-section .calculation .container-calculation h2 {
       color: white;
     }
-    .calculations-page .calculation-section .calculation .container-calculation .quarterly-calculations .quarterly-data-item {
+    .calculations-page
+      .calculation-section
+      .calculation
+      .container-calculation
+      .quarterly-calculations
+      .quarterly-data-item {
       background-color: #404040;
     }
-    .calculations-page .calculation-section .calculation .container-calculation .quarterly-calculations .quarterly-data-item .titledata {
+    .calculations-page
+      .calculation-section
+      .calculation
+      .container-calculation
+      .quarterly-calculations
+      .quarterly-data-item
+      .titledata {
       color: white;
     }
-    .calculations-page .calculation-section .calculation .container-calculation .yearly-calculations .yearly-data-item .titledata {
+    .calculations-page
+      .calculation-section
+      .calculation
+      .container-calculation
+      .yearly-calculations
+      .yearly-data-item
+      .titledata {
       color: white;
     }
     .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact h2 {
@@ -2076,13 +2130,13 @@ $whitedarktwo: #8b9f9c;
     }
     .ourworks-section .works .container-works .grid-works .navigation-content {
       background-color: #303030;
-      *{
+      * {
         color: #fff !important;
       }
     }
     .ourworks-section .works .container-works .grid-works .navigation-description-content {
       background-color: #303030;
-      *{
+      * {
         color: #fff !important;
       }
     }
@@ -2545,7 +2599,8 @@ $whitedarktwo: #8b9f9c;
         gap: 24px;
 
         .header-item-results,
-        .another-section-results {
+        .another-section-results,
+        .services-section-results {
           width: 100%;
           display: flex;
           align-items: flex-start;
@@ -2587,7 +2642,8 @@ $whitedarktwo: #8b9f9c;
           }
 
           .results-area,
-          .results-area-blog {
+          .results-area-blog,
+          .results-area-service {
             transition: max-height 200ms ease-in-out, opacity 200ms ease-in-out, transform 200ms ease-in-out;
             gap: 8px;
             width: 100%;
@@ -2666,7 +2722,8 @@ $whitedarktwo: #8b9f9c;
             }
           }
 
-          .result-item-blog {
+          .result-item-blog,
+          .result-item-service {
             gap: 24px;
             .description {
               max-height: 60px !important;
@@ -2687,6 +2744,12 @@ $whitedarktwo: #8b9f9c;
             pointer-events: none;
           }
           &.collapsed .results-area-blog {
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+          }
+          &.collapsed .results-area-service {
             max-height: 0;
             opacity: 0;
             transform: translateY(-20px);
@@ -3026,6 +3089,7 @@ $whitedarktwo: #8b9f9c;
           position: absolute;
           top: 50px;
           right: 0;
+          z-index: 10;
           pointer-events: none;
           user-select: none;
           opacity: 0;
@@ -3075,6 +3139,17 @@ $whitedarktwo: #8b9f9c;
             user-select: auto;
             cursor: auto;
           }
+        }
+        &::after {
+          user-select: none;
+          cursor: auto;
+          content: "";
+          width: 100%;
+          height: 200px;
+          background-color: transparent;
+          position: absolute;
+          z-index: 0;
+          inset: 0;
         }
       }
 
@@ -3445,7 +3520,14 @@ $whitedarktwo: #8b9f9c;
   cursor: pointer;
 }
 
-.about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content .img-grid {
+.about-page
+  .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-description-content
+  .description-content
+  .img-grid {
   grid-template-columns: repeat(2, 1fr) !important;
 }
 
@@ -3514,7 +3596,14 @@ $whitedarktwo: #8b9f9c;
   }
 }
 
-.activity-page .servicespage-section .servicespage .container-servicespage .container-services-grid .item-service .image img {
+.activity-page
+  .servicespage-section
+  .servicespage
+  .container-servicespage
+  .container-services-grid
+  .item-service
+  .image
+  img {
   filter: none !important;
 }
 
@@ -3523,12 +3612,22 @@ $whitedarktwo: #8b9f9c;
   &:hover {
     background-color: #cecece;
     * {
-    color: black;
+      color: black;
     }
   }
 }
 
-.app.dark .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left .description-content p img {
+.app.dark
+  .blog-inner-page
+  .blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .left
+  .description-content
+  p
+  img {
   width: 100%;
   height: 100%;
   transition: 100ms ease-in-out;
@@ -3537,21 +3636,46 @@ $whitedarktwo: #8b9f9c;
   }
 }
 
-.blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left .description-content .description-area {
+.blog-inner-page
+  .blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .left
+  .description-content
+  .description-area {
   width: 100%;
   max-width: unset;
   p {
     text-align: justify !important;
   }
 }
-.blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left .description-content .description-area {
+.blog-inner-page
+  .blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .left
+  .description-content
+  .description-area {
   width: 100%;
   p {
     line-height: 28px;
     text-align: justify !important;
   }
 }
-.blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left .description-content .description-area p {
+.blog-inner-page
+  .blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .left
+  .description-content
+  .description-area
+  p {
   width: 100% !important;
   a {
     width: 100% !important;
@@ -3567,14 +3691,28 @@ $whitedarktwo: #8b9f9c;
 .blog-page-wrapper .blogs-section .blogs .container-blogs .blog-grid-blogpage .blog-item-blogpage {
   min-width: 100% !important;
 }
-.home-page .contact-us-section .contact-us .map-contact .contact-information-box .contact-datas .information-box .left-icon {
+.home-page
+  .contact-us-section
+  .contact-us
+  .map-contact
+  .contact-information-box
+  .contact-datas
+  .information-box
+  .left-icon {
   padding: 5px !important;
 }
 .home-page .card-about-section .card-about .top-card-area .right-descriptions {
   background-size: contain !important;
 }
 
-.blog-page-wrapper .blogs-section .blogs .container-blogs .blog-grid-blogpage .blog-item-blogpage .descriptions-blog h4 {
+.blog-page-wrapper
+  .blogs-section
+  .blogs
+  .container-blogs
+  .blog-grid-blogpage
+  .blog-item-blogpage
+  .descriptions-blog
+  h4 {
   font-weight: 700;
 }
 .fancybox-active {

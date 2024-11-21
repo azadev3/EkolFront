@@ -1,7 +1,7 @@
 import React from "react";
 import Breadcrumb from "../../Breadcrumb";
 import { v4 as uuidv4 } from "uuid";
-import { useRecoilValue } from "recoil";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useQuery } from "@tanstack/react-query";
 import { Baseurl } from "../../Baseurl";
@@ -11,7 +11,7 @@ import { useTranslate } from "../../context/TranslateContext";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-interface ToolsInnerInterface {
+export interface ToolsInnerInterface {
   _id?: string;
   title: string;
   description: string;
@@ -22,6 +22,11 @@ interface ToolsImages {
   images: [string];
   selected_tools: string;
 }
+
+export const SelectedToolState = atom<any>({
+  key: "selectedToolStatekey",
+  default: "",
+});
 
 const Tools: React.FC = () => {
   const { translations } = useTranslate();
@@ -39,7 +44,7 @@ const Tools: React.FC = () => {
     staleTime: 1000000,
   });
 
-  const [selectItem, setSelectItem] = React.useState<string>("");
+  const [selectItem, setSelectItem] = useRecoilState(SelectedToolState);
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [selectedImage, setSelectedImage] = React.useState<string>("");
 

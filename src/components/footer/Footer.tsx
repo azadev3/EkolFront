@@ -139,6 +139,7 @@ const Footer: React.FC = () => {
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_elaqe"]}`,
+          to: "/elaqe"
         },
       ],
     },

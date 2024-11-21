@@ -38,7 +38,6 @@ const BlogSection: React.FC = () => {
           "Accept-Language": selectedlang,
         },
       });
-      console.log(response.data, "salam xeberler");
       return response.data;
     },
     staleTime: 9000000,
@@ -70,7 +69,7 @@ const BlogSection: React.FC = () => {
             ? blogData.slice(0, 3).map((item: BlogType, index: number) => (
                 <article
                   onClick={() => {
-                    navigate(`/xeberler/${index.toString()}`);
+                    navigate(`/xeberler/${item._id}`);
                   }}
                   className="blog-item"
                   key={index}>

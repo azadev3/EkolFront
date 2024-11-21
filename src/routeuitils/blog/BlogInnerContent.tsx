@@ -38,7 +38,6 @@ const BlogInnerContent: React.FC = () => {
   const { blogtitle } = useParams<{ blogtitle: string }>();
   const selectedlang = useRecoilValue(SelectedLanguageState);
   const navigate = useNavigate();
-
   // Fetch blog data
   const {
     data: blogDatas,
@@ -76,7 +75,6 @@ const BlogInnerContent: React.FC = () => {
             "Accept-Language": selectedlang,
           },
         });
-        console.log(response.data, "last blogs");
         return response.data;
       } catch (error) {
         console.error(error);
@@ -97,8 +95,8 @@ const BlogInnerContent: React.FC = () => {
   });
 
   const innerBlogItem: BlogType =
-    blogDatas && blogDatas?.find((_: BlogType, index: number) => index.toString() === blogtitle);
-
+    blogDatas && blogDatas?.find((item: BlogType) => item._id === blogtitle);
+ 
   //open fancybox images
   const [open, setOpen] = React.useState(false);
   const [currentImageIndex, setCurrentImageIndex] = React.useState<number | null>(null);
@@ -197,9 +195,9 @@ const BlogInnerContent: React.FC = () => {
                 <h5>Ən son xəbərlər</h5>
                 <div className="grid-last-blog">
                   {lastBlogs && lastBlogs.length > 0
-                    ? lastBlogs.map((item: LastBlogType, index: string) => (
+                    ? lastBlogs.map((item: LastBlogType, _: string) => (
                         <Link
-                          to={`/xeberler/en-son-xeberler/${index?.toString()}`}
+                          to={`/xeberler/en-son-xeberler/${item._id}`}
                           key={uuidv4()}
                           className="item-last-blog">
                           <div className="title">{item.title}</div>

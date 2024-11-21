@@ -29,9 +29,9 @@ const ShareButton: React.FC = () => {
   return (
     <section
       className="share-media"
-      onClick={() => {
-        setShareModal((prevModal) => !prevModal);
-      }}>
+      onMouseEnter={() => setShareModal(true)}
+      onMouseLeave={() => setShareModal(false)}
+      >
       {/* <span>Sosial media</span> */}
       <IoShareSocialOutline className="share-icon" />
 

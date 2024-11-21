@@ -1,7 +1,5 @@
 import React from "react";
 import Breadcrumb from "../../Breadcrumb";
-import { useRecoilValue } from "recoil";
-import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useTranslate } from "../../context/TranslateContext";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";

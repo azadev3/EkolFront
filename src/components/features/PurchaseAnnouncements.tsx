@@ -139,12 +139,44 @@ const PurchaseAnnouncements: React.FC = () => {
   const openPurchModal = (id: string) => {
     setPurchModal(id);
   };
+
+  // const orderByItems =
+  // hasPurchData && currentItems
+  //   ? currentItems?.sort((a: PurchAnnInterface, b: PurchAnnInterface) => {
+  //       return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  //     })
+  //   : [];
+
+
+
   const orderByItems =
-    hasPurchData && currentItems
-      ? currentItems?.sort((a: PurchAnnInterface, b: PurchAnnInterface) => {
-          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-        })
-      : [];
+  hasPurchData && currentItems
+    ? currentItems?.sort((a: PurchAnnInterface, b: PurchAnnInterface) => {
+        const endDateA = new Date(a.end_date).getTime();
+        const endDateB = new Date(b.end_date).getTime();
+        return endDateA - endDateB;
+      })
+    : [];
+
+  // const orderByItems =
+  //   hasPurchData && currentItems
+  //     ? currentItems?.sort((a: PurchAnnInterface, b: PurchAnnInterface) => {
+  //         const endDateA = new Date(a.end_date).getTime();
+  //         const endDateB = new Date(b.end_date).getTime();
+  //         return endDateA - endDateB;
+  //       })
+  //     : [];
+
+  // const orderByItems =
+  // hasPurchData && currentItems
+  //   ? currentItems?.sort((a: PurchAnnInterface, b: PurchAnnInterface) => {
+  //       const endDateA = new Date(a.end_date).getTime();
+  //       const endDateB = new Date(b.end_date).getTime();
+        
+  //       return endDateB - endDateA; 
+  //     })
+  //   : [];
+
 
   return (
     <main className="purch-announcement-wrapper">

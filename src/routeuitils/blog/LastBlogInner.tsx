@@ -23,7 +23,6 @@ type LastBlogType = {
 
 const LastBlogInner: React.FC = () => {
   const { lastblogtitle } = useParams<{ lastblogtitle: string }>();
-
   const selectedlang = useRecoilValue(SelectedLanguageState);
 
   //formatted created at
@@ -65,11 +64,10 @@ const LastBlogInner: React.FC = () => {
 
   const lastBlogItem =
   lastBlogs &&
-  lastBlogs.find((_: LastBlogType, index: number) => {
-    return index.toString() === lastblogtitle;
+  lastBlogs.find((item: LastBlogType) => {
+    return item._id === lastblogtitle;
   });
 
-    
   React.useEffect(() => {
     fetchLastBlogs();
   }, [selectedlang]);
@@ -96,7 +94,6 @@ const LastBlogInner: React.FC = () => {
   const findedImage =
     data &&
     data?.find((item: SwiperDataForImages) => {
-      console.log(item.selected_blog === lastblogtitle)
       return item?.selected_blog === lastBlogItem?._id;
     });
 
@@ -131,7 +128,7 @@ const LastBlogInner: React.FC = () => {
                   )}
                 </div>
 
-                <div className="description-content-images" style={{ display: findedImage ? "flex" : "none" }}>
+                <div className="description-content-images" style={{ display: findedImage ? "flex" : "flex" }}>
                   {findedImage && findedImage?.images
                     ? findedImage?.images?.map((imgs, i: number) => (
                         <div className="content-img">
@@ -165,9 +162,9 @@ const LastBlogInner: React.FC = () => {
                 <h5>Ən son xəbərlər</h5>
                 <div className="grid-last-blog">
                   {lastBlogs && lastBlogs.length > 0
-                    ? lastBlogs?.map((item: LastBlogType, i) => (
+                    ? lastBlogs?.map((item: LastBlogType) => (
                         <Link
-                          to={`/xeberler/en-son-xeberler/${i?.toString()}`}
+                          to={`/xeberler/en-son-xeberler/${item?._id}`}
                           key={item?._id}
                           className="item-last-blog">
                           <div className="title">{item?.title}</div>

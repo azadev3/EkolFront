@@ -14,6 +14,8 @@ import { Baseurl } from "../../../Baseurl";
 import axios from "axios";
 import { BlogType } from "../../../routeuitils/home/BlogSection";
 import DOMPurify from "dompurify";
+import { ServicesContentType } from "../../../routeuitils/activity/ServicesActivity";
+import { SelectedToolState, ToolsInnerInterface } from "../../../routeuitils/activity/Tools";
 
 const SearchModal = () => {
   const { translations } = useTranslate();
@@ -169,9 +171,61 @@ const SearchModal = () => {
     staleTime: 1000000,
   });
 
+  const { data: servicesPageData } = useQuery<ServicesContentType[]>({
+    queryKey: ["servicesPageDataKey", selectedlang],
+    queryFn: async () => {
+      const response = await axios.get(`${Baseurl}/servicespagefront`, {
+        headers: {
+          "Accept-Language": selectedlang,
+        },
+      });
+      return response.data;
+    },
+    staleTime: 1000000,
+  });
+
+  const { data: ToolsInnerData } = useQuery<ToolsInnerInterface[]>({
+    queryKey: ["toolsInnerDataKey", selectedlang],
+    queryFn: async () => {
+      const response = await axios.get(`${Baseurl}/toolsinnerfront`, {
+        headers: {
+          "Accept-Language": selectedlang,
+        },
+      });
+      return response.data;
+    },
+    staleTime: 1000000,
+  });
+
   const filterItemsBlogs =
     blogData && blogData?.length > 0
       ? blogData?.filter((item: BlogType) => {
+          if (searchItems) {
+            const lowerCaseTitle = item.title.toLowerCase();
+            const lowerCaseSearch = searchItems.toLowerCase();
+
+            return lowerCaseTitle.includes(lowerCaseSearch);
+          }
+          return true;
+        })
+      : [];
+
+  const filterItemsServices =
+    servicesPageData && servicesPageData?.length > 0
+      ? servicesPageData?.filter((item: ServicesContentType) => {
+          if (searchItems) {
+            const lowerCaseTitle = item.title.toLowerCase();
+            const lowerCaseSearch = searchItems.toLowerCase();
+
+            return lowerCaseTitle.includes(lowerCaseSearch);
+          }
+          return true;
+        })
+      : [];
+
+  const filterItemsTools =
+    ToolsInnerData && ToolsInnerData?.length > 0
+      ? ToolsInnerData?.filter((item: ToolsInnerInterface) => {
           if (searchItems) {
             const lowerCaseTitle = item.title.toLowerCase();
             const lowerCaseSearch = searchItems.toLowerCase();
@@ -186,6 +240,10 @@ const SearchModal = () => {
 
   const [collapseHeaderItems, setCollapseHeaderItems] = React.useState(false);
   const [collapseAnotherSection, setCollapseAnotherSection] = React.useState(false);
+  const [collapseServicesSection, setCollapseServicesSection] = React.useState(false);
+  const [collapseToolsSection, setCollapseToolsSection] = React.useState(false);
+
+  const [_, setSelectItem] = useRecoilState(SelectedToolState);
 
   return (
     <section className={`search-modal ${searchModal ? "active" : ""}`} ref={modalRef}>
@@ -264,7 +322,7 @@ const SearchModal = () => {
                       className="result-item-blog"
                       key={i}
                       onClick={() => {
-                        navigate(`/xeberler/${i.toString()}`);
+                        navigate(`/xeberler/${items?._id}`);
                         setSearchModal(false);
                       }}>
                       <article className="head-item-title">
@@ -275,6 +333,60 @@ const SearchModal = () => {
                         className="description"
                         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(items?.description) }}
                       />
+                    </div>
+                  ))
+                : ""}
+            </div>
+          </div>
+
+          <div className={`services-section-results ${collapseServicesSection ? "collapsed" : ""}`}>
+            <div className="head" title="Yığ" onClick={() => setCollapseServicesSection(!collapseServicesSection)}>
+              <span className="name-result">{translations["nav_haqqimizda_xidmetler"]}</span>
+              <FaCaretDown
+                className="down"
+                style={{ transform: `${collapseServicesSection ? "rotate(-180deg)" : ""}` }}
+              />
+            </div>
+            <div className="results-area-service">
+              {filterItemsServices && filterItemsServices?.length > 0
+                ? filterItemsServices.map((items: ServicesContentType, i: number) => (
+                    <div
+                      className="result-item-blog"
+                      key={i}
+                      onClick={() => {
+                        navigate(`/fealiyyet/xidmetler/${i + 1}`);
+                        setSearchModal(false);
+                      }}>
+                      <article className="head-item-title">
+                        <MdLocationSearching className="icon-result" />
+                        <span>{items?.title}</span>
+                      </article>
+                    </div>
+                  ))
+                : ""}
+            </div>
+          </div>
+
+          <div className={`services-section-results ${collapseToolsSection ? "collapsed" : ""}`}>
+            <div className="head" title="Yığ" onClick={() => setCollapseToolsSection(!collapseToolsSection)}>
+              <span className="name-result">{translations["nav_haqqimizda_avadanliqlar"]}</span>
+              <FaCaretDown className="down" style={{ transform: `${collapseToolsSection ? "rotate(-180deg)" : ""}` }} />
+            </div>
+            <div className="results-area-service">
+              {filterItemsTools && filterItemsTools?.length > 0
+                ? filterItemsTools.map((items: ToolsInnerInterface, i: number) => (
+                    <div
+                      className="result-item-blog"
+                      key={i}
+                      onClick={() => {
+                        navigate(`/fealiyyet/avadanliqlar`);
+                        setSelectItem(items.title);
+                        setSearchModal(false);
+                      }}>
+                      <article className="head-item-title">
+                        <MdLocationSearching className="icon-result" />
+                        <span>{items?.title}</span>
+                      </article>
                     </div>
                   ))
                 : ""}
