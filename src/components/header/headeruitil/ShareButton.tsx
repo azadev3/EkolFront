@@ -28,7 +28,7 @@ const ShareButton: React.FC = () => {
 
   return (
     <section
-      className="share-media"
+      className={`share-media ${shareModal ? "actived" : ""}`}
       onMouseEnter={() => setShareModal(true)}
       onMouseLeave={() => setShareModal(false)}
       >

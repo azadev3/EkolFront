@@ -8,10 +8,10 @@ import axios from "axios";
 import { FaAngleDown } from "react-icons/fa6";
 import { useTranslate } from "../../context/TranslateContext";
 import Search from "./headeruitil/Search";
-import Language from "./headeruitil/Language";
 import { isHomePageState } from "../../App";
 import { useRecoilValue } from "recoil";
 import DarkMode from "./headeruitil/DarkMode";
+import LangMobile from "./headeruitil/LangMobile";
 
 export interface Logo {
   _id: string;
@@ -266,7 +266,7 @@ const MobileHeader: React.FC = () => {
 
         <div className="lang-and-search-mobile">
           <Search />
-          <Language />
+          <LangMobile />
           <DarkMode />
         </div>
       </div>

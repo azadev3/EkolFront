@@ -1,9 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { SelectedLanguageState } from "../../../recoil/Atoms";
 
+type LanguagesType = {
+  id: number;
+  title: string; 
+  langValue: string;
+};
+
+export const LanguagesData: LanguagesType[] = [
+  {
+    id: 1,
+    title: "AZ",
+    langValue: "az",
+  },
+  {
+    id: 2,
+    title: "EN",
+    langValue: "en",
+  },
+  {
+    id: 3,
+    title: "RU",
+    langValue: "ru",
+  },
+];
+
 const Language: React.FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useRecoilState(SelectedLanguageState);
+  const [dropdown, setDropdown] = useState<boolean>(false);
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem("languageSelected");
@@ -12,18 +37,23 @@ const Language: React.FC = () => {
     }
   }, [setSelectedLanguage]);
 
-  const handleSelectLanguage = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const lang = event.target.value;
+  const handleSelectLanguage = (lang: string) => {
     localStorage.setItem("languageSelected", lang);
     setSelectedLanguage(lang);
+    setDropdown(false);
   };
 
   return (
-    <select className="select-language" onChange={handleSelectLanguage} value={selectedLanguage}>
-      <option value="az">az</option>
-      <option value="en">en</option>
-      <option value="ru">ru</option>
-    </select>
+    <div className="select-language" onMouseEnter={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)}>
+      <div className="selected-lang">{selectedLanguage.toUpperCase()}</div>
+        <div className={`dropdown-menu ${dropdown ? "actived" : ""}`}>
+          {LanguagesData.map((langs: LanguagesType) => (
+            <div key={langs.id} className="lang-item" onClick={() => handleSelectLanguage(langs.langValue)}>
+             <span> {langs.title}</span>
+            </div>
+          ))}
+        </div>
+    </div>
   );
 };
 
