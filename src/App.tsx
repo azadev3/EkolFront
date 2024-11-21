@@ -37,6 +37,7 @@ import PurchaseAnnouncements from "./components/features/PurchaseAnnouncements";
 import PurchaseRules from "./components/features/PurchaseRules";
 import PurchaseAnnouncementModal from "./modals/PurchaseAnnouncementModal";
 import PurchaseContact from "./components/features/PurchaseContact";
+import CarcbonCalculate from "./routes/CarcbonCalculate";
 export const isHomePageState = atom<boolean>({
   key: "isHomePageState",
   default: false,
@@ -122,6 +123,7 @@ const App: React.FC = () => {
         />
         <Route path="/xeberler" element={<Blog />} />
         <Route path="/xeberler/:blogtitle" element={<BlogInner />} />
+        <Route path="/carbon_calculate" element={<CarcbonCalculate />} />
         <Route
           path="/xeberler/en-son-xeberler/:lastblogtitle"
           element={

@@ -121,6 +121,11 @@ const Header: React.FC = () => {
           title: `${translations["newblog_title"]}`,
           to: "/bloq",
         },
+        {
+          id: 5,
+          title: `${translations["carbon_calculate"]}`,
+          to: "/carbon_calculate",
+        },
       ],
     },
     {

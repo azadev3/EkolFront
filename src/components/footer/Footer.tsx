@@ -139,7 +139,12 @@ const Footer: React.FC = () => {
         {
           id: uuidv4(),
           title: `${translations["nav_haqqimizda_elaqe"]}`,
-          to: "/elaqe"
+          to: "/elaqe",
+        },
+        {
+          id: "procedur_id",
+          title: `${translations["sikayetler_proseduru"]}`,
+          to: "/s_procedure.pdf",
         },
       ],
     },
@@ -216,9 +221,24 @@ const Footer: React.FC = () => {
                       {item?.footerNavItems?.map((links: FooterNavLinkType) => {
                         if (links?.id === "23456789" && !showRehberlik) {
                           return (
-                            <Link style={{ display: "none" }} key={links.id} to={links.to ? links.to : ""} className="link">
+                            <Link
+                              style={{ display: "none" }}
+                              key={links.id}
+                              to={links.to ? links.to : ""}
+                              className="link">
                               {links.title}
                             </Link>
+                          );
+                        } else if (links?.id === "procedur_id") {
+                          return (
+                            <div
+                              key={links.id}
+                              onClick={() => {
+                                window.open(links?.to, "_blank");
+                              }}
+                              className="link">
+                              {links.title}
+                            </div>
                           );
                         } else {
                           return (

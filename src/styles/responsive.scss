@@ -223,6 +223,16 @@
 }
 
 @media only screen and (max-width: 968px) {
+  .carbon-page-wrapper {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .carbon-page-wrapper .carbon-section .carbons .container-carbons h2 {
+    font-size: 21px;
+  }
+  .carbon-page-wrapper .carbon-section .carbons .container-carbons {
+    margin-top: 24px;
+  }
   .contact-page .contact-section .contact .container-locations {
     grid-template-columns: repeat(2, 1fr) !important;
   }
