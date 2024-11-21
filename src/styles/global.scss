@@ -259,7 +259,7 @@
             object-fit: scale-down;
           }
         }
-        
+
         .select-language {
           width: 70px;
           height: 40px;
@@ -287,7 +287,7 @@
           &:focus {
             outline: 2px solid white;
           }
-          
+
           .dropdown-menu {
             position: absolute;
             top: 100%;
@@ -319,13 +319,10 @@
             &.actived {
               opacity: 1;
               pointer-events: all;
-              transform: scale(1.0);
+              transform: scale(1);
             }
           }
-
-          
         }
-
       }
 
       .share-media {
@@ -663,7 +660,7 @@
             object-fit: scale-down;
           }
         }
-        
+
         .select-language {
           width: 70px;
           height: 40px;
@@ -691,7 +688,7 @@
           &:focus {
             outline: 2px solid white;
           }
-          
+
           .dropdown-menu {
             position: absolute;
             top: 100%;
@@ -723,13 +720,10 @@
             &.actived {
               opacity: 1;
               pointer-events: all;
-              transform: scale(1.0);
+              transform: scale(1);
             }
           }
-
-          
         }
-        
       }
 
       .share-media {
@@ -828,7 +822,6 @@
           z-index: 0;
           inset: 0;
           pointer-events: none;
-          
         }
         &.actived {
           &::after {
@@ -3137,7 +3130,7 @@ $whitedarktwo: #8b9f9c;
             object-fit: scale-down;
           }
         }
-        
+
         .select-language {
           width: 70px;
           height: 40px;
@@ -3165,7 +3158,7 @@ $whitedarktwo: #8b9f9c;
           &:focus {
             outline: 2px solid white;
           }
-          
+
           .dropdown-menu {
             position: absolute;
             top: 100%;
@@ -3197,11 +3190,9 @@ $whitedarktwo: #8b9f9c;
             &.actived {
               opacity: 1;
               pointer-events: all;
-              transform: scale(1.0);
+              transform: scale(1);
             }
           }
-
-          
         }
       }
 
