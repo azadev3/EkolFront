@@ -2,29 +2,25 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Baseurl } from "../../Baseurl";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useQuery } from "@tanstack/react-query";
 import DOMPurify from "dompurify";
 import { useTranslate } from "../../context/TranslateContext";
 import { Autoplay, Pagination } from "swiper/modules";
-
-type ServicesDataType = {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-};
+import { IsClickedServiceState } from "../activity/ServicesPage";
+import { ServicesContentType } from "../activity/ServicesActivity";
 
 const Services: React.FC = () => {
   const selectedlang = useRecoilValue(SelectedLanguageState);
 
   //services
-  const { data: servicesData } = useQuery<ServicesDataType[]>({
-    queryKey: ["servicesDataKey", selectedlang],
+
+  const { data: servicesPageData } = useQuery<ServicesContentType[]>({
+    queryKey: ["servicesPageDataKey", selectedlang],
     queryFn: async () => {
       const response = await axios.get(`${Baseurl}/servicespagefront`, {
         headers: {
@@ -33,7 +29,7 @@ const Services: React.FC = () => {
       });
       return response.data;
     },
-    staleTime: 9000000,
+    staleTime: 1000000,
   });
 
   //swiper button prev and next funcitons with custom
@@ -50,7 +46,13 @@ const Services: React.FC = () => {
     }
   };
 
+  const [_, setSelectedServiceID] = useRecoilState(IsClickedServiceState);
+
   const { translations } = useTranslate();
+
+  const hasServicesPageData = servicesPageData && servicesPageData?.length > 0;
+
+  const navigate = useNavigate();
 
   return (
     <section className="services-section">
@@ -66,8 +68,8 @@ const Services: React.FC = () => {
           }}
           modules={[Pagination, Autoplay]}
           className="mySwiper">
-          {servicesData && servicesData.length > 0
-            ? servicesData.map((item: ServicesDataType, index: number) => (
+          {hasServicesPageData 
+            ? servicesPageData.map((item: ServicesContentType, index: number) => (
                 <SwiperSlide key={index}>
                   <div className="left">
                     <h3>{item?.title}</h3>
@@ -75,13 +77,22 @@ const Services: React.FC = () => {
                       className="elements"
                       dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
                     />
-                    <Link to={`/fealiyyet/xidmetler/${index+1}`} className="show-more">
+                    <div
+                      onClick={() => {
+                        navigate(`/fealiyyet/xidmetler/${item?._id}`);
+                        setSelectedServiceID(item?._id);
+                      }}
+                      className="show-more">
                       {translations["etrafli_bax_button"]}
-                    </Link>
+                    </div>
                   </div>
                   {item?.image && (
                     <div className="right">
-                      <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${item?.id}-image`} title={item?.title} />
+                      <img
+                        src={`https://ekol-server-1.onrender.com${item?.image}`}
+                        alt={`${item?._id}-image`}
+                        title={item?.title}
+                      />
                     </div>
                   )}
                 </SwiperSlide>

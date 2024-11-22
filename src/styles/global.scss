@@ -914,6 +914,36 @@ $whitedarktwo: #8b9f9c;
 
   &.dark {
     background-color: $maindarkcolor;
+    .search-modal-overlay .search-modal .search-input .results .header-item-results .results-area .result-item, .search-modal-overlay .search-modal .search-input .results .header-item-results .results-area .result-item-blog, .search-modal-overlay .search-modal .search-input .results .header-item-results .results-area-blog .result-item, .search-modal-overlay .search-modal .search-input .results .header-item-results .results-area-blog .result-item-blog, .search-modal-overlay .search-modal .search-input .results .header-item-results .results-area-service .result-item, .search-modal-overlay .search-modal .search-input .results .header-item-results .results-area-service .result-item-blog, .search-modal-overlay .search-modal .search-input .results .another-section-results .results-area .result-item, .search-modal-overlay .search-modal .search-input .results .another-section-results .results-area .result-item-blog, .search-modal-overlay .search-modal .search-input .results .another-section-results .results-area-blog .result-item, .search-modal-overlay .search-modal .search-input .results .another-section-results .results-area-blog .result-item-blog, .search-modal-overlay .search-modal .search-input .results .another-section-results .results-area-service .result-item, .search-modal-overlay .search-modal .search-input .results .another-section-results .results-area-service .result-item-blog, .search-modal-overlay .search-modal .search-input .results .services-section-results .results-area .result-item, .search-modal-overlay .search-modal .search-input .results .services-section-results .results-area .result-item-blog, .search-modal-overlay .search-modal .search-input .results .services-section-results .results-area-blog .result-item, .search-modal-overlay .search-modal .search-input .results .services-section-results .results-area-blog .result-item-blog, .search-modal-overlay .search-modal .search-input .results .services-section-results .results-area-service .result-item, .search-modal-overlay .search-modal .search-input .results .services-section-results .results-area-service .result-item-blog {
+      background-color: $maindarkcolor !important;
+      
+      *{
+        color: #fff;
+      }
+    }
+    .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase th, .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase td {
+      border: 1px solid rgba(213, 213, 213, 0.442) !important;
+    }
+   .carier-page .carier-section .carier .container-carier .carier-content-area .content-carier .general-information .why-ekol-section .grid-ekol-item .item {
+      border: 1px solid rgba(243, 243, 243, 0.127) !important;
+      background-color: white !important;
+      * {
+        color: black  !important;
+      }
+    }
+    .search-modal-overlay .search-modal .search-input .results .header-item-results .head .name-result, .search-modal-overlay .search-modal .search-input .results .another-section-results .head .name-result, .search-modal-overlay .search-modal .search-input .results .services-section-results .head .name-result {
+      color: white;
+    }
+    .NewBlogPage-wrapper .newblogpage-section .blogs-newblogpage .container-newblogpage .newblogpage-grid-blogpage .newblogpage-item-blogpage {
+      background-color: $maindarkcolor;
+      border: 1px solid #cecece28 !important;
+      * {
+        color: white !important;
+      }
+    }
+    .NewBlogPage-wrapper .newblogpage-section .blogs-newblogpage .container-newblogpage h2 {
+      color: #dfdfdf;
+    }
     .header-wrapper .header .right-header-area .language-and-search-button .select-language {
       background-color: rgba(255, 255, 255, 0.2392156863) !important;
       background-image: none;

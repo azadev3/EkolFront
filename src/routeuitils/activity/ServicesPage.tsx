@@ -1,6 +1,6 @@
 import React from "react";
 import Breadcrumb from "../../Breadcrumb";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
 import { useQuery } from "@tanstack/react-query";
@@ -65,10 +65,10 @@ const ServicesPage: React.FC = () => {
                         <h2>{item.title}</h2>
                         <p dangerouslySetInnerHTML={{ __html: item.description.slice(0, 200) }} />
                       </article>
-                      <Link to={`/fealiyyet/xidmetler/${i + 1}`} className="btn-more">
+                      <div className="btn-more">
                         <span>{translations["etrafli_bax_button"]}</span>
                         <img src="/righte.svg" alt="right" />
-                      </Link>
+                      </div>
                     </div>
 
                     <div className="image">
