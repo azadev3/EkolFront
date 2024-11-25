@@ -32,12 +32,27 @@ const Breadcrumb: React.FC<Props> = ({ uri, prevpage, blogTitle }) => {
         </span>
         <HiArrowNarrowRight />
         <span
-          onClick={() =>
-            navigate(isLocationInnerImage ? "/about/gallery/images" : isLocationInnerBlog ? "/xeberler" : "")
-          }
+          onClick={() => {
+            navigate(isLocationInnerImage ? "/about/gallery/images" : isLocationInnerBlog ? "/xeberler" : "");
+            if (uri === translations["nav_haqqimizda_xidmetler"]) {
+              navigate("/fealiyyet/xidmetler");
+            } else if (uri === translations["nav_haqqimizda_xeberler"]) {
+              navigate("/xeberler");
+            } else if (uri === translations["newblog_title"]) {
+              navigate("/bloq");
+            } else if (uri === translations['karyera_imkanlari']) {
+              navigate("/karyera");
+            }
+          }}
           className="currentpage"
-          style={{ color: isLocationInnerImage ? "rgba(0, 0, 0, 0.5019607843)" : "" }}>
-          {uri}
+          style={{
+            cursor:
+              uri === translations["nav_haqqimizda_xidmetler"] || uri === translations["nav_haqqimizda_xeberler"] ||  uri === translations["newblog_title"] || uri === translations["karyera_imkanlari"]
+                ? "pointer"
+                : "",
+            color: isLocationInnerImage ? "rgba(0, 0, 0, 0.5019607843)" : "",
+          }}>
+          {uri === translations["nav_haqqimizda_xidmetler"] ? uri : uri}
         </span>
         {isLocationInnerImage ? (
           <React.Fragment>
@@ -46,10 +61,14 @@ const Breadcrumb: React.FC<Props> = ({ uri, prevpage, blogTitle }) => {
               {isLocationInnerImage.params?.imagename}
             </span>
           </React.Fragment>
-        ) : isLocationInnerBlog || isLocationInnerLastBlog || isLocationBlog || isLocationLastBlog || isServicesInPage ? (
+        ) : isLocationInnerBlog ||
+          isLocationInnerLastBlog ||
+          isLocationBlog ||
+          isLocationLastBlog ||
+          isServicesInPage ? (
           <React.Fragment>
             <HiArrowNarrowRight />
-            <span className="currentpage" style={{ textTransform: "capitalize" }}>
+            <span className="currentpage" style={{ textTransform: "capitalize", cursor: "pointer" }}>
               {blogTitle ? blogTitle : ""}
             </span>
           </React.Fragment>

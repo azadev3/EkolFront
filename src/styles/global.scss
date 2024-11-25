@@ -1023,9 +1023,8 @@ $whitedarktwo: #8b9f9c;
       .grid-ekol-item
       .item {
       border: 1px solid rgba(243, 243, 243, 0.127) !important;
-      background-color: white !important;
       * {
-        color: black !important;
+        color: rgb(223, 223, 223) !important;
       }
     }
     .search-modal-overlay .search-modal .search-input .results .header-item-results .head .name-result,
@@ -3998,4 +3997,10 @@ $whitedarktwo: #8b9f9c;
 }
 .fancybox-active {
   overflow: hidden !important;
+}
+.app .page-navigator .prevpage {
+  cursor: pointer !important;
+}
+.carier-page .carier-section .carier .container-carier .carier-content-area .content-carier .general-information .wrapper-image-general {
+  height: 450px !important;
 }
