@@ -102,6 +102,11 @@ const ScrollHeader: React.FC = () => {
       submenu: [
         { id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
         { id: 4343, title: `${translations["nav_haqqimizda_elaqe"]}`, to: "/elaqe" },
+        {
+          id: 2322,
+          title: `${translations["sikayetler_proseduru"]}`,
+          to: "/s_procedure.pdf",
+        },
       ],
     },
   ];
@@ -161,6 +166,7 @@ const ScrollHeader: React.FC = () => {
     return () => window.removeEventListener("resize", controlSize);
   }, []);
 
+
   return (
     <div className="scrolled-header">
       <div className="header">
@@ -204,11 +210,26 @@ const ScrollHeader: React.FC = () => {
                         setHoveringMenu(false);
                         setDropdown(null);
                       }}>
-                      {item?.submenu?.map((item: submenuType) => (
-                        <NavLink onClick={() => setDropdown(null)} to={item.to ? item.to : ""} key={item?.id}>
-                          {item.title}
-                        </NavLink>
-                      ))}
+                      {item?.submenu?.map((item: submenuType) => {
+                        if (item.id === 2322) {
+                          return (
+                            <NavLink
+                              onClick={() => {
+                                window.open(item?.to, "_blank");
+                              }}
+                              to={""}
+                              key={item?.id}>
+                              {item.title}
+                            </NavLink>
+                          );
+                        } else {
+                          return (
+                            <NavLink onClick={() => setDropdown(null)} to={item.to ? item.to : ""} key={item?.id}>
+                              {item.title}
+                            </NavLink>
+                          );
+                        }
+                      })}
                     </div>
                   )}
                 </ul>

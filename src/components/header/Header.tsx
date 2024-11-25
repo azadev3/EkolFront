@@ -136,6 +136,11 @@ const Header: React.FC = () => {
       submenu: [
         { id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
         { id: 4343, title: `${translations["nav_haqqimizda_elaqe"]}`, to: "/elaqe" },
+        {
+          id: 2322,
+          title: `${translations["sikayetler_proseduru"]}`,
+          to: "/s_procedure.pdf",
+        },
       ],
     },
   ];
@@ -215,6 +220,18 @@ const Header: React.FC = () => {
                             style={{ display: "none" }}
                             onClick={() => setDropdownHeader(null)}
                             to={submenuItem.to ? submenuItem.to : ""}
+                            key={submenuItem?.id}>
+                            {submenuItem.title}
+                          </NavLink>
+                        );
+                      } else if (submenuItem.id === 2322) {
+                        return (
+                          <NavLink
+                            onClick={() => {
+                              window.open(submenuItem?.to, "_blank");
+                              setDropdownHeader(null);
+                            }}
+                            to={""}
                             key={submenuItem?.id}>
                             {submenuItem.title}
                           </NavLink>

@@ -143,6 +143,11 @@ const MobileHeader: React.FC = () => {
       submenu: [
         { id: 8, title: `${translations["nav_haqqimizda_cariers"]}`, to: "/karyera" },
         { id: 4343, title: `${translations["nav_haqqimizda_elaqe"]}`, to: "/elaqe" },
+        {
+          id: 2322,
+          title: `${translations["sikayetler_proseduru"]}`,
+          to: "/s_procedure.pdf",
+        },
       ],
     },
   ];
@@ -241,6 +246,18 @@ const MobileHeader: React.FC = () => {
                             setDropdown(null), setToggleMenu(false);
                           }}
                           to={item.to ? item.to : ""}
+                          key={item?.id}>
+                          {item.title}
+                        </NavLink>
+                      );
+                    } else if (item.id === 2322) {
+                      return (
+                        <NavLink
+                          onClick={() => {
+                            setDropdown(null), setToggleMenu(false);
+                            window.open(item?.to, "_blank");
+                          }}
+                          to={""}
                           key={item?.id}>
                           {item.title}
                         </NavLink>
