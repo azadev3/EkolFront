@@ -3,7 +3,7 @@
     grid-template-columns: repeat(1, 1fr);
     display: grid;
   }
-    
+
   .home-page .hero-wrapper .hero .header-wrapper .header .left-navigation {
     gap: 13px;
   }
@@ -14,7 +14,6 @@
   .footer-wrapper {
     padding-left: 24px;
     padding-right: 24px;
-
   }
   .footer-wrapper .footer .top-footer .footer-navigations {
     grid-template-columns: repeat(4, 1fr);
@@ -30,29 +29,83 @@
     padding-left: 24px;
     padding-right: 24px;
   }
-  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .search-area .input-search {
+  .purch-announcement-wrapper
+    .purch-announcement-section
+    .purch-announcement
+    .container-purch-announcement
+    .search-and-items
+    .search-area
+    .input-search {
     max-width: unset;
     width: 100%;
   }
-  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .search-area {
+  .purch-announcement-wrapper
+    .purch-announcement-section
+    .purch-announcement
+    .container-purch-announcement
+    .search-and-items
+    .search-area {
     flex-direction: column;
     gap: 40px;
   }
-  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase th, .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase td {
+  .purch-announcement-wrapper
+    .purch-announcement-section
+    .purch-announcement
+    .container-purch-announcement
+    .table-area-purchase
+    th,
+  .purch-announcement-wrapper
+    .purch-announcement-section
+    .purch-announcement
+    .container-purch-announcement
+    .table-area-purchase
+    td {
     padding: 18px 12px;
     font-size: 13.5px;
   }
-  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase th.order, .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase td.order {
+  .purch-announcement-wrapper
+    .purch-announcement-section
+    .purch-announcement
+    .container-purch-announcement
+    .table-area-purchase
+    th.order,
+  .purch-announcement-wrapper
+    .purch-announcement-section
+    .purch-announcement
+    .container-purch-announcement
+    .table-area-purchase
+    td.order {
     width: auto;
     font-size: 13px;
   }
-  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter .link-filter {
+  .purch-announcement-wrapper
+    .purch-announcement-section
+    .purch-announcement
+    .container-purch-announcement
+    .search-and-items
+    .right-filter
+    .link-filter {
     font-size: 14px;
   }
-  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase {
+  .purch-announcement-wrapper
+    .purch-announcement-section
+    .purch-announcement
+    .container-purch-announcement
+    .table-area-purchase {
     overflow: auto;
   }
-  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase th, .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase td {
+  .purch-announcement-wrapper
+    .purch-announcement-section
+    .purch-announcement
+    .container-purch-announcement
+    .table-area-purchase
+    th,
+  .purch-announcement-wrapper
+    .purch-announcement-section
+    .purch-announcement
+    .container-purch-announcement
+    .table-area-purchase
+    td {
     text-wrap: nowrap;
   }
 
@@ -223,6 +276,44 @@
 }
 
 @media only screen and (max-width: 968px) {
+  .dynamic-page-wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page {
+    margin-top: 16px;
+  }
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page h2 {
+    font-size: 24px;
+    margin: 4px 0;
+  }
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .description-area {
+    margin-top: 36px;
+    gap: 8px;
+  }
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .description-area h3,
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .description-area h4,
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .description-area h5 {
+    font-size: 21px;
+    margin: 4px 0;
+  }
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .description-area h2 {
+    font-size: 24px;
+    line-height: normal;
+  }
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .description-area h1 {
+    line-height: normal;
+    font-size: 27px;
+  }
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .description-area p,
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .description-area span,
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .description-area strong,
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .description-area li,
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .description-area ul,
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .description-area ol {
+    font-size: 14px;
+    line-height: 28px;
+  }
   .carbon-page-wrapper {
     padding-left: 12px;
     padding-right: 12px;
@@ -240,7 +331,7 @@
     padding-left: 24px;
     padding-right: 24px;
   }
-  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact h2{
+  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact h2 {
     font-size: 30px;
   }
   .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase {
@@ -262,7 +353,7 @@
   .activity-page .tools-section .tools .container-tools .container-descriptions div {
     width: 100%;
   }
-  .home-page .hero-wrapper .hero .swiper-slide .slide-content .left h1{
+  .home-page .hero-wrapper .hero .swiper-slide .slide-content .left h1 {
     line-height: 26px;
   }
   .purchase-page .purchase-section .purchase .container-purchase .grid-purchase {
@@ -472,30 +563,30 @@
             color: rgb(255, 255, 255);
           }
         }
-        
-      .dark-mode-btn {
-        cursor: pointer;
-        transition: 100ms ease-in-out;
-        min-width: 40px;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 4px;
-        border-radius: 4px;
-        background-color: #004238;
-        &:hover {
-          background-color: #00423838;
+
+        .dark-mode-btn {
+          cursor: pointer;
+          transition: 100ms ease-in-out;
+          min-width: 40px;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 4px;
+          border-radius: 4px;
+          background-color: #004238;
+          &:hover {
+            background-color: #00423838;
+          }
+          &:active {
+            transform: scale(0.99);
+          }
+          .moon-icon {
+            font-size: 24px;
+            color: white;
+          }
         }
-        &:active {
-          transform: scale(0.99);
-        }
-        .moon-icon {
-          font-size: 24px;
-          color: white;
-        }
-      }
       }
 
       &.active {
@@ -822,25 +913,38 @@
     padding-left: 24px;
     padding-right: 24px;
   }
-  .ourworks-section .works .container-works .grid-works{
+  .ourworks-section .works .container-works .grid-works {
     flex-direction: column;
   }
   .ourworks-section .works .container-works .grid-works .navigation-content {
     width: 100%;
   }
-  .ourworks-section .works .container-works .grid-works .navigation-description-content{
+  .ourworks-section .works .container-works .grid-works .navigation-description-content {
     width: 100%;
   }
   .ourworks-section .works .container-works h2 {
     font-size: 18px;
   }
-  .ourworks-section .works .container-works .grid-works .navigation-content .item-navigation .left-order-num-and-title p {
+  .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-content
+    .item-navigation
+    .left-order-num-and-title
+    p {
     font-size: 14px;
   }
   .ourworks-section .works .container-works .grid-works .navigation-description-content .images-for-description {
     grid-template-columns: repeat(1, 1fr);
   }
-  .ourworks-section .works .container-works .grid-works .navigation-description-content .images-for-description .image-wrapper {
+  .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-description-content
+    .images-for-description
+    .image-wrapper {
     height: 160px;
   }
   .home-page .contact-us-section .contact-us .map-contact .iframe-div {
@@ -849,10 +953,27 @@
   .home-page .contact-us-section .contact-us .map-contact .contact-information-box {
     padding: 12px !important;
   }
-  .home-page .contact-us-section .contact-us .map-contact .contact-information-box .contact-datas .information-box .right-items strong {
+  .home-page
+    .contact-us-section
+    .contact-us
+    .map-contact
+    .contact-information-box
+    .contact-datas
+    .information-box
+    .right-items
+    strong {
     font-size: 14px !important;
   }
-  .home-page .contact-us-section .contact-us .map-contact .contact-information-box .contact-datas .information-box .right-items .links a {
+  .home-page
+    .contact-us-section
+    .contact-us
+    .map-contact
+    .contact-information-box
+    .contact-datas
+    .information-box
+    .right-items
+    .links
+    a {
     font-size: 12px !important;
     line-height: 18px !important;
   }
@@ -862,15 +983,108 @@
   .home-page .blog-section .blogs .blog-grid-section .blog-item {
     height: 300px !important;
   }
-  .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .images-for-description {
+  .about-page
+    .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-description-content
+    .images-for-description {
     grid-template-columns: repeat(1, 1fr) !important;
     margin-top: 0 !important;
   }
-  .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content p, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content h1, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content h2, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content h3, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content h4, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content strong, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content li, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content ul, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content ol, .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content span {
+  .about-page
+    .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-description-content
+    .description-content
+    p,
+  .about-page
+    .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-description-content
+    .description-content
+    h1,
+  .about-page
+    .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-description-content
+    .description-content
+    h2,
+  .about-page
+    .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-description-content
+    .description-content
+    h3,
+  .about-page
+    .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-description-content
+    .description-content
+    h4,
+  .about-page
+    .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-description-content
+    .description-content
+    strong,
+  .about-page
+    .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-description-content
+    .description-content
+    li,
+  .about-page
+    .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-description-content
+    .description-content
+    ul,
+  .about-page
+    .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-description-content
+    .description-content
+    ol,
+  .about-page
+    .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-description-content
+    .description-content
+    span {
     font-size: 14px !important;
     line-height: 24px !important;
   }
-  .about-page .ourworks-section .works .container-works .grid-works .navigation-content .item-navigation .left-order-num-and-title p {
+  .about-page
+    .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-content
+    .item-navigation
+    .left-order-num-and-title
+    p {
     font-size: 14px !important;
     line-height: 24px !important;
   }
@@ -895,18 +1109,111 @@
     height: 100% !important;
   }
   .about-page .certificates-section .certificates .container-certificates .description-certificates p {
-    grid-template-columns: repeat(2, 1fr) !important; 
+    grid-template-columns: repeat(2, 1fr) !important;
   }
   .about-page .lisanse-section .lisanse .container-lisanse .description-area-lisanse p {
     grid-template-columns: repeat(2, 1fr) !important;
   }
-  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .legal-and-natural-person-checkbox {
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .legal-and-natural-person-checkbox {
     grid-template-columns: repeat(1, 1fr);
   }
-  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .company-and-voen, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .requested-person-name-surname, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .mobile-and-job-tel-number, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .other-email, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .country-and-job, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .enterprise-name-and-part, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .company-and-voen, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .requested-person-name-surname, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .mobile-and-job-tel-number, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .other-email, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .country-and-job, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .enterprise-name-and-part {
-    grid-template-columns: repeat(1,1fr);
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-legal
+    .company-and-voen,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-legal
+    .requested-person-name-surname,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-legal
+    .mobile-and-job-tel-number,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-legal
+    .other-email,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-legal
+    .country-and-job,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-legal
+    .enterprise-name-and-part,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-natural
+    .company-and-voen,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-natural
+    .requested-person-name-surname,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-natural
+    .mobile-and-job-tel-number,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-natural
+    .other-email,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-natural
+    .country-and-job,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-natural
+    .enterprise-name-and-part {
+    grid-template-columns: repeat(1, 1fr);
   }
-  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter {
+  .purch-announcement-wrapper
+    .purch-announcement-section
+    .purch-announcement
+    .container-purch-announcement
+    .search-and-items
+    .right-filter {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
@@ -917,7 +1224,13 @@
   .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement h2 {
     font-size: 30px;
   }
-  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter .link-filter {
+  .purch-announcement-wrapper
+    .purch-announcement-section
+    .purch-announcement
+    .container-purch-announcement
+    .search-and-items
+    .right-filter
+    .link-filter {
     width: 100%;
     min-width: unset;
     max-width: unset;
@@ -940,7 +1253,7 @@
   .home-page .card-about-section .card-about .bottom-card-area .item-card p {
     font-size: 13px;
   }
-  .home-page .card-about-section .card-about .top-card-area .right-descriptions{
+  .home-page .card-about-section .card-about .top-card-area .right-descriptions {
     padding: 3px;
   }
   .home-page .card-about-section .card-about .top-card-area .right-descriptions .links .right-nav-link span {
@@ -993,25 +1306,57 @@
   .home-page .services-section .services .button-swiper {
     display: none;
   }
-  .home-page .services-section .services .swiper-pagination-fraction, .home-page .services-section .services .swiper-pagination-custom, .home-page .services-section .services .swiper-horizontal > .swiper-pagination-bullets, .home-page .services-section .services .swiper-pagination-bullets.swiper-pagination-horizontal {
+  .home-page .services-section .services .swiper-pagination-fraction,
+  .home-page .services-section .services .swiper-pagination-custom,
+  .home-page .services-section .services .swiper-horizontal > .swiper-pagination-bullets,
+  .home-page .services-section .services .swiper-pagination-bullets.swiper-pagination-horizontal {
     display: none;
   }
   .home-page .services-section .services .elements {
-    ul, h1, h2, h3, h4, h5, li, a, ol, table, br, strong {
+    ul,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    li,
+    a,
+    ol,
+    table,
+    br,
+    strong {
       display: none;
     }
   }
   .app .page-navigator .currentpage {
     font-size: 9px;
   }
-  .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .right .share-post .bottom {
+  .blog-inner-page
+    .blog-inner-content-section
+    .blogs-inner
+    .container-blogs-inner
+    .col-blogs-inner
+    .contents
+    .right
+    .share-post
+    .bottom {
     align-items: flex-start;
   }
-  .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .right .share-post .bottom .view {
+  .blog-inner-page
+    .blog-inner-content-section
+    .blogs-inner
+    .container-blogs-inner
+    .col-blogs-inner
+    .contents
+    .right
+    .share-post
+    .bottom
+    .view {
     border-left: none;
     padding-left: 0;
   }
-  .app .page-navigator .dot, .app .page-navigator .dotsm {
+  .app .page-navigator .dot,
+  .app .page-navigator .dotsm {
     width: 3px;
     height: 3px;
   }
@@ -1291,7 +1636,14 @@
   .contact-page .contact-section .contact .container-contact .form-area {
     padding: 8px;
   }
-  .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .images-for-description .image-wrapper {
+  .about-page
+    .ourworks-section
+    .works
+    .container-works
+    .grid-works
+    .navigation-description-content
+    .images-for-description
+    .image-wrapper {
     height: 100%;
     max-height: 150px;
   }

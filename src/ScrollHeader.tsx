@@ -13,9 +13,20 @@ import Language from "./components/header/headeruitil/Language";
 import MobileHeader, { Logo } from "./components/header/MobileHeader";
 import ShareButton from "./components/header/headeruitil/ShareButton";
 import DarkMode from "./components/header/headeruitil/DarkMode";
+import { useDynamicPageData } from "./UseDynamicPage";
 
 const ScrollHeader: React.FC = () => {
   const { translations } = useTranslate();
+
+  const { DynamicPageData } = useDynamicPageData();
+  const hasRoutes = DynamicPageData && DynamicPageData?.length > 0 ? DynamicPageData : [];
+
+  const dynamicRoutes = hasRoutes?.map((route) => ({
+    id: route._id,
+    title: route.title,
+    to: route.path.startsWith("/") ? route.path : `/${route.path}`,
+    dropdown_name: route.dropdown_name, 
+  }));
 
   const HeaderItems: HeaderElementType[] = [
     // { id: 1, title: `${translations["nav_anasehife"]}`, to: "/" },
@@ -52,7 +63,6 @@ const ScrollHeader: React.FC = () => {
         },
       ],
     },
-
     {
       id: 4,
       title: `${translations["nav_haqqimizda_satinalma"]}`,
@@ -64,7 +74,6 @@ const ScrollHeader: React.FC = () => {
         { id: 3, title: `${translations["nav_haqqimizda_satinalma_elaqe"]}`, to: "/satinalma_elaqe" },
       ],
     },
-
     {
       id: 5,
       title: "Media",
@@ -110,6 +119,21 @@ const ScrollHeader: React.FC = () => {
       ],
     },
   ];
+
+
+  dynamicRoutes.forEach((dynamicRoute) => {
+    const matchedHeader = HeaderItems.find(
+      (headerItem) => headerItem.title === dynamicRoute.dropdown_name
+    );
+
+    if (matchedHeader && matchedHeader.submenu) {
+      matchedHeader.submenu.push({
+        id: dynamicRoute.id,
+        title: dynamicRoute.title,
+        to: dynamicRoute.to,
+      });
+    }
+  });
 
   // FETCH LOGO
   const { data: LogoIcon } = useQuery({
@@ -165,7 +189,6 @@ const ScrollHeader: React.FC = () => {
     window.addEventListener("resize", controlSize);
     return () => window.removeEventListener("resize", controlSize);
   }, []);
-
 
   return (
     <div className="scrolled-header">

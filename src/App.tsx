@@ -38,6 +38,8 @@ import PurchaseRules from "./components/features/PurchaseRules";
 import PurchaseAnnouncementModal from "./modals/PurchaseAnnouncementModal";
 import PurchaseContact from "./components/features/PurchaseContact";
 import CarcbonCalculate from "./routes/CarcbonCalculate";
+import { DynamicPageDataType, useDynamicPageData } from "./UseDynamicPage";
+import DynamicPage from "./routes/DynamicPage";
 export const isHomePageState = atom<boolean>({
   key: "isHomePageState",
   default: false,
@@ -82,6 +84,9 @@ const App: React.FC = () => {
   React.useEffect(() => {
     localStorage.setItem("modekol", JSON.stringify(mode));
   }, [mode]);
+
+  // DYNAMIC PAGES
+  const { DynamicPageData } = useDynamicPageData();
 
   return (
     <div className={`app ${mode ? "dark" : ""}`}>
@@ -145,6 +150,11 @@ const App: React.FC = () => {
         <Route path="/satinalmaelanlari" element={<PurchaseAnnouncements />} />
         <Route path="/satinalmaqaydalari" element={<PurchaseRules />} />
         <Route path="/satinalma_elaqe" element={<PurchaseContact />} />
+        {DynamicPageData && DynamicPageData?.length > 0
+          ? DynamicPageData?.map((data: DynamicPageDataType) => (
+              <Route key={data?._id} path={"/:pathdynamic"} element={<DynamicPage />} />
+            ))
+          : null}
       </Routes>
       <Footer />
     </div>

@@ -1190,6 +1190,96 @@
   }
 }
 
+.dynamic-page-wrapper {
+  width: 100%;
+  height: auto;
+  padding-left: 100px;
+  padding-right: 100px;
+  margin: 0 auto;
+  max-width: 1440px;
+  .page-section-dynamic {
+    @include SectionStyle();
+    .page-route {
+      @include InnerStyle();
+      .container-page {
+        margin-top: 24px;
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        h2 {
+          color: #000000;
+          font-weight: 700;
+          font-size: 48px;
+        }
+        .image-area {
+          width: 100%;
+          margin-top: 36px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          border-radius: 8px;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+        .description-area {
+          width: 100%;
+          height: auto;
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          flex-direction: column;
+          gap: 12px;
+          margin-top: 50px;
+          h1 {
+            font-size: 48px;
+            font-weight: 600;
+            line-height: 70px;
+            text-align: start;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+          }
+          h2 {
+            font-size: 38px;
+            font-weight: 500;
+            line-height: 60px;
+            text-align: start;
+            letter-spacing: -0.8px;
+            margin: 16px 0;
+          }
+          h3, h4, h5 {
+            font-size: 24px;
+            font-weight: 500;
+            text-align: start;
+            letter-spacing: -0.6px;
+            line-height: 48px;
+            margin: 12px 0;
+          }
+          em {
+            font-weight: 300;
+            letter-spacing: 1px;
+            font-size: 16px;
+          }
+          p, span, strong, li, ul, ol {
+            color: #303030;
+            font-size: 17px;
+            line-height: 32px;
+            letter-spacing: -0.1px;
+            text-align: justify;
+            max-width: 1240px;
+          }
+        }
+      }
+    }
+  }
+}
+
 
 .carbon-page-wrapper {
   width: 100%;

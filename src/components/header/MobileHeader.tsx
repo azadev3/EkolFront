@@ -12,6 +12,7 @@ import { isHomePageState } from "../../App";
 import { useRecoilValue } from "recoil";
 import DarkMode from "./headeruitil/DarkMode";
 import LangMobile from "./headeruitil/LangMobile";
+import { useDynamicPageData } from "../../UseDynamicPage";
 
 export interface Logo {
   _id: string;
@@ -19,13 +20,13 @@ export interface Logo {
 }
 
 type submenuType = {
-  id: number;
+  id: any;
   title: string;
   to?: string;
 };
 
 type HeaderElementType = {
-  id: number;
+  id: any;
   title: string;
   to: string;
   icon?: React.JSX.Element | JSX.Element;
@@ -57,6 +58,16 @@ const MobileHeader: React.FC = () => {
   React.useEffect(() => {
     handleCheck();
   }, [showRehberlik]);
+
+  const { DynamicPageData } = useDynamicPageData();
+  const hasRoutes = DynamicPageData && DynamicPageData?.length > 0 ? DynamicPageData : [];
+
+  const dynamicRoutes = hasRoutes?.map((route) => ({
+    id: route._id,
+    title: route.title,
+    to: route.path.startsWith("/") ? route.path : `/${route.path}`,
+    dropdown_name: route.dropdown_name,
+  }));
 
   const HeaderItems: HeaderElementType[] = [
     // { id: 1, title: `${translations["nav_anasehife"]}`, to: "/" },
@@ -93,7 +104,6 @@ const MobileHeader: React.FC = () => {
         },
       ],
     },
-
     {
       id: 4,
       title: `${translations["nav_haqqimizda_satinalma"]}`,
@@ -105,7 +115,6 @@ const MobileHeader: React.FC = () => {
         { id: 3, title: `${translations["nav_haqqimizda_satinalma_elaqe"]}`, to: "/satinalma_elaqe" },
       ],
     },
-
     {
       id: 5,
       title: "Media",
@@ -151,6 +160,18 @@ const MobileHeader: React.FC = () => {
       ],
     },
   ];
+
+  dynamicRoutes.forEach((dynamicRoute) => {
+    const matchedHeader = HeaderItems.find((item) => item.title === dynamicRoute.dropdown_name);
+
+    if (matchedHeader && matchedHeader.submenu) {
+      matchedHeader.submenu.push({
+        id: dynamicRoute.id,
+        title: dynamicRoute.title,
+        to: dynamicRoute.to,
+      });
+    }
+  });
 
   // FETCH LOGO
   const { data: LogoIcon } = useQuery({

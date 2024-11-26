@@ -882,6 +882,13 @@
     @include Header();
   }
 }
+
+.app .header-wrapper .header .left-navigation {
+  gap: 11px !important;
+}
+.scrolled-header .header .left-navigation {
+  gap: 11px !important;
+}
 .blog-page-wrapper
   .blogs-section
   .blogs
@@ -914,6 +921,17 @@ $whitedarktwo: #8b9f9c;
 
   &.dark {
     background-color: $maindarkcolor;
+    .vacations-inner-section .vacationsinner .container-inner-vac .vacation-top-description {
+      border: 1px solid #b5ffc52d !important;
+    }
+    .dynamic-page-wrapper .page-section-dynamic .page-route .container-page h2 {
+      color: $whitedark;
+    }
+    .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .description-area {
+      * {
+        color: $whitedark !important;
+      }
+    }
     .search-modal-overlay .search-modal .search-input .results .header-item-results .results-area .result-item,
     .search-modal-overlay .search-modal .search-input .results .header-item-results .results-area .result-item-blog,
     .search-modal-overlay .search-modal .search-input .results .header-item-results .results-area-blog .result-item,
@@ -4001,6 +4019,13 @@ $whitedarktwo: #8b9f9c;
 .app .page-navigator .prevpage {
   cursor: pointer !important;
 }
-.carier-page .carier-section .carier .container-carier .carier-content-area .content-carier .general-information .wrapper-image-general {
+.carier-page
+  .carier-section
+  .carier
+  .container-carier
+  .carier-content-area
+  .content-carier
+  .general-information
+  .wrapper-image-general {
   height: 450px !important;
 }
