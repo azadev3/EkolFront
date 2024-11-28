@@ -8,7 +8,6 @@ import { Baseurl } from "../../Baseurl";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useQuery } from "@tanstack/react-query";
-import DOMPurify from "dompurify";
 import { useTranslate } from "../../context/TranslateContext";
 import { Autoplay, Pagination } from "swiper/modules";
 import { IsClickedServiceState } from "../activity/ServicesPage";
