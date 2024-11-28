@@ -68,15 +68,12 @@ const Services: React.FC = () => {
           }}
           modules={[Pagination, Autoplay]}
           className="mySwiper">
-          {hasServicesPageData 
+          {hasServicesPageData
             ? servicesPageData.map((item: ServicesContentType, index: number) => (
                 <SwiperSlide key={index}>
                   <div className="left">
                     <h3>{item?.title}</h3>
-                    <div
-                      className="elements"
-                      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
-                    />
+                    <p>{item?.slogan}</p>
                     <div
                       onClick={() => {
                         navigate(`/fealiyyet/xidmetler/${item?._id}`);
