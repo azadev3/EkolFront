@@ -177,7 +177,7 @@ const MobileHeader: React.FC = () => {
   const { data: LogoIcon } = useQuery({
     queryKey: ["logoIconKey"],
     queryFn: async () => {
-      const response = await axios.get(`${Baseurl}/logo`);
+      const response = await axios.get(`${Baseurl}/logofront`);
       return response.data;
     },
     staleTime: 900000,

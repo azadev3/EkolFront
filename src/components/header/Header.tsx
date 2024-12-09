@@ -172,7 +172,11 @@ const Header: React.FC = () => {
   const { data: LogoIcon } = useQuery({
     queryKey: ["logoIconKey"],
     queryFn: async () => {
-      const response = await axios.get(`${Baseurl}/logo`);
+      const response = await axios.get(`${Baseurl}/logofront`, {
+        headers: {
+          "Authorization": "Bearer "
+        }
+      });
       return response.data;
     },
     staleTime: 9000000,
@@ -199,7 +203,7 @@ const Header: React.FC = () => {
 
     window.addEventListener("resize", controlSize);
     return () => window.removeEventListener("resize", controlSize);
-  }, []);
+  }, [setIsMobile]);
 
   return (
     <header className="header-wrapper">

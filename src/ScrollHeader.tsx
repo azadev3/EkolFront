@@ -139,11 +139,12 @@ const ScrollHeader: React.FC = () => {
   const { data: LogoIcon } = useQuery({
     queryKey: ["logoIconKey"],
     queryFn: async () => {
-      const response = await axios.get(`${Baseurl}/logo`);
+      const response = await axios.get(`${Baseurl}/logofront`);
       return response.data;
     },
     staleTime: 9000000,
   });
+  console.log(LogoIcon,' slloogoogogo')
 
   const [dropdown, setDropdown] = React.useState<number | null>(null);
   const [hoveringMenu, setHoveringMenu] = React.useState<boolean>(false);
@@ -188,7 +189,7 @@ const ScrollHeader: React.FC = () => {
 
     window.addEventListener("resize", controlSize);
     return () => window.removeEventListener("resize", controlSize);
-  }, []);
+  }, [setIsMobile]);
 
   return (
     <div className="scrolled-header">
