@@ -11,7 +11,7 @@ import { useTranslate } from "../../context/TranslateContext";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-interface OurWorksInnerInterface {
+export interface OurWorksInnerInterface {
   _id?: string;
   title: string;
   description: string;

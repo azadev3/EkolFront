@@ -7,13 +7,11 @@ import { HeaderElementType, submenuType } from '../Header';
 import { FaAngleDown } from 'react-icons/fa6';
 import { MdLocationSearching } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaCaretDown } from 'react-icons/fa';
 import { useQuery } from '@tanstack/react-query';
 import { SelectedLanguageState } from '../../../recoil/Atoms';
 import { Baseurl } from '../../../Baseurl';
 import axios from 'axios';
 import { BlogType } from '../../../routeuitils/home/BlogSection';
-import DOMPurify from 'dompurify';
 import { ServicesContentType } from '../../../routeuitils/activity/ServicesActivity';
 import { SelectedToolState, ToolsInnerInterface } from '../../../routeuitils/activity/Tools';
 
@@ -251,8 +249,9 @@ const SearchModal = () => {
       if (searchItems) {
        const lowerCaseTitle = item.title.toLowerCase();
        const lowerCaseSearch = searchItems.toLowerCase();
-
-       return lowerCaseTitle.includes(lowerCaseSearch);
+       if (lowerCaseTitle.includes(lowerCaseSearch)) {
+        return;
+       }
       }
       return true;
      })
@@ -286,10 +285,10 @@ const SearchModal = () => {
 
  const navigate = useNavigate();
 
- const [collapseHeaderItems, setCollapseHeaderItems] = React.useState(false);
- const [collapseAnotherSection, setCollapseAnotherSection] = React.useState(false);
- const [collapseServicesSection, setCollapseServicesSection] = React.useState(false);
- const [collapseToolsSection, setCollapseToolsSection] = React.useState(false);
+ const [collapseHeaderItems, ,] = React.useState(false);
+ const [collapseAnotherSection, ,] = React.useState(false);
+ const [collapseServicesSection, ,] = React.useState(false);
+ const [collapseToolsSection, ,] = React.useState(false);
 
  const [, setSelectItem] = useRecoilState(SelectedToolState);
 
@@ -310,20 +309,6 @@ const SearchModal = () => {
      <div className="results">
       {/* Header items search result */}
       <div className={`header-item-results ${collapseHeaderItems ? 'collapsed' : ''}`}>
-       <div
-        className="head"
-        title="Yığ"
-        onClick={() => {
-         setCollapseHeaderItems(!collapseHeaderItems);
-        }}>
-        <span className="name-result">{translations['search_basliqlar_title']}</span>
-        <FaCaretDown
-         className="down"
-         style={{
-          transform: `${collapseHeaderItems ? 'rotate(-180deg)' : ''}`,
-         }}
-        />
-       </div>
        <div className="results-area">
         {filterItems &&
          filterItems.map((items: HeaderElementType) => (
@@ -338,7 +323,7 @@ const SearchModal = () => {
             <span>{items?.title}</span>
            </article>
 
-           <div className="submenus">
+           <div className="submenus" style={{ display: items && items.submenu && items?.submenu?.length > 0 ? 'flex' : 'none' }}>
             {items.submenu?.map((sub: submenuType) => {
              if (sub.id === 33444433 && !showRehberlik) {
               return null;
@@ -358,15 +343,6 @@ const SearchModal = () => {
 
       {/* Another section (future use) */}
       <div className={`another-section-results ${collapseAnotherSection ? 'collapsed' : ''}`}>
-       <div className="head" title="Yığ" onClick={() => setCollapseAnotherSection(!collapseAnotherSection)}>
-        <span className="name-result">{translations['blog_title']}</span>
-        <FaCaretDown
-         className="down"
-         style={{
-          transform: `${collapseAnotherSection ? 'rotate(-180deg)' : ''}`,
-         }}
-        />
-       </div>
        <div className="results-area-blog">
         {filterItemsBlogs && filterItemsBlogs?.length > 0
          ? filterItemsBlogs.map((items: BlogType, i: number) => (
@@ -381,12 +357,6 @@ const SearchModal = () => {
               <MdLocationSearching className="icon-result" />
               <span>{items?.title}</span>
              </article>
-             <div
-              className="description"
-              dangerouslySetInnerHTML={{
-               __html: DOMPurify.sanitize(items?.description),
-              }}
-             />
             </div>
            ))
          : ''}
@@ -394,15 +364,6 @@ const SearchModal = () => {
       </div>
 
       <div className={`services-section-results ${collapseServicesSection ? 'collapsed' : ''}`}>
-       <div className="head" title="Yığ" onClick={() => setCollapseServicesSection(!collapseServicesSection)}>
-        <span className="name-result">{translations['nav_haqqimizda_xidmetler']}</span>
-        <FaCaretDown
-         className="down"
-         style={{
-          transform: `${collapseServicesSection ? 'rotate(-180deg)' : ''}`,
-         }}
-        />
-       </div>
        <div className="results-area-service">
         {filterItemsServices && filterItemsServices?.length > 0
          ? filterItemsServices.map((items: ServicesContentType, i: number) => (
@@ -424,15 +385,6 @@ const SearchModal = () => {
       </div>
 
       <div className={`services-section-results ${collapseToolsSection ? 'collapsed' : ''}`}>
-       <div className="head" title="Yığ" onClick={() => setCollapseToolsSection(!collapseToolsSection)}>
-        <span className="name-result">{translations['nav_haqqimizda_avadanliqlar']}</span>
-        <FaCaretDown
-         className="down"
-         style={{
-          transform: `${collapseToolsSection ? 'rotate(-180deg)' : ''}`,
-         }}
-        />
-       </div>
        <div className="results-area-service">
         {filterItemsTools && filterItemsTools?.length > 0
          ? filterItemsTools.map((items: ToolsInnerInterface, i: number) => (
