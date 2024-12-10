@@ -11,7 +11,7 @@ const Search:React.FC = () => {
   //is none homepage change search icon color black
   const isHomePage = useRecoilValue(isHomePageState);
 
-  const [_, setSearchModal] = useRecoilState(searchModalState);
+  const [, setSearchModal] = useRecoilState(searchModalState);
 
   return (
     <div className='search' onClick={() => setSearchModal(true)}>

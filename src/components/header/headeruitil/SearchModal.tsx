@@ -5,15 +5,17 @@ import React, { ChangeEvent } from 'react';
 import { useTranslate } from '../../../context/TranslateContext';
 import { HeaderElementType, submenuType } from '../Header';
 import { FaAngleDown } from 'react-icons/fa6';
-import { MdLocationSearching } from 'react-icons/md';
-import { Link, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { SelectedLanguageState } from '../../../recoil/Atoms';
 import { Baseurl } from '../../../Baseurl';
 import axios from 'axios';
-import { BlogType } from '../../../routeuitils/home/BlogSection';
+import { Link } from 'react-router-dom';
+import { OurWorksInnerInterface } from '../../../routeuitils/about/OurWorks';
+import { useQuery } from '@tanstack/react-query';
+import { SelectedLanguageState } from '../../../recoil/Atoms';
+import { CalculationsDataType } from '../../../routeuitils/calculations/Yearly';
+import { ToolsInnerInterface } from '../../../routeuitils/activity/Tools';
 import { ServicesContentType } from '../../../routeuitils/activity/ServicesActivity';
-import { SelectedToolState, ToolsInnerInterface } from '../../../routeuitils/activity/Tools';
+import { PurchAnnInterface } from '../../features/PurchaseAnnouncements';
+import { BlogType } from '../../../routeuitils/home/BlogSection';
 
 const SearchModal = () => {
  const { translations } = useTranslate();
@@ -175,37 +177,104 @@ const SearchModal = () => {
   };
  }, [setSearchModal]);
 
- const [searchItems, setSearchItems] = React.useState<string>('');
+ //highlighted function for search query results
+ const getHighlightedText = (text: string, query: string) => {
+  if (!query) return text;
 
- const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-  const inputValue = e.target.value;
-  setSearchItems(inputValue);
+  const regex = new RegExp(`(${query})`, 'gi');
+  const parts = text.split(regex);
+
+  return parts.map((part, index) =>
+   regex.test(part) ? (
+    <span key={index} style={{ backgroundColor: 'green', padding: '0 2px', fontWeight: '400', letterSpacing: '0.5px', color: 'white' }}>
+     {part}
+    </span>
+   ) : (
+    part
+   )
+  );
  };
 
- const filterItems = HeaderItems?.filter((item: HeaderElementType) => {
-  if (searchItems) {
-   const lowerCaseTitle = item.title.toLowerCase();
-   const lowerCaseSearch = searchItems.toLowerCase();
+ const [searchQuery, setSearchQuery] = React.useState<string>('');
 
-   const others = item.submenu?.filter((subItem: submenuType) => {
-    const lowerCaseSubTitle = subItem.title.toLowerCase();
-    return lowerCaseSubTitle.includes(lowerCaseSearch);
+ const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+  setSearchQuery(e.target.value);
+ };
+
+ const lang = useRecoilValue(SelectedLanguageState);
+ const [headerSearchResult, setHeaderSearchResult] = React.useState<HeaderElementType[]>([]);
+ const [ourWorksInnerResult, setOurWorksInnerResult] = React.useState<OurWorksInnerInterface[]>([]);
+ const [yearlyCalcResult, setYearlyCalcResult] = React.useState<CalculationsDataType[]>([]);
+ const [toolsInnerResult, setToolsInnerResult] = React.useState<ToolsInnerInterface[]>([]);
+ const [servicesResult, setServicesResult] = React.useState<ServicesContentType[]>([]);
+ const [purchaseResult, setPurchaseResult] = React.useState<PurchAnnInterface[]>([]);
+ const [blogResult, setBlogResult] = React.useState<BlogType[]>([]);
+
+ //our works
+ const { data: OurWorksInnerData } = useQuery<OurWorksInnerInterface[]>({
+  queryKey: ['ourWorksInnerDataKey', lang],
+  queryFn: async () => {
+   const response = await axios.get(`${Baseurl}/ourworksinnerfront`, {
+    headers: {
+     'Accept-Language': lang,
+    },
    });
-
-   return (others && others.length > 0) || lowerCaseTitle.includes(lowerCaseSearch);
-  }
-  return true;
+   return response.data;
+  },
+  staleTime: 1000000,
  });
 
- const selectedlang = useRecoilValue(SelectedLanguageState);
+ //yearly calculations
+ const { data: yearlyCalculationsData } = useQuery<CalculationsDataType[]>({
+  queryKey: ['yearlyKey', lang],
+  queryFn: async () => {
+   const response = await axios.get(`${Baseurl}/yearly_calculationsfront`, {
+    headers: {
+     'Accept-Language': lang,
+    },
+   });
+   return response.data;
+  },
+  staleTime: 2000000,
+ });
 
- const { data: blogData } = useQuery<BlogType[]>({
-  queryKey: ['blogData', selectedlang],
+ //tools inner
+ const { data: ToolsInnerData } = useQuery<ToolsInnerInterface[]>({
+  queryKey: ['toolsInnerDataKey', lang],
+  queryFn: async () => {
+   const response = await axios.get(`${Baseurl}/toolsinnerfront`, {
+    headers: {
+     'Accept-Language': lang,
+    },
+   });
+   return response.data;
+  },
+  staleTime: 1000000,
+ });
+
+ //services data
+ const { data: servicesPageData } = useQuery<ServicesContentType[]>({
+  queryKey: ['servicesPageDataKey', lang],
+  queryFn: async () => {
+   const response = await axios.get(`${Baseurl}/servicespagefront`, {
+    headers: {
+     'Accept-Language': lang,
+    },
+   });
+   return response.data;
+  },
+  staleTime: 1000000,
+ });
+
+ //purchase announcements
+ const { data: purchAnnData } = useQuery<PurchAnnInterface[]>({
+  queryKey: ['purchAnnData', lang],
   queryFn: async () => {
    try {
-    const response = await axios.get(`${Baseurl}/blogfront`, {
+    const response = await axios.get(`${Baseurl}/purchaseannouncementfront`, {
      headers: {
-      'Accept-Language': selectedlang,
+      'Accept-Language': lang,
+      'Content-Type': 'multipart/form-data',
      },
     });
     return response.data;
@@ -217,80 +286,90 @@ const SearchModal = () => {
   staleTime: 1000000,
  });
 
- const { data: servicesPageData } = useQuery<ServicesContentType[]>({
-  queryKey: ['servicesPageDataKey', selectedlang],
+ //blogs
+ const { data: blogData } = useQuery<BlogType[]>({
+  queryKey: ['blogData', lang],
   queryFn: async () => {
-   const response = await axios.get(`${Baseurl}/servicespagefront`, {
-    headers: {
-     'Accept-Language': selectedlang,
-    },
-   });
-   return response.data;
+   try {
+    const response = await axios.get(`${Baseurl}/blogfront`, {
+     headers: {
+      'Accept-Language': lang,
+     },
+    });
+    return response.data;
+   } catch (error) {
+    console.error(error);
+    throw error;
+   }
   },
   staleTime: 1000000,
  });
 
- const { data: ToolsInnerData } = useQuery<ToolsInnerInterface[]>({
-  queryKey: ['toolsInnerDataKey', selectedlang],
-  queryFn: async () => {
-   const response = await axios.get(`${Baseurl}/toolsinnerfront`, {
-    headers: {
-     'Accept-Language': selectedlang,
-    },
-   });
-   return response.data;
-  },
-  staleTime: 1000000,
- });
+ React.useEffect(() => {
+  if (searchQuery) {
+   const matchedHeaderItems = HeaderItems.filter((element) => element.submenu?.some((sub) => sub.title.toLowerCase().includes(searchQuery)));
 
- const filterItemsBlogs =
-  blogData && blogData?.length > 0
-   ? blogData?.filter((item: BlogType) => {
-      if (searchItems) {
-       const lowerCaseTitle = item.title.toLowerCase();
-       const lowerCaseSearch = searchItems.toLowerCase();
-       if (lowerCaseTitle.includes(lowerCaseSearch)) {
-        return;
-       }
-      }
-      return true;
-     })
-   : [];
+   const matchedOurworkItems =
+    OurWorksInnerData && OurWorksInnerData?.length > 0
+     ? OurWorksInnerData?.filter((data: OurWorksInnerInterface) => {
+        return data.title.toLowerCase().includes(searchQuery.toLowerCase());
+       })
+     : [];
 
- const filterItemsServices =
-  servicesPageData && servicesPageData?.length > 0
-   ? servicesPageData?.filter((item: ServicesContentType) => {
-      if (searchItems) {
-       const lowerCaseTitle = item.title.toLowerCase();
-       const lowerCaseSearch = searchItems.toLowerCase();
+   const matchedYearlyCalcs =
+    yearlyCalculationsData && yearlyCalculationsData?.length > 0
+     ? yearlyCalculationsData?.filter((data: CalculationsDataType) => {
+        return data.title.toLowerCase().includes(searchQuery.toLowerCase()) || data.title.toUpperCase().includes(searchQuery.toUpperCase());
+       })
+     : [];
 
-       return lowerCaseTitle.includes(lowerCaseSearch);
-      }
-      return true;
-     })
-   : [];
+   const matchedToolsInnerData =
+    ToolsInnerData && ToolsInnerData?.length > 0
+     ? ToolsInnerData?.filter((data: ToolsInnerInterface) => {
+        return data.title.toLowerCase().includes(searchQuery.toLowerCase()) || data.title.toUpperCase().includes(searchQuery.toUpperCase());
+       })
+     : [];
 
- const filterItemsTools =
-  ToolsInnerData && ToolsInnerData?.length > 0
-   ? ToolsInnerData?.filter((item: ToolsInnerInterface) => {
-      if (searchItems) {
-       const lowerCaseTitle = item.title.toLowerCase();
-       const lowerCaseSearch = searchItems.toLowerCase();
+   const matchedServicesData =
+    servicesPageData && servicesPageData?.length > 0
+     ? servicesPageData?.filter((data: ServicesContentType) => {
+        return data.title.toLowerCase().includes(searchQuery.toLowerCase()) || data.title.toUpperCase().includes(searchQuery.toUpperCase());
+       })
+     : [];
 
-       return lowerCaseTitle.includes(lowerCaseSearch);
-      }
-      return true;
-     })
-   : [];
+   const matchedPurchaseData =
+    purchAnnData && purchAnnData?.length > 0
+     ? purchAnnData?.filter((data: PurchAnnInterface) => {
+        return data.title.toLowerCase().includes(searchQuery.toLowerCase()) || data.title.toUpperCase().includes(searchQuery.toUpperCase());
+       })
+     : [];
 
- const navigate = useNavigate();
+   const matchedBlogData =
+    blogData && blogData?.length > 0
+     ? blogData?.filter((data: BlogType) => {
+        return data.title.toLowerCase().includes(searchQuery.toLowerCase()) || data.title.toUpperCase().includes(searchQuery.toUpperCase());
+       })
+     : [];
 
- const [collapseHeaderItems, ,] = React.useState(false);
- const [collapseAnotherSection, ,] = React.useState(false);
- const [collapseServicesSection, ,] = React.useState(false);
- const [collapseToolsSection, ,] = React.useState(false);
+   setServicesResult(matchedServicesData);
+   setHeaderSearchResult(matchedHeaderItems);
+   setOurWorksInnerResult(matchedOurworkItems);
+   setYearlyCalcResult(matchedYearlyCalcs);
+   setToolsInnerResult(matchedToolsInnerData);
+   setPurchaseResult(matchedPurchaseData);
+   setBlogResult(matchedBlogData);
+  } else {
+   setHeaderSearchResult([]);
+  }
+ }, [searchQuery]);
 
- const [, setSelectItem] = useRecoilState(SelectedToolState);
+ const checkIfHeaderResultFinded = headerSearchResult && headerSearchResult.length > 0 ? headerSearchResult : [];
+ const checkIfOurworksResultFinded = ourWorksInnerResult && ourWorksInnerResult.length > 0 ? ourWorksInnerResult : [];
+ const checkIfYearlyCalcResultFinded = yearlyCalcResult && yearlyCalcResult?.length > 0 ? yearlyCalcResult : [];
+ const checkIfToolsInnerResultFinded = toolsInnerResult && toolsInnerResult?.length > 0 ? toolsInnerResult : [];
+ const checkIfServicesFinded = servicesResult && servicesResult?.length > 0 ? servicesResult : [];
+ const checkIfPurchaseFinded = purchaseResult && purchaseResult?.length > 0 ? purchaseResult : [];
+ const checkIfBlogFinded = blogResult && blogResult?.length > 0 ? blogResult : [];
 
  return (
   <section className={`search-modal ${searchModal ? 'active' : ''}`} ref={modalRef}>
@@ -301,128 +380,95 @@ const SearchModal = () => {
 
    <div className="search-input">
     <div className="input-area">
-     <input type="search" placeholder={translations['search_placeholder_title']} onChange={handleSearch} />
+     <input value={searchQuery} type="search" placeholder={translations['search_placeholder_title']} onChange={handleSearch} />
      <IoSearch className="searchicon" />
     </div>
+    <div className="result-content">
+     {searchQuery?.length > 0 ? (
+      checkIfHeaderResultFinded?.length ||
+      checkIfOurworksResultFinded?.length > 0 ||
+      yearlyCalcResult?.length > 0 ||
+      checkIfToolsInnerResultFinded?.length > 0 ||
+      checkIfServicesFinded?.length > 0 ||
+      checkIfPurchaseFinded?.length > 0 ||
+      checkIfBlogFinded?.length > 0 ? (
+       <div className="results-main">
+        {/* header */}
+        {checkIfHeaderResultFinded.map((item: HeaderElementType) =>
+         item?.submenu?.map((sub: submenuType) => (
+          <Link
+           className="link-el"
+           to={sub?.to || ''}
+           onClick={() => {
+            setSearchModal(false);
+           }}
+           key={sub?.id}>
+           {getHighlightedText(sub?.title, searchQuery)}
+          </Link>
+         ))
+        )}
 
-    {searchItems && searchItems?.length > 0 ? (
-     <div className="results">
-      {/* Header items search result */}
-      <div className={`header-item-results ${collapseHeaderItems ? 'collapsed' : ''}`}>
-       <div className="results-area">
-        {filterItems &&
-         filterItems.map((items: HeaderElementType) => (
-          <div className="result-item" key={items.id}>
-           <article
-            className="head-item-title"
-            onClick={() => {
-             navigate(items?.to);
-             setSearchModal(false);
-            }}>
-            <MdLocationSearching className="icon-result" />
-            <span>{items?.title}</span>
-           </article>
+        {/* gorduyumuz isler */}
+        {checkIfOurworksResultFinded?.length > 0
+         ? checkIfOurworksResultFinded?.map((item: OurWorksInnerInterface) => (
+            <div className="link-el" key={item?._id}>
+             <p>{getHighlightedText(item?.title, searchQuery)}</p>
+            </div>
+           ))
+         : ''}
 
-           <div className="submenus" style={{ display: items && items.submenu && items?.submenu?.length > 0 ? 'flex' : 'none' }}>
-            {items.submenu?.map((sub: submenuType) => {
-             if (sub.id === 33444433 && !showRehberlik) {
-              return null;
-             }
+        {/* illik hesabatlar */}
+        {checkIfYearlyCalcResultFinded?.length > 0
+         ? checkIfYearlyCalcResultFinded?.map((item: CalculationsDataType) => (
+            <div className="link-el" key={item?._id}>
+             <p>{getHighlightedText(item?.title, searchQuery)}</p>
+            </div>
+           ))
+         : ''}
 
-             return (
-              <Link onClick={() => setSearchModal(false)} key={sub.to} title={`${sub.title}'a get`} to={sub.to ? sub.to : ''}>
-               {sub.title}
-              </Link>
-             );
-            })}
-           </div>
-          </div>
-         ))}
-       </div>
-      </div>
+        {/* avadanliqlar */}
+        {checkIfToolsInnerResultFinded?.length > 0
+         ? checkIfToolsInnerResultFinded?.map((item: ToolsInnerInterface) => (
+            <div className="link-el" key={item?._id}>
+             <p>{getHighlightedText(item?.title, searchQuery)}</p>
+            </div>
+           ))
+         : ''}
 
-      {/* Another section (future use) */}
-      <div className={`another-section-results ${collapseAnotherSection ? 'collapsed' : ''}`}>
-       <div className="results-area-blog">
-        {filterItemsBlogs && filterItemsBlogs?.length > 0
-         ? filterItemsBlogs.map((items: BlogType, i: number) => (
-            <div
-             className="result-item-blog"
-             key={i}
-             onClick={() => {
-              navigate(`/xeberler/${items?._id}`);
-              setSearchModal(false);
-             }}>
-             <article className="head-item-title">
-              <MdLocationSearching className="icon-result" />
-              <span>{items?.title}</span>
-             </article>
+        {/* services */}
+        {checkIfServicesFinded?.length > 0
+         ? checkIfServicesFinded?.map((item: ServicesContentType) => (
+            <div className="link-el" key={item?._id}>
+             <p>{getHighlightedText(item?.title, searchQuery)}</p>
+            </div>
+           ))
+         : ''}
+
+        {/* satinalma elanlari */}
+        {checkIfPurchaseFinded?.length > 0
+         ? checkIfPurchaseFinded?.map((item: PurchAnnInterface) => (
+            <div className="link-el" key={item?._id}>
+             <p>{getHighlightedText(item?.title, searchQuery)}</p>
+            </div>
+           ))
+         : ''}
+
+        {/* blogs */}
+        {checkIfBlogFinded?.length > 0
+         ? checkIfBlogFinded?.map((item: BlogType) => (
+            <div className="link-el" key={item?._id}>
+             <p>{getHighlightedText(item?.title, searchQuery)}</p>
             </div>
            ))
          : ''}
        </div>
-      </div>
-
-      <div className={`services-section-results ${collapseServicesSection ? 'collapsed' : ''}`}>
-       <div className="results-area-service">
-        {filterItemsServices && filterItemsServices?.length > 0
-         ? filterItemsServices.map((items: ServicesContentType, i: number) => (
-            <div
-             className="result-item-blog"
-             key={i}
-             onClick={() => {
-              navigate(`/fealiyyet/xidmetler/${i + 1}`);
-              setSearchModal(false);
-             }}>
-             <article className="head-item-title">
-              <MdLocationSearching className="icon-result" />
-              <span>{items?.title}</span>
-             </article>
-            </div>
-           ))
-         : ''}
-       </div>
-      </div>
-
-      <div className={`services-section-results ${collapseToolsSection ? 'collapsed' : ''}`}>
-       <div className="results-area-service">
-        {filterItemsTools && filterItemsTools?.length > 0
-         ? filterItemsTools.map((items: ToolsInnerInterface, i: number) => (
-            <div
-             className="result-item-blog"
-             key={i}
-             onClick={() => {
-              navigate(`/fealiyyet/avadanliqlar`);
-              setSelectItem(items.title);
-              setSearchModal(false);
-             }}>
-             <article className="head-item-title">
-              <MdLocationSearching className="icon-result" />
-              <span>{items?.title}</span>
-             </article>
-            </div>
-           ))
-         : ''}
-       </div>
-      </div>
-     </div>
-    ) : (
-     <p
-      style={{
-       width: '100%',
-       height: 'auto',
-       display: 'flex',
-       alignItems: 'center',
-       justifyContent: 'center',
-       marginTop: '120px',
-       fontSize: '18px',
-       fontWeight: '500',
-       color: '#707070',
-       letterSpacing: '-0.1px',
-      }}>
-      {translations['no_result']}
-     </p>
-    )}
+      ) : (
+       <div>Axtardığınız key üzrə nəticə tapılmadı: "{searchQuery}"</div>
+      )
+     ) : (
+      <div>{translations['no_result']}</div>
+     )}
+    </div>
    </div>
   </section>
  );

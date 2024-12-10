@@ -7,6 +7,14 @@
  font-family: 'Public Sans', sans-serif;
 }
 
+.app .header-wrapper .header .right-header-area .share-media {
+ z-index: 1000 !important;
+}
+
+.last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left .description-content p {
+  text-align: justify !important;
+}
+
 .home-page .contact-us-section .contact-us .map-contact .contact-information-box .contact-datas .information-box .left-icon {
  padding: 10px !important;
 }
@@ -2450,6 +2458,58 @@ $whitedarktwo: #8b9f9c;
       pointer-events: none;
      }
     }
+   }
+  }
+
+  .result-content {
+   width: 100%;
+   background-color: transparent;
+   margin-top: 12px;
+   display: flex;
+   max-height: 60vh;
+   overflow-y: auto;
+   align-items: flex-start;
+   justify-content: flex-start;
+   flex-direction: column;
+   padding: 12px;
+   .results-main {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 6px;
+
+    .link-el {
+     text-decoration: none;
+     background-color: #eeeeee;
+     padding: 6px 12px;
+     width: 100%;
+     text-align: start;
+     color: black;
+     font-size: 17px;
+     cursor: pointer;
+     font-weight: 500;
+     display: flex;
+     align-items: center;
+     justify-content: flex-start;
+     p {
+      color: black;
+      &:hover {
+        color: #707070;
+       }
+     }
+     &:hover {
+      color: #707070;
+     }
+    }
+   }
+   &::-webkit-scrollbar {
+    width: 5px;
+    background-color: transparent;
+   }
+   &::-webkit-scrollbar-thumb {
+    background-color: rgb(157, 157, 196);
    }
   }
 

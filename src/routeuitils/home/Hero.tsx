@@ -78,9 +78,10 @@ const Hero: React.FC = () => {
           <Swiper
             autoplay={{
               delay: 1500,
-              pauseOnMouseEnter: true,
+              pauseOnMouseEnter: false,
             }}
-            speed={1800}
+            loop={true}
+            speed={1000}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
