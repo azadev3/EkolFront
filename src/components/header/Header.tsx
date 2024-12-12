@@ -37,6 +37,9 @@ const Header: React.FC = () => {
  const { translations } = useTranslate();
 
  const [showRehberlik, setShowRehberlik] = React.useState<boolean>(false);
+ const [showPurchase, setShowPurchase] = React.useState<boolean>(false);
+ const [showCarier, setShowCarier] = React.useState<boolean>(false);
+
  const handleCheck = async () => {
   try {
    const res = await axios.get(`${Baseurl}/hidden-rehberlik-front`);
@@ -50,9 +53,38 @@ const Header: React.FC = () => {
    console.log(error);
   }
  };
+
+ const handleCheckPurchase = async () => {
+  try {
+   const res = await axios.get(`${Baseurl}/hidden-purchase-front`);
+   if (res.data) {
+    setShowPurchase(res.data?.showed);
+   } else {
+    console.log(res.status);
+   }
+  } catch (error) {
+   console.log(error);
+  }
+ };
+
+ const handleCheckCarier = async () => {
+  try {
+   const res = await axios.get(`${Baseurl}/hidden-carier-front`);
+   if (res.data) {
+    setShowCarier(res.data?.showed);
+   } else {
+    console.log(res.status);
+   }
+  } catch (error) {
+   console.log(error);
+  }
+ };
+
  React.useEffect(() => {
   handleCheck();
- }, [showRehberlik]);
+  handleCheckPurchase();
+  handleCheckCarier();
+ }, [showRehberlik, showPurchase, showCarier]);
 
  const { DynamicPageData } = useDynamicPageData();
  const hasRoute = DynamicPageData && DynamicPageData?.length > 0 ? DynamicPageData : [];
@@ -145,7 +177,7 @@ const Header: React.FC = () => {
    to: '/',
    icon: <FaAngleDown className="down-icon" />,
    submenu: [
-    { id: 8, title: `${translations['nav_haqqimizda_cariers']}`, to: '/karyera' },
+    { id: 888, title: `${translations['nav_haqqimizda_cariers']}`, to: '/karyera' },
     { id: 4343, title: `${translations['nav_haqqimizda_elaqe']}`, to: '/elaqe' },
     {
      id: 2322,
@@ -213,15 +245,33 @@ const Header: React.FC = () => {
     <div className="header">
      <Link to="/" className="logo-header">
       {LogoIcon && LogoIcon.length > 0
-       ? LogoIcon.map((logo: Logo) => <img key={logo._id} src={`https://ekol-server-1.onrender.com${logo.logo}`} alt={`${logo._id}-logo`} title={logo._id} />)
+       ? LogoIcon.map((logo: Logo) => (
+          <img
+           key={logo._id}
+           src={`https://ekol-server-1.onrender.com${logo.logo}`}
+           alt={`${logo._id}-logo`}
+           title={logo._id}
+          />
+         ))
        : ''}
      </Link>
 
      <nav className="left-navigation">
       {HeaderItems?.map((item: HeaderElementType) => (
-       <ul key={item?.id} onMouseEnter={() => handleDropdownMenuHeader(item?.id)} onMouseLeave={() => setDropdownHeader(null)}>
-        <li className="links">
-         {item.submenu ? <span className="title-dropdown">{item.title}</span> : <NavLink to={item?.to}>{item.title}</NavLink>}
+       <ul
+        key={item?.id}
+        onMouseEnter={() => handleDropdownMenuHeader(item?.id)}
+        onMouseLeave={() => setDropdownHeader(null)}>
+        <li
+         style={{
+          display: item.id === 4 && !showPurchase ? 'none' : 'flex',
+         }}
+         className="links">
+         {item.submenu ? (
+          <span className="title-dropdown">{item.title}</span>
+         ) : (
+          <NavLink to={item?.to}>{item.title}</NavLink>
+         )}
          <span style={{ transform: dropdownHeader === item.id ? 'rotate(180deg)' : '' }}>{item.icon}</span>
         </li>
         {dropdownHeader === item.id && item.submenu && (
@@ -229,7 +279,11 @@ const Header: React.FC = () => {
           {item?.submenu?.map((submenuItem: submenuType) => {
            if (submenuItem.id === 23456789 && !showRehberlik) {
             return (
-             <NavLink style={{ display: 'none' }} onClick={() => setDropdownHeader(null)} to={submenuItem.to ? submenuItem.to : ''} key={submenuItem?.id}>
+             <NavLink
+              style={{ display: 'none' }}
+              onClick={() => setDropdownHeader(null)}
+              to={submenuItem.to ? submenuItem.to : ''}
+              key={submenuItem?.id}>
               {submenuItem.title}
              </NavLink>
             );
@@ -245,9 +299,16 @@ const Header: React.FC = () => {
               {submenuItem.title}
              </NavLink>
             );
-           } else {
+           } else if (submenuItem.id === 888 && !showCarier) {
             return (
-             <NavLink onClick={() => setDropdownHeader(null)} to={submenuItem.to ? submenuItem.to : ''} key={submenuItem?.id}>
+              <></>
+            )
+           } {
+            return (
+             <NavLink
+              onClick={() => setDropdownHeader(null)}
+              to={submenuItem.to ? submenuItem.to : ''}
+              key={submenuItem?.id}>
               {submenuItem.title}
              </NavLink>
             );
