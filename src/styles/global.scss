@@ -7,6 +7,11 @@
  font-family: 'Public Sans', sans-serif;
 }
 
+.last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left .description-content .description-area {
+  max-width: unset !important;
+  width: 100% !important;
+}
+
 .app .header-wrapper .header .right-header-area .share-media {
  z-index: 1000 !important;
 }
