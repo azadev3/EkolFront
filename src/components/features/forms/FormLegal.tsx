@@ -211,7 +211,7 @@ const FormLegal: React.FC = () => {
  const [enterprises, setEnterprises] = React.useState<EnterprisesType>();
  const handleGetEnterprises = async () => {
   try {
-   const res = await axios.get(`http://localhost:3000/api/add-enterprise`, {
+   const res = await axios.get(`${Baseurl}/add-enterprise`, {
     headers: {
      'Content-Type': 'application/json',
     },
