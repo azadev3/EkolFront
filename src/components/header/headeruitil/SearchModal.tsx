@@ -7,12 +7,12 @@ import { HeaderElementType, submenuType } from '../Header';
 import { FaAngleDown } from 'react-icons/fa6';
 import { Baseurl } from '../../../Baseurl';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { OurWorksInnerInterface } from '../../../routeuitils/about/OurWorks';
+import { Link, useNavigate } from 'react-router-dom';
+import { OurWorksInnerInterface, SelectItemOurWorkState } from '../../../routeuitils/about/OurWorks';
 import { useQuery } from '@tanstack/react-query';
 import { SelectedLanguageState } from '../../../recoil/Atoms';
 import { CalculationsDataType } from '../../../routeuitils/calculations/Yearly';
-import { ToolsInnerInterface } from '../../../routeuitils/activity/Tools';
+import { SelectedToolState, ToolsInnerInterface } from '../../../routeuitils/activity/Tools';
 import { ServicesContentType } from '../../../routeuitils/activity/ServicesActivity';
 import { PurchAnnInterface } from '../../features/PurchaseAnnouncements';
 import { BlogType } from '../../../routeuitils/home/BlogSection';
@@ -186,7 +186,9 @@ const SearchModal = () => {
 
   return parts.map((part, index) =>
    regex.test(part) ? (
-    <span key={index} style={{ backgroundColor: 'green', padding: '0 2px', fontWeight: '400', letterSpacing: '0.5px', color: 'white' }}>
+    <span
+     key={index}
+     style={{ backgroundColor: 'green', padding: '0 2px', fontWeight: '400', letterSpacing: '0.5px', color: 'white' }}>
      {part}
     </span>
    ) : (
@@ -307,7 +309,9 @@ const SearchModal = () => {
 
  React.useEffect(() => {
   if (searchQuery) {
-   const matchedHeaderItems = HeaderItems.filter((element) => element.submenu?.some((sub) => sub.title.toLowerCase().includes(searchQuery)));
+   const matchedHeaderItems = HeaderItems.filter((element) =>
+    element.submenu?.some((sub) => sub.title.toLowerCase().includes(searchQuery))
+   );
 
    const matchedOurworkItems =
     OurWorksInnerData && OurWorksInnerData?.length > 0
@@ -319,35 +323,50 @@ const SearchModal = () => {
    const matchedYearlyCalcs =
     yearlyCalculationsData && yearlyCalculationsData?.length > 0
      ? yearlyCalculationsData?.filter((data: CalculationsDataType) => {
-        return data.title.toLowerCase().includes(searchQuery.toLowerCase()) || data.title.toUpperCase().includes(searchQuery.toUpperCase());
+        return (
+         data.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+         data.title.toUpperCase().includes(searchQuery.toUpperCase())
+        );
        })
      : [];
 
    const matchedToolsInnerData =
     ToolsInnerData && ToolsInnerData?.length > 0
      ? ToolsInnerData?.filter((data: ToolsInnerInterface) => {
-        return data.title.toLowerCase().includes(searchQuery.toLowerCase()) || data.title.toUpperCase().includes(searchQuery.toUpperCase());
+        return (
+         data.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+         data.title.toUpperCase().includes(searchQuery.toUpperCase())
+        );
        })
      : [];
 
    const matchedServicesData =
     servicesPageData && servicesPageData?.length > 0
      ? servicesPageData?.filter((data: ServicesContentType) => {
-        return data.title.toLowerCase().includes(searchQuery.toLowerCase()) || data.title.toUpperCase().includes(searchQuery.toUpperCase());
+        return (
+         data.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+         data.title.toUpperCase().includes(searchQuery.toUpperCase())
+        );
        })
      : [];
 
    const matchedPurchaseData =
     purchAnnData && purchAnnData?.length > 0
      ? purchAnnData?.filter((data: PurchAnnInterface) => {
-        return data.title.toLowerCase().includes(searchQuery.toLowerCase()) || data.title.toUpperCase().includes(searchQuery.toUpperCase());
+        return (
+         data.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+         data.title.toUpperCase().includes(searchQuery.toUpperCase())
+        );
        })
      : [];
 
    const matchedBlogData =
     blogData && blogData?.length > 0
      ? blogData?.filter((data: BlogType) => {
-        return data.title.toLowerCase().includes(searchQuery.toLowerCase()) || data.title.toUpperCase().includes(searchQuery.toUpperCase());
+        return (
+         data.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+         data.title.toUpperCase().includes(searchQuery.toUpperCase())
+        );
        })
      : [];
 
@@ -371,6 +390,11 @@ const SearchModal = () => {
  const checkIfPurchaseFinded = purchaseResult && purchaseResult?.length > 0 ? purchaseResult : [];
  const checkIfBlogFinded = blogResult && blogResult?.length > 0 ? blogResult : [];
 
+ const navigate = useNavigate();
+
+ const [, setSelectItemOurWork] = useRecoilState(SelectItemOurWorkState);
+ const [, setSelectTool] = useRecoilState(SelectedToolState);
+
  return (
   <section className={`search-modal ${searchModal ? 'active' : ''}`} ref={modalRef}>
    <div className="head-modal">
@@ -380,7 +404,12 @@ const SearchModal = () => {
 
    <div className="search-input">
     <div className="input-area">
-     <input value={searchQuery} type="search" placeholder={translations['search_placeholder_title']} onChange={handleSearch} />
+     <input
+      value={searchQuery}
+      type="search"
+      placeholder={translations['search_placeholder_title']}
+      onChange={handleSearch}
+     />
      <IoSearch className="searchicon" />
     </div>
     <div className="result-content">
@@ -411,7 +440,14 @@ const SearchModal = () => {
         {/* gorduyumuz isler */}
         {checkIfOurworksResultFinded?.length > 0
          ? checkIfOurworksResultFinded?.map((item: OurWorksInnerInterface) => (
-            <div className="link-el" key={item?._id}>
+            <div
+             onClick={() => {
+              navigate('/about/workwedo');
+              setSelectItemOurWork(item?.title);
+              setSearchModal(false);
+             }}
+             className="link-el"
+             key={item?._id}>
              <p>{getHighlightedText(item?.title, searchQuery)}</p>
             </div>
            ))
@@ -420,7 +456,13 @@ const SearchModal = () => {
         {/* illik hesabatlar */}
         {checkIfYearlyCalcResultFinded?.length > 0
          ? checkIfYearlyCalcResultFinded?.map((item: CalculationsDataType) => (
-            <div className="link-el" key={item?._id}>
+            <div
+             onClick={() => {
+              navigate('/hesabatlar/illikhesabatlar');
+              setSearchModal(false);
+             }}
+             className="link-el"
+             key={item?._id}>
              <p>{getHighlightedText(item?.title, searchQuery)}</p>
             </div>
            ))
@@ -429,7 +471,14 @@ const SearchModal = () => {
         {/* avadanliqlar */}
         {checkIfToolsInnerResultFinded?.length > 0
          ? checkIfToolsInnerResultFinded?.map((item: ToolsInnerInterface) => (
-            <div className="link-el" key={item?._id}>
+            <div
+             onClick={() => {
+              navigate('/fealiyyet/avadanliqlar');
+              setSelectTool(item?.title);
+              setSearchModal(false);
+             }}
+             className="link-el"
+             key={item?._id}>
              <p>{getHighlightedText(item?.title, searchQuery)}</p>
             </div>
            ))
@@ -438,7 +487,13 @@ const SearchModal = () => {
         {/* services */}
         {checkIfServicesFinded?.length > 0
          ? checkIfServicesFinded?.map((item: ServicesContentType) => (
-            <div className="link-el" key={item?._id}>
+            <div
+             className="link-el"
+             onClick={() => {
+              navigate(`/fealiyyet/xidmetler/${item?._id}`);
+              setSearchModal(false);
+             }}
+             key={item?._id}>
              <p>{getHighlightedText(item?.title, searchQuery)}</p>
             </div>
            ))
@@ -447,7 +502,13 @@ const SearchModal = () => {
         {/* satinalma elanlari */}
         {checkIfPurchaseFinded?.length > 0
          ? checkIfPurchaseFinded?.map((item: PurchAnnInterface) => (
-            <div className="link-el" key={item?._id}>
+            <div
+             className="link-el"
+             onClick={() => {
+              navigate('/satinalmaelanlari');
+              setSearchModal(false);
+             }}
+             key={item?._id}>
              <p>{getHighlightedText(item?.title, searchQuery)}</p>
             </div>
            ))
@@ -456,7 +517,13 @@ const SearchModal = () => {
         {/* blogs */}
         {checkIfBlogFinded?.length > 0
          ? checkIfBlogFinded?.map((item: BlogType) => (
-            <div className="link-el" key={item?._id}>
+            <div
+             className="link-el"
+             onClick={() => {
+              navigate(`/xeberler/${item?._id}`);
+              setSearchModal(false);
+             }}
+             key={item?._id}>
              <p>{getHighlightedText(item?.title, searchQuery)}</p>
             </div>
            ))

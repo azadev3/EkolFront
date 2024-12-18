@@ -1,7 +1,7 @@
 import React from 'react';
 import Breadcrumb from '../../Breadcrumb';
 import { v4 as uuidv4 } from 'uuid';
-import { useRecoilValue } from 'recoil';
+import { atom, useRecoilState, useRecoilValue } from 'recoil';
 import { SelectedLanguageState } from '../../recoil/Atoms';
 import { useQuery } from '@tanstack/react-query';
 import { Baseurl } from '../../Baseurl';
@@ -23,6 +23,11 @@ interface OurworksImages {
  selected_ourworks: string;
 }
 
+export const SelectItemOurWorkState = atom<string>({
+ key: 's_item_ourwork_key',
+ default: '',
+});
+
 const OurWorks: React.FC = () => {
  const { translations } = useTranslate();
  const selectedlang = useRecoilValue(SelectedLanguageState);
@@ -39,7 +44,7 @@ const OurWorks: React.FC = () => {
   staleTime: 1000000,
  });
 
- const [selectItem, setSelectItem] = React.useState<string>('');
+ const [selectItem, setSelectItem] = useRecoilState(SelectItemOurWorkState);
  const [isOpen, setIsOpen] = React.useState<boolean>(false);
  const [selectedImage, setSelectedImage] = React.useState<string>('');
 
@@ -181,7 +186,11 @@ const OurWorks: React.FC = () => {
         <Lightbox
          open={open}
          close={() => setOpen(false)}
-         slides={findedImage && findedImage?.images ? findedImage?.images?.map((imgs) => ({ src: `https://ekol-server-1.onrender.com${imgs}` })) : []}
+         slides={
+          findedImage && findedImage?.images
+           ? findedImage?.images?.map((imgs) => ({ src: `https://ekol-server-1.onrender.com${imgs}` }))
+           : []
+         }
          index={currentImageIndex}
         />
        )}

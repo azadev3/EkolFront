@@ -19,7 +19,6 @@
   grid-template-columns: repeat(4, 1fr);
  }
  .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content .links-nav-social {
-  flex-direction: row !important;
   display: flex !important;
  }
 }
@@ -29,32 +28,83 @@
   padding-left: 24px;
   padding-right: 24px;
  }
- .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .search-area .input-search {
+ .purch-announcement-wrapper
+  .purch-announcement-section
+  .purch-announcement
+  .container-purch-announcement
+  .search-and-items
+  .search-area
+  .input-search {
   max-width: unset;
   width: 100%;
  }
- .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .search-area {
+ .purch-announcement-wrapper
+  .purch-announcement-section
+  .purch-announcement
+  .container-purch-announcement
+  .search-and-items
+  .search-area {
   flex-direction: column;
   gap: 40px;
  }
- .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase th,
- .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase td {
+ .purch-announcement-wrapper
+  .purch-announcement-section
+  .purch-announcement
+  .container-purch-announcement
+  .table-area-purchase
+  th,
+ .purch-announcement-wrapper
+  .purch-announcement-section
+  .purch-announcement
+  .container-purch-announcement
+  .table-area-purchase
+  td {
   padding: 18px 12px;
   font-size: 13.5px;
  }
- .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase th.order,
- .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase td.order {
+ .purch-announcement-wrapper
+  .purch-announcement-section
+  .purch-announcement
+  .container-purch-announcement
+  .table-area-purchase
+  th.order,
+ .purch-announcement-wrapper
+  .purch-announcement-section
+  .purch-announcement
+  .container-purch-announcement
+  .table-area-purchase
+  td.order {
   width: auto;
   font-size: 13px;
  }
- .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter .link-filter {
+ .purch-announcement-wrapper
+  .purch-announcement-section
+  .purch-announcement
+  .container-purch-announcement
+  .search-and-items
+  .right-filter
+  .link-filter {
   font-size: 14px;
  }
- .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase {
+ .purch-announcement-wrapper
+  .purch-announcement-section
+  .purch-announcement
+  .container-purch-announcement
+  .table-area-purchase {
   overflow: auto;
  }
- .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase th,
- .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase td {
+ .purch-announcement-wrapper
+  .purch-announcement-section
+  .purch-announcement
+  .container-purch-announcement
+  .table-area-purchase
+  th,
+ .purch-announcement-wrapper
+  .purch-announcement-section
+  .purch-announcement
+  .container-purch-announcement
+  .table-area-purchase
+  td {
   text-wrap: nowrap;
  }
 
@@ -182,7 +232,14 @@
  .last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner h3 {
   font-size: 21px;
  }
- .last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .right h5 {
+ .last-blog-inner-page
+  .last-blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .right
+  h5 {
   font-size: 14px;
  }
  .last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner {
@@ -347,7 +404,7 @@
    background-color: rgb(255, 255, 255);
    padding: 24px;
    display: flex;
-   align-items: flex-start;
+   align-items: center !important;
    justify-content: space-between;
    flex-direction: column;
    opacity: 0;
@@ -356,6 +413,8 @@
    transition: 500ms ease-in-out;
 
    .left-navigation-mobile {
+    max-width: 200px !important;
+    width: 100% !important;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -450,10 +509,11 @@
    }
 
    .lang-and-search-mobile {
+    width: 100%;
     display: flex;
     position: relative;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-evenly;
     gap: 20px;
     .search {
      width: 40px;
@@ -634,25 +694,63 @@
   padding-left: 24px;
   padding-right: 24px;
  }
- .carier-page .carier-section .carier .container-carier .carier-content-area .content-carier .general-information .why-ekol-section .grid-ekol-item {
+ .carier-page
+  .carier-section
+  .carier
+  .container-carier
+  .carier-content-area
+  .content-carier
+  .general-information
+  .why-ekol-section
+  .grid-ekol-item {
   grid-template-columns: repeat(1, 1fr);
  }
- .carier-page .carier-section .carier .container-carier .carier-content-area .content-carier .general-information .recruitment-process .process {
+ .carier-page
+  .carier-section
+  .carier
+  .container-carier
+  .carier-content-area
+  .content-carier
+  .general-information
+  .recruitment-process
+  .process {
   grid-template-columns: repeat(1, 1fr);
  }
  .carier-page .carier-section .carier .container-carier h2 {
   font-size: 24px;
  }
- .carier-page .carier-section .carier .container-carier .carier-content-area .content-carier .vacations .vacations-grid {
+ .carier-page
+  .carier-section
+  .carier
+  .container-carier
+  .carier-content-area
+  .content-carier
+  .vacations
+  .vacations-grid {
   grid-template-columns: repeat(1, 1fr);
  }
- .carier-page .carier-section .carier .container-carier .carier-content-area .content-carier .general-information .wrapper-image-general h4 {
+ .carier-page
+  .carier-section
+  .carier
+  .container-carier
+  .carier-content-area
+  .content-carier
+  .general-information
+  .wrapper-image-general
+  h4 {
   font-size: 24px;
  }
  .carier-page .carier-section .carier .container-carier .carier-content-area .navigation .navigation-item {
   font-size: 16px;
  }
- .carier-page .carier-section .carier .container-carier .carier-content-area .content-carier .general-information .why-ekol-section {
+ .carier-page
+  .carier-section
+  .carier
+  .container-carier
+  .carier-content-area
+  .content-carier
+  .general-information
+  .why-ekol-section {
   padding-left: 24px;
   padding-right: 24px;
  }
@@ -687,19 +785,48 @@
  .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .right {
   width: 40%;
  }
- .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .right .share-post .bottom {
+ .blog-inner-page
+  .blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .right
+  .share-post
+  .bottom {
   flex-direction: column;
  }
- .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .right .grid-last-blog .item-last-blog .title {
+ .blog-inner-page
+  .blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .right
+  .grid-last-blog
+  .item-last-blog
+  .title {
   font-size: 14px;
  }
  .last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents {
   flex-direction: column;
  }
- .last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left {
+ .last-blog-inner-page
+  .last-blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .left {
   width: 100%;
  }
- .last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .right {
+ .last-blog-inner-page
+  .last-blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .right {
   width: 100%;
  }
  .last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner h2 {
@@ -779,6 +906,13 @@
 }
 
 @media only screen and (max-width: 568px) {
+ .home-page .hero-wrapper {
+  height: 70vh !important;
+ }
+ .home-page .hero-wrapper .hero .swiper-slide .slide-content .left h1 {
+  font-size: 17px !important;
+  line-height: normal !important;
+ }
  .activity-page {
   padding-left: 24px;
   padding-right: 24px;
@@ -795,13 +929,26 @@
  .ourworks-section .works .container-works h2 {
   font-size: 18px;
  }
- .ourworks-section .works .container-works .grid-works .navigation-content .item-navigation .left-order-num-and-title p {
+ .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-content
+  .item-navigation
+  .left-order-num-and-title
+  p {
   font-size: 14px;
  }
  .ourworks-section .works .container-works .grid-works .navigation-description-content .images-for-description {
   grid-template-columns: repeat(1, 1fr);
  }
- .ourworks-section .works .container-works .grid-works .navigation-description-content .images-for-description .image-wrapper {
+ .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-description-content
+  .images-for-description
+  .image-wrapper {
   height: 160px;
  }
  .home-page .contact-us-section .contact-us .map-contact .iframe-div {
@@ -810,10 +957,27 @@
  .home-page .contact-us-section .contact-us .map-contact .contact-information-box {
   padding: 12px !important;
  }
- .home-page .contact-us-section .contact-us .map-contact .contact-information-box .contact-datas .information-box .right-items strong {
+ .home-page
+  .contact-us-section
+  .contact-us
+  .map-contact
+  .contact-information-box
+  .contact-datas
+  .information-box
+  .right-items
+  strong {
   font-size: 14px !important;
  }
- .home-page .contact-us-section .contact-us .map-contact .contact-information-box .contact-datas .information-box .right-items .links a {
+ .home-page
+  .contact-us-section
+  .contact-us
+  .map-contact
+  .contact-information-box
+  .contact-datas
+  .information-box
+  .right-items
+  .links
+  a {
   font-size: 12px !important;
   line-height: 18px !important;
  }
@@ -823,24 +987,108 @@
  .home-page .blog-section .blogs .blog-grid-section .blog-item {
   height: 300px !important;
  }
- .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .images-for-description {
+ .about-page
+  .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-description-content
+  .images-for-description {
   grid-template-columns: repeat(1, 1fr) !important;
   margin-top: 0 !important;
  }
- .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content p,
- .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content h1,
- .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content h2,
- .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content h3,
- .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content h4,
- .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content strong,
- .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content li,
- .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content ul,
- .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content ol,
- .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content span {
+ .about-page
+  .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-description-content
+  .description-content
+  p,
+ .about-page
+  .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-description-content
+  .description-content
+  h1,
+ .about-page
+  .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-description-content
+  .description-content
+  h2,
+ .about-page
+  .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-description-content
+  .description-content
+  h3,
+ .about-page
+  .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-description-content
+  .description-content
+  h4,
+ .about-page
+  .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-description-content
+  .description-content
+  strong,
+ .about-page
+  .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-description-content
+  .description-content
+  li,
+ .about-page
+  .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-description-content
+  .description-content
+  ul,
+ .about-page
+  .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-description-content
+  .description-content
+  ol,
+ .about-page
+  .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-description-content
+  .description-content
+  span {
   font-size: 14px !important;
   line-height: 24px !important;
  }
- .about-page .ourworks-section .works .container-works .grid-works .navigation-content .item-navigation .left-order-num-and-title p {
+ .about-page
+  .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-content
+  .item-navigation
+  .left-order-num-and-title
+  p {
   font-size: 14px !important;
   line-height: 24px !important;
  }
@@ -870,24 +1118,106 @@
  .about-page .lisanse-section .lisanse .container-lisanse .description-area-lisanse p {
   grid-template-columns: repeat(2, 1fr) !important;
  }
- .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .legal-and-natural-person-checkbox {
+ .purch-contact-wrapper
+  .purch-contact-section
+  .purch-contact
+  .container-purch-contact
+  .form-for-purchase
+  .legal-and-natural-person-checkbox {
   grid-template-columns: repeat(1, 1fr);
  }
- .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .company-and-voen,
- .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .requested-person-name-surname,
- .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .mobile-and-job-tel-number,
- .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .other-email,
- .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .country-and-job,
- .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .enterprise-name-and-part,
- .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .company-and-voen,
- .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .requested-person-name-surname,
- .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .mobile-and-job-tel-number,
- .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .other-email,
- .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .country-and-job,
- .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .enterprise-name-and-part {
+ .purch-contact-wrapper
+  .purch-contact-section
+  .purch-contact
+  .container-purch-contact
+  .form-for-purchase
+  .form-legal
+  .company-and-voen,
+ .purch-contact-wrapper
+  .purch-contact-section
+  .purch-contact
+  .container-purch-contact
+  .form-for-purchase
+  .form-legal
+  .requested-person-name-surname,
+ .purch-contact-wrapper
+  .purch-contact-section
+  .purch-contact
+  .container-purch-contact
+  .form-for-purchase
+  .form-legal
+  .mobile-and-job-tel-number,
+ .purch-contact-wrapper
+  .purch-contact-section
+  .purch-contact
+  .container-purch-contact
+  .form-for-purchase
+  .form-legal
+  .other-email,
+ .purch-contact-wrapper
+  .purch-contact-section
+  .purch-contact
+  .container-purch-contact
+  .form-for-purchase
+  .form-legal
+  .country-and-job,
+ .purch-contact-wrapper
+  .purch-contact-section
+  .purch-contact
+  .container-purch-contact
+  .form-for-purchase
+  .form-legal
+  .enterprise-name-and-part,
+ .purch-contact-wrapper
+  .purch-contact-section
+  .purch-contact
+  .container-purch-contact
+  .form-for-purchase
+  .form-natural
+  .company-and-voen,
+ .purch-contact-wrapper
+  .purch-contact-section
+  .purch-contact
+  .container-purch-contact
+  .form-for-purchase
+  .form-natural
+  .requested-person-name-surname,
+ .purch-contact-wrapper
+  .purch-contact-section
+  .purch-contact
+  .container-purch-contact
+  .form-for-purchase
+  .form-natural
+  .mobile-and-job-tel-number,
+ .purch-contact-wrapper
+  .purch-contact-section
+  .purch-contact
+  .container-purch-contact
+  .form-for-purchase
+  .form-natural
+  .other-email,
+ .purch-contact-wrapper
+  .purch-contact-section
+  .purch-contact
+  .container-purch-contact
+  .form-for-purchase
+  .form-natural
+  .country-and-job,
+ .purch-contact-wrapper
+  .purch-contact-section
+  .purch-contact
+  .container-purch-contact
+  .form-for-purchase
+  .form-natural
+  .enterprise-name-and-part {
   grid-template-columns: repeat(1, 1fr);
  }
- .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter {
+ .purch-announcement-wrapper
+  .purch-announcement-section
+  .purch-announcement
+  .container-purch-announcement
+  .search-and-items
+  .right-filter {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   justify-items: center;
@@ -898,7 +1228,13 @@
  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement h2 {
   font-size: 30px;
  }
- .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter .link-filter {
+ .purch-announcement-wrapper
+  .purch-announcement-section
+  .purch-announcement
+  .container-purch-announcement
+  .search-and-items
+  .right-filter
+  .link-filter {
   width: 100%;
   min-width: unset;
   max-width: unset;
@@ -997,12 +1333,29 @@
   }
  }
  .app .page-navigator .currentpage {
-  font-size: 9px;
+  font-size: 9px !important;
  }
- .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .right .share-post .bottom {
+ .blog-inner-page
+  .blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .right
+  .share-post
+  .bottom {
   align-items: flex-start;
  }
- .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .right .share-post .bottom .view {
+ .blog-inner-page
+  .blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .right
+  .share-post
+  .bottom
+  .view {
   border-left: none;
   padding-left: 0;
  }
@@ -1112,7 +1465,12 @@
  .overlay-leadership-modal .leadership-modal .top-profile-and-user-info .right-description .job-and-education {
   width: 100%;
  }
- .overlay-leadership-modal .leadership-modal .top-profile-and-user-info .right-description .job-and-education .item-education {
+ .overlay-leadership-modal
+  .leadership-modal
+  .top-profile-and-user-info
+  .right-description
+  .job-and-education
+  .item-education {
   max-width: unset;
   width: 100%;
  }
@@ -1147,7 +1505,15 @@
  .about-page .structure-section .structure .content-structure h2 {
   font-size: 24px;
  }
- .about-page .structure-section .structure .content-structure .other-refactors .item-department .container-item .item span {
+ .about-page
+  .structure-section
+  .structure
+  .content-structure
+  .other-refactors
+  .item-department
+  .container-item
+  .item
+  span {
   font-size: 12px;
  }
  .activity-page {
@@ -1160,7 +1526,14 @@
  .activity-page .social-life-section .sociallife .container-sociallife .container-descriptions .wrapperimg-carousel {
   height: 300px;
  }
- .activity-page .social-life-section .sociallife .container-sociallife .container-descriptions .wrapperimg-carousel .swiper-slide h5 {
+ .activity-page
+  .social-life-section
+  .sociallife
+  .container-sociallife
+  .container-descriptions
+  .wrapperimg-carousel
+  .swiper-slide
+  h5 {
   font-size: 16px;
   max-width: 350px;
   text-align: start;
@@ -1177,7 +1550,13 @@
  .activity-page .servicespage-section .servicespage .container-servicespage {
   margin-top: 24px;
  }
- .activity-page .servicesActivity-section .servicesActivity .container-servicesActivity .container-services .service-items .service-image-container {
+ .activity-page
+  .servicesActivity-section
+  .servicesActivity
+  .container-servicesActivity
+  .container-services
+  .service-items
+  .service-image-container {
   height: 180px;
  }
  .activity-page
@@ -1191,10 +1570,22 @@
   span {
   font-size: 9px;
  }
- .activity-page .servicesActivity-section .servicesActivity .container-servicesActivity .container-services .service-items .navigator-content .swiper-slide {
+ .activity-page
+  .servicesActivity-section
+  .servicesActivity
+  .container-servicesActivity
+  .container-services
+  .service-items
+  .navigator-content
+  .swiper-slide {
   padding: 10px 12px;
  }
- .activity-page .servicesActivity-section .servicesActivity .container-servicesActivity .container-services .service-items {
+ .activity-page
+  .servicesActivity-section
+  .servicesActivity
+  .container-servicesActivity
+  .container-services
+  .service-items {
   gap: 0px;
  }
  .activity-page .servicesActivity-section .servicesActivity .container-servicesActivity h2 {
@@ -1236,7 +1627,14 @@
  .contact-page .contact-section .contact .container-contact .form-area {
   padding: 8px;
  }
- .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .images-for-description .image-wrapper {
+ .about-page
+  .ourworks-section
+  .works
+  .container-works
+  .grid-works
+  .navigation-description-content
+  .images-for-description
+  .image-wrapper {
   height: 100%;
   max-height: 150px;
  }
@@ -1253,7 +1651,7 @@
  .contact-page .contact-section .contact .container-locations {
   grid-template-columns: repeat(1, 1fr);
  }
- 
+
  .footer-wrapper .footer .top-footer .footer-navigations {
   grid-template-columns: repeat(1, 1fr);
  }

@@ -1892,6 +1892,7 @@ $whitedarktwo: #8b9f9c;
  align-items: flex-start;
  justify-content: flex-end;
  position: fixed;
+ z-index: 10000;
  inset: 0;
  background: #0000001f;
  transition: all 1000ms ease-in-out;

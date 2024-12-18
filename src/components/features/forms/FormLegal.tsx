@@ -209,6 +209,7 @@ const FormLegal: React.FC = () => {
   name: [{ _id: string; value: string }];
  };
  const [enterprises, setEnterprises] = React.useState<EnterprisesType>();
+ const [stages, setStages] = React.useState<EnterprisesType>();
  const handleGetEnterprises = async () => {
   try {
    const res = await axios.get(`${Baseurl}/add-enterprise`, {
@@ -226,9 +227,27 @@ const FormLegal: React.FC = () => {
    console.log(error);
   }
  };
+ const handleGetStages = async () => {
+  try {
+   const res = await axios.get(`${Baseurl}/add-stage`, {
+    headers: {
+     'Content-Type': 'application/json',
+    },
+   });
+
+   if (res.data) {
+    setStages(res.data[0]);
+   } else {
+    console.log(res.status);
+   }
+  } catch (error) {
+   console.log(error);
+  }
+ };
 
  React.useEffect(() => {
   handleGetEnterprises();
+  handleGetStages();
  }, []);
 
  return (
@@ -577,10 +596,10 @@ const FormLegal: React.FC = () => {
       id="enterprisepart"
       onChange={(e: ChangeEvent<HTMLSelectElement>) => setEnterprisePart(e.target.value)}>
       <option value="">Mərhələ seçin</option>
-      {EnterprisePart && EnterprisePart?.length > 0 ? (
-       EnterprisePart?.map((enterprise: EnterprisePartTypes) => (
-        <option value={enterprise?.partname} key={enterprise?.id}>
-         {enterprise?.partname}
+      {stages && stages?.name?.length > 0 ? (
+       stages?.name?.map((names, i: number) => (
+        <option value={names?.value} key={i + 1}>
+         {names?.value}
         </option>
        ))
       ) : (
