@@ -1,3 +1,16 @@
+.activity-page
+ .servicesActivity-section
+ .servicesActivity
+ .container-servicesActivity
+ .container-services
+ .service-items
+ .content {
+ * {
+  font-size: 14px !important;
+  line-height: 24px !important;
+ }
+}
+
 @media only screen and (max-width: 1330px) {
  .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content .links-nav-social {
   grid-template-columns: repeat(1, 1fr);
@@ -7,6 +20,7 @@
  .home-page .hero-wrapper .hero .header-wrapper .header .left-navigation {
   gap: 13px;
  }
+
  .scrolled-header {
   display: none !important;
  }
@@ -20,10 +34,24 @@
  }
  .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content .links-nav-social {
   display: flex !important;
+  flex-direction: row !important;
  }
 }
 
 @media only screen and (max-width: 1230px) {
+ .NewBlogPage-wrapper {
+  padding-left: 24px;
+  padding-right: 24px;
+ }
+ .NewBlogPage-wrapper .newblogpage-section .blogs-newblogpage .container-newblogpage h2 {
+  font-size: 24px;
+ }
+ .NewBlogPage-wrapper .newblogpage-section .blogs-newblogpage .container-newblogpage {
+  margin-top: 24px;
+ }
+ .NewBlogPage-wrapper .newblogpage-section .blogs-newblogpage .container-newblogpage .newblogpage-grid-blogpage {
+  grid-template-columns: repeat(2, 1fr);
+ }
  .purch-announcement-wrapper {
   padding-left: 24px;
   padding-right: 24px;
@@ -141,9 +169,39 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
  }
+ .calculations-page .calculation-section .calculation .container-calculation .navigator {
+  flex-direction: column;
+  width: 100%;
+ }
+ .calculations-page .calculation-section .calculation .container-calculation .navigator .yearly,
+ .calculations-page .calculation-section .calculation .container-calculation .navigator .quarterly {
+  width: 100%;
+ }
+ .calculations-page .calculation-section .calculation .container-calculation .yearly-calculations .yearly-data-item {
+  padding: 16px 12px;
+ }
+ .calculations-page
+  .calculation-section
+  .calculation
+  .container-calculation
+  .yearly-calculations
+  .yearly-data-item
+  .titledata {
+  font-size: 14px;
+  line-height: 24px;
+ }
+ .calculations-page
+  .calculation-section
+  .calculation
+  .container-calculation
+  .yearly-calculations
+  .yearly-data-item
+  .download-file-button {
+  font-size: 14px !important;
+ }
  .home-page .card-about-section {
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 12px;
+  padding-right: 12px;
  }
  .home-page .card-about-section .card-about .bottom-card-area .item-card {
   min-width: unset;
@@ -206,13 +264,42 @@
  .about-page .structure-section .structure .content-structure .other-refactors {
   grid-template-columns: repeat(4, 1fr);
  }
-
+ .activity-page
+  .servicesActivity-section
+  .servicesActivity
+  .container-servicesActivity
+  .container-services
+  .service-items
+  .content {
+  * {
+   font-size: 14px !important;
+   line-height: 24px !important;
+  }
+ }
+ .activity-page
+  .servicesActivity-section
+  .servicesActivity
+  .container-servicesActivity
+  .container-services
+  .service-items
+  .navigator-content {
+  padding: 8px;
+ }
+ .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content {
+  * {
+   font-size: 13px !important;
+   line-height: 28px;
+   li {
+    list-style-type: none;
+   }
+  }
+ }
  .activity-page .servicespage-section .servicespage .container-servicespage .container-services-grid {
   grid-template-columns: repeat(2, 1fr);
  }
  .activity-page {
-  padding-left: 45px !important;
-  padding-right: 45px !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
  }
  .blog-page-wrapper {
   padding-left: 24px;
@@ -275,6 +362,66 @@
 }
 
 @media only screen and (max-width: 968px) {
+ .blog-inner-page
+  .blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .left
+  .description-content-images {
+  grid-template-columns: repeat(1, 1fr);
+ }
+ .last-blog-inner-page
+  .last-blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .left
+  .description-content-images {
+  grid-template-columns: repeat(1, 1fr);
+ }
+ .activity-page
+  .servicesActivity-section
+  .servicesActivity
+  .container-servicesActivity
+  .container-services
+  .service-items
+  .navigator-content
+  .swiper-button-prev {
+  top: 2.3rem;
+  left: -1rem;
+  width: 24px;
+  opacity: 70%;
+  height: 24px;
+ }
+ .activity-page
+  .servicesActivity-section
+  .servicesActivity
+  .container-servicesActivity
+  .container-services
+  .service-items
+  .navigator-content
+  .swiper-button-next {
+  top: 2.3rem;
+  right: -1rem;
+  width: 24px;
+  opacity: 70%;
+  height: 24px;
+ }
+ .home-page
+  .contact-us-section
+  .contact-us
+  .map-contact
+  .contact-information-box
+  .contact-datas
+  .information-box
+  .left-icon
+  img {
+  width: 65%;
+  height: 65%;
+ }
  .dynamic-page-wrapper {
   padding-left: 24px;
   padding-right: 24px;
@@ -906,6 +1053,9 @@
 }
 
 @media only screen and (max-width: 568px) {
+ .NewBlogPage-wrapper .newblogpage-section .blogs-newblogpage .container-newblogpage .newblogpage-grid-blogpage {
+  grid-template-columns: repeat(1, 1fr);
+ }
  .home-page .hero-wrapper {
   height: 70vh !important;
  }
@@ -985,7 +1135,7 @@
   display: none !important;
  }
  .home-page .blog-section .blogs .blog-grid-section .blog-item {
-  height: 300px !important;
+  height: 350px !important;
  }
  .about-page
   .ourworks-section
@@ -1333,6 +1483,12 @@
   }
  }
  .app .page-navigator .currentpage {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 150px;
   font-size: 9px !important;
  }
  .blog-inner-page

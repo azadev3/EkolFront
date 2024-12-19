@@ -45,12 +45,27 @@ const ScrollHeader: React.FC = () => {
    console.log(error);
   }
  };
+ const [showSocialLife, setShowSocialLife] = React.useState<boolean>(false);
+
+ const handleCheckSocialLife = async () => {
+  try {
+   const res = await axios.get(`${Baseurl}/hidden-social-front`);
+   if (res.data) {
+    setShowSocialLife(res.data?.showed);
+   } else {
+    console.log(res.status);
+   }
+  } catch (error) {
+   console.log(error);
+  }
+ };
 
  React.useEffect(() => {
   handleCheckPurchase();
   handleCheckCarier();
   handleCheckCarier();
- }, [showPurchase, showCarier, showCarier]);
+  handleCheckSocialLife();
+ }, [showPurchase, showCarier, showCarier, showSocialLife]);
 
  const { DynamicPageData } = useDynamicPageData();
  const hasRoutes = DynamicPageData && DynamicPageData?.length > 0 ? DynamicPageData : [];
@@ -120,11 +135,11 @@ const ScrollHeader: React.FC = () => {
      title: `${translations['nav_haqqimizda_qalereya']}`,
      to: '/about/gallery',
     },
-    // {
-    //   id: 3,
-    //   title: `${translations["nav_haqqimizda_sosialheyat"]}`,
-    //   to: "/fealiyyet/sosialheyat",
-    // },
+    {
+     id: 1000,
+     title: `${translations['nav_haqqimizda_sosialheyat']}`,
+     to: '/fealiyyet/sosialheyat',
+    },
     {
      id: 4,
      title: `${translations['newblog_title']}`,
@@ -175,7 +190,6 @@ const ScrollHeader: React.FC = () => {
   },
   staleTime: 9000000,
  });
- console.log(LogoIcon, ' slloogoogogo');
 
  const [dropdown, setDropdown] = React.useState<number | null>(null);
  const [hoveringMenu, setHoveringMenu] = React.useState<boolean>(false);
@@ -279,6 +293,8 @@ const ScrollHeader: React.FC = () => {
               </NavLink>
              );
             } else if (item.id === 888 && !showCarier) {
+             return <></>;
+            } else if (item.id === 1000 && !showSocialLife) {
              return <></>;
             } else {
              return (

@@ -68,11 +68,27 @@ const Footer: React.FC = () => {
   }
  };
 
+ const [showSocialLife, setShowSocialLife] = React.useState<boolean>(false);
+
+ const handleCheckSocialLife = async () => {
+  try {
+   const res = await axios.get(`${Baseurl}/hidden-social-front`);
+   if (res.data) {
+    setShowSocialLife(res.data?.showed);
+   } else {
+    console.log(res.status);
+   }
+  } catch (error) {
+   console.log(error);
+  }
+ };
+
  React.useEffect(() => {
   handleCheck();
   handleCheckPurchase();
   handleCheckCarier();
- }, [showRehberlik, showPurchase, showCarier]);
+  handleCheckSocialLife();
+ }, [showRehberlik, showPurchase, showCarier, showSocialLife]);
 
  const FooterElements: FooterElementsType[] = [
   {
@@ -151,15 +167,20 @@ const Footer: React.FC = () => {
      title: `${translations['nav_haqqimizda_qalereya']}`,
      to: '/about/gallery',
     },
-    // {
-    //   id: uuidv4(),
-    //   title: `${translations["nav_haqqimizda_sosialheyat"]}`,
-    //   to: "/fealiyyet/sosialheyat",
-    // },
+    {
+     id: 'socialid',
+     title: `${translations['nav_haqqimizda_sosialheyat']}`,
+     to: '/fealiyyet/sosialheyat',
+    },
     {
      id: uuidv4(),
      title: `${translations['newblog_title']}`,
      to: '/bloq',
+    },
+    {
+     id: uuidv4(),
+     title: `${translations['carbon_calculate']}`,
+     to: '/carbon_calculate',
     },
    ],
   },
@@ -274,6 +295,8 @@ const Footer: React.FC = () => {
               </div>
              );
             } else if (links?.id === '888' && !showCarier) {
+             return <></>;
+            } else if (links?.id === 'socialid' && !showSocialLife) {
              return <></>;
             } else {
              return (
