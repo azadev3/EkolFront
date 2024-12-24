@@ -11,6 +11,7 @@ import Loader from "../../Loader";
 import { useTranslate } from "../../context/TranslateContext";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 const InnerImages: React.FC = () => {
   const { imagename } = useParams<{ imagename: string }>();
@@ -83,6 +84,11 @@ const InnerImages: React.FC = () => {
         {/* Lightbox */}
         {isTrueImages && (
           <Lightbox
+          plugins={[Zoom]}
+          zoom={{
+            maxZoomPixelRatio: 6,
+            scrollToZoom: true
+          }}
             open={isLightboxOpen}
             close={closeLightbox}
             slides={

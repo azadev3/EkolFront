@@ -12,6 +12,7 @@ import { SocialsType } from "../home/Hero";
 import { SwiperDataForImages } from "./BlogInnerContent";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 type LastBlogType = {
   _id?: string;
@@ -63,10 +64,10 @@ const LastBlogInner: React.FC = () => {
   };
 
   const lastBlogItem =
-  lastBlogs &&
-  lastBlogs.find((item: LastBlogType) => {
-    return item._id === lastblogtitle;
-  });
+    lastBlogs &&
+    lastBlogs.find((item: LastBlogType) => {
+      return item._id === lastblogtitle;
+    });
 
   React.useEffect(() => {
     fetchLastBlogs();
@@ -131,20 +132,25 @@ const LastBlogInner: React.FC = () => {
                 <div className="description-content-images" style={{ display: findedImage ? "flex" : "flex" }}>
                   {findedImage && findedImage?.images
                     ? findedImage?.images?.map((imgs, i: number) => (
-                        <div className="content-img">
-                          <img
-                            src={`https://ekol-server-1.onrender.com${imgs}`}
-                            alt={`image-${i + 3}`}
-                            onClick={() => handleImageClick(i)}
-                            style={{ cursor: "pointer" }}
-                          />
-                        </div>
-                      ))
+                      <div className="content-img">
+                        <img
+                          src={`https://ekol-server-1.onrender.com${imgs}`}
+                          alt={`image-${i + 3}`}
+                          onClick={() => handleImageClick(i)}
+                          style={{ cursor: "pointer" }}
+                        />
+                      </div>
+                    ))
                     : ""}
 
                   {/* Lightbox */}
                   {currentImageIndex !== null && (
                     <Lightbox
+                    plugins={[Zoom]}
+                    zoom={{
+                      maxZoomPixelRatio: 6,
+                      scrollToZoom: true
+                    }}
                       open={open}
                       close={() => setOpen(false)}
                       slides={
@@ -163,18 +169,18 @@ const LastBlogInner: React.FC = () => {
                 <div className="grid-last-blog">
                   {lastBlogs && lastBlogs.length > 0
                     ? lastBlogs?.map((item: LastBlogType) => (
-                        <Link
-                          to={`/xeberler/en-son-xeberler/${item?._id}`}
-                          key={item?._id}
-                          className="item-last-blog">
-                          <div className="title">{item?.title}</div>
+                      <Link
+                        to={`/xeberler/en-son-xeberler/${item?._id}`}
+                        key={item?._id}
+                        className="item-last-blog">
+                        <div className="title">{item?.title}</div>
 
-                          <div className="time-and-icon">
-                            <span className="time">{item?.created_at ? item?.created_at : ""}</span>
-                            <img src="/arrow.svg" alt="arrow-icon" />
-                          </div>
-                        </Link>
-                      ))
+                        <div className="time-and-icon">
+                          <span className="time">{item?.created_at ? item?.created_at : ""}</span>
+                          <img src="/arrow.svg" alt="arrow-icon" />
+                        </div>
+                      </Link>
+                    ))
                     : ""}
                   <div className="button-content">
                     <button className="all-blogs" onClick={() => navigate("/xeberler")}>
@@ -188,29 +194,29 @@ const LastBlogInner: React.FC = () => {
                     <div className="socials">
                       {SocialsData && SocialsData.length > 0
                         ? SocialsData.map((item: SocialsType) => (
-                            <Link
-                              style={{
-                                background: "#30b258",
-                                padding: "7px",
-                                borderRadius: "100px",
-                                minWidth: "30px",
-                                width: "30px",
-                                height: "30px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                overflow: "hidden",
-                              }}
-                              key={item?._id}
-                              to={item?.link}
-                              className="icon">
-                              <img
-                                src={`https://ekol-server-1.onrender.com${item?.icon}`}
-                                alt={`${item?._id}-icon`}
-                                title={item?.link}
-                              />
-                            </Link>
-                          ))
+                          <Link
+                            style={{
+                              background: "#30b258",
+                              padding: "7px",
+                              borderRadius: "100px",
+                              minWidth: "30px",
+                              width: "30px",
+                              height: "30px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              overflow: "hidden",
+                            }}
+                            key={item?._id}
+                            to={item?.link}
+                            className="icon">
+                            <img
+                              src={`https://ekol-server-1.onrender.com${item?.icon}`}
+                              alt={`${item?._id}-icon`}
+                              title={item?.link}
+                            />
+                          </Link>
+                        ))
                         : ""}
                     </div>
                     <div className="view">

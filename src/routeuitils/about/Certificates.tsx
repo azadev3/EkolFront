@@ -11,6 +11,7 @@ import { useTranslate } from "../../context/TranslateContext";
 import Lisanse from "./Lisanse";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 interface Certificates {
   _id: string;
@@ -80,17 +81,17 @@ const Certificates: React.FC = () => {
           <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_sertifikatlar"]} />
           {hasCertificatesData
             ? certificatesData.map((item: Certificates, _: number) => (
-                <div className="container-certificates" key={item?._id}>
-                  <h2>{item?.title}</h2>
-                  <div
-                    className="description-certificates"
-                    onClick={handleDescriptionClick}
-                    dangerouslySetInnerHTML={{
-                      __html: DOMPurify.sanitize(item?.description.replace(/<img/g, `<img data-lightbox="gallery"`)),
-                    }}
-                  />
-                </div>
-              ))
+              <div className="container-certificates" key={item?._id}>
+                <h2>{item?.title}</h2>
+                <div
+                  className="description-certificates"
+                  onClick={handleDescriptionClick}
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(item?.description.replace(/<img/g, `<img data-lightbox="gallery"`)),
+                  }}
+                />
+              </div>
+            ))
             : ""}
         </div>
       )}
@@ -100,6 +101,11 @@ const Certificates: React.FC = () => {
       {/* Lightbox Component */}
       {isLightboxOpen && (
         <Lightbox
+          plugins={[Zoom]}
+          zoom={{
+            maxZoomPixelRatio: 6,
+            scrollToZoom: true
+          }}
           open={isLightboxOpen}
           close={() => setIsLightboxOpen(false)}
           slides={lightboxImages}

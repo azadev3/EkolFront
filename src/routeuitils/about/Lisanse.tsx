@@ -8,6 +8,7 @@ import Loader from "../../Loader";
 import DOMPurify from "dompurify";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 interface LisanseItemType {
   _id: string;
@@ -99,6 +100,11 @@ const Lisanse: React.FC = () => {
       {/* Lightbox Component */}
       {isLightboxOpen && (
         <Lightbox
+        plugins={[Zoom]}
+        zoom={{
+          maxZoomPixelRatio: 6,
+          scrollToZoom: true
+        }}
           open={isLightboxOpen}
           close={closeModal}
           slides={lightboxImages}

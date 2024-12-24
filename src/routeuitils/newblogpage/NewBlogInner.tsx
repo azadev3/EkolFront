@@ -12,6 +12,10 @@ import Loader from "../../Loader";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslate } from "../../context/TranslateContext";
 import { SocialsType } from "../home/Hero";
+import { SwiperDataForImagesNewBlog } from "../blog/BlogInnerContent";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 type LastBlogType = {
   _id: number;
@@ -91,7 +95,29 @@ const NewBlogInner: React.FC = () => {
   //   return <span>{formattedDate}</span>;
   // };
 
-  const innerBlogItem = newBlogDatasInner?.find((_: BlogType, i:string) => i?.toString() === newblogtitle?.toString());
+  const innerBlogItem = newBlogDatasInner?.find((_: BlogType, i: string) => i?.toString() === newblogtitle?.toString());
+  //open fancybox images
+  const [open, setOpen] = React.useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = React.useState<number | null>(null);
+  const handleImageClick = (index: number) => {
+    setCurrentImageIndex(index);
+    setOpen(true); // Lightbox opened
+  };
+
+
+  const { data } = useQuery<SwiperDataForImagesNewBlog[]>({
+    queryKey: ["newblogInnerImgKey", selectedlang],
+    queryFn: async () => {
+      const response = await axios.get(`${Baseurl}/newblogimagefront`);
+      return response.data;
+    },
+  });
+
+  const findedImage =
+    data &&
+    data?.find((item: SwiperDataForImagesNewBlog) => {
+      return item?.selected_new_blog === innerBlogItem?._id;
+    });
 
   if (blogLoading || lastBlogsLoading) {
     return <Loader />;
@@ -124,7 +150,7 @@ const NewBlogInner: React.FC = () => {
 
                 <div className="description-content">
                   <span className="time-span">
-                   {innerBlogItem && innerBlogItem?.created_at}
+                    {innerBlogItem && innerBlogItem?.created_at}
                   </span>
                   {innerBlogItem && innerBlogItem.description && (
                     <div
@@ -133,27 +159,62 @@ const NewBlogInner: React.FC = () => {
                     />
                   )}
                 </div>
+
+                <div className="description-content-images" style={{ display: findedImage ? "flex" : "none" }}>
+                  {findedImage && findedImage?.images
+                    ? findedImage?.images?.map((imgs, i: number) => (
+                      <div className="content-img">
+                        <img
+                          src={`https://ekol-server-1.onrender.com${imgs}`}
+                          alt={`image-${i + 3}`}
+                          onClick={() => handleImageClick(i)}
+                          style={{ cursor: "pointer" }}
+                        />
+                      </div>
+                    ))
+                    : ""}
+
+                  {/* Lightbox */}
+                  {currentImageIndex !== null && (
+                    <Lightbox
+                      plugins={[Zoom]}
+                      zoom={{
+                        maxZoomPixelRatio: 6,
+                        scrollToZoom: true
+                      }}
+                      open={open}
+                      close={() => setOpen(false)}
+                      slides={
+                        findedImage && findedImage?.images
+                          ? findedImage?.images?.map((imgs) => ({ src: `https://ekol-server-1.onrender.com${imgs}` }))
+                          : []
+                      }
+                      index={currentImageIndex}
+                    />
+                  )}
+                </div>
+
               </div>
 
               <div className="right">
                 <h5>Ən son bloqlar</h5>
                 <div className="grid-last-blog">
                   {lastBlogs && lastBlogs.length > 0
-                    ? lastBlogs.map((item: LastBlogType, i:string) => (
-                        <Link
-                          to={`/bloq/en-son-bloqlar/${i?.toString()}`}
-                          key={uuidv4()}
-                          className="item-last-blog">
-                          <div className="title">{item.title}</div>
+                    ? lastBlogs.map((item: LastBlogType, i: string) => (
+                      <Link
+                        to={`/bloq/en-son-bloqlar/${i?.toString()}`}
+                        key={uuidv4()}
+                        className="item-last-blog">
+                        <div className="title">{item.title}</div>
 
-                          <div className="time-and-icon">
-                            <span className="time">
-                              {item?.created_at}
-                            </span>
-                            <img src="/arrow.svg" alt="arrow-icon" />
-                          </div>
-                        </Link>
-                      ))
+                        <div className="time-and-icon">
+                          <span className="time">
+                            {item?.created_at}
+                          </span>
+                          <img src="/arrow.svg" alt="arrow-icon" />
+                        </div>
+                      </Link>
+                    ))
                     : ""}
                   <div className="button-content">
                     <button className="all-blogs" onClick={() => navigate("/bloq")}>
@@ -167,29 +228,29 @@ const NewBlogInner: React.FC = () => {
                     <div className="socials">
                       {SocialsData && SocialsData.length > 0
                         ? SocialsData.map((item: SocialsType) => (
-                            <Link
-                              style={{
-                                background: "#30b258",
-                                padding: "7px",
-                                borderRadius: "100px",
-                                minWidth: "30px",
-                                width: "30px",
-                                height: "30px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                overflow: "hidden",
-                              }}
-                              key={item?._id}
-                              to={item?.link}
-                              className="icon">
-                              <img
-                                src={`https://ekol-server-1.onrender.com${item?.icon}`}
-                                alt={`${item?._id}-icon`}
-                                title={item?.link}
-                              />
-                            </Link>
-                          ))
+                          <Link
+                            style={{
+                              background: "#30b258",
+                              padding: "7px",
+                              borderRadius: "100px",
+                              minWidth: "30px",
+                              width: "30px",
+                              height: "30px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              overflow: "hidden",
+                            }}
+                            key={item?._id}
+                            to={item?.link}
+                            className="icon">
+                            <img
+                              src={`https://ekol-server-1.onrender.com${item?.icon}`}
+                              alt={`${item?._id}-icon`}
+                              title={item?.link}
+                            />
+                          </Link>
+                        ))
                         : ""}
                     </div>
                     {/* <div className="view">

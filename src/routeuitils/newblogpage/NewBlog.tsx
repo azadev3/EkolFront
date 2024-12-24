@@ -51,6 +51,17 @@ const NewBlog: React.FC = () => {
   //   return formattedDate;
   // };
 
+  const sortedBlogData = newBlogData
+    ? [...newBlogData].sort((a: BlogType, b: BlogType) => {
+      const parseDate = (dateString: string) => {
+        const [day, month, year] = dateString.split('.').map(Number);
+        return new Date(year, month - 1, day).getTime();
+      };
+
+      return parseDate(b.created_at) - parseDate(a.created_at);
+    })
+    : [];
+
   const navigate = useNavigate();
 
   if (isLoading) {
@@ -70,35 +81,35 @@ const NewBlog: React.FC = () => {
           <h2>{translations["newblog_title"]}</h2>
 
           <section className="newblogpage-grid-blogpage">
-            {newBlogData && newBlogData.length > 0
-              ? newBlogData.slice(0, paginate).map((item: BlogType, index: number) => (
-                  <article
-                    onClick={() => {
-                      navigate(`/bloq/${index?.toString()}`);
-                    }}
-                    className={`newblogpage-item-blogpage ${item?.image === "" ? "noimg" : ""}`}
-                    key={index}>
-                    {item?.image === "" ? (
-                      ""
-                    ) : (
-                      <div className="image-newblogpage">
-                        <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
-                      </div>
-                    )}
-
-
-                    <div className="descriptions-newblogpage">
-                      <span>{item.created_at ? item?.created_at : ""}</span>
-                      <h4>{item?.title}</h4>
-                      <div className="description">
-                        <div dangerouslySetInnerHTML={{ __html: item?.description }} />
-                      </div>
-                      <div className="show-more-btn">
-                        <Link to={`/bloq/${index?.toString()}`}>Ətraflı oxu</Link>
-                      </div>
+            {sortedBlogData && sortedBlogData?.length > 0
+              ? sortedBlogData?.slice(0, paginate)?.map((item: BlogType, index: number) => (
+                <article
+                  onClick={() => {
+                    navigate(`/bloq/${index?.toString()}`);
+                  }}
+                  className={`newblogpage-item-blogpage ${item?.image === "" ? "noimg" : ""}`}
+                  key={index}>
+                  {item?.image === "" ? (
+                    ""
+                  ) : (
+                    <div className="image-newblogpage">
+                      <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${index}-blogimg`} title={item?.title} />
                     </div>
-                  </article>
-                ))
+                  )}
+
+
+                  <div className="descriptions-newblogpage">
+                    <span>{item.created_at ? item?.created_at : ""}</span>
+                    <h4>{item?.title}</h4>
+                    <div className="description">
+                      <div dangerouslySetInnerHTML={{ __html: item?.description }} />
+                    </div>
+                    <div className="show-more-btn">
+                      <Link to={`/bloq/${index?.toString()}`}>Ətraflı oxu</Link>
+                    </div>
+                  </div>
+                </article>
+              ))
               : ""}
           </section>
 

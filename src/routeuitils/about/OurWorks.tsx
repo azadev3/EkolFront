@@ -10,208 +10,215 @@ import DOMPurify from 'dompurify';
 import { useTranslate } from '../../context/TranslateContext';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
+import Zoom from 'yet-another-react-lightbox/plugins/zoom';
 
 export interface OurWorksInnerInterface {
- _id?: string;
- title: string;
- description: string;
+  _id?: string;
+  title: string;
+  description: string;
 }
 
 interface OurworksImages {
- _id: string;
- images: [string];
- selected_ourworks: string;
+  _id: string;
+  images: [string];
+  selected_ourworks: string;
 }
 
 export const SelectItemOurWorkState = atom<string>({
- key: 's_item_ourwork_key',
- default: '',
+  key: 's_item_ourwork_key',
+  default: '',
 });
 
 const OurWorks: React.FC = () => {
- const { translations } = useTranslate();
- const selectedlang = useRecoilValue(SelectedLanguageState);
- const { data: OurWorksInnerData } = useQuery<OurWorksInnerInterface[]>({
-  queryKey: ['ourWorksInnerDataKey', selectedlang],
-  queryFn: async () => {
-   const response = await axios.get(`${Baseurl}/ourworksinnerfront`, {
-    headers: {
-     'Accept-Language': selectedlang,
+  const { translations } = useTranslate();
+  const selectedlang = useRecoilValue(SelectedLanguageState);
+  const { data: OurWorksInnerData } = useQuery<OurWorksInnerInterface[]>({
+    queryKey: ['ourWorksInnerDataKey', selectedlang],
+    queryFn: async () => {
+      const response = await axios.get(`${Baseurl}/ourworksinnerfront`, {
+        headers: {
+          'Accept-Language': selectedlang,
+        },
+      });
+      return response.data;
     },
-   });
-   return response.data;
-  },
-  staleTime: 1000000,
- });
-
- const [selectItem, setSelectItem] = useRecoilState(SelectItemOurWorkState);
- const [isOpen, setIsOpen] = React.useState<boolean>(false);
- const [selectedImage, setSelectedImage] = React.useState<string>('');
-
- React.useEffect(() => {
-  if (OurWorksInnerData && OurWorksInnerData.length > 0) {
-   const initialValue = OurWorksInnerData[0]?.title;
-   setSelectItem(initialValue);
-  }
- }, [OurWorksInnerData]);
-
- const handleSelectItem = (i: string) => {
-  setSelectItem(i);
- };
-
- const openImagePopup = (src: string) => {
-  setSelectedImage(src);
-  setIsOpen(true);
- };
-
- const closeImagePopup = () => {
-  setIsOpen(false);
-  setSelectedImage('');
- };
-
- React.useEffect(() => {
-  const contentDivs = document.querySelectorAll('.description-content p');
-  contentDivs.forEach((pTag) => {
-   if (pTag.querySelector('img')) {
-    pTag.classList.add('img-grid');
-   }
-  });
- }, [OurWorksInnerData, selectItem]);
-
- const { data: ourWorksImgData } = useQuery<OurworksImages[]>({
-  queryKey: ['ourworksimagesKey', selectedlang],
-  queryFn: async () => {
-   const response = await axios.get(`${Baseurl}/ourworksimagesfront`);
-   return response.data;
-  },
- });
-
- //open fancybox images
- const [open, setOpen] = React.useState(false);
- const [currentImageIndex, setCurrentImageIndex] = React.useState<number | null>(null);
- const handleImageClick = (index: number) => {
-  setCurrentImageIndex(index);
-  setOpen(true); // Lightbox opened
- };
-
- const selectedItemID = OurWorksInnerData?.find((item: OurWorksInnerInterface) => item?.title === selectItem)?._id;
-
- const findedImage =
-  ourWorksImgData &&
-  ourWorksImgData.find((item: OurworksImages) => {
-   return item?.selected_ourworks === selectedItemID;
+    staleTime: 1000000,
   });
 
- const [isMobile, setIsMobile] = React.useState<boolean>(false);
+  const [selectItem, setSelectItem] = useRecoilState(SelectItemOurWorkState);
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = React.useState<string>('');
 
- React.useEffect(() => {
-  const controlWindow = () => {
-   if (window.innerWidth <= 568) {
-    setIsMobile(true);
-   } else {
-    setIsMobile(false);
-   }
+  React.useEffect(() => {
+    if (OurWorksInnerData && OurWorksInnerData.length > 0) {
+      const initialValue = OurWorksInnerData[0]?.title;
+      setSelectItem(initialValue);
+    }
+  }, [OurWorksInnerData]);
+
+  const handleSelectItem = (i: string) => {
+    setSelectItem(i);
   };
 
-  controlWindow();
+  const openImagePopup = (src: string) => {
+    setSelectedImage(src);
+    setIsOpen(true);
+  };
 
-  window.addEventListener('resize', controlWindow);
-  return () => window.removeEventListener('resize', controlWindow);
- }, []);
+  const closeImagePopup = () => {
+    setIsOpen(false);
+    setSelectedImage('');
+  };
 
- return (
-  <section className="ourworks-section">
-   <div className="works">
-    <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['gorduyumuz_isler_title']} />
+  React.useEffect(() => {
+    const contentDivs = document.querySelectorAll('.description-content p');
+    contentDivs.forEach((pTag) => {
+      if (pTag.querySelector('img')) {
+        pTag.classList.add('img-grid');
+      }
+    });
+  }, [OurWorksInnerData, selectItem]);
 
-    <div className="container-works">
-     <h2>{translations['gorduyumuz_isler_title']}</h2>
+  const { data: ourWorksImgData } = useQuery<OurworksImages[]>({
+    queryKey: ['ourworksimagesKey', selectedlang],
+    queryFn: async () => {
+      const response = await axios.get(`${Baseurl}/ourworksimagesfront`);
+      return response.data;
+    },
+  });
 
-     <div className="grid-works">
-      <div className="navigation-content">
-       {OurWorksInnerData && OurWorksInnerData.length > 0
-        ? OurWorksInnerData.map((item: OurWorksInnerInterface) => (
-           <div
-            key={uuidv4()}
-            className="item-navigation"
-            onClick={() => {
-             handleSelectItem(item?.title);
-             if (isMobile) {
-              const el = document.getElementById('navigation_content');
-              el?.scrollIntoView({ behavior: 'smooth' });
-             }
-            }}>
-            <div className="left-order-num-and-title">
-             <p>{item?.title}</p>
+  //open fancybox images
+  const [open, setOpen] = React.useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = React.useState<number | null>(null);
+  const handleImageClick = (index: number) => {
+    setCurrentImageIndex(index);
+    setOpen(true); // Lightbox opened
+  };
+
+  const selectedItemID = OurWorksInnerData?.find((item: OurWorksInnerInterface) => item?.title === selectItem)?._id;
+
+  const findedImage =
+    ourWorksImgData &&
+    ourWorksImgData.find((item: OurworksImages) => {
+      return item?.selected_ourworks === selectedItemID;
+    });
+
+  const [isMobile, setIsMobile] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    const controlWindow = () => {
+      if (window.innerWidth <= 568) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    controlWindow();
+
+    window.addEventListener('resize', controlWindow);
+    return () => window.removeEventListener('resize', controlWindow);
+  }, []);
+
+  return (
+    <section className="ourworks-section">
+      <div className="works">
+        <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['gorduyumuz_isler_title']} />
+
+        <div className="container-works">
+          <h2>{translations['gorduyumuz_isler_title']}</h2>
+
+          <div className="grid-works">
+            <div className="navigation-content">
+              {OurWorksInnerData && OurWorksInnerData.length > 0
+                ? OurWorksInnerData.map((item: OurWorksInnerInterface) => (
+                  <div
+                    key={uuidv4()}
+                    className="item-navigation"
+                    onClick={() => {
+                      handleSelectItem(item?.title);
+                      window.scrollTo(0, 0);
+                      if (isMobile) {
+                        const el = document.getElementById('navigation_content');
+                        el?.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}>
+                    <div className="left-order-num-and-title">
+                      <p>{item?.title}</p>
+                    </div>
+                    <img src="/arrow.svg" className="arrowimg" alt="" />
+                  </div>
+                ))
+                : ''}
             </div>
-            <img src="/arrow.svg" className="arrowimg" alt="" />
-           </div>
-          ))
-        : ''}
+
+            <div className="navigation-description-content" id="navigation_content">
+              {OurWorksInnerData && OurWorksInnerData.length > 0
+                ? OurWorksInnerData.map((item: OurWorksInnerInterface) => {
+                  if (selectItem === item?.title) {
+                    return (
+                      <div
+                        style={{ width: "100%" }}
+                        className='description-content'
+                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
+                        onClick={(e) => {
+                          const img = e.target as HTMLImageElement;
+                          if (img.tagName === 'IMG') {
+                            openImagePopup(img.src); // Pass the image src to the popup
+                          }
+                        }}
+                      />
+                    );
+                  }
+                })
+                : ''}
+
+              <div className="images-for-description" style={{ display: findedImage ? 'grid' : 'none' }}>
+                {findedImage && findedImage?.images
+                  ? findedImage?.images?.map((imgs, i: number) => (
+                    <div onClick={() => handleImageClick(i)} className="image-wrapper" key={i + 3}>
+                      <img src={`https://ekol-server-1.onrender.com${imgs}`} alt="" />
+                    </div>
+                  ))
+                  : ''}
+              </div>
+
+              {/* Lightbox */}
+              {currentImageIndex !== null && (
+                <Lightbox
+                  plugins={[Zoom]}
+                  zoom={{
+                    maxZoomPixelRatio: 6,
+                    scrollToZoom: true,
+                  }}
+                  open={open}
+                  close={() => setOpen(false)}
+                  slides={
+                    findedImage && findedImage?.images
+                      ? findedImage?.images?.map((imgs) => ({ src: `https://ekol-server-1.onrender.com${imgs}` }))
+                      : []
+                  }
+                  index={currentImageIndex}
+                />
+              )}
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="navigation-description-content" id="navigation_content">
-       {OurWorksInnerData && OurWorksInnerData.length > 0
-        ? OurWorksInnerData.map((item: OurWorksInnerInterface) => {
-           if (selectItem === item?.title) {
-            return (
-             <div className="description-content" key={item?._id}>
-              <div
-               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
-               onClick={(e) => {
-                const img = e.target as HTMLImageElement;
-                if (img.tagName === 'IMG') {
-                 openImagePopup(img.src); // Pass the image src to the popup
-                }
-               }}
-              />
-             </div>
-            );
-           }
-          })
-        : ''}
-
-       <div className="images-for-description" style={{ display: findedImage ? 'grid' : 'none' }}>
-        {findedImage && findedImage?.images
-         ? findedImage?.images?.map((imgs, i: number) => (
-            <div onClick={() => handleImageClick(i)} className="image-wrapper" key={i + 3}>
-             <img src={`https://ekol-server-1.onrender.com${imgs}`} alt="" />
-            </div>
-           ))
-         : ''}
-       </div>
-
-       {/* Lightbox */}
-       {currentImageIndex !== null && (
-        <Lightbox
-         open={open}
-         close={() => setOpen(false)}
-         slides={
-          findedImage && findedImage?.images
-           ? findedImage?.images?.map((imgs) => ({ src: `https://ekol-server-1.onrender.com${imgs}` }))
-           : []
-         }
-         index={currentImageIndex}
-        />
-       )}
-      </div>
-     </div>
-    </div>
-   </div>
-
-   {/* Pop-Up Modal for Image Display */}
-   {isOpen && (
-    <div className="popup-overlay" onClick={closeImagePopup}>
-     <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-      <img src={selectedImage} alt="Selected" className="popup-image" />
-      <button className="close-popup" onClick={closeImagePopup}>
-       X
-      </button>
-     </div>
-    </div>
-   )}
-  </section>
- );
+      {/* Pop-Up Modal for Image Display */}
+      {isOpen && (
+        <div className="popup-overlay" onClick={closeImagePopup}>
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <img src={selectedImage} alt="Selected" className="popup-image" />
+            <button className="close-popup" onClick={closeImagePopup}>
+              X
+            </button>
+          </div>
+        </div>
+      )}
+    </section>
+  );
 };
 
 export default OurWorks;

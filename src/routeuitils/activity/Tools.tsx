@@ -10,6 +10,7 @@ import DOMPurify from "dompurify";
 import { useTranslate } from "../../context/TranslateContext";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
 export interface ToolsInnerInterface {
   _id?: string;
@@ -131,59 +132,65 @@ const Tools: React.FC = () => {
             <div className="navigation-content">
               {ToolsInnerData && ToolsInnerData.length > 0
                 ? ToolsInnerData.map((item: ToolsInnerInterface) => (
-                    <div
-                      key={uuidv4()}
-                      className="item-navigation"
-                      onClick={() => {
-                        handleSelectItem(item?.title);
-                        if (isMobile) {
-                          const el = document.getElementById("navigation_content");
-                          el?.scrollIntoView({ behavior: "smooth" });
-                        }
-                      }}>
-                      <div className="left-order-num-and-title">
-                        <p>{item?.title}</p>
-                      </div>
-                      <img src="/arrow.svg" className="arrowimg" alt="" />
+                  <div
+                    key={uuidv4()}
+                    className="item-navigation"
+                    onClick={() => {
+                      handleSelectItem(item?.title);
+                      window.scrollTo(0, 0);
+                      if (isMobile) {
+                        const el = document.getElementById("navigation_content");
+                        el?.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}>
+                    <div className="left-order-num-and-title">
+                      <p>{item?.title}</p>
                     </div>
-                  ))
+                    <img src="/arrow.svg" className="arrowimg" alt="" />
+                  </div>
+                ))
                 : ""}
             </div>
 
             <div className="navigation-description-content" id="navigation_content">
               {ToolsInnerData && ToolsInnerData.length > 0
                 ? ToolsInnerData.map((item: ToolsInnerInterface) => {
-                    if (selectItem === item?.title) {
-                      return (
-                        <div className="description-content" key={item?._id}>
-                          <div
-                            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
-                            onClick={(e) => {
-                              const img = e.target as HTMLImageElement;
-                              if (img.tagName === "IMG") {
-                                openImagePopup(img.src); // Pass the image src to the popup
-                              }
-                            }}
-                          />
-                        </div>
-                      );
-                    }
-                  })
+                  if (selectItem === item?.title) {
+                    return (
+                      <div
+                        style={{ width: "100%" }}
+                        className="description-content"
+                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
+                        onClick={(e) => {
+                          const img = e.target as HTMLImageElement;
+                          if (img.tagName === "IMG") {
+                            openImagePopup(img.src); // Pass the image src to the popup
+                          }
+                        }}
+                      />
+                    );
+                  }
+                })
                 : ""}
 
               <div className="images-for-description" style={{ display: findedImage ? "grid" : "none" }}>
                 {findedImage && findedImage?.images
                   ? findedImage?.images?.map((imgs, i: number) => (
-                      <div onClick={() => handleImageClick(i)} className="image-wrapper" key={i + 3}>
-                        <img src={`https://ekol-server-1.onrender.com${imgs}`} alt="" />
-                      </div>
-                    ))
+                    <div onClick={() => handleImageClick(i)} className="image-wrapper" key={i + 3}>
+                      <img src={`https://ekol-server-1.onrender.com${imgs}`} alt="" />
+                    </div>
+                  ))
                   : ""}
               </div>
 
               {/* Lightbox */}
               {currentImageIndex !== null && (
                 <Lightbox
+                  plugins={[Zoom]}
+                  zoom={{
+                    maxZoomPixelRatio: 6,
+                    scrollToZoom: true
+                  }}
                   open={open}
                   close={() => setOpen(false)}
                   slides={

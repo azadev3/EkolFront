@@ -16,11 +16,18 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 // import moment from "moment";
 
 export type SwiperDataForImages = {
   _id: string;
   selected_blog: string;
+  images: [string];
+};
+
+export type SwiperDataForImagesNewBlog = {
+  _id: string;
+  selected_new_blog: string;
   images: [string];
 };
 
@@ -178,6 +185,11 @@ const BlogInnerContent: React.FC = () => {
                   {/* Lightbox */}
                   {currentImageIndex !== null && (
                     <Lightbox
+                    plugins={[Zoom]}
+                    zoom={{
+                      maxZoomPixelRatio: 6,
+                      scrollToZoom: true
+                    }}
                       open={open}
                       close={() => setOpen(false)}
                       slides={
