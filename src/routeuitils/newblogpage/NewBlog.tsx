@@ -101,9 +101,7 @@ const NewBlog: React.FC = () => {
                   <div className="descriptions-newblogpage">
                     <span>{item.created_at ? item?.created_at : ""}</span>
                     <h4>{item?.title}</h4>
-                    <div className="description">
-                      <div dangerouslySetInnerHTML={{ __html: item?.description }} />
-                    </div>
+                    <p>{item?.slogan}</p>
                     <div className="show-more-btn">
                       <Link to={`/bloq/${index?.toString()}`}>Ətraflı oxu</Link>
                     </div>

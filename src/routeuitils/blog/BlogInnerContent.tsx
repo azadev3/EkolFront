@@ -1,6 +1,6 @@
 import React from "react";
 import Breadcrumb from "../../Breadcrumb";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { BlogType } from "../home/BlogSection";
 import { Baseurl } from "../../Baseurl";
 import axios from "axios";
@@ -32,11 +32,12 @@ export type SwiperDataForImagesNewBlog = {
 };
 
 type LastBlogType = {
-  _id: number;
+  _id: any;
   title: string;
   description: string;
   image: string;
   created_at: string;
+  view: string;
 };
 
 const BlogInnerContent: React.FC = () => {
@@ -50,6 +51,7 @@ const BlogInnerContent: React.FC = () => {
     data: blogDatas,
     isLoading: blogLoading,
     error: blogError,
+    refetch: BlogRefetch,
   } = useQuery({
     queryKey: ["blogDatasInner", selectedlang],
     queryFn: async () => {
@@ -73,7 +75,7 @@ const BlogInnerContent: React.FC = () => {
     data: lastBlogs,
     isLoading: lastBlogsLoading,
     error: lastBlogsError,
-  } = useQuery({
+  } = useQuery<[]>({
     queryKey: ["lastBlogs", selectedlang],
     queryFn: async () => {
       try {
@@ -103,7 +105,7 @@ const BlogInnerContent: React.FC = () => {
 
   const innerBlogItem: BlogType =
     blogDatas && blogDatas?.find((item: BlogType) => item._id === blogtitle);
- 
+
   //open fancybox images
   const [open, setOpen] = React.useState(false);
   const [currentImageIndex, setCurrentImageIndex] = React.useState<number | null>(null);
@@ -125,6 +127,32 @@ const BlogInnerContent: React.FC = () => {
     data?.find((item: SwiperDataForImages) => {
       return item?.selected_blog === innerBlogItem?._id;
     });
+
+  const location = useLocation();
+  React.useEffect(() => {
+    if (innerBlogItem?._id) {
+      BlogRefetch();
+    }
+  }, [innerBlogItem?._id, blogDatas, location?.pathname]);
+
+  
+  const getBlogView = async (id: string) => {
+    try {
+      const res = await axios.get(`${Baseurl}/blog-viewer/${id}`);
+      if (res.data) {
+        console.log(res.data)
+      } else {
+        console.log(res.status)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const sortedLastBlogs = lastBlogs && lastBlogs?.sort((a: LastBlogType, b: LastBlogType) => {
+    return Number(a.created_at) - Number(b.created_at)
+  });
+
 
   if (blogLoading || lastBlogsLoading) {
     return <Loader />;
@@ -171,25 +199,25 @@ const BlogInnerContent: React.FC = () => {
                 <div className="description-content-images" style={{ display: findedImage ? "flex" : "none" }}>
                   {findedImage && findedImage?.images
                     ? findedImage?.images?.map((imgs, i: number) => (
-                        <div className="content-img">
-                          <img
-                            src={`https://ekol-server-1.onrender.com${imgs}`}
-                            alt={`image-${i + 3}`}
-                            onClick={() => handleImageClick(i)}
-                            style={{ cursor: "pointer" }}
-                          />
-                        </div>
-                      ))
+                      <div className="content-img">
+                        <img
+                          src={`https://ekol-server-1.onrender.com${imgs}`}
+                          alt={`image-${i + 3}`}
+                          onClick={() => handleImageClick(i)}
+                          style={{ cursor: "pointer" }}
+                        />
+                      </div>
+                    ))
                     : ""}
 
                   {/* Lightbox */}
                   {currentImageIndex !== null && (
                     <Lightbox
-                    plugins={[Zoom]}
-                    zoom={{
-                      maxZoomPixelRatio: 6,
-                      scrollToZoom: true
-                    }}
+                      plugins={[Zoom]}
+                      zoom={{
+                        maxZoomPixelRatio: 6,
+                        scrollToZoom: true
+                      }}
                       open={open}
                       close={() => setOpen(false)}
                       slides={
@@ -204,63 +232,65 @@ const BlogInnerContent: React.FC = () => {
               </div>
 
               <div className="right">
-                <h5>Ən son xəbərlər</h5>
+                <h5>{translations['en_son_xeberler']}</h5>
                 <div className="grid-last-blog">
-                  {lastBlogs && lastBlogs.length > 0
-                    ? lastBlogs.map((item: LastBlogType, _: string) => (
-                        <Link
-                          to={`/xeberler/en-son-xeberler/${item._id}`}
-                          key={uuidv4()}
-                          className="item-last-blog">
-                          <div className="title">{item.title}</div>
-                          <div className="time-and-icon">
-                            <span className="time">{item?.created_at}</span>
-                            <img src="/arrow.svg" alt="arrow-icon" />
-                          </div>
-                        </Link>
-                      ))
+                  {sortedLastBlogs && sortedLastBlogs?.length > 0
+                    ? sortedLastBlogs?.map((item: LastBlogType) => (
+                      <Link
+                        to={`/xeberler/en-son-xeberler/${item._id}`}
+                        onClick={() => getBlogView(item?._id || '')}
+                        key={uuidv4()}
+                        className="item-last-blog">
+                        <div className="title">{item.title}</div>
+                        <div className="time-and-icon">
+                          <span className="time">{item?.created_at}</span>
+                          <img src="/arrow.svg" alt="arrow-icon" />
+                        </div>
+                      </Link>
+                    ))
                     : ""}
                   <div className="button-content">
                     <button className="all-blogs" onClick={() => navigate("/xeberler")}>
-                      Bütün xəbərlər
+                      {translations['butun_xeberler']}
                     </button>
                   </div>
                 </div>
                 <div className="share-post">
-                  <span>Xəbəri paylaş:</span>
+                  <span>{translations['xeberi_paylas']}</span>
                   <div className="bottom">
                     <div className="socials">
                       {SocialsData && SocialsData.length > 0
                         ? SocialsData.map((item: SocialsType) => (
-                            <Link
-                              style={{
-                                background: "#30b258",
-                                padding: "7px",
-                                borderRadius: "100px",
-                                minWidth: "30px",
-                                width: "30px",
-                                height: "30px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                overflow: "hidden",
-                              }}
-                              key={item?._id}
-                              to={item?.link}
-                              className="icon">
-                              <img
-                                src={`https://ekol-server-1.onrender.com${item?.icon}`}
-                                alt={`${item?._id}-icon`}
-                                title={item?.link}
-                              />
-                            </Link>
-                          ))
+                          <Link
+                            style={{
+                              background: "#30b258",
+                              padding: "7px",
+                              borderRadius: "100px",
+                              minWidth: "30px",
+                              width: "30px",
+                              height: "30px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              overflow: "hidden",
+                            }}
+                            key={item?._id}
+                            to={item?.link}
+                            className="icon">
+                            <img
+                              src={`https://ekol-server-1.onrender.com${item?.icon}`}
+                              alt={`${item?._id}-icon`}
+                              title={item?.link}
+                            />
+                          </Link>
+                        ))
                         : ""}
                     </div>
                     <div className="view">
                       <div className="eye-wrap">
                         <img src="/ey.svg" alt="eye" title="Baxışlar" />
                       </div>
+                      <p style={{ paddingLeft: '12px' }}>{innerBlogItem?.view || ''}</p>
                     </div>
                   </div>
                 </div>

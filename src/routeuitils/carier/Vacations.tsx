@@ -412,11 +412,21 @@ const Vacations: React.FC = () => {
           "Accept-Language": selectedlang,
         },
       });
+      if (response.data) {
+        const newVacs = [...response.data];
+        
+        const lastVac = newVacs.pop(); 
+        if (lastVac) {
+          newVacs.unshift(lastVac); 
+        }
+        
+        return newVacs;
+      }
       return response.data;
     },
     staleTime: 1000000,
   });
-
+  
   //pagination
   const [paginate, setPaginate] = React.useState<number>(12);
 
@@ -451,7 +461,7 @@ const Vacations: React.FC = () => {
   const filteredSearchItems =
     vacationData && vacationData?.length > 0
       ? vacationData.filter((item: Vacations) => {
-          return item.title.toLowerCase().includes(searchTerm.toLowerCase());
+          return item?.title?.toLowerCase()?.includes(searchTerm?.toLowerCase());
         })
       : [];
 
@@ -479,7 +489,7 @@ const Vacations: React.FC = () => {
             {filteredSearchItems && filteredSearchItems.length > 0 ? (
               filteredSearchItems.slice(0, paginate).map((item: Vacations) => (
                 <article
-                  onClick={() => navigate(`/karyera/${item?.title.toLowerCase()}`)}
+                  onClick={() => navigate(`/karyera/${item?.title?.toLowerCase()}`)}
                   key={uuidv4()}
                   className="vacation-item">
                   <h3>{item?.title}</h3>

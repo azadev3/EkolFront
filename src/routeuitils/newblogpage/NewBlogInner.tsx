@@ -78,6 +78,17 @@ const NewBlogInner: React.FC = () => {
     staleTime: 900000,
   });
 
+  const sortedLastBlog = lastBlogs
+    ? [...lastBlogs].sort((a: LastBlogType, b: LastBlogType) => {
+      const parseDate = (dateString: string) => {
+        const [day, month, year] = dateString.split('.').map(Number);
+        return new Date(year, month - 1, day).getTime();
+      };
+
+      return parseDate(b.created_at) - parseDate(a.created_at);
+    })
+    : [];
+
   //socials
   const { data: SocialsData } = useQuery<SocialsType[]>({
     queryKey: ["socialData"],
@@ -197,10 +208,10 @@ const NewBlogInner: React.FC = () => {
               </div>
 
               <div className="right">
-                <h5>Ən son bloqlar</h5>
+                <h5>{translations['en_son_xeberler']}</h5>
                 <div className="grid-last-blog">
-                  {lastBlogs && lastBlogs.length > 0
-                    ? lastBlogs.map((item: LastBlogType, i: string) => (
+                  {sortedLastBlog && sortedLastBlog?.length > 0
+                    ? sortedLastBlog?.map((item: LastBlogType, i: number) => (
                       <Link
                         to={`/bloq/en-son-bloqlar/${i?.toString()}`}
                         key={uuidv4()}
@@ -218,12 +229,12 @@ const NewBlogInner: React.FC = () => {
                     : ""}
                   <div className="button-content">
                     <button className="all-blogs" onClick={() => navigate("/bloq")}>
-                      Bütün bloqlar
+                      {translations['butun_xeberler']}
                     </button>
                   </div>
                 </div>
                 <div className="share-post">
-                  <span>Bloqu paylaş:</span>
+                  <span>{translations['xeberi_paylas']}</span>
                   <div className="bottom">
                     <div className="socials">
                       {SocialsData && SocialsData.length > 0

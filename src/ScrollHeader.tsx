@@ -47,8 +47,8 @@ const ScrollHeader: React.FC = () => {
       console.log(error);
     }
   };
-  const [showSocialLife, setShowSocialLife] = React.useState<boolean>(false);
 
+  const [showSocialLife, setShowSocialLife] = React.useState<boolean>(false);
   const handleCheckSocialLife = async () => {
     try {
       const res = await axios.get(`${Baseurl}/hidden-social-front`);

@@ -6,7 +6,149 @@
   box-sizing: border-box;
   font-family: 'Public Sans', sans-serif;
 }
-
+.home-page .services-section .services .swiper-slide .left p {
+  color: white !important;
+}
+.app .header-wrapper .header .right-header-area .share-media .modal-share {
+  border-radius: 4px !important;
+  background-color: white !important;
+}
+.app .scrolled-header .header .right-header-area .share-media .modal-share {
+  border-radius: 4px !important;
+  background-color: white !important;
+}
+.ourworks-section .works .container-works .grid-works .navigation-content .item-navigation .left-order-num-and-title p {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  font-size: 15px;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.app .header-wrapper .header .right-header-area .language-and-search-button .select-language {
+  background-image: url('/blackdropdown.svg') !important;
+}
+.home-page .hero-wrapper .hero .header-wrapper .header .right-header-area .language-and-search-button .select-language {
+  background-image: url('/dropdownicon.svg') !important;
+}
+.NewBlogPage-wrapper .newblogpage-section .blogs-newblogpage .container-newblogpage .newblogpage-grid-blogpage .newblogpage-item-blogpage {
+  height: 100% !important;
+  justify-content: space-between !important;
+}
+.NewBlogPage-wrapper
+  .newblogpage-section
+  .blogs-newblogpage
+  .container-newblogpage
+  .newblogpage-grid-blogpage
+  .newblogpage-item-blogpage
+  .image-newblogpage
+  img {
+  object-fit: fill !important;
+}
+.blog-inner-page
+  .blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .left
+  .content-inner-blog-image-wrapper
+  img {
+  object-fit: fill !important;
+}
+.last-blog-inner-page
+  .last-blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .left
+  .description-content
+  .description-area {
+  width: 100% !important;
+  p {
+    width: 100% !important;
+    img {
+      width: 100% !important;
+      object-fit: fill !important;
+    }
+  }
+}
+.last-blog-inner-page
+  .last-blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .left
+  .description-content-images
+  .content-img
+  img {
+  object-fit: fill !important;
+}
+.blog-inner-page
+  .blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .left
+  .description-content
+  .description-area {
+  width: 100% !important;
+  p {
+    width: 100% !important;
+    img {
+      width: 100% !important;
+      object-fit: fill !important;
+    }
+  }
+}
+.page-navigator {
+  .prevpage {
+    text-wrap: nowrap;
+  }
+  .currentpage {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 1 !important;
+    line-clamp: 1 !important;
+    overflow: hidden !important;
+    max-width: 1000px;
+  }
+}
+.home-page .contact-us-section .contact-us .map-contact {
+  max-width: 1240px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+.footer-wrapper .footer {
+  max-width: 1240px !important;
+}
+.footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content {
+  &:nth-child(6) {
+    align-items: flex-end !important;
+  }
+}
+.home-page .contact-us-section .contact-us .map-contact .contact-information-box .contact-datas .information-box .left-icon img {
+  width: 70% !important;
+  height: 70% !important;
+}
+.home-page .services-section {
+  width: auto !important;
+  max-width: unset !important;
+}
+.home-page .services-section .services {
+  max-width: 1240px !important;
+  margin: 0 auto !important;
+}
+.ourworks-section .works .container-works .grid-works .navigation-description-content .description-content ul {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 21px;
+}
 .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content p,
 .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content h1,
 .about-page .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content h2,
@@ -24,7 +166,8 @@
   :first-child {
     margin-top: 0;
   }
-  sup, sub {
+  sup,
+  sub {
     font-size: 12px;
   }
   /* List styles */
@@ -1053,6 +1196,23 @@ $maindarkcolor: #262626;
 $whitedark: #d8d8d8;
 $whitedarktwo: #8b9f9c;
 
+.scrolled-header .header .right-header-area .share-media {
+  background-color: rgba(255, 255, 255, 0.2392156863) !important;
+  border-radius: 4px !important;
+}
+.home-page .hero-wrapper .hero .header-wrapper .header .right-header-area .share-media {
+  background-color: rgba(255, 255, 255, 0.2392156863) !important;
+  border-radius: 4px !important;
+}
+.search-modal-overlay .search-modal .result-content .results-main .link-el {
+  padding: 10px 10px !important;
+  border-radius: 100px;
+  background-color: transparent !important;
+  border: 1px solid #d4d4d4;
+  span {
+    background-color: rgb(114, 131, 114) !important;
+  }
+}
 .app {
   width: 100%;
   min-height: 100vh;
@@ -1067,8 +1227,234 @@ $whitedarktwo: #8b9f9c;
 
   &.dark {
     background-color: $maindarkcolor;
+    .blog-page-wrapper .blogs-section .blogs .container-blogs .pagination-button .formorebtn {
+      background-color: #30b258;
+      color: white;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+    .blog-inner-page
+      .blog-inner-content-section
+      .blogs-inner
+      .container-blogs-inner
+      .col-blogs-inner
+      .contents
+      .right
+      .grid-last-blog
+      .item-last-blog:hover {
+      background-color: rgba(146, 146, 146, 0.089);
+      transition: 500ms ease;
+    }
+    .last-blog-inner-page
+      .last-blog-inner-content-section
+      .blogs-inner
+      .container-blogs-inner
+      .col-blogs-inner
+      .contents
+      .right
+      .grid-last-blog
+      .item-last-blog:hover {
+      background-color: rgba(146, 146, 146, 0.089);
+      transition: 500ms ease;
+    }
+    .vacations-request .vacationrequest .container-vacation-request .vacation-top-description {
+      border: 1px solid #e0e0e01c;
+      border-radius: 4px;
+    }
+    .vacations-request .vacationrequest .container-vacation-request .form-vac-request {
+      border: 1px solid #e0e0e01c;
+      border-radius: 4px;
+    }
+    .vacations-request .vacationrequest .container-vacation-request .form-vac-request form .field-input {
+      border: 1px dashed #004238;
+      padding: 5px 0;
+      border-radius: 4px;
+    }
+    .search-modal-overlay .search-modal .result-content {
+      div {
+        color: #d8d8d8 !important;
+      }
+    }
+    .search-modal-overlay .search-modal .result-content .results-main .link-el {
+      background-color: transparent;
+      border: 1px solid $maindarkcolor;
+      padding: 10px 10px;
+      border-radius: 100px;
+      color: #d8d8d8 !important;
+      span {
+        background-color: #303030 !important;
+      }
+      * {
+        color: #d8d8d8 !important;
+      }
+    }
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .location textarea,
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .location input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .enterprise
+      textarea,
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .enterprise input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .typeofrequest
+      textarea,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .typeofrequest
+      input,
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .message textarea,
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .message input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .location
+      textarea,
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .location input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .enterprise
+      textarea,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .enterprise
+      input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .typeofrequest
+      textarea,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .typeofrequest
+      input,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .message
+      textarea,
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .message input {
+      background-color: #d8d8d8 !important;
+    }
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .location select,
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .enterprise select,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .typeofrequest
+      select,
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .message select,
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .location select,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .enterprise
+      select,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .typeofrequest
+      select,
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .message select {
+      background-color: #d8d8d8 !important;
+    }
+    .home-page .hero-wrapper .hero .header-wrapper .header .right-header-area .language-and-search-button .select-language .selected-lang {
+      position: relative;
+      right: 0px !important;
+    }
+    .header-wrapper .header .right-header-area .language-and-search-button .select-language {
+      background-image: url('/refing.svg') !important;
+      background-repeat: no-repeat !important;
+      background-size: 24px;
+      .selected-lang {
+        position: relative;
+        right: 12px;
+      }
+    }
+    .scrolled-header .header .right-header-area .share-media .modal-share {
+      background-color: rgba(255, 255, 255, 0.2392156863) !important;
+      border: none !important;
+    }
+    .scrolled-header .header .right-header-area .language-and-search-button .select-language .dropdown-menu {
+      background-color: rgba(255, 255, 255, 0.2392156863) !important;
+      * {
+        color: white !important;
+      }
+    }
+    .header-wrapper .header .right-header-area .share-media .modal-share {
+      background-color: rgba(255, 255, 255, 0.2392156863) !important;
+      border: none !important;
+    }
+    .home-page .hero-wrapper .hero .header-wrapper .header .right-header-area .language-and-search-button .select-language .dropdown-menu {
+      background-color: rgba(255, 255, 255, 0.2392156863) !important;
+      * {
+        color: white !important;
+      }
+    }
+    .header-wrapper .header .right-header-area .share-media {
+      background-color: rgba(255, 255, 255, 0.2392156863) !important;
+    }
+    .scrolled-header .header .right-header-area .share-media {
+      background-color: rgba(255, 255, 255, 0.2392156863) !important;
+    }
+    .about-page .videos-section .videos .container-videos h2 {
+      color: #d8d8d8;
+    }
     .vacations-inner-section .vacationsinner .container-inner-vac .vacation-top-description {
       border: 1px solid #b5ffc52d !important;
+    }
+    .activity-page
+      .servicesActivity-section
+      .servicesActivity
+      .container-servicesActivity
+      .container-services
+      .service-items
+      .navigator-content
+      .swiper-slide.actived {
+      background-color: #2e2e2e;
     }
     .dynamic-page-wrapper .page-section-dynamic .page-route .container-page h2 {
       color: $whitedark;
@@ -1621,8 +2007,20 @@ $whitedarktwo: #8b9f9c;
     }
     .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase th,
     .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .table-area-purchase td {
-      background-color: #2b2e3e;
+      background-color: #2b2b2b;
       color: $whitedark;
+      &:hover {
+        background-color: #363636;
+      }
+    }
+    .overlay-purchase-modal .purchase-modal .header-modal h1 {
+      color: white !important;
+    }
+    .overlay-purchase-modal .purchase-modal .content-area p {
+      color: white !important;
+    }
+    .overlay-purchase-modal .purchase-modal .download-pdf-btn {
+      color: white !important;
     }
     .purch-announcement-wrapper
       .purch-announcement-section
@@ -3596,6 +3994,20 @@ $whitedarktwo: #8b9f9c;
 }
 .home-page .card-about-section .card-about .top-card-area .right-descriptions .links .right-nav-link {
   background-color: rgba(165, 165, 165, 0.592);
+}
+
+.about-page .who-we-are-section .whoweare .container-whoweare .description-container ul {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 24px;
+  li {
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 .about-page .who-we-are-section .whoweare .container-whoweare .description-container p {

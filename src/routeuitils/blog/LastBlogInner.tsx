@@ -20,6 +20,7 @@ type LastBlogType = {
   description: string;
   image: string;
   created_at: string;
+  view: string;
 };
 
 const LastBlogInner: React.FC = () => {
@@ -73,6 +74,18 @@ const LastBlogInner: React.FC = () => {
     fetchLastBlogs();
   }, [selectedlang]);
 
+
+  const sortedLastBlog = lastBlogs
+    ? [...lastBlogs].sort((a: LastBlogType, b: LastBlogType) => {
+      const parseDate = (dateString: string) => {
+        const [day, month, year] = dateString.split('.').map(Number);
+        return new Date(year, month - 1, day).getTime();
+      };
+
+      return parseDate(b.created_at) - parseDate(a.created_at);
+    })
+    : [];
+
   const navigate = useNavigate();
   const { translations } = useTranslate();
 
@@ -97,6 +110,27 @@ const LastBlogInner: React.FC = () => {
     data?.find((item: SwiperDataForImages) => {
       return item?.selected_blog === lastBlogItem?._id;
     });
+
+
+  const getBlogView = async (id: string) => {
+    try {
+      const res = await axios.get(`${Baseurl}/blog-viewer/${id}`);
+      if (res.data) {
+        console.log(res.data)
+      } else {
+        console.log(res.status)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  React.useEffect(() => {
+    if (lastBlogItem?._id) {
+      fetchLastBlogs();
+    }
+  }, [lastBlogItem?._id])
 
 
   return (
@@ -146,11 +180,11 @@ const LastBlogInner: React.FC = () => {
                   {/* Lightbox */}
                   {currentImageIndex !== null && (
                     <Lightbox
-                    plugins={[Zoom]}
-                    zoom={{
-                      maxZoomPixelRatio: 6,
-                      scrollToZoom: true
-                    }}
+                      plugins={[Zoom]}
+                      zoom={{
+                        maxZoomPixelRatio: 6,
+                        scrollToZoom: true
+                      }}
                       open={open}
                       close={() => setOpen(false)}
                       slides={
@@ -165,13 +199,14 @@ const LastBlogInner: React.FC = () => {
               </div>
 
               <div className="right">
-                <h5>Ən son xəbərlər</h5>
+                <h5>{translations['en_son_xeberler']}</h5>
                 <div className="grid-last-blog">
-                  {lastBlogs && lastBlogs.length > 0
-                    ? lastBlogs?.map((item: LastBlogType) => (
+                  {sortedLastBlog && sortedLastBlog?.length > 0
+                    ? sortedLastBlog?.map((item: LastBlogType) => (
                       <Link
                         to={`/xeberler/en-son-xeberler/${item?._id}`}
                         key={item?._id}
+                        onClick={() => getBlogView(item?._id || '')}
                         className="item-last-blog">
                         <div className="title">{item?.title}</div>
 
@@ -184,12 +219,12 @@ const LastBlogInner: React.FC = () => {
                     : ""}
                   <div className="button-content">
                     <button className="all-blogs" onClick={() => navigate("/xeberler")}>
-                      Bütün xəbərlər
+                      {translations['butun_xeberler']}
                     </button>
                   </div>
                 </div>
                 <div className="share-post">
-                  <span>Xəbəri paylaş:</span>
+                  <span>{translations['xeberi_paylas']}</span>
                   <div className="bottom">
                     <div className="socials">
                       {SocialsData && SocialsData.length > 0
@@ -223,6 +258,7 @@ const LastBlogInner: React.FC = () => {
                       <div className="eye-wrap">
                         <img src="/ey.svg" alt="eye" title="Baxışlar" />
                       </div>
+                      <p style={{ paddingLeft: '12px' }}>{lastBlogItem?.view || ''}</p>
                     </div>
                   </div>
                 </div>

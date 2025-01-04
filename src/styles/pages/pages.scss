@@ -696,11 +696,15 @@
               }
             }
             span {
+              background-color: rgba(0, 0, 0, 0.411) !important;
+              padding: 8px 28px !important;
+              backdrop-filter: blur(0px) !important;
+              -webkit-backdrop-filter: blur(15px) !important;
               color: #ffffff;
               position: absolute;
               z-index: 100;
-              left: 32px;
-              bottom: 32px;
+              left: 12px;
+              bottom: 12px;
               font-weight: 600;
               font-size: 16px;
               line-height: 24px;

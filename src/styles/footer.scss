@@ -1,4 +1,4 @@
-@import "./global.scss";
+@import './global.scss';
 
 .footer-wrapper {
   width: 100%;
@@ -61,9 +61,9 @@
       }
 
       .footer-navigations {
-        max-width: 960px;
+        max-width: 100%;
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         justify-items: flex-end;
         align-items: flex-start;
         gap: 24px;

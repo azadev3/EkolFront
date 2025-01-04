@@ -51,8 +51,8 @@ const OurWorks: React.FC = () => {
 
   React.useEffect(() => {
     if (OurWorksInnerData && OurWorksInnerData.length > 0) {
-      const initialValue = OurWorksInnerData[0]?.title;
-      setSelectItem(initialValue);
+      const initialValue = OurWorksInnerData[0]?._id;
+      setSelectItem(initialValue || '');
     }
   }, [OurWorksInnerData]);
 
@@ -95,7 +95,7 @@ const OurWorks: React.FC = () => {
     setOpen(true); // Lightbox opened
   };
 
-  const selectedItemID = OurWorksInnerData?.find((item: OurWorksInnerInterface) => item?.title === selectItem)?._id;
+  const selectedItemID = OurWorksInnerData?.find((item: OurWorksInnerInterface) => item?._id === selectItem)?._id;
 
   const findedImage =
     ourWorksImgData &&
@@ -136,7 +136,7 @@ const OurWorks: React.FC = () => {
                     key={uuidv4()}
                     className="item-navigation"
                     onClick={() => {
-                      handleSelectItem(item?.title);
+                      handleSelectItem(item?._id || '');
                       window.scrollTo(0, 0);
                       if (isMobile) {
                         const el = document.getElementById('navigation_content');
@@ -155,7 +155,7 @@ const OurWorks: React.FC = () => {
             <div className="navigation-description-content" id="navigation_content">
               {OurWorksInnerData && OurWorksInnerData.length > 0
                 ? OurWorksInnerData.map((item: OurWorksInnerInterface) => {
-                  if (selectItem === item?.title) {
+                  if (selectItem === item?._id) {
                     return (
                       <div
                         style={{ width: "100%" }}

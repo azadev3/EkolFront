@@ -15,6 +15,7 @@ export type BlogDataType = {
  created_by: string;
  blogimage: string;
  time?: string;
+ view: string;
 };
 
 export type BlogType = {
@@ -24,6 +25,8 @@ export type BlogType = {
  created_at: string;
  updated: string;
  image: string;
+ view: string;
+ slogan: string;
 };
 
 const BlogSection: React.FC = () => {

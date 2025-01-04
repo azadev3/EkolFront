@@ -51,9 +51,7 @@ const WhoWeAre: React.FC = () => {
                   <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${item?._id}-img`} title={item?.title} />
                 </div>
 
-                <div className="description-container">
-                  <div dangerouslySetInnerHTML={{ __html: item?.description }} />
-                </div>
+                  <div className="description-container" dangerouslySetInnerHTML={{ __html: item?.description }} />
               </div>
             ))
           : ""}
