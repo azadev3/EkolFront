@@ -11,6 +11,8 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import Loader from '../../Loader';
 import { useTranslate } from '../../context/TranslateContext';
+import { DefaultMeta, MetaDataType } from '../../routes/Home';
+import { HelmetTag } from '../../main';
 
 const Blogs: React.FC = () => {
   //pagination
@@ -78,6 +80,21 @@ const Blogs: React.FC = () => {
     }
   }
 
+
+  const { data: MetaData } = useQuery<MetaDataType>({
+    queryKey: ['meta_xeberler_key', selectedlang],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/meta-tags-xeberler-front`, {
+        headers: {
+          "Accept-Language": selectedlang,
+        }
+      });
+      return res.data[0];
+    }
+  });
+  const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
+
+
   if (isLoading) {
     return <Loader />;
   }
@@ -88,6 +105,14 @@ const Blogs: React.FC = () => {
 
   return (
     <section className="blogs-section">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{hasMeta?.meta_title}</title>
+        <meta name="title" content={hasMeta?.meta_title} />
+        <meta name="description" content={hasMeta?.meta_description} />
+        <meta name="generator" content={hasMeta?.meta_generator} />
+        <meta name="author" content={hasMeta?.meta_author} />
+      </HelmetTag>
       <div className="blogs">
         <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_xeberler']} />
 
@@ -124,7 +149,7 @@ const Blogs: React.FC = () => {
                     </div>
                     <div className="show-more-btn">
                       <Link to={`/xeberler/${item?._id}`}
-                      onClick={() => getBlogView(item?._id || '')}
+                        onClick={() => getBlogView(item?._id || '')}
                       >Ətraflı oxu</Link>
                     </div>
                   </div>

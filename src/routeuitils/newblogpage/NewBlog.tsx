@@ -10,6 +10,8 @@ import { SelectedLanguageState } from "../../recoil/Atoms";
 import { BlogType } from "../home/BlogSection";
 import { Link, useNavigate } from "react-router-dom";
 import PaginateButton from "../../components/PaginateButton";
+import { DefaultMeta, MetaDataType } from "../../routes/Home";
+import { HelmetTag } from "../../main";
 
 const NewBlog: React.FC = () => {
   const { translations } = useTranslate();
@@ -64,6 +66,20 @@ const NewBlog: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const { data: MetaData } = useQuery<MetaDataType>({
+    queryKey: ['meta_bloqlar_key', selectedlang],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/meta-tags-bloqlar-front`, {
+        headers: {
+          "Accept-Language": selectedlang,
+        }
+      });
+      return res.data[0];
+    }
+  });
+  const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
+
+
   if (isLoading) {
     return <Loader />;
   }
@@ -74,6 +90,14 @@ const NewBlog: React.FC = () => {
 
   return (
     <section className="newblogpage-section">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{hasMeta?.meta_title}</title>
+        <meta name="title" content={hasMeta?.meta_title} />
+        <meta name="description" content={hasMeta?.meta_description} />
+        <meta name="generator" content={hasMeta?.meta_generator} />
+        <meta name="author" content={hasMeta?.meta_author} />
+      </HelmetTag>
       <div className="blogs-newblogpage">
         <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["newblog_title"]} />
 
@@ -85,7 +109,7 @@ const NewBlog: React.FC = () => {
               ? sortedBlogData?.slice(0, paginate)?.map((item: BlogType, index: number) => (
                 <article
                   onClick={() => {
-                    navigate(`/bloq/${index?.toString()}`);
+                    navigate(`/bloq/${item._id}`);
                   }}
                   className={`newblogpage-item-blogpage ${item?.image === "" ? "noimg" : ""}`}
                   key={index}>
@@ -103,7 +127,7 @@ const NewBlog: React.FC = () => {
                     <h4>{item?.title}</h4>
                     <p>{item?.slogan}</p>
                     <div className="show-more-btn">
-                      <Link to={`/bloq/${index?.toString()}`}>Ətraflı oxu</Link>
+                      <Link to={`/bloq/${item._id}`}>Ətraflı oxu</Link>
                     </div>
                   </div>
                 </article>

@@ -299,6 +299,9 @@
 }
 
 @media only screen and (max-width: 968px) {
+  .app .page-navigator .currentpage {
+    max-width: 250px !important;
+  }
   .footer-wrapper .footer .top-footer .footer-navigations {
     grid-template-columns: repeat(1, 1fr) !important;
     gap: 70px;
@@ -955,6 +958,9 @@
 }
 
 @media only screen and (max-width: 568px) {
+  .app .page-navigator .currentpage {
+    max-width: 250px !important;
+  }
   .scrolled-header {
     display: none;
   }

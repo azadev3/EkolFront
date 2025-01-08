@@ -11,6 +11,7 @@ import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import DOMPurify from "dompurify";
 import { useTranslate } from "../../context/TranslateContext";
+import { HelmetTag } from "../../main";
 
 const VacationInner: React.FC = () => {
   const { vacid } = useParams<{ lang: string, vacid: string }>();
@@ -41,6 +42,12 @@ const VacationInner: React.FC = () => {
 
   return (
     <section className="vacations-inner-section">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{innerVacancy?.title || ''}</title>
+        <meta name="title" content={innerVacancy?.title || ''} />
+        <meta name="description" content={innerVacancy?.description || ''} />
+      </HelmetTag>
       <div className="vacationsinner">
         <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['karyera_imkanlari']} />
         <div className="container-inner-vac">

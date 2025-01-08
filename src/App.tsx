@@ -40,6 +40,10 @@ import PurchaseContact from "./components/features/PurchaseContact";
 import CarcbonCalculate from "./routes/CarcbonCalculate";
 import { DynamicPageDataType, useDynamicPageData } from "./UseDynamicPage";
 import DynamicPage from "./routes/DynamicPage";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { Baseurl } from "./Baseurl";
+import { HelmetTag } from "./main";
 export const isHomePageState = atom<boolean>({
   key: "isHomePageState",
   default: false,
@@ -88,8 +92,25 @@ const App: React.FC = () => {
   // DYNAMIC PAGES
   const { DynamicPageData } = useDynamicPageData();
 
+  const { data: faviconFile } = useQuery({
+    queryKey: ['favicon_key'],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/get-favicon`);
+      return res.data?.favicon;
+    }
+  });
+
+  const hasFavicon = faviconFile ? faviconFile : '';
+
   return (
     <div className={`app ${mode ? "dark" : ""}`}>
+      <HelmetTag>
+        {hasFavicon ? (
+          <link rel="icon" type="image/x-icon" href={`https://ekol-server-1.onrender.com${hasFavicon}`} />
+        ) : (
+          <link rel="icon" type="image/svg+xml" href="/ekol.svg" />
+        )}
+      </HelmetTag>
       {/* purchase announcement modal (new feature) */}
       <div className={`overlay-purchase-modal ${purchaseAnnouncementModal ? "active" : ""}`}>
         <PurchaseAnnouncementModal />
@@ -152,8 +173,8 @@ const App: React.FC = () => {
         <Route path="/satinalma_elaqe" element={<PurchaseContact />} />
         {DynamicPageData && DynamicPageData?.length > 0
           ? DynamicPageData?.map((data: DynamicPageDataType) => (
-              <Route key={data?._id} path={"/:pathdynamic"} element={<DynamicPage />} />
-            ))
+            <Route key={data?._id} path={"/:pathdynamic"} element={<DynamicPage />} />
+          ))
           : null}
       </Routes>
       <Footer />

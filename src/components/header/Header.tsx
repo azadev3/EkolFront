@@ -96,12 +96,91 @@ const Header: React.FC = () => {
     }
   };
 
+
+  const [showOurworkshome, setShowourworkshome] = React.useState<boolean>(false);
+  const handleCheckOurworksHome = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-ourworkshome-front`);
+      if (res.data) {
+        setShowourworkshome(res.data?.showed);
+        console.log(res.data, 'slam');
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  const [showAbout, setShowAbout] = React.useState<boolean>(false);
+  const handleCheckAbout = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-about-front`);
+      if (res.data) {
+        setShowAbout(res.data?.showed);
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [showActivity, setShowActivity] = React.useState<boolean>(false);
+  const handleCheckActivity = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-activity-front`);
+      if (res.data) {
+        setShowActivity(res.data?.showed);
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [showMedia, setShowMedia] = React.useState<boolean>(false);
+  const handleCheckMedia = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-media-front`);
+      if (res.data) {
+        setShowMedia(res.data?.showed);
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [showContact, setShowContact] = React.useState<boolean>(false);
+  const handleCheckContact = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-contact-front`);
+      if (res.data) {
+        setShowContact(res.data?.showed);
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   React.useEffect(() => {
     handleCheck();
     handleCheckPurchase();
     handleCheckCarier();
     handleCheckSocialLife();
-  }, [showRehberlik, showPurchase, showCarier, showSocialLife]);
+    handleCheckOurworksHome();
+    handleCheckAbout();
+    handleCheckActivity();
+    handleCheckMedia();
+    handleCheckContact();
+  }, [showRehberlik, showPurchase, showCarier, showSocialLife, showAbout, showActivity, showMedia, showContact]);
 
   const { DynamicPageData } = useDynamicPageData();
   const hasRoute = DynamicPageData && DynamicPageData?.length > 0 ? DynamicPageData : [];
@@ -125,10 +204,11 @@ const Header: React.FC = () => {
     }
   });
 
+
   const HeaderItems: HeaderElementType[] = [
     // { id: 1, title: `${translations["nav_anasehife"]}`, to: "/" },
     {
-      id: 2,
+      id: 222,
       title: `${translations['nav_haqqimizda']}`,
       to: '',
       icon: <FaAngleDown className="down-icon" />,
@@ -138,12 +218,12 @@ const Header: React.FC = () => {
         { id: 3, title: `${translations['nav_haqqimizda_struktur']}`, to: '/about/structure' },
         { id: 5, title: `${translations['nav_haqqimizda_sertifikatlar']}`, to: '/about/certificates' },
         { id: 6, title: `${translations['nav_haqqimizda_partnyorlar']}`, to: '/about/partners' },
-        { id: 7, title: `${translations['nav_haqqimizda_ourworks']}`, to: '/about/workwedo' },
+        { id: 777, title: `${translations['nav_haqqimizda_ourworks']}`, to: '/about/workwedo' },
         { id: 9, title: `${translations['nav_haqqimizda_hesabatlar']}`, to: '/hesabatlar/illikhesabatlar' },
       ],
     },
     {
-      id: 3,
+      id: 333,
       title: `${translations['nav_haqqimizda_fealiyyet']}`,
       to: '/',
       icon: <FaAngleDown className="down-icon" />,
@@ -172,7 +252,7 @@ const Header: React.FC = () => {
       ],
     },
     {
-      id: 5,
+      id: 555,
       title: 'Media',
       to: '/',
       icon: <FaAngleDown className="down-icon" />,
@@ -201,7 +281,7 @@ const Header: React.FC = () => {
       ],
     },
     {
-      id: 6,
+      id: 666,
       title: `${translations['nav_haqqimizda_elaqe']}`,
       to: '/',
       icon: <FaAngleDown className="down-icon" />,
@@ -293,7 +373,7 @@ const Header: React.FC = () => {
                 onMouseLeave={() => setDropdownHeader(null)}>
                 <li
                   style={{
-                    display: item.id === 4 && !showPurchase ? 'none' : 'flex',
+                    display: item.id === 4 && !showPurchase ? 'none' : item.id === 222 && !showAbout ? 'none' : item.id === 333 && !showActivity ? 'none' : item.id === 555 && !showMedia ? 'none' : item.id === 666 && !showContact ? 'none' : 'flex',
                   }}
                   className="links">
                   {item.submenu ? (
@@ -332,6 +412,8 @@ const Header: React.FC = () => {
                         return <></>;
                       } else if (submenuItem.id === 1000 && !showSocialLife) {
                         return <></>;
+                      } else if (submenuItem.id === 777 && !showOurworkshome) {
+                        return <></>
                       } else {
                         return (
                           <NavLink

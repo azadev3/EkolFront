@@ -9,6 +9,8 @@ import DOMPurify from "dompurify";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import { DefaultMeta, MetaDataType } from "../../routes/Home";
+import { HelmetTag } from "../../main";
 
 interface LisanseItemType {
   _id: string;
@@ -74,8 +76,31 @@ const Lisanse: React.FC = () => {
     }
   }, [lisanseData]);
 
+  const { data: MetaData } = useQuery<MetaDataType>({
+    queryKey: ['meta_sertifikatlar_key', selectedlang],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/meta-tags-sertifikatlar-front`, {
+        headers: {
+          "Accept-Language": selectedlang,
+        }
+      });
+      return res.data[0];
+    }
+  });
+  const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
+
+
+
   return (
     <section className="lisanse-section">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{hasMeta?.meta_title}</title>
+        <meta name="title" content={hasMeta?.meta_title} />
+        <meta name="description" content={hasMeta?.meta_description} />
+        <meta name="generator" content={hasMeta?.meta_generator} />
+        <meta name="author" content={hasMeta?.meta_author} />
+      </HelmetTag>
       <div className="lisanse">
         {isLoading ? (
           <Loader />
@@ -83,15 +108,15 @@ const Lisanse: React.FC = () => {
           <div className="container-lisanse">
             {hasLisanseData
               ? lisanseData?.map((item: LisanseItemType, _: number) => (
-                  <React.Fragment key={item?._id}>
-                    <h2>{item?.title}</h2>
-                    <div
-                      onClick={handleDescriptionLisanse}
-                      className="description-area-lisanse"
-                      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
-                    />
-                  </React.Fragment>
-                ))
+                <React.Fragment key={item?._id}>
+                  <h2>{item?.title}</h2>
+                  <div
+                    onClick={handleDescriptionLisanse}
+                    className="description-area-lisanse"
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
+                  />
+                </React.Fragment>
+              ))
               : ""}
           </div>
         )}
@@ -100,11 +125,11 @@ const Lisanse: React.FC = () => {
       {/* Lightbox Component */}
       {isLightboxOpen && (
         <Lightbox
-        plugins={[Zoom]}
-        zoom={{
-          maxZoomPixelRatio: 6,
-          scrollToZoom: true
-        }}
+          plugins={[Zoom]}
+          zoom={{
+            maxZoomPixelRatio: 6,
+            scrollToZoom: true
+          }}
           open={isLightboxOpen}
           close={closeModal}
           slides={lightboxImages}

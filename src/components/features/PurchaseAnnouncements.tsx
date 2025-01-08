@@ -9,6 +9,8 @@ import { SelectedLanguageState } from "../../recoil/Atoms";
 import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import moment from "moment";
+import { DefaultMeta, MetaDataType } from "../../routes/Home";
+import { HelmetTag } from "../../main";
 
 export interface PurchAnnInterface {
   _id: string;
@@ -150,13 +152,13 @@ const PurchaseAnnouncements: React.FC = () => {
 
 
   const orderByItems =
-  hasPurchData && currentItems
-    ? currentItems?.sort((a: PurchAnnInterface, b: PurchAnnInterface) => {
+    hasPurchData && currentItems
+      ? currentItems?.sort((a: PurchAnnInterface, b: PurchAnnInterface) => {
         const endDateA = new Date(a.end_date).getTime();
         const endDateB = new Date(b.end_date).getTime();
         return endDateA - endDateB;
       })
-    : [];
+      : [];
 
   // const orderByItems =
   //   hasPurchData && currentItems
@@ -172,14 +174,35 @@ const PurchaseAnnouncements: React.FC = () => {
   //   ? currentItems?.sort((a: PurchAnnInterface, b: PurchAnnInterface) => {
   //       const endDateA = new Date(a.end_date).getTime();
   //       const endDateB = new Date(b.end_date).getTime();
-        
+
   //       return endDateB - endDateA; 
   //     })
   //   : [];
 
+  const { data: MetaData } = useQuery<MetaDataType>({
+    queryKey: ['meta_satinalmaelanlari_key', selectedlang],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/meta-tags-satinalmaelanlari-front`, {
+        headers: {
+          "Accept-Language": selectedlang,
+        }
+      });
+      return res.data[0];
+    }
+  });
+  const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
+
 
   return (
     <main className="purch-announcement-wrapper">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{hasMeta?.meta_title}</title>
+        <meta name="title" content={hasMeta?.meta_title} />
+        <meta name="description" content={hasMeta?.meta_description} />
+        <meta name="generator" content={hasMeta?.meta_generator} />
+        <meta name="author" content={hasMeta?.meta_author} />
+      </HelmetTag>
       <section className="purch-announcement-section">
         <div className="purch-announcement">
           <Breadcrumb

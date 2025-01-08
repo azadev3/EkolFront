@@ -13,6 +13,7 @@ import { SwiperDataForImages } from "./BlogInnerContent";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import { HelmetTag } from "../../main";
 
 type LastBlogType = {
   _id?: string;
@@ -135,6 +136,12 @@ const LastBlogInner: React.FC = () => {
 
   return (
     <section className="last-blog-inner-content-section">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{lastBlogItem?.title || ''}</title>
+        <meta name="title" content={lastBlogItem?.title} />
+        <meta name="description" content={lastBlogItem?.description} />
+      </HelmetTag>
       <div className="blogs-inner">
         <Breadcrumb
           blogTitle={lastBlogItem?.title}

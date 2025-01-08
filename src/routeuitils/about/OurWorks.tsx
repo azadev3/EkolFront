@@ -11,6 +11,8 @@ import { useTranslate } from '../../context/TranslateContext';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import Zoom from 'yet-another-react-lightbox/plugins/zoom';
+import { DefaultMeta, MetaDataType } from '../../routes/Home';
+import { HelmetTag } from '../../main';
 
 export interface OurWorksInnerInterface {
   _id?: string;
@@ -120,8 +122,32 @@ const OurWorks: React.FC = () => {
     return () => window.removeEventListener('resize', controlWindow);
   }, []);
 
+  const { data: MetaData } = useQuery<MetaDataType>({
+    queryKey: ['meta_gorduyumuzisler_key', selectedlang],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/meta-tags-gorduyumuzisler-front`, {
+        headers: {
+          "Accept-Language": selectedlang,
+        }
+      });
+      return res.data[0];
+    }
+  });
+
+  const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
+
+  const findedDynamicTitle = OurWorksInnerData && OurWorksInnerData?.length > 0 ? OurWorksInnerData?.find((data: OurWorksInnerInterface) => selectItem === data?._id)?.title : [];
+
   return (
     <section className="ourworks-section">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{findedDynamicTitle ? findedDynamicTitle : hasMeta?.meta_title}</title>
+        <meta name="title" content={hasMeta?.meta_title} />
+        <meta name="description" content={hasMeta?.meta_description} />
+        <meta name="generator" content={hasMeta?.meta_generator} />
+        <meta name="author" content={hasMeta?.meta_author} />
+      </HelmetTag>
       <div className="works">
         <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['gorduyumuz_isler_title']} />
 
@@ -143,8 +169,8 @@ const OurWorks: React.FC = () => {
                         el?.scrollIntoView({ behavior: 'smooth' });
                       }
                     }}>
-                    <div className="left-order-num-and-title">
-                      <p>{item?.title}</p>
+                    <div title={item?.title || ''} className="left-order-num-and-title">
+                      <p title={item?.title || ''}>{item?.title}</p>
                     </div>
                     <img src="/arrow.svg" className="arrowimg" alt="" />
                   </div>

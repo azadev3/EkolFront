@@ -2,12 +2,43 @@ import React from "react";
 import Breadcrumb from "../../Breadcrumb";
 import { NavLink, Outlet } from "react-router-dom";
 import { useTranslate } from "../../context/TranslateContext";
+import { DefaultMeta, MetaDataType } from "../../routes/Home";
+import { useQuery } from "@tanstack/react-query";
+import { useRecoilValue } from "recoil";
+import { SelectedLanguageState } from "../../recoil/Atoms";
+import { Baseurl } from "../../Baseurl";
+import axios from "axios";
+import { HelmetTag } from "../../main";
 
 const CalculationSection: React.FC = () => {
   const { translations } = useTranslate();
 
+  const lang = useRecoilValue(SelectedLanguageState);
+  const { data: MetaData } = useQuery<MetaDataType>({
+    queryKey: ['meta_hesabatlar_key', lang],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/meta-tags-hesabatlar-front`, {
+        headers: {
+          "Accept-Language": lang,
+        }
+      });
+      return res.data[0];
+    }
+  });
+  const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
+
+
+
   return (
     <section className="calculation-section">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{hasMeta?.meta_title}</title>
+        <meta name="title" content={hasMeta?.meta_title} />
+        <meta name="description" content={hasMeta?.meta_description} />
+        <meta name="generator" content={hasMeta?.meta_generator} />
+        <meta name="author" content={hasMeta?.meta_author} />
+      </HelmetTag>
       <div className="calculation">
         <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_hesabatlar"]} />
 

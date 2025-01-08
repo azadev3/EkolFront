@@ -9,6 +9,8 @@ import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import Loader from "../../Loader";
 import { useTranslate } from "../../context/TranslateContext";
+import { DefaultMeta, MetaDataType } from "../../routes/Home";
+import { HelmetTag } from "../../main";
 
 export const IsClickedServiceState = atom<any>({
   key: "isClickedServiceStateKey",
@@ -17,6 +19,8 @@ export const IsClickedServiceState = atom<any>({
 
 const ServicesPage: React.FC = () => {
   const { translations } = useTranslate();
+
+  const lang = useRecoilValue(SelectedLanguageState);
 
   const [_, setSelectedServiceID] = useRecoilState(IsClickedServiceState);
 
@@ -40,8 +44,31 @@ const ServicesPage: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const { data: MetaData } = useQuery<MetaDataType>({
+    queryKey: ['meta_xidmetler_key', lang],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/meta-tags-xidmetler-front`, {
+        headers: {
+          "Accept-Language": lang,
+        }
+      });
+      return res.data[0];
+    }
+  });
+
+  const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
+
+
   return (
     <section className="servicespage-section">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{hasMeta?.meta_title}</title>
+        <meta name="title" content={hasMeta?.meta_title} />
+        <meta name="description" content={hasMeta?.meta_description} />
+        <meta name="generator" content={hasMeta?.meta_generator} />
+        <meta name="author" content={hasMeta?.meta_author} />
+      </HelmetTag>
       <div className="servicespage">
         <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_xidmetler"]} />
 

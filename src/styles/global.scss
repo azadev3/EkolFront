@@ -6,6 +6,13 @@
   box-sizing: border-box;
   font-family: 'Public Sans', sans-serif;
 }
+.ourworks-section .works .container-works .grid-works .navigation-description-content .description-content {
+  p {
+    line-height: 28px !important;
+    font-size: 17px !important;
+    color: #303030;
+  }
+}
 .home-page .services-section .services .swiper-slide .left p {
   color: white !important;
 }
@@ -1227,6 +1234,18 @@ $whitedarktwo: #8b9f9c;
 
   &.dark {
     background-color: $maindarkcolor;
+    .about-page .partner-section .partners .partners-container .pagination-button span {
+      min-width: 117px;
+      height: 48px;
+      @include flex();
+      background-color: #30b258;
+      color: white;
+      border: 1px solid transparent;
+      &:hover {
+      border: 1px solid #004238;
+        background-color: transparent;
+      }
+    }
     .blog-page-wrapper .blogs-section .blogs .container-blogs .pagination-button .formorebtn {
       background-color: #30b258;
       color: white;

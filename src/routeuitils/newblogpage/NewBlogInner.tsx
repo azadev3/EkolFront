@@ -16,6 +16,8 @@ import { SwiperDataForImagesNewBlog } from "../blog/BlogInnerContent";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import { DefaultMeta, MetaDataType } from "../../routes/Home";
+import { HelmetTag } from "../../main";
 
 type LastBlogType = {
   _id: number;
@@ -106,7 +108,7 @@ const NewBlogInner: React.FC = () => {
   //   return <span>{formattedDate}</span>;
   // };
 
-  const innerBlogItem = newBlogDatasInner?.find((_: BlogType, i: string) => i?.toString() === newblogtitle?.toString());
+  const innerBlogItem = newBlogDatasInner?.find((item: BlogType) => item._id === newblogtitle?.toString());
   //open fancybox images
   const [open, setOpen] = React.useState(false);
   const [currentImageIndex, setCurrentImageIndex] = React.useState<number | null>(null);
@@ -130,6 +132,21 @@ const NewBlogInner: React.FC = () => {
       return item?.selected_new_blog === innerBlogItem?._id;
     });
 
+
+  const { data: MetaData } = useQuery<MetaDataType>({
+    queryKey: ['meta_bloqlardaxili_key', selectedlang],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/meta-tags-bloqlardaxili-front`, {
+        headers: {
+          "Accept-Language": selectedlang,
+        }
+      });
+      return res.data[0];
+    }
+  });
+  const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
+
+
   if (blogLoading || lastBlogsLoading) {
     return <Loader />;
   }
@@ -140,6 +157,14 @@ const NewBlogInner: React.FC = () => {
 
   return (
     <section className="blog-inner-content-section">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{hasMeta?.meta_title}</title>
+        <meta name="title" content={hasMeta?.meta_title} />
+        <meta name="description" content={hasMeta?.meta_description} />
+        <meta name="generator" content={hasMeta?.meta_generator} />
+        <meta name="author" content={hasMeta?.meta_author} />
+      </HelmetTag>
       <div className="blogs-inner">
         <Breadcrumb blogTitle={innerBlogItem?.title} prevpage={translations["nav_anasehife"]} uri={translations["newblog_title"]} />
 
@@ -211,9 +236,9 @@ const NewBlogInner: React.FC = () => {
                 <h5>{translations['en_son_xeberler']}</h5>
                 <div className="grid-last-blog">
                   {sortedLastBlog && sortedLastBlog?.length > 0
-                    ? sortedLastBlog?.map((item: LastBlogType, i: number) => (
+                    ? sortedLastBlog?.map((item: LastBlogType) => (
                       <Link
-                        to={`/bloq/en-son-bloqlar/${i?.toString()}`}
+                        to={`/bloq/en-son-bloqlar/${item._id}`}
                         key={uuidv4()}
                         className="item-last-blog">
                         <div className="title">{item.title}</div>

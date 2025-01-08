@@ -17,6 +17,7 @@ import "swiper/css/pagination";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import { HelmetTag } from "../../main";
 // import moment from "moment";
 
 export type SwiperDataForImages = {
@@ -135,7 +136,7 @@ const BlogInnerContent: React.FC = () => {
     }
   }, [innerBlogItem?._id, blogDatas, location?.pathname]);
 
-  
+
   const getBlogView = async (id: string) => {
     try {
       const res = await axios.get(`${Baseurl}/blog-viewer/${id}`);
@@ -164,6 +165,13 @@ const BlogInnerContent: React.FC = () => {
 
   return (
     <section className="blog-inner-content-section">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{innerBlogItem?.title || ''}</title>
+        <meta name="title" content={innerBlogItem?.title} />
+        <meta name="description" content={innerBlogItem?.description} />
+        <meta name="generator" content={innerBlogItem?.slogan} />
+      </HelmetTag>
       <div className="blogs-inner">
         <Breadcrumb blogTitle={innerBlogItem?.title} prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_xeberler"]} />
 

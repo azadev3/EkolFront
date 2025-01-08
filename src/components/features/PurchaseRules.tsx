@@ -6,6 +6,8 @@ import { useRecoilValue } from "recoil";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { Baseurl } from "../../Baseurl";
 import axios from "axios";
+import { DefaultMeta, MetaDataType } from "../../routes/Home";
+import { HelmetTag } from "../../main";
 
 type PurchaseRulesDataType = {
   _id: string;
@@ -42,8 +44,8 @@ const PurchaseRules: React.FC = () => {
     const findUrl: any =
       purchRuleData && purchRuleData?.length > 0
         ? purchRuleData?.find((item: PurchaseRulesDataType) => {
-            return _id === item?._id ? item?.pdf : "";
-          })
+          return _id === item?._id ? item?.pdf : "";
+        })
         : "";
     const url: any = findUrl ? `https://ekol-server-1.onrender.com${findUrl?.pdf}` : "";
     const link = document.createElement("a");
@@ -52,8 +54,30 @@ const PurchaseRules: React.FC = () => {
     link.click();
   };
 
+  const { data: MetaData } = useQuery<MetaDataType>({
+    queryKey: ['meta_satinalmaqaydalari_key', selectedLang],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/meta-tags-satinalmaqaydalari-front`, {
+        headers: {
+          "Accept-Language": selectedLang,
+        }
+      });
+      return res.data[0];
+    }
+  });
+  const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
+
+
   return (
     <main className="purch-rules-wrapper">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{hasMeta?.meta_title}</title>
+        <meta name="title" content={hasMeta?.meta_title} />
+        <meta name="description" content={hasMeta?.meta_description} />
+        <meta name="generator" content={hasMeta?.meta_generator} />
+        <meta name="author" content={hasMeta?.meta_author} />
+      </HelmetTag>
       <section className="purch-rules-section">
         <div className="purch-rules">
           <Breadcrumb
@@ -66,13 +90,13 @@ const PurchaseRules: React.FC = () => {
 
             {purchRuleData && purchRuleData?.length > 0
               ? purchRuleData?.map((data: PurchaseRulesDataType) => (
-                  <div key={data?._id} className="centered-section">
-                    <h3>{data?.title}</h3>
-                    <button className="download-pdf-btn" onClick={() => handleDownloadPdf(data?._id)}>
-                      {translations["pdf_yukle_title"]}
-                    </button>
-                  </div>
-                ))
+                <div key={data?._id} className="centered-section">
+                  <h3>{data?.title}</h3>
+                  <button className="download-pdf-btn" onClick={() => handleDownloadPdf(data?._id)}>
+                    {translations["pdf_yukle_title"]}
+                  </button>
+                </div>
+              ))
               : ""}
           </div>
         </div>

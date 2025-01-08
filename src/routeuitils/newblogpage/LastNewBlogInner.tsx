@@ -13,6 +13,7 @@ import { SwiperDataForImagesNewBlog } from "../blog/BlogInnerContent";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import { HelmetTag } from "../../main";
 
 type LastBlogType = {
   _id?: string;
@@ -63,22 +64,22 @@ const LastNewBlogInner: React.FC = () => {
     }
   };
 
-  const lastBlogItem = lastBlogs?.find((_: LastBlogType, i) => i.toString() === lastnewblogtitle?.toString());
+  const lastBlogItem = lastBlogs?.find((item: LastBlogType) => item._id === lastnewblogtitle?.toString());
 
   React.useEffect(() => {
     fetchLastBlogs();
   }, [selectedlang]);
 
   const sortedLastBlog = lastBlogs
-  ? [...lastBlogs].sort((a: LastBlogType, b: LastBlogType) => {
-    const parseDate = (dateString: string) => {
-      const [day, month, year] = dateString.split('.').map(Number);
-      return new Date(year, month - 1, day).getTime();
-    };
+    ? [...lastBlogs].sort((a: LastBlogType, b: LastBlogType) => {
+      const parseDate = (dateString: string) => {
+        const [day, month, year] = dateString.split('.').map(Number);
+        return new Date(year, month - 1, day).getTime();
+      };
 
-    return parseDate(b.created_at) - parseDate(a.created_at);
-  })
-  : [];
+      return parseDate(b.created_at) - parseDate(a.created_at);
+    })
+    : [];
 
   const navigate = useNavigate();
   const { translations } = useTranslate();
@@ -109,6 +110,13 @@ const LastNewBlogInner: React.FC = () => {
 
   return (
     <section className="last-blog-inner-content-section">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{lastBlogItem?.title || ''}</title>
+        <meta name="title" content={lastBlogItem?.title || ''} />
+        <meta name="description" content={lastBlogItem?.description || ''} />
+        <meta name="generator" content={lastBlogItem?.title || ''} />
+      </HelmetTag>
       <div className="blogs-inner">
         <Breadcrumb blogTitle={lastBlogItem?.title} prevpage={translations["nav_anasehife"]} uri={translations["newblog_title"]} />
 
@@ -178,8 +186,8 @@ const LastNewBlogInner: React.FC = () => {
                 <h5>{translations['en_son_xeberler']}</h5>
                 <div className="grid-last-blog">
                   {sortedLastBlog && sortedLastBlog?.length > 0
-                    ? sortedLastBlog?.map((item: LastBlogType, i) => (
-                      <Link to={`/bloq/en-son-bloqlar/${i?.toString()}`} key={item?._id} className="item-last-blog">
+                    ? sortedLastBlog?.map((item: LastBlogType) => (
+                      <Link to={`/bloq/en-son-bloqlar/${item._id}`} key={item?._id} className="item-last-blog">
                         <div className="title">{item?.title}</div>
 
                         <div className="time-and-icon">

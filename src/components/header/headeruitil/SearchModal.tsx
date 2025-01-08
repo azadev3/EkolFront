@@ -16,7 +16,6 @@ import { SelectedToolState, ToolsInnerInterface } from '../../../routeuitils/act
 import { ServicesContentType } from '../../../routeuitils/activity/ServicesActivity';
 import { PurchAnnInterface } from '../../features/PurchaseAnnouncements';
 import { BlogType } from '../../../routeuitils/home/BlogSection';
-import DOMPurify from 'dompurify';
 
 const SearchModal = () => {
   const { translations } = useTranslate();
@@ -78,12 +77,89 @@ const SearchModal = () => {
     }
   };
 
+  const [showOurworkshome, setShowourworkshome] = React.useState<boolean>(false);
+  const handleCheckOurworksHome = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-ourworkshome-front`);
+      if (res.data) {
+        setShowourworkshome(res.data?.showed);
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [showAbout, setShowAbout] = React.useState<boolean>(false);
+  const handleCheckAbout = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-about-front`);
+      if (res.data) {
+        setShowAbout(res.data?.showed);
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [showActivity, setShowActivity] = React.useState<boolean>(false);
+  const handleCheckActivity = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-activity-front`);
+      if (res.data) {
+        setShowActivity(res.data?.showed);
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [showMedia, setShowMedia] = React.useState<boolean>(false);
+  const handleCheckMedia = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-media-front`);
+      if (res.data) {
+        setShowMedia(res.data?.showed);
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  const [showContact, setShowContact] = React.useState<boolean>(false);
+  const handleCheckContact = async () => {
+    try {
+      const res = await axios.get(`${Baseurl}/hidden-contact-front`);
+      if (res.data) {
+        setShowContact(res.data?.showed);
+      } else {
+        console.log(res.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   React.useEffect(() => {
     handleCheck();
     handleCheckPurchase();
     handleCheckCarier();
     handleCheckSocialLife();
-  }, [showRehberlik, showPurchase, showCarier, showSocialLife]);
+    handleCheckOurworksHome();
+    handleCheckAbout();
+    handleCheckActivity();
+    handleCheckMedia();
+    handleCheckContact();
+  }, [showRehberlik, showPurchase, showCarier, showSocialLife, showOurworkshome, showAbout, showActivity, showMedia, showContact]);
 
   const HeaderItems: HeaderElementType[] = [
     { id: 1, title: `${translations['nav_anasehife']}`, to: '/' },
@@ -119,7 +195,7 @@ const SearchModal = () => {
           to: '/about/partners',
         },
         {
-          id: 7,
+          id: 777,
           title: `${translations['nav_haqqimizda_ourworks']}`,
           to: '/about/workwedo',
         },
@@ -178,7 +254,7 @@ const SearchModal = () => {
       ],
     },
     {
-      id: 5,
+      id: 555,
       title: 'Media',
       to: '/',
       icon: <FaAngleDown className="down-icon" />,
@@ -205,7 +281,7 @@ const SearchModal = () => {
         },
       ],
     },
-    { id: 6, title: `${translations['nav_haqqimizda_elaqe']}`, to: '/elaqe' },
+    { id: 666, title: `${translations['nav_haqqimizda_elaqe']}`, to: '/elaqe' },
   ];
 
   const [searchModal, setSearchModal] = useRecoilState(searchModalState);
@@ -500,6 +576,58 @@ const SearchModal = () => {
                           {getHighlightedText(sub?.title, searchQuery)}
                         </Link>
                       )
+                    } else if (item.id === 222 && !showAbout) {
+                      return (
+                        <Link
+                          style={{ display: 'none' }}
+                          className="link-el"
+                          to={sub?.to || ''}
+                          onClick={() => {
+                            setSearchModal(false);
+                          }}
+                          key={sub?.id}>
+                          {getHighlightedText(sub?.title, searchQuery)}
+                        </Link>
+                      )
+                    } else if (item.id === 333 && !showActivity) {
+                      return (
+                        <Link
+                          style={{ display: 'none' }}
+                          className="link-el"
+                          to={sub?.to || ''}
+                          onClick={() => {
+                            setSearchModal(false);
+                          }}
+                          key={sub?.id}>
+                          {getHighlightedText(sub?.title, searchQuery)}
+                        </Link>
+                      )
+                    } else if (item?.id === 555 && !showMedia) {
+                      return (
+                        <Link
+                          style={{ display: 'none' }}
+                          className="link-el"
+                          to={sub?.to || ''}
+                          onClick={() => {
+                            setSearchModal(false);
+                          }}
+                          key={sub?.id}>
+                          {getHighlightedText(sub?.title, searchQuery)}
+                        </Link>
+                      )
+                    } else if (item?.id === 666 && !showContact) {
+                      return (
+                        <Link
+                          style={{ display: 'none' }}
+                          className="link-el"
+                          to={sub?.to || ''}
+                          onClick={() => {
+                            setSearchModal(false);
+                          }}
+                          key={sub?.id}>
+                          {getHighlightedText(sub?.title, searchQuery)}
+                        </Link>
+                      )
                     } else if (sub?.id === 888 && !showCarier) {
                       return (
                         <Link
@@ -526,6 +654,19 @@ const SearchModal = () => {
                           {getHighlightedText(sub?.title, searchQuery)}
                         </Link>
                       )
+                    } else if (sub?.id === 777 && !showOurworkshome) {
+                      return (
+                        <Link
+                          style={{ display: 'none' }}
+                          className="link-el"
+                          to={sub?.to || ''}
+                          onClick={() => {
+                            setSearchModal(false);
+                          }}
+                          key={sub?.id}>
+                          {getHighlightedText(sub?.title, searchQuery)}
+                        </Link>
+                      );
                     } else {
                       return (
                         <Link
@@ -604,7 +745,6 @@ const SearchModal = () => {
                       }}
                       key={item?._id}>
                       <p>{getHighlightedText(item?.title, searchQuery)}</p>
-                      <div style={{ padding: '36px 24px' }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }} />
                     </div>
                   ))
                   : ''}

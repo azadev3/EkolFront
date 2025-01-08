@@ -29,6 +29,7 @@ const CarierSection: React.FC = () => {
     setSelectedItem(i);
   };
 
+
   return (
     <section className="carier-section">
       <div className="carier">

@@ -12,6 +12,8 @@ import { Baseurl } from "../../Baseurl";
 import Loader from "../../Loader";
 import DOMPurify from "dompurify";
 import { useTranslate } from "../../context/TranslateContext";
+import { DefaultMeta, MetaDataType } from "../../routes/Home";
+import { HelmetTag } from "../../main";
 
 type SocialLifeCarouselDataType = {
   _id: string;
@@ -59,8 +61,32 @@ const SocialLife: React.FC = () => {
 
   const { translations } = useTranslate();
 
+
+  const { data: MetaData } = useQuery<MetaDataType>({
+    queryKey: ['meta_sociallife_key', selectedLang],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/meta-tags-sosialheyat-front`, {
+        headers: {
+          "Accept-Language": selectedLang,
+        }
+      });
+      return res.data[0];
+    }
+  });
+
+  const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
+
+
   return (
     <section className="social-life-section">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{hasMeta?.meta_title}</title>
+        <meta name="title" content={hasMeta?.meta_title} />
+        <meta name="description" content={hasMeta?.meta_description} />
+        <meta name="generator" content={hasMeta?.meta_generator} />
+        <meta name="author" content={hasMeta?.meta_author} />
+      </HelmetTag>
       <div className="sociallife">
         <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_sosialheyat']} />
 
@@ -77,15 +103,15 @@ const SocialLife: React.FC = () => {
                 className="mySwiper">
                 {hasCarouselData
                   ? SocialLifeCarouselData.map((item: SocialLifeCarouselDataType, i: number) =>
-                      isLoading ? (
-                        <Loader />
-                      ) : (
-                        <SwiperSlide key={item._id}>
-                          <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${i}-image`} title={item?.title} />
-                          <h5>{item?.title}</h5>
-                        </SwiperSlide>
-                      )
+                    isLoading ? (
+                      <Loader />
+                    ) : (
+                      <SwiperSlide key={item._id}>
+                        <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${i}-image`} title={item?.title} />
+                        <h5>{item?.title}</h5>
+                      </SwiperSlide>
                     )
+                  )
                   : ""}
               </Swiper>
             </div>
@@ -96,12 +122,12 @@ const SocialLife: React.FC = () => {
               <div className="spor">
                 {hasSocialLifeData
                   ? socialLifeData?.map((item: SocialLifeDescriptionType) => (
-                      <div
-                        className="descriptions-spor"
-                        key={item?._id}
-                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
-                      />
-                    ))
+                    <div
+                      className="descriptions-spor"
+                      key={item?._id}
+                      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
+                    />
+                  ))
                   : ""}
               </div>
             )}

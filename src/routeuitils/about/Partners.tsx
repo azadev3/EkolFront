@@ -5,6 +5,9 @@ import { SelectedLanguageState } from "../../recoil/Atoms";
 import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import { useTranslate } from "../../context/TranslateContext";
+import { DefaultMeta, MetaDataType } from "../../routes/Home";
+import { useQuery } from "@tanstack/react-query";
+import { HelmetTag } from "../../main";
 
 type PartnersType = {
   _id: string;
@@ -51,8 +54,32 @@ const Partners: React.FC = () => {
 
   const { translations } = useTranslate();
 
+  const { data: MetaData } = useQuery<MetaDataType>({
+    queryKey: ['meta_partnyorlar_key', selectedlang],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/meta-tags-partnyorlar-front`, {
+        headers: {
+          "Accept-Language": selectedlang,
+        }
+      });
+      return res.data[0];
+    }
+  });
+  
+  const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
+
+
+
   return (
     <section className="partner-section">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{hasMeta?.meta_title}</title>
+        <meta name="title" content={hasMeta?.meta_title} />
+        <meta name="description" content={hasMeta?.meta_description} />
+        <meta name="generator" content={hasMeta?.meta_generator} />
+        <meta name="author" content={hasMeta?.meta_author} />
+      </HelmetTag>
       <div className="partners">
         <Breadcrumb prevpage={translations['nav_anasehife']} uri={translations['nav_haqqimizda_partnyorlar']} />
 
@@ -64,7 +91,7 @@ const Partners: React.FC = () => {
               displayedPartners.map((item: PartnersType, i: number) => (
                 <div key={i} className="partners-item">
                   <div className="logo-wrap">
-                  <img src={`https://ekol-server-1.onrender.com${item?.logo}`} alt={`${i}-logo`} title={item?.title} />
+                    <img src={`https://ekol-server-1.onrender.com${item?.logo}`} alt={`${i}-logo`} title={item?.title} />
                   </div>
                   <span>{item?.title}</span>
                 </div>

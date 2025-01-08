@@ -11,6 +11,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslate } from "../../context/TranslateContext";
 import "swiper/css";
 import { toast } from "react-toastify";
+import { DefaultMeta, MetaDataType } from "../../routes/Home";
+import { HelmetTag } from "../../main";
 
 interface LocationInterface {
   _id: string;
@@ -88,8 +90,31 @@ const ContactForm: React.FC = () => {
     }
   };
 
+
+  const { data: MetaData } = useQuery<MetaDataType>({
+    queryKey: ['meta_contact_key', selectedLanguage],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/meta-tags-elaqe-front`, {
+        headers: {
+          "Accept-Language": selectedLanguage,
+        }
+      });
+      return res.data[0];
+    }
+  });
+  const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
+
+
   return (
     <section className="contact-section">
+      <HelmetTag>
+        <meta charSet="utf-8" />
+        <title>{hasMeta?.meta_title}</title>
+        <meta name="title" content={hasMeta?.meta_title} />
+        <meta name="description" content={hasMeta?.meta_description} />
+        <meta name="generator" content={hasMeta?.meta_generator} />
+        <meta name="author" content={hasMeta?.meta_author} />
+      </HelmetTag>
       <div className="contact">
         <Breadcrumb prevpage={translations["nav_anasehife"]} uri={translations["nav_haqqimizda_elaqe"]} />
 

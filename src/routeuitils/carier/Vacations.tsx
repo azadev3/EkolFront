@@ -10,6 +10,8 @@ import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import Loader from "../../Loader";
 import { useTranslate } from "../../context/TranslateContext";
+import { DefaultMeta, MetaDataType } from "../../routes/Home";
+import { HelmetTag } from "../../main";
 export type VacationsType = {
   id: string;
   vacationName: string;
@@ -414,19 +416,19 @@ const Vacations: React.FC = () => {
       });
       if (response.data) {
         const newVacs = [...response.data];
-        
-        const lastVac = newVacs.pop(); 
+
+        const lastVac = newVacs.pop();
         if (lastVac) {
-          newVacs.unshift(lastVac); 
+          newVacs.unshift(lastVac);
         }
-        
+
         return newVacs;
       }
       return response.data;
     },
     staleTime: 1000000,
   });
-  
+
   //pagination
   const [paginate, setPaginate] = React.useState<number>(12);
 
@@ -461,13 +463,27 @@ const Vacations: React.FC = () => {
   const filteredSearchItems =
     vacationData && vacationData?.length > 0
       ? vacationData.filter((item: Vacations) => {
-          return item?.title?.toLowerCase()?.includes(searchTerm?.toLowerCase());
-        })
+        return item?.title?.toLowerCase()?.includes(searchTerm?.toLowerCase());
+      })
       : [];
 
   const navigate = useNavigate();
 
-  const { translations } = useTranslate(); 
+  const { translations } = useTranslate();
+
+  const { data: MetaData } = useQuery<MetaDataType>({
+    queryKey: ['meta_karyeravakansiyalar_key', selectedlang],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/meta-tags-karyeraimkanlarivakansiyalar-front`, {
+        headers: {
+          "Accept-Language": selectedlang,
+        }
+      });
+      return res.data[0];
+    }
+  });
+  const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
+
 
   return (
     <React.Fragment>
@@ -475,6 +491,14 @@ const Vacations: React.FC = () => {
         <Loader />
       ) : (
         <section className="vacations">
+          <HelmetTag>
+            <meta charSet="utf-8" />
+            <title>{hasMeta?.meta_title}</title>
+            <meta name="title" content={hasMeta?.meta_title} />
+            <meta name="description" content={hasMeta?.meta_description} />
+            <meta name="generator" content={hasMeta?.meta_generator} />
+            <meta name="author" content={hasMeta?.meta_author} />
+          </HelmetTag>
           <div className="search-area">
             <div className="search-input">
               <IoIosSearch className="search-icon" />
@@ -509,16 +533,16 @@ const Vacations: React.FC = () => {
               <React.Fragment>
                 {vacationData && vacationData?.length > 0
                   ? vacationData.slice(0, paginate).map((item: Vacations) => (
-                      <article key={uuidv4()} className="vacation-item">
-                        <h3>{item?.title}</h3>
-                        <div className="time-and-icon">
-                          <span>{item?.startDate}</span>
-                          <div className="icon-right">
-                            <img src="/rightt.png" alt="go-to-vacation" />
-                          </div>
+                    <article key={uuidv4()} className="vacation-item">
+                      <h3>{item?.title}</h3>
+                      <div className="time-and-icon">
+                        <span>{item?.startDate}</span>
+                        <div className="icon-right">
+                          <img src="/rightt.png" alt="go-to-vacation" />
                         </div>
-                      </article>
-                    ))
+                      </div>
+                    </article>
+                  ))
                   : ""}
               </React.Fragment>
             )}
