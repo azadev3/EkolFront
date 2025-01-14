@@ -3,8 +3,12 @@ import React, { ChangeEvent, FormEvent } from 'react';
 import { C, TypeOfRequest, TypeOfRequestData } from './FormLegal';
 import { Baseurl } from '../../../Baseurl';
 import axios from 'axios';
+import { useTranslate } from '../../../context/TranslateContext';
 
 const FormNatural: React.FC = () => {
+
+  const { translations } = useTranslate();
+
  const [countryData, setCountryData] = React.useState<C[]>([]);
 
  const getData = async () => {
@@ -150,20 +154,21 @@ const FormNatural: React.FC = () => {
   handleGetStages();
  }, []);
 
+ 
  return (
   <form className="form-natural" acceptCharset="UTF-8" onSubmit={handleSubmit}>
    <section className="company-and-voen">
     {/* voen */}
     <div className="input-field">
      <label htmlFor="voen">
-      VÖEN <span>*</span>
+      {translations['voen']} <span>*</span>
      </label>
      <input
       onChange={(e: ChangeEvent<HTMLInputElement>) => setVoen(e.target.value)}
       required
       type="text"
       name="voen"
-      placeholder="VÖEN"
+      placeholder={translations['voen']}
       id="voen"
      />
     </div>
@@ -173,7 +178,7 @@ const FormNatural: React.FC = () => {
     {/* name */}
     <div className="input-field">
      <label htmlFor="name">
-      Müraciət edənin adı
+      {translations['muraciet_edenin_adi']}
       <span>*</span>
      </label>
      <input
@@ -181,14 +186,14 @@ const FormNatural: React.FC = () => {
       type="text"
       onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
       name="name"
-      placeholder="Müraciət edənin adı"
+      placeholder={translations['muraciet_edenin_adi']}
       id="name"
      />
     </div>
     {/* surname */}
     <div className="input-field">
      <label htmlFor="surname">
-      Müraciət edənin soyadı
+     {translations['muraciet_edenin_soyadi']}
       <span>*</span>
      </label>
      <input
@@ -196,7 +201,7 @@ const FormNatural: React.FC = () => {
       type="text"
       name="surname"
       onChange={(e: ChangeEvent<HTMLInputElement>) => setSurname(e.target.value)}
-      placeholder="Müraciət edənin soyadı"
+      placeholder={translations['muraciet_edenin_soyadi']}
       id="surname"
      />
     </div>
@@ -206,14 +211,14 @@ const FormNatural: React.FC = () => {
     {/* mobile number */}
     <div className="input-field">
      <label htmlFor="mobiletel">
-      Mobil telefon nömrəsi
+      {translations['mobil_telefon_nomresi']}
       <span>*</span>
      </label>
      <input
       required
       type="number"
       name="mobiletel"
-      placeholder="Mobil telefon nömrəsi"
+      placeholder={translations['mobil_telefon_nomresi']}
       id="mobiletel"
       onChange={(e: ChangeEvent<HTMLInputElement>) => setMobTel(e.target.value)}
      />
@@ -224,14 +229,14 @@ const FormNatural: React.FC = () => {
     {/* email */}
     <div className="input-field">
      <label htmlFor="email">
-      E-poçt
+      {translations['e_poct']}
       <span>*</span>
      </label>
      <input
       required
       type="text"
       name="email"
-      placeholder="E-poçt"
+      placeholder={translations['e_poct']}
       id="email"
       onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
      />
@@ -242,7 +247,7 @@ const FormNatural: React.FC = () => {
     {/* country */}
     <div className="input-field">
      <label htmlFor="country">
-      Ölkə
+      {translations['olke']}
       <span>*</span>
      </label>
 
@@ -251,7 +256,7 @@ const FormNatural: React.FC = () => {
       id="country"
       value={country}
       onChange={(e: ChangeEvent<HTMLSelectElement>) => setCountry(e.target.value)}>
-      <option value="">Bir ölkə seçin</option>
+      <option value="">{translations['bir_olke_secin']}</option>
       {countryData && countryData?.length > 0 ? (
        countryData?.map((data: C) =>
         data.countries && data.countries?.length > 0
@@ -271,7 +276,7 @@ const FormNatural: React.FC = () => {
 
    <section className="location">
     <label htmlFor="location">
-     Ünvan <span>*</span>
+     {translations['unvan']} <span>*</span>
     </label>
     <textarea
      name="location"
@@ -281,14 +286,14 @@ const FormNatural: React.FC = () => {
 
    <section className="enterprise">
     <label htmlFor="enterprise">
-     Müəssisə <span>*</span>
+     {translations['muessise']} <span>*</span>
     </label>
     <select
      name="enterprise"
      id="enterprise"
      onChange={(e: ChangeEvent<HTMLSelectElement>) => setEnterpriseName(e.target.value)}>
      <option value="">
-      Müəssisə <span>*</span>
+      {translations['muessise']} <span>*</span>
      </option>
      {enterprises && enterprises?.name?.length > 0 ? (
       enterprises?.name?.map((names, i: number) => (
@@ -297,7 +302,7 @@ const FormNatural: React.FC = () => {
        </option>
       ))
      ) : (
-      <option value="">Müraciət növü yoxdur</option>
+      <option value="">{translations['muraciet_novu_yoxdur']}</option>
      )}
     </select>
    </section>
@@ -306,7 +311,7 @@ const FormNatural: React.FC = () => {
     {/* enterprise name or phone */}
     <div className="input-field">
      <label htmlFor="enterpriseNameOrPhone">
-      Müsabiqənin adı və ya nömrəsi
+      {translations['musabiqenin_adi_veya_nomresi']}
       <span>*</span>
      </label>
      <input
@@ -314,7 +319,7 @@ const FormNatural: React.FC = () => {
       required
       type="text"
       name="enterpriseNameOrPhone"
-      placeholder="Müsabiqənin adı və ya nömrəsi"
+      placeholder={translations['musabiqenin_adi_veya_nomresi']}
       id="enterpriseNameOrPhone"
      />
     </div>
@@ -322,14 +327,14 @@ const FormNatural: React.FC = () => {
     {/* enterprise part */}
     <div className="input-field">
      <label htmlFor="enterprisepart">
-      Müsabiqə mərhələsi
+      {translations['musabiqe_merhelesi']}
       <span>*</span>
      </label>
      <select
       name="enterprisepart"
       id="enterprisepart"
       onChange={(e: ChangeEvent<HTMLSelectElement>) => setEnterprisePart(e.target.value)}>
-      <option value="">Müsabiqə mərhələsi seçin</option>
+      <option value="">{translations['musabiqe_merhelesi']}</option>
       {stages && stages?.name?.length > 0 ? (
        stages?.name?.map((names, i: number) => (
         <option value={names?.value} key={i + 1}>
@@ -345,14 +350,14 @@ const FormNatural: React.FC = () => {
 
    <section className="typeofrequest">
     <label htmlFor="typeofrequest">
-     Müraciətin növü
+     {translations['muracietin_novu']}
      <span>*</span>
     </label>
     <select
      name="typeofrequest"
      id="typeofrequest"
      onChange={(e: ChangeEvent<HTMLSelectElement>) => setTypeOfRequest(e.target.value)}>
-     <option value="">Müraciətin növünü seçin</option>
+     <option value="">{translations['muracietin_novunu_secin']}</option>
      {TypeOfRequestData && TypeOfRequestData?.length > 0 ? (
       TypeOfRequestData?.map((reqtype: TypeOfRequest) => (
        <option value={reqtype?.request} key={reqtype?.id}>
@@ -367,16 +372,16 @@ const FormNatural: React.FC = () => {
 
    <section className="request-pdf">
     <label htmlFor="requestpdf">
-     Müraciətlə bağlı sənəd(lər) <span>*</span>
+     {translations['muraciet_senedleri']} <span>*</span>
     </label>
     <div className="input-field">
-     <input onChange={handleFileChange} type="file" accept=".pdf, .doc, .docx" name="requestpdf" id="requestpdf" />
+     <input onChange={handleFileChange} type="file" name="requestpdf" id="requestpdf" />
     </div>
    </section>
 
    <section className="message" style={{ marginTop: '24px' }}>
     <label htmlFor="message">
-     Mesaj <span>*</span>
+     {translations['message']} <span>*</span>
     </label>
     <textarea
      name="message"
@@ -388,7 +393,7 @@ const FormNatural: React.FC = () => {
         <ReCAPTCHA sitekey={RECAPTCHA_SITE_KEY} onChange={handleCaptchaChange} />
       </div> */}
 
-   <button type="submit">Göndər</button>
+   <button type="submit">{translations['gonder_btn']}</button>
   </form>
  );
 };

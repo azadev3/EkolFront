@@ -6,6 +6,26 @@
   box-sizing: border-box;
   font-family: 'Public Sans', sans-serif;
 }
+
+.vacations-inner-section .vacationsinner .container-inner-vac .vacation-top-description .texts .titles .dot {
+  min-width: 6px !important;
+  min-height: 6px !important;
+}
+.vacations-inner-section .vacationsinner .container-inner-vac .vacation-top-description .texts {
+  width: 100% !important;
+}
+.vacations-inner-section .vacationsinner .container-inner-vac .vacation-top-description .texts .titles {
+  width: 100% !important;
+}
+.vacations-inner-section .vacationsinner .container-inner-vac .vacation-top-description .texts .titles .title {
+  overflow: unset !important;
+}
+.dynamic-page-wrapper .page-section-dynamic .page-route .container-page .image-area {
+  height: 600px !important;
+  img {
+    object-fit: fill !important;
+  }
+}
 .ourworks-section .works .container-works .grid-works .navigation-description-content .description-content {
   p {
     line-height: 28px !important;

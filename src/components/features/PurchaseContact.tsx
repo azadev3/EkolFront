@@ -84,12 +84,12 @@ const PurchaseContact: React.FC = () => {
                     value="legal"
                     defaultChecked
                   />
-                  <label htmlFor="legal">Hüquqi şəxs</label>
+                  <label htmlFor="legal">{translations['huquqi_sexs']}</label>
                 </div>
 
                 <div className="natural">
                   <input onChange={handleRadio} type="radio" id="natural" name="personType" value="natural" />
-                  <label htmlFor="natural">Fiziki şəxs</label>
+                  <label htmlFor="natural">{translations['fiziki_sexs']}</label>
                 </div>
               </div>
 

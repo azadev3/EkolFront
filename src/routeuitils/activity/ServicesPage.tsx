@@ -78,32 +78,36 @@ const ServicesPage: React.FC = () => {
           <div className="container-servicespage">
             <h2>{translations["xidmetler_title"]}</h2>
             <div className="container-services-grid">
-              {hasServicesPageData &&
-                servicesPageData?.map((item: ServicesContentType, i: number) => (
-                  <div
-                    onClick={() => {
-                      navigate(`/fealiyyet/xidmetler/${item?._id}`);
-                      setSelectedServiceID(item?._id);
-                    }}
-                    className="item-service"
-                    key={i}>
-                    <div className="texts">
-                      <article className="top-text">
-                        <h2>{item.title}</h2>
-                        <p dangerouslySetInnerHTML={{ __html: item.description.slice(0, 200) }} />
-                      </article>
-                      <div className="btn-more">
-                        <span>{translations["etrafli_bax_button"]}</span>
-                        <img src="/righte.svg" alt="right" />
-                      </div>
-                    </div>
-
-                    <div className="image">
-                      <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${i}_image`} loading="lazy" />
-                    </div>
-                  </div>
-                ))}
+  {hasServicesPageData &&
+    servicesPageData
+      ?.slice() // Orijinal array'i korumak için kopya alınır
+      .reverse() // Veriyi tersine çevirir
+      .map((item: ServicesContentType, i: number) => (
+        <div
+          onClick={() => {
+            navigate(`/fealiyyet/xidmetler/${item?._id}`);
+            setSelectedServiceID(item?._id);
+          }}
+          className="item-service"
+          key={i}>
+          <div className="texts">
+            <article className="top-text">
+              <h2>{item.title}</h2>
+              <p dangerouslySetInnerHTML={{ __html: item.description.slice(0, 200) }} />
+            </article>
+            <div className="btn-more">
+              <span>{translations["etrafli_bax_button"]}</span>
+              <img src="/righte.svg" alt="right" />
             </div>
+          </div>
+
+          <div className="image">
+            <img src={`https://ekol-server-1.onrender.com${item?.image}`} alt={`${i}_image`} loading="lazy" />
+          </div>
+        </div>
+      ))}
+</div>
+
           </div>
         )}
       </div>

@@ -138,6 +138,21 @@ const OurWorks: React.FC = () => {
 
   const findedDynamicTitle = OurWorksInnerData && OurWorksInnerData?.length > 0 ? OurWorksInnerData?.find((data: OurWorksInnerInterface) => selectItem === data?._id)?.title : [];
 
+  const cleanHTML = (htmlContent: string) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlContent, 'text/html');
+
+    // Fazladan <p> etiketlerini kontrol et ve kaldır
+    const paragraphs = doc.querySelectorAll('p');
+    paragraphs.forEach((p) => {
+      if (!p.textContent?.trim()) {
+        p.remove(); // İçeriği boş olan <p> etiketlerini kaldır
+      }
+    });
+
+    return doc.body.innerHTML;
+  };
+
   return (
     <section className="ourworks-section">
       <HelmetTag>
@@ -186,7 +201,9 @@ const OurWorks: React.FC = () => {
                       <div
                         style={{ width: "100%" }}
                         className='description-content'
-                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(cleanHTML(item?.description || '')),
+                        }}
                         onClick={(e) => {
                           const img = e.target as HTMLImageElement;
                           if (img.tagName === 'IMG') {
