@@ -150,7 +150,7 @@ const Blogs: React.FC = () => {
                     <div className="show-more-btn">
                       <Link to={`/xeberler/${item?._id}`}
                         onClick={() => getBlogView(item?._id || '')}
-                      >Ətraflı oxu</Link>
+                      >{translations['etrafli_oxu']}</Link>
                     </div>
                   </div>
                 </article>

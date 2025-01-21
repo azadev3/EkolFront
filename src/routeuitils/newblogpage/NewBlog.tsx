@@ -127,7 +127,7 @@ const NewBlog: React.FC = () => {
                     <h4>{item?.title}</h4>
                     <p>{item?.slogan}</p>
                     <div className="show-more-btn">
-                      <Link to={`/bloq/${item._id}`}>Ətraflı oxu</Link>
+                      <Link to={`/bloq/${item._id}`}>{translations['etrafli_oxu']}</Link>
                     </div>
                   </div>
                 </article>
