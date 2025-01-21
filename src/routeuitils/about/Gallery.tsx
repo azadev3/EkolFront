@@ -22,22 +22,24 @@ type GalleryDropdownPageType = {
   title: string;
 };
 
-export const GallerySelectItem: GalleryPageDataType[] = [
-  {
-    id: 1,
-    title: "Şəkillər",
-    route: "/about/gallery/images",
-    image: "/imgone.svg",
-  },
-  {
-    id: 2,
-    title: "{translations['nav_haqqimizda_videos']}",
-    route: "/about/gallery/videos",
-    image: "/imgtwo.svg",
-  },
-];
-
 const Gallery: React.FC = () => {
+  const { translations } = useTranslate();
+
+  // @ts-ignore
+  const GallerySelectItem: GalleryPageDataType[] = [
+    {
+      id: 1,
+      title: translations['images_key'],
+      route: "/about/gallery/images",
+      image: "/imgone.svg",
+    },
+    {
+      id: 2,
+      title: translations['nav_haqqimizda_videos'],
+      route: "/about/gallery/videos",
+      image: "/imgtwo.svg",
+    },
+  ];
   const selectedlang = useRecoilValue(SelectedLanguageState);
 
   const { data: GalleryDropdownPageData } = useQuery({
@@ -53,7 +55,6 @@ const Gallery: React.FC = () => {
   });
 
 
-  const { translations } = useTranslate();
 
   return (
     <section className="gallery-section">
@@ -71,13 +72,13 @@ const Gallery: React.FC = () => {
                   to={i === 0 ? "/about/gallery/images" : i === 1 ? "/about/gallery/videos" : ""}
                   className="item-gallery-select"
                   key={uuidv4()}
-                  >
+                >
                   <img
                     src={`https://ekol-server-1.onrender.com${item?.backgroundImage}`}
                     alt={`${item?._id}-image`}
                     title={item?.title}
                   />
-                  <h3 className="title-select">{item?.title}</h3>
+                  <h3 className="title-select">{i === 0 ? translations['images_key'] : i === 1 ? translations['nav_haqqimizda_videos'] : item?.title}</h3>
                 </Link>
               ))}
           </div>
