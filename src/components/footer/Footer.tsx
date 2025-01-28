@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../styles/footer.scss';
 import { Link } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 import { useQuery } from '@tanstack/react-query';
 import { Baseurl } from '../../Baseurl';
 import axios from 'axios';
@@ -30,7 +29,6 @@ const Footer: React.FC = () => {
       const res = await axios.get(`${Baseurl}/hidden-rehberlik-front`);
       if (res.data) {
         setShowRehberlik(res.data?.showed);
-        console.log(res.data, 'slam');
       } else {
         console.log(res.status);
       }
@@ -170,7 +168,7 @@ const Footer: React.FC = () => {
       title: `${translations['nav_haqqimizda']}`,
       footerNavItems: [
         {
-          id: uuidv4(),
+          id: '101',
           title: `${translations['nav_haqqimizda_bizkimik']}`,
           to: '/about',
         },
@@ -180,17 +178,17 @@ const Footer: React.FC = () => {
           to: '/about/leadership',
         },
         {
-          id: uuidv4(),
+          id: '102',
           title: `${translations['nav_haqqimizda_struktur']}`,
           to: '/about/structure',
         },
         {
-          id: uuidv4(),
+          id: '103',
           title: `${translations['nav_haqqimizda_sertifikatlar']}`,
           to: '/about/certificates',
         },
         {
-          id: uuidv4(),
+          id: '104',
           title: `${translations['nav_haqqimizda_partnyorlar']}`,
           to: '/about/partners',
         },
@@ -199,7 +197,7 @@ const Footer: React.FC = () => {
           title: `${translations['nav_haqqimizda_ourworks']}`,
           to: '/about/workwedo',
         },
-        { id: uuidv4(), title: `${translations['nav_haqqimizda_hesabatlar']}`, to: '/hesabatlar/illikhesabatlar' },
+        { id: '105', title: `${translations['nav_haqqimizda_hesabatlar']}`, to: '/hesabatlar/illikhesabatlar' },
       ],
     },
     {
@@ -207,12 +205,12 @@ const Footer: React.FC = () => {
       title: `${translations['nav_haqqimizda_fealiyyet']}`,
       footerNavItems: [
         {
-          id: uuidv4(),
+          id: '106',
           title: `${translations['nav_haqqimizda_avadanliqlar']}`,
           to: '/fealiyyet/avadanliqlar',
         },
         {
-          id: uuidv4(),
+          id: '107',
           title: `${translations['nav_haqqimizda_xidmetler']}`,
           to: '/fealiyyet/xidmetler',
         },
@@ -222,9 +220,9 @@ const Footer: React.FC = () => {
       id: 's1s1s1',
       title: `${translations['nav_haqqimizda_satinalma']}`,
       footerNavItems: [
-        { id: uuidv4(), title: `${translations['nav_haqqimizda_satinalma_elanlari']}`, to: '/satinalmaelanlari' },
-        { id: uuidv4(), title: `${translations['nav_haqqimizda_satinalma_qaydalari']}`, to: '/satinalmaqaydalari' },
-        { id: uuidv4(), title: `${translations['nav_haqqimizda_satinalma_elaqe']}`, to: '/satinalma_elaqe' },
+        { id: '108', title: `${translations['nav_haqqimizda_satinalma_elanlari']}`, to: '/satinalmaelanlari' },
+        { id: '109', title: `${translations['nav_haqqimizda_satinalma_qaydalari']}`, to: '/satinalmaqaydalari' },
+        { id: '110', title: `${translations['nav_haqqimizda_satinalma_elaqe']}`, to: '/satinalma_elaqe' },
       ],
     },
     {
@@ -232,12 +230,12 @@ const Footer: React.FC = () => {
       title: `${translations['nav_media']}`,
       footerNavItems: [
         {
-          id: uuidv4(),
+          id: '111',
           title: `${translations['nav_haqqimizda_xeberler']}`,
           to: '/xeberler',
         },
         {
-          id: uuidv4(),
+          id: '112',
           title: `${translations['nav_haqqimizda_qalereya']}`,
           to: '/about/gallery',
         },
@@ -247,12 +245,12 @@ const Footer: React.FC = () => {
           to: '/fealiyyet/sosialheyat',
         },
         {
-          id: uuidv4(),
+          id: '113',
           title: `${translations['newblog_title']}`,
           to: '/bloq',
         },
         {
-          id: uuidv4(),
+          id: '114',
           title: `${translations['carbon_calculate']}`,
           to: '/carbon_calculate',
         },
@@ -264,7 +262,7 @@ const Footer: React.FC = () => {
       footerNavItems: [
         { id: '888', title: `${translations['nav_haqqimizda_cariers']}`, to: '/karyera' },
         {
-          id: uuidv4(),
+          id: '115',
           title: `${translations['nav_haqqimizda_elaqe']}`,
           to: '/elaqe',
         },
@@ -276,23 +274,23 @@ const Footer: React.FC = () => {
       ],
     },
     {
-      id: uuidv4(),
+      id: '116',
       title: `${translations['nav_bizi_izle']}`,
       footerNavItems: [
         {
-          id: uuidv4(),
+          id: '117',
           title: '/instawhite.svg',
         },
         {
-          id: uuidv4(),
+          id: '118',
           title: '/facewhite.svg',
         },
         {
-          id: uuidv4(),
+          id: '119',
           title: '/linkedinwhite.svg',
         },
         {
-          id: uuidv4(),
+          id: '120',
           title: '/wpwhite.svg',
         },
       ],
@@ -325,9 +323,9 @@ const Footer: React.FC = () => {
           <article className="left-logo-and-description">
             <Link to="/" className="logo-footer">
               {LogoIcon && LogoIcon.length > 0
-                ? LogoIcon.map((logo: Logo) => (
+                ? LogoIcon.map((logo: Logo, i: number) => (
                   <img
-                    key={logo._id}
+                    key={i}
                     src={`https://ekol-server-1.onrender.com${logo.logo}`}
                     alt={`${logo._id}-logo`}
                     title={logo._id}
@@ -346,21 +344,21 @@ const Footer: React.FC = () => {
                     style={{
                       display: item.id === 's1s1s1' && !showPurchase ? 'none' : item.id === '222' && !showAbout ? 'none' : item.id === '333' && !showActivity ? 'none' : item.id === '999' && !showMedia ? 'none' : item.id === '299' && !showContact ? 'none' : 'flex',
                     }}
-                    key={item.id}
+                    key={index}
                     className="footer-nav-link-content">
                     <h4 className="title-nav">{item.title}</h4>
                     <div className="links-nav">
                       {item?.footerNavItems?.map((links: FooterNavLinkType) => {
                         if (links?.id === '23456789' && !showRehberlik) {
                           return (
-                            <Link style={{ display: 'none' }} key={links.id} to={links.to ? links.to : ''} className="link">
+                            <Link style={{ display: 'none' }} key={links?.id} to={links.to ? links.to : ''} className="link">
                               {links.title}
                             </Link>
                           );
                         } else if (links?.id === 'procedur_id') {
                           return (
                             <div
-                              key={links.id}
+                              key={links?.id}
                               onClick={() => {
                                 window.open(links?.to, '_blank');
                               }}
@@ -369,14 +367,14 @@ const Footer: React.FC = () => {
                             </div>
                           );
                         } else if (links?.id === '888' && !showCarier) {
-                          return <></>;
+                          return;
                         } else if (links?.id === 'socialid' && !showSocialLife) {
-                          return <></>;
+                          return;
                         } else if (links?.id === '777' && !showOurworkshome) {
-                          return <></>;
+                          return;
                         } else {
                           return (
-                            <Link key={links.id} to={links.to ? links.to : ''} className="link">
+                            <Link key={links?.id} to={links.to ? links.to : ''} className="link">
                               {links.title}
                             </Link>
                           );
@@ -391,11 +389,11 @@ const Footer: React.FC = () => {
                     style={{
                       display: item.id === 's1s1s1' && !showPurchase ? 'none' : 'flex',
                     }}
-                    key={item.id}
+                    key={item?.id}
                     className="footer-nav-link-content">
                     <div className="links-nav-social">
-                      {SocialsData.map((links: SocialsType) => (
-                        <Link target="_blank" key={links?._id} to={links?.link} className="link-social">
+                      {SocialsData.map((links: SocialsType, i: number) => (
+                        <Link target="_blank" key={i} to={links?.link} className="link-social">
                           <img
                             src={`https://ekol-server-1.onrender.com${links?.icon}`}
                             alt={`${links._id}-icon`}

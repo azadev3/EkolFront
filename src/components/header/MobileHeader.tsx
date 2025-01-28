@@ -51,7 +51,6 @@ const MobileHeader: React.FC = () => {
       const res = await axios.get(`${Baseurl}/hidden-rehberlik-front`);
       if (res.data) {
         setShowRehberlik(res.data?.showed);
-        console.log(res.data, 'slam');
       } else {
         console.log(res.status);
       }
@@ -111,7 +110,6 @@ const MobileHeader: React.FC = () => {
       const res = await axios.get(`${Baseurl}/hidden-ourworkshome-front`);
       if (res.data) {
         setShowourworkshome(res.data?.showed);
-        console.log(res.data, 'slam');
       } else {
         console.log(res.status);
       }

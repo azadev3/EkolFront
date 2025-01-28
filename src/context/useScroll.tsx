@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const useScroll = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,7 +19,7 @@ const useScroll = () => {
     };
   }, []);
 
-  return isScrolled;
+  return { isScrolled };
 };
 
 export default useScroll;

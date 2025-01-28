@@ -7,6 +7,14 @@
   font-family: 'Public Sans', sans-serif;
 }
 
+.app .header-wrapper .header .right-header-area .share-media {
+  display: none !important;
+}
+
+.scrolled-header .header .right-header-area .share-media {
+  display: none !important;
+}
+
 .vacations-inner-section .vacationsinner .container-inner-vac .vacation-top-description .texts .titles .dot {
   min-width: 6px !important;
   min-height: 6px !important;
@@ -424,7 +432,7 @@
             justify-content: center;
             text-align: center;
             .down-icon {
-              font-size: 16px;
+              font-size: 15px;
               color: #fff;
               position: relative;
               top: 2px;
@@ -434,8 +442,9 @@
           .title-dropdown {
             text-decoration: none;
             color: #ffffff;
-            font-weight: 400;
-            font-size: 16px;
+            font-weight: 500;
+            font-size: 17px;
+            letter-spacing: 0.3px;
 
             &.active {
               color: #6eb6ab;
@@ -830,8 +839,9 @@
             z-index: 1;
             text-decoration: none;
             color: #141414;
-            font-weight: 400;
-            font-size: 16px;
+            font-weight: 500;
+            font-size: 17px;
+            letter-spacing: 0.3px;
 
             &.active {
               color: #0b4b41;
@@ -1196,9 +1206,9 @@
 @mixin HeroHeaderWrapperStyle {
   .header-wrapper {
     box-shadow: 4px 0px 12px 0px #0000000d;
-    background-color: rgba(255, 255, 255, 0.026) !important;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background-color: rgba(0, 0, 0, 0.363) !important;
+    backdrop-filter: blur(55px);
+    -webkit-backdrop-filter: blur(55px);
     width: 100%;
     position: absolute;
     z-index: 100;
@@ -3532,8 +3542,9 @@ $whitedarktwo: #8b9f9c;
           .title-dropdown {
             text-decoration: none;
             color: #ffffff;
-            font-weight: 400;
-            font-size: 16px;
+            font-weight: 500;
+            font-size: 17px;
+            letter-spacing: 0.3px;
 
             &.active {
               color: #6eb6ab;

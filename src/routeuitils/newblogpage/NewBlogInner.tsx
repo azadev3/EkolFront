@@ -96,7 +96,6 @@ const NewBlogInner: React.FC = () => {
     queryKey: ["socialData"],
     queryFn: async () => {
       const response = await axios.get(`${Baseurl}/socialsfront`);
-      console.log(response.data, "sociaaals");
       return response.data;
     },
     staleTime: 9000000,

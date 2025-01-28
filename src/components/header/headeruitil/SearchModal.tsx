@@ -26,7 +26,6 @@ const SearchModal = () => {
       const res = await axios.get(`${Baseurl}/hidden-rehberlik-front`);
       if (res.data) {
         setShowRehberlik(res.data?.showed);
-        console.log(res.data, 'slam');
       } else {
         console.log(res.status);
       }

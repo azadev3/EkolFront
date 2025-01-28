@@ -24,7 +24,7 @@ export const TranslateContextProvider: React.FC<{ children: React.ReactNode }> =
 
   const {
     data: translateData,
-    isLoading,
+    isLoading: translatesLoading,
     error,
   } = useQuery({
     queryKey: ["translateDataKey", selectedlang],
@@ -52,7 +52,7 @@ export const TranslateContextProvider: React.FC<{ children: React.ReactNode }> =
     retry: 2, 
   });
 
-  if (isLoading) return <Loader />;
+  if (translatesLoading) return <Loader />;
 
   if (error) {
     return (

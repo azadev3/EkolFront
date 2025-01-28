@@ -13,6 +13,7 @@ import MobileHeader from './MobileHeader';
 import ShareButton from './headeruitil/ShareButton';
 import DarkMode from './headeruitil/DarkMode';
 import { useDynamicPageData } from '../../UseDynamicPage';
+import Loader from '../../Loader';
 
 export interface Logo {
   _id: string;
@@ -46,7 +47,6 @@ const Header: React.FC = () => {
       const res = await axios.get(`${Baseurl}/hidden-rehberlik-front`);
       if (res.data) {
         setShowRehberlik(res.data?.showed);
-        console.log(res.data, 'slam');
       } else {
         console.log(res.status);
       }
@@ -103,7 +103,6 @@ const Header: React.FC = () => {
       const res = await axios.get(`${Baseurl}/hidden-ourworkshome-front`);
       if (res.data) {
         setShowourworkshome(res.data?.showed);
-        console.log(res.data, 'slam');
       } else {
         console.log(res.status);
       }
@@ -310,7 +309,7 @@ const Header: React.FC = () => {
   });
 
   // FETCH LOGO
-  const { data: LogoIcon } = useQuery({
+  const { data: LogoIcon, isLoading: logoLoading } = useQuery({
     queryKey: ['logoIconKey'],
     queryFn: async () => {
       const response = await axios.get(`${Baseurl}/logofront`, {
@@ -353,16 +352,19 @@ const Header: React.FC = () => {
       ) : (
         <div className="header">
           <Link to="/" className="logo-header">
-            {LogoIcon && LogoIcon.length > 0
-              ? LogoIcon.map((logo: Logo) => (
-                <img
-                  key={logo._id}
-                  src={`https://ekol-server-1.onrender.com${logo.logo}`}
-                  alt={`${logo._id}-logo`}
-                  title={logo._id}
-                />
-              ))
-              : ''}
+            {logoLoading ? (
+              <Loader />
+            ) : (
+              LogoIcon && LogoIcon.length > 0
+                ? LogoIcon.map((logo: Logo) => (
+                  <img
+                    key={logo._id}
+                    src={`https://ekol-server-1.onrender.com${logo.logo}`}
+                    alt={`${logo._id}-logo`}
+                  />
+                ))
+                : ''
+            )}
           </Link>
 
           <nav className="left-navigation">

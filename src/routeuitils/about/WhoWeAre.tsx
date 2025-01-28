@@ -18,6 +18,9 @@ type WhoWeAreType = {
 };
 
 const WhoWeAre: React.FC = () => {
+
+  const { translations } = useTranslate();
+
   const selectedlang = useRecoilValue(SelectedLanguageState);
 
   const { data: WhoWeAreData, isLoading: WhoWeAreLoading } = useQuery({
@@ -45,14 +48,12 @@ const WhoWeAre: React.FC = () => {
       return res.data[0];
     }
   });
+  
   const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
-
 
   if (WhoWeAreLoading) {
     return <Loader />;
   }
-
-  const { translations } = useTranslate();
 
   return (
     <section className="who-we-are-section">

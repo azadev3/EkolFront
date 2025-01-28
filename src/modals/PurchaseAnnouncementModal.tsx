@@ -28,7 +28,6 @@ const PurchaseAnnouncementModal: React.FC = () => {
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log(response.data, "purch ann data");
         return response.data;
       } catch (error) {
         console.error(error);

@@ -1,6 +1,5 @@
 import React from 'react';
 import Breadcrumb from '../../Breadcrumb';
-import { v4 as uuidv4 } from 'uuid';
 import { atom, useRecoilState, useRecoilValue } from 'recoil';
 import { SelectedLanguageState } from '../../recoil/Atoms';
 import { useQuery } from '@tanstack/react-query';
@@ -32,8 +31,11 @@ export const SelectItemOurWorkState = atom<string>({
 });
 
 const OurWorks: React.FC = () => {
+
   const { translations } = useTranslate();
+
   const selectedlang = useRecoilValue(SelectedLanguageState);
+
   const { data: OurWorksInnerData } = useQuery<OurWorksInnerInterface[]>({
     queryKey: ['ourWorksInnerDataKey', selectedlang],
     queryFn: async () => {
@@ -174,7 +176,7 @@ const OurWorks: React.FC = () => {
               {OurWorksInnerData && OurWorksInnerData.length > 0
                 ? OurWorksInnerData.map((item: OurWorksInnerInterface) => (
                   <div
-                    key={uuidv4()}
+                    key={item?._id}
                     className="item-navigation"
                     onClick={() => {
                       handleSelectItem(item?._id || '');
@@ -199,6 +201,7 @@ const OurWorks: React.FC = () => {
                   if (selectItem === item?._id) {
                     return (
                       <div
+                        key={item?._id}
                         style={{ width: "100%" }}
                         className='description-content'
                         dangerouslySetInnerHTML={{
@@ -219,7 +222,7 @@ const OurWorks: React.FC = () => {
               <div className="images-for-description" style={{ display: findedImage ? 'grid' : 'none' }}>
                 {findedImage && findedImage?.images
                   ? findedImage?.images?.map((imgs, i: number) => (
-                    <div onClick={() => handleImageClick(i)} className="image-wrapper" key={i + 3}>
+                    <div onClick={() => handleImageClick(i)} className="image-wrapper" key={i}>
                       <img src={`https://ekol-server-1.onrender.com${imgs}`} alt="" />
                     </div>
                   ))

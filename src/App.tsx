@@ -72,7 +72,7 @@ const App: React.FC = () => {
 
   const purchaseAnnouncementModal = useRecoilValue(PurchaseAnnouncementModalState);
 
-  const isScrolled = useScroll();
+  const { isScrolled } = useScroll();
 
   const [mode, setMode] = useRecoilState(DarkModeState);
 

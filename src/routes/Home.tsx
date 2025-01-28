@@ -36,7 +36,6 @@ const Home: React.FC = () => {
       const res = await axios.get(`${Baseurl}/hidden-hero-front`);
       if (res.data) {
         setShowRehberlik(res.data?.showed);
-        console.log(res.data, 'slam');
       } else {
         console.log(res.status);
       }
@@ -51,7 +50,6 @@ const Home: React.FC = () => {
       const res = await axios.get(`${Baseurl}/hidden-ourworkshome-front`);
       if (res.data) {
         setShowourworkshome(res.data?.showed);
-        console.log(res.data, 'slam');
       } else {
         console.log(res.status);
       }

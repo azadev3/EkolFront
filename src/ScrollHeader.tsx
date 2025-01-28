@@ -14,6 +14,7 @@ import MobileHeader, { Logo } from './components/header/MobileHeader';
 import ShareButton from './components/header/headeruitil/ShareButton';
 import DarkMode from './components/header/headeruitil/DarkMode';
 import { useDynamicPageData } from './UseDynamicPage';
+import Loader from './Loader';
 
 const ScrollHeader: React.FC = () => {
 
@@ -68,7 +69,6 @@ const ScrollHeader: React.FC = () => {
       const res = await axios.get(`${Baseurl}/hidden-ourworkshome-front`);
       if (res.data) {
         setShowourworkshome(res.data?.showed);
-        console.log(res.data, 'slam');
       } else {
         console.log(res.status);
       }
@@ -167,7 +167,7 @@ const ScrollHeader: React.FC = () => {
     }
   });
 
-  
+
 
   const HeaderItems: HeaderElementType[] = [
     // { id: 1, title: `${translations["nav_anasehife"]}`, to: "/" },
@@ -274,7 +274,7 @@ const ScrollHeader: React.FC = () => {
   });
 
   // FETCH LOGO
-  const { data: LogoIcon } = useQuery({
+  const { data: LogoIcon, isLoading: logoLoading } = useQuery({
     queryKey: ['logoIconKey'],
     queryFn: async () => {
       const response = await axios.get(`${Baseurl}/logofront`);
@@ -336,16 +336,19 @@ const ScrollHeader: React.FC = () => {
         ) : (
           <div className="header">
             <Link to="/" className="logo-header">
-              {LogoIcon && LogoIcon.length > 0
-                ? LogoIcon.map((logo: Logo) => (
-                  <img
-                    key={logo._id}
-                    src={`https://ekol-server-1.onrender.com${logo.logo}`}
-                    alt={`${logo._id}-logo`}
-                    title={logo._id}
-                  />
-                ))
-                : ''}
+              {logoLoading ? (
+                <Loader />
+              ) : (
+                LogoIcon && LogoIcon.length > 0
+                  ? LogoIcon.map((logo: Logo) => (
+                    <img
+                      key={logo._id}
+                      src={`https://ekol-server-1.onrender.com${logo.logo}`}
+                      alt={logo.logo}
+                    />
+                  ))
+                  : ''
+              )}
             </Link>
 
             <nav className="left-navigation" ref={liRef}>

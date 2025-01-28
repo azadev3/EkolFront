@@ -24,7 +24,6 @@ export const useDynamicPageData = () => {
           "Accept-Language": selectedLang,
         },
       });
-      console.log(res.data, "resdata");
       return res.data;
     },
     staleTime: 1000 * 60 * 60,

@@ -1,6 +1,5 @@
 import React from "react";
 import Breadcrumb from "../../Breadcrumb";
-import { v4 as uuidv4 } from "uuid";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useQuery } from "@tanstack/react-query";
@@ -158,7 +157,7 @@ const Tools: React.FC = () => {
               {ToolsInnerData && ToolsInnerData.length > 0
                 ? ToolsInnerData.map((item: ToolsInnerInterface) => (
                   <div
-                    key={uuidv4()}
+                    key={item?._id}
                     className="item-navigation"
                     onClick={() => {
                       handleSelectItem(item?.title);
@@ -183,6 +182,7 @@ const Tools: React.FC = () => {
                   if (selectItem === item?.title) {
                     return (
                       <div
+                        key={item?._id}
                         style={{ width: "100%" }}
                         className="description-content"
                         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item?.description) }}
@@ -201,7 +201,7 @@ const Tools: React.FC = () => {
               <div className="images-for-description" style={{ display: findedImage ? "grid" : "none" }}>
                 {findedImage && findedImage?.images
                   ? findedImage?.images?.map((imgs, i: number) => (
-                    <div onClick={() => handleImageClick(i)} className="image-wrapper" key={i + 3}>
+                    <div onClick={() => handleImageClick(i)} className="image-wrapper" key={i}>
                       <img src={`https://ekol-server-1.onrender.com${imgs}`} alt="" />
                     </div>
                   ))

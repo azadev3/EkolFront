@@ -94,7 +94,6 @@ const FormNatural: React.FC = () => {
     },
    });
    if (response.data) {
-    console.log(response.data);
     window.location.reload();
    } else {
     console.log(response.status);

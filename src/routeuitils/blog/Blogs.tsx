@@ -71,7 +71,6 @@ const Blogs: React.FC = () => {
     try {
       const res = await axios.get(`${Baseurl}/blog-viewer/${id}`);
       if (res.data) {
-        console.log(res.data)
       } else {
         console.log(res.status)
       }

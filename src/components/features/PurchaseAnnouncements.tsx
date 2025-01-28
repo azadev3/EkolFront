@@ -45,7 +45,6 @@ const PurchaseAnnouncements: React.FC = () => {
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log(response.data, "purch ann data");
         return response.data;
       } catch (error) {
         console.error(error);
@@ -80,10 +79,6 @@ const PurchaseAnnouncements: React.FC = () => {
     if (selectedFilter === "") {
       setSelectedFilter("all");
     }
-  }, []);
-
-  React.useEffect(() => {
-    console.log(selectedFilter);
   }, []);
 
   // Search and filter logic
