@@ -44,6 +44,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Baseurl } from "./Baseurl";
 import { HelmetTag } from "./main";
+import OtherContent from "./routeuitils/calculations/OtherContent";
 export const isHomePageState = atom<boolean>({
   key: "isHomePageState",
   default: false,
@@ -165,7 +166,9 @@ const App: React.FC = () => {
         <Route path="/hesabatlar" element={<Calculations />}>
           <Route path="illikhesabatlar" element={<Yearly />} />
           <Route path="rublukhesabatlar" element={<Quarterly />} />
+          <Route path=":dynamic" element={<OtherContent />} />
         </Route>
+
 
         {/* satinalma elanlari - qaydalari */}
         <Route path="/satinalmaelanlari" element={<PurchaseAnnouncements />} />

@@ -7,6 +7,19 @@
   font-family: 'Public Sans', sans-serif;
 }
 
+.created_at_service {
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 400;
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  max-width: 300px;
+  margin-bottom: 12px;
+}
+
 .app .header-wrapper .header .right-header-area .share-media {
   display: none !important;
 }
@@ -26,7 +39,7 @@
   width: 100% !important;
 }
 .vacations-inner-section .vacationsinner .container-inner-vac .vacation-top-description .texts .titles .title {
-  overflow: unset !important;
+  overflow: hidden !important;
 }
 .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .image-area {
   height: 600px !important;
@@ -1250,6 +1263,10 @@ $whitedarktwo: #8b9f9c;
     background-color: rgb(114, 131, 114) !important;
   }
 }
+
+.blog-page-wrapper .blogs-section .blogs .container-blogs .blog-grid-blogpage .blog-item-blogpage {
+  justify-content: flex-end !important;
+}
 .app {
   width: 100%;
   min-height: 100vh;
@@ -1272,7 +1289,7 @@ $whitedarktwo: #8b9f9c;
       color: white;
       border: 1px solid transparent;
       &:hover {
-      border: 1px solid #004238;
+        border: 1px solid #004238;
         background-color: transparent;
       }
     }
@@ -1482,6 +1499,10 @@ $whitedarktwo: #8b9f9c;
       * {
         color: white !important;
       }
+    }
+    .scrolled-header {
+      background-color: $maindarkcolor;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.3) !important;
     }
     .header-wrapper .header .right-header-area .share-media {
       background-color: rgba(255, 255, 255, 0.2392156863) !important;
@@ -2157,10 +2178,7 @@ $whitedarktwo: #8b9f9c;
     .home-page .card-for-subscribtion-section .card-for-subscribtion {
       background-color: $maindarkcolor;
     }
-    .scrolled-header {
-      background-color: $maindarkcolor;
-      border-bottom: 3px solid #404040;
-    }
+
     .home-page .card-about-section .card-about .top-card-area .left-descriptions {
       * {
         color: $whitedark !important;
@@ -2760,6 +2778,12 @@ $whitedarktwo: #8b9f9c;
     }
     .mobile-header .toggle-menu .left-navigation-mobile ul .dropdown-menu {
       background-color: #303030;
+    }
+    .home-page .hero-wrapper .hero .header-wrapper {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .header-wrapper {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     }
   }
 }
@@ -4207,7 +4231,7 @@ $whitedarktwo: #8b9f9c;
   transition: 150ms ease-out;
 }
 .activity-page .servicespage-section .servicespage .container-servicespage .container-services-grid .item-service:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
   cursor: pointer;
 }
 
@@ -4309,7 +4333,7 @@ $whitedarktwo: #8b9f9c;
   height: 100%;
   transition: 100ms ease-in-out;
   &:hover {
-    transform: scale(1.04);
+    transform: scale(1.02);
   }
 }
 

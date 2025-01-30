@@ -5,6 +5,7 @@ import { SelectedLanguageState } from "../../recoil/Atoms";
 import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import Loader from "../../Loader";
+import { toast } from "react-toastify";
 
 export type CalculationsDataType = {
   title: string;
@@ -34,9 +35,16 @@ const Yearly: React.FC = () => {
   const downloadPDF = (_id: string) => {
     const findUrl: any = hasData
       ? data?.find((item: CalculationsDataType) => {
-          return _id === item?._id ? item?.pdf : "";
-        })
+        return _id === item?._id ? item?.pdf : "";
+      })
       : "";
+      
+    if (findUrl === undefined) {
+      toast.warning('Bu məlumat üçün PDF təyin edilməyib', {
+        position: 'bottom-right'
+      })
+      return;
+    }
     const url: any = findUrl ? `https://ekol-server-1.onrender.com${findUrl?.pdf}` : "";
     const link = document.createElement("a");
     link.href = url;

@@ -144,7 +144,7 @@ const Blogs: React.FC = () => {
                     <span>{item?.created_at || ''}</span>
                     <h4>{item?.title}</h4>
                     <div className="description">
-                      <div dangerouslySetInnerHTML={{ __html: item?.description }} />
+                      <p>{item?.slogan}</p>
                     </div>
                     <div className="show-more-btn">
                       <Link to={`/xeberler/${item?._id}`}

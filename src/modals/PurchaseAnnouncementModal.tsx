@@ -8,6 +8,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { SelectedLanguageState } from "../recoil/Atoms";
 import { useTranslate } from "../context/TranslateContext";
 import DOMPurify from "dompurify";
+import { toast } from "react-toastify";
 
 const PurchaseAnnouncementModal: React.FC = () => {
   //purchase modal
@@ -42,9 +43,15 @@ const PurchaseAnnouncementModal: React.FC = () => {
     const findUrl: any =
       purchAnnData && purchAnnData?.length > 0
         ? purchAnnData?.find((item: PurchAnnInterface) => {
-            return _id === item?._id ? item?.pdf : "";
-          })
+          return _id === item?._id ? item?.pdf : "";
+        })
         : "";
+    if (findUrl === undefined) {
+      toast.warning('Bu məlumat üçün PDF təyin edilməyib', {
+        position: 'bottom-right'
+      })
+      return;
+    }
     const url: any = findUrl ? `https://ekol-server-1.onrender.com${findUrl?.pdf}` : "";
     const link = document.createElement("a");
     link.href = url;
@@ -57,8 +64,8 @@ const PurchaseAnnouncementModal: React.FC = () => {
   const isPurchaseData: any =
     purchAnnData && purchAnnData?.length > 0
       ? purchAnnData?.find((item: PurchAnnInterface) => {
-          return purchaseModal === item?._id;
-        })
+        return purchaseModal === item?._id;
+      })
       : [];
 
   React.useEffect(() => {
@@ -78,14 +85,14 @@ const PurchaseAnnouncementModal: React.FC = () => {
     <div className={`purchase-modal ${purchaseModal ? "active" : ""}`} ref={purchaseModalRef}>
       <section className="header-modal">
         <h1
-        style={{fontSize: "40px", lineHeight:"normal"}}
+          style={{ fontSize: "40px", lineHeight: "normal" }}
         >{isPurchaseData ? isPurchaseData.title : ""}</h1>
         <img src="/close.svg" title="Bağla" alt="close" className="close-icon" onClick={() => setPurchaseModal("")} />
       </section>
 
       <article className="content-area">
         <div
-        className="content-area-texts-announcements"
+          className="content-area-texts-announcements"
           style={{
             display: "flex",
             alignItems: "flex-start",

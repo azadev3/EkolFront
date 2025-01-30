@@ -351,7 +351,7 @@ const Header: React.FC = () => {
         <MobileHeader />
       ) : (
         <div className="header">
-          <Link to="/" className="logo-header">
+          <Link title={translations['logo_title']} to="/" className="logo-header">
             {logoLoading ? (
               <Loader />
             ) : (
@@ -360,7 +360,6 @@ const Header: React.FC = () => {
                   <img
                     key={logo._id}
                     src={`https://ekol-server-1.onrender.com${logo.logo}`}
-                    alt={`${logo._id}-logo`}
                   />
                 ))
                 : ''

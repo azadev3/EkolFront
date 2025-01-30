@@ -33,6 +33,7 @@ type HeaderElementType = {
   icon?: React.JSX.Element | JSX.Element;
   submenu?: submenuType[];
 };
+
 const MobileHeader: React.FC = () => {
 
   const lang = useRecoilValue(SelectedLanguageState);

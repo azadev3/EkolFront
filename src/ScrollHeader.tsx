@@ -335,7 +335,7 @@ const ScrollHeader: React.FC = () => {
           <MobileHeader />
         ) : (
           <div className="header">
-            <Link to="/" className="logo-header">
+            <Link title={translations['logo_title']} to="/" className="logo-header">
               {logoLoading ? (
                 <Loader />
               ) : (

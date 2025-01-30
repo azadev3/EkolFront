@@ -12,6 +12,7 @@ import Loader from "../../Loader";
 import { useTranslate } from "../../context/TranslateContext";
 import { DefaultMeta, MetaDataType } from "../../routes/Home";
 import { HelmetTag } from "../../main";
+import moment from "moment";
 export type VacationsType = {
   id: string;
   vacationName: string;
@@ -467,6 +468,10 @@ const Vacations: React.FC = () => {
       })
       : [];
 
+  const sortedFilteredSearchItems = filteredSearchItems?.sort((a: Vacations, b: Vacations) => {
+    return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
+  });
+
   const navigate = useNavigate();
 
   const { translations } = useTranslate();
@@ -510,15 +515,16 @@ const Vacations: React.FC = () => {
           </div>
 
           <div className="vacations-grid">
-            {filteredSearchItems && filteredSearchItems.length > 0 ? (
-              filteredSearchItems.slice(0, paginate).map((item: Vacations) => (
+            {sortedFilteredSearchItems && sortedFilteredSearchItems?.length > 0 ? (
+              sortedFilteredSearchItems?.slice(0, paginate).map((item: Vacations, i: number) => (
                 <article
                   onClick={() => navigate(`/karyera/${item?.title?.toLowerCase()}`)}
-                  key={uuidv4()}
+                  key={i}
                   className="vacation-item">
                   <h3>{item?.title}</h3>
                   <div className="time-and-icon">
-                    <span>{item?.startDate}</span>
+                    <span>{translations['paylasilma']}: <strong>{moment(item?.startDate).format('DD.MM.YYYY')}</strong></span>
+                    <span>{translations['bitme']}: <strong>{moment(item?.endDate).format('DD.MM.YYYY')}</strong></span>
                     <div className="icon-right">
                       <img src="/rightt.png" alt="go-to-vacation" />
                     </div>

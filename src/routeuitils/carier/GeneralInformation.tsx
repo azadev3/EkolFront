@@ -98,10 +98,10 @@ const GeneralInformation: React.FC = () => {
         <meta name="author" content={hasMeta?.meta_author} />
       </HelmetTag>
       {careerOpportunitiesBackgroundData && Object.values(careerOpportunitiesBackgroundData).length > 0
-        ? Object.values(careerOpportunitiesBackgroundData).map((item: GeneralInformationData) => (
-          <div key={uuidv4()} className="wrapper-image-general">
+        ? Object.values(careerOpportunitiesBackgroundData).map((item: GeneralInformationData, index: number) => (
+          <div key={index} className="wrapper-image-general">
             <img src={`https://ekol-server-1.onrender.com${item?.backgroundImage}`} alt={`${uuidv4()}-image`} />
-            <h4>{item?.title}</h4>
+            <h4>{item?.title === '' ? '' : item?.title}</h4>
           </div>
         ))
         : ""}

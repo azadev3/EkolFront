@@ -22,6 +22,7 @@ export type ServicesContentType = {
   description: string;
   image: string;
   slogan: string;
+  created_at: string;
 };
 
 const ServicesActivity: React.FC = () => {

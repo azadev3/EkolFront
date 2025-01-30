@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { SelectedLanguageState } from "../../recoil/Atoms";
 import { useRecoilValue } from "recoil";
 import { useTranslate } from "../../context/TranslateContext";
+import moment from "moment";
 
 const VacationTopHead: React.FC = () => {
   const { vacid } = useParams<{ vacid: string }>();
@@ -43,18 +44,17 @@ const VacationTopHead: React.FC = () => {
           <span className="title">{innerVacancy?.location || "Bakı, Azərbaycan"}</span>
           <span className="dot"></span>
           <span className="title">{innerVacancy?.workRegime || "Work regime not available"}</span>
-          <div className="time-and-view">
-            <article>
-              <img src="/dates.png" alt="date" title={`${innerVacancy?.startDate} - ${innerVacancy?.endDate}`} />
-              <p>
-                {innerVacancy?.startDate} - {innerVacancy?.endDate}
-              </p>
-            </article>
-            {/* <article>
+        </div>
+        <div className="time-and-view">
+          <article>
+            <img src="/dates.png" alt="date" title={`${innerVacancy?.startDate} - ${innerVacancy?.endDate}`} />
+            <p>{translations['paylasilma']}: <strong>{moment(innerVacancy?.startDate).format('DD.MM.YYYY')}</strong></p>
+            <p>{translations['bitme']}: <strong>{moment(innerVacancy?.endDate).format('DD.MM.YYYY')}</strong></p>
+          </article>
+          {/* <article>
               <img src="/eyy.png" alt="views" title="Baxış sayı" />
               <p>112 baxış</p>
             </article> */}
-          </div>
         </div>
       </div>
       <Link

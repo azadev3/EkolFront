@@ -10,6 +10,12 @@ import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import { HelmetTag } from "../../main";
 
+export interface DynamicCalcCategory {
+  _id: string;
+  title: string;
+}
+
+
 const CalculationSection: React.FC = () => {
   const { translations } = useTranslate();
 
@@ -27,6 +33,17 @@ const CalculationSection: React.FC = () => {
   });
   const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
 
+  const { data: DynamicCategoryData } = useQuery<DynamicCalcCategory[]>({
+    queryKey: ['DynamicCalcCategoryKey', lang],
+    queryFn: async () => {
+      const res = await axios.get(`${Baseurl}/dynamic-category-front`, {
+        headers: {
+          "Accept-Language": lang,
+        }
+      });
+      return res.data;
+    }
+  });
 
 
   return (
@@ -52,6 +69,13 @@ const CalculationSection: React.FC = () => {
             <NavLink to="rublukhesabatlar" className="quarterly">
               {translations["rubluk_hesabatlar_title"]}
             </NavLink>
+            {DynamicCategoryData && DynamicCategoryData.length > 0 ?
+              DynamicCategoryData.map((data: DynamicCalcCategory) => (
+                <NavLink to={data._id} key={data?._id} className="quarterly">
+                  {data?.title}
+                </NavLink>
+              )) : null
+            }
           </div>
           <Outlet />
         </div>
