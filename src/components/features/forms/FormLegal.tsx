@@ -136,10 +136,12 @@ const FormLegal: React.FC = () => {
   const [othersecond, setOtherSecond] = React.useState<string>('');
 
   //send pdf file
+  const [fileName, setFileName] = React.useState<string>("");
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setRequestPdf(file);
+      setFileName(file.name);
     }
   };
 
@@ -209,6 +211,7 @@ const FormLegal: React.FC = () => {
     _id: string;
     name: [{ _id: string; value: string }];
   };
+
   const [enterprises, setEnterprises] = React.useState<EnterprisesType>();
   const [stages, setStages] = React.useState<EnterprisesType>();
   const handleGetEnterprises = async () => {
@@ -228,6 +231,7 @@ const FormLegal: React.FC = () => {
       console.log(error);
     }
   };
+
   const handleGetStages = async () => {
     try {
       const res = await axios.get(`${Baseurl}/add-stage`, {
@@ -435,6 +439,7 @@ const FormLegal: React.FC = () => {
         </div>
 
         <div className={`inner-form ${innerForm ? 'actived' : ''}`}>
+          <h2>{translations['meshul_sexs']}</h2>
           <section className="requested-person-name-surname">
             {/* name second */}
             <div className="input-field">
@@ -536,38 +541,40 @@ const FormLegal: React.FC = () => {
         </div>
       </div>
 
-      <section className="location">
-        <label htmlFor="location">
-          {translations['unvan']} <span>*</span>
-        </label>
-        <textarea
-          name="location"
-          id="location"
-          onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setLocation(e.target.value)}></textarea>
-      </section>
+      <div className="loc-and-enterprise">
+        <section className="location">
+          <label htmlFor="location">
+            {translations['unvan']} <span>*</span>
+          </label>
+          <textarea
+            name="location"
+            id="location"
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setLocation(e.target.value)}></textarea>
+        </section>
 
-      <section className="enterprise">
-        <label htmlFor="enterprise">
-          {translations['muessise']} <span>*</span>
-        </label>
-        <select
-          name="enterprise"
-          id="enterprise"
-          onChange={(e: ChangeEvent<HTMLSelectElement>) => setEnterpriseName(e.target.value)}>
-          <option value="">
+        <section className="enterprise">
+          <label htmlFor="enterprise">
             {translations['muessise']} <span>*</span>
-          </option>
-          {enterprises && enterprises?.name?.length > 0 ? (
-            enterprises?.name?.map((names, i: number) => (
-              <option value={names?.value} key={i + 1}>
-                {names?.value}
-              </option>
-            ))
-          ) : (
-            <option value="">Müraciət növü yoxdur</option>
-          )}
-        </select>
-      </section>
+          </label>
+          <select
+            name="enterprise"
+            id="enterprise"
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => setEnterpriseName(e.target.value)}>
+            <option value="">
+              {translations['muessise']} <span>*</span>
+            </option>
+            {enterprises && enterprises?.name?.length > 0 ? (
+              enterprises?.name?.map((names, i: number) => (
+                <option value={names?.value} key={i + 1}>
+                  {names?.value}
+                </option>
+              ))
+            ) : (
+              <option value="">Müraciət növü yoxdur</option>
+            )}
+          </select>
+        </section>
+      </div>
 
       <section className="enterprise-name-and-part">
         {/* enterprise name or phone */}
@@ -637,6 +644,10 @@ const FormLegal: React.FC = () => {
           {translations['muraciet_senedleri']} <span>*</span>
         </label>
         <div className="input-field">
+          <div className="select-a-file">
+            <img src="/cekefil.svg" alt="check-a-file" />
+            <p>{fileName ? fileName : translations['fayl_sec']}</p>
+          </div>
           <input type="file" name="requestpdf" id="requestpdf" onChange={handleFileChange} />
         </div>
       </section>

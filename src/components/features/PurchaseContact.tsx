@@ -10,6 +10,7 @@ import { SelectedLanguageState } from "../../recoil/Atoms";
 import axios from "axios";
 import { Baseurl } from "../../Baseurl";
 import { HelmetTag } from "../../main";
+import '../../styles/purchasecontact.scss';
 
 export const radioValueState = atom<string>({
   key: "radioValueState",
