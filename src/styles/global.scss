@@ -2074,6 +2074,12 @@
   }
 }
 
+.dynamic-page-wrapper .page-section-dynamic .page-route .container-page .image-area img {
+  object-fit: cover !important;
+}
+.dynamic-page-wrapper .page-section-dynamic .page-route .container-page .image-area {
+  height: 300px !important;
+}
 
 
 .app .header-wrapper .header .left-navigation {

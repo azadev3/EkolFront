@@ -100,8 +100,8 @@ const Hero: React.FC = () => {
                     />
                     <div className="slide-content">
                       <div className="left">
-                        <h1>{item?.title}</h1>
-                        <p>{item?.description}</p>
+                        <h1 style={{ display: item?.title === '' || item?.title === null ? 'none' : '' }}>{item?.title}</h1>
+                        <p style={{ display: item?.description === '' || item?.description === null ? 'none' : '' }}>{item?.description}</p>
                       </div>
                     </div>
                   </SwiperSlide>
