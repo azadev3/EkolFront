@@ -5,6 +5,7 @@ import { SelectedLanguageState } from "../../recoil/Atoms";
 import { Baseurl } from "../../Baseurl";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import CountUp from 'react-countup';
 
 type TopCardData = {
   title: string;
@@ -107,11 +108,11 @@ const CardAbout: React.FC = () => {
           <article className="left-descriptions">
             {ourWorksData && ourWorksData.length > 0
               ? ourWorksData.slice(0, 1).map((item: TopCardData, index: number) => (
-                  <React.Fragment key={index}>
-                    <h2>{item?.title}</h2>
-                    <p>{item?.description}</p>
-                  </React.Fragment>
-                ))
+                <React.Fragment key={index}>
+                  <h2>{item?.title}</h2>
+                  <p>{item?.description}</p>
+                </React.Fragment>
+              ))
               : ""}
           </article>
 
@@ -154,11 +155,17 @@ const CardAbout: React.FC = () => {
         <div className="bottom-card-area">
           {statisticsData && statisticsData.length > 0
             ? statisticsData.map((item: BottomCardItemType, index: number) => (
-                <div className="item-card" key={index}>
-                  <h3>{item?.count}</h3>
-                  <p>{item?.title}</p>
-                </div>
-              ))
+              <div className="item-card" key={index}>
+                <h3>
+                  <CountUp
+                    end={Number(item.count)}
+                    duration={12}
+                    suffix="+"
+                  />
+                </h3>
+                <p>{item?.title}</p>
+              </div>
+            ))
             : ""}
         </div>
       </div>
