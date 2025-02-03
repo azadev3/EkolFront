@@ -14,6 +14,7 @@ import ShareButton from './headeruitil/ShareButton';
 import DarkMode from './headeruitil/DarkMode';
 import { useDynamicPageData } from '../../UseDynamicPage';
 import Loader from '../../Loader';
+import useScroll from '../../context/useScroll';
 
 export interface Logo {
   _id: string;
@@ -36,6 +37,7 @@ export type HeaderElementType = {
 
 const Header: React.FC = () => {
   const { translations } = useTranslate();
+  const { isScrolled } = useScroll();
   const lang = useRecoilValue(SelectedLanguageState);
 
   const [showRehberlik, setShowRehberlik] = React.useState<boolean>(false);
@@ -346,7 +348,7 @@ const Header: React.FC = () => {
   }, [setIsMobile]);
 
   return (
-    <header className="header-wrapper">
+    <header className={`header-wrapper ${isScrolled ? 'scrolled-header' : ''}`}>
       {isMobile ? (
         <MobileHeader />
       ) : (

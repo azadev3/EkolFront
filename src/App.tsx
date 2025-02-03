@@ -27,8 +27,6 @@ import "./styles/responsive.scss";
 import PurchaseModal from "./modals/PurchaseModal";
 import { PurchaseAnnouncementModalState, PurchaseModalState } from "./routeuitils/purchase/PurchaseSection";
 import LeadershipModal from "./modals/LeadershipModal";
-import useScroll from "./context/useScroll";
-import ScrollHeader from "./ScrollHeader";
 import { DarkModeState } from "./components/header/headeruitil/DarkMode";
 import NewBlogPage from "./routes/NewBlogPage";
 import NewBlogInnerC from "./routes/NewBlogInnerC";
@@ -72,8 +70,6 @@ const App: React.FC = () => {
   const purchaseModal = useRecoilValue(PurchaseModalState);
 
   const purchaseAnnouncementModal = useRecoilValue(PurchaseAnnouncementModalState);
-
-  const { isScrolled } = useScroll();
 
   const [mode, setMode] = useRecoilState(DarkModeState);
 
@@ -134,7 +130,6 @@ const App: React.FC = () => {
 
       <ToastContainer autoClose={2000} pauseOnHover={false} transition={Bounce} />
       {!isHomePage && <Header />}
-      {isScrolled ? <ScrollHeader /> : ""}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about/*" element={<About />} />

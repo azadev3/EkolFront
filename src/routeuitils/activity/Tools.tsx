@@ -154,8 +154,8 @@ const Tools: React.FC = () => {
 
           <div className="grid-works">
             <div className="navigation-content">
-              {ToolsInnerData && ToolsInnerData.length > 0
-                ? ToolsInnerData.map((item: ToolsInnerInterface) => (
+              {ToolsInnerData && ToolsInnerData?.length > 0
+                ? [...ToolsInnerData]?.reverse()?.map((item: ToolsInnerInterface) => (
                   <div
                     key={item?._id}
                     className="item-navigation"

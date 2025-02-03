@@ -92,7 +92,6 @@ const ServicesPage: React.FC = () => {
                       key={i}>
                       <div className="texts">
                         <article className="top-text">
-                          <span className="created_at_service">{item.created_at}</span>
                           <h2>{item.title}</h2>
                           <p>{item.slogan || ''}</p>
                         </article>

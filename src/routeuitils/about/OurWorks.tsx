@@ -174,7 +174,7 @@ const OurWorks: React.FC = () => {
           <div className="grid-works">
             <div className="navigation-content">
               {OurWorksInnerData && OurWorksInnerData.length > 0
-                ? OurWorksInnerData.map((item: OurWorksInnerInterface) => (
+                ? [...OurWorksInnerData]?.reverse()?.map((item: OurWorksInnerInterface) => (
                   <div
                     key={item?._id}
                     className="item-navigation"

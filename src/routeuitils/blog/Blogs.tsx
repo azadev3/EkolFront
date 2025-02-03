@@ -56,16 +56,16 @@ const Blogs: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const sortedBlogData = blogData
-    ? [...blogData].sort((a: BlogType, b: BlogType) => {
-      const parseDate = (dateString: string) => {
-        const [day, month, year] = dateString.split('.').map(Number);
-        return new Date(year, month - 1, day).getTime();
-      };
+  // const sortedBlogData = blogData
+  //   ? [...blogData].sort((a: BlogType, b: BlogType) => {
+  //     const parseDate = (dateString: string) => {
+  //       const [day, month, year] = dateString.split('.').map(Number);
+  //       return new Date(year, month - 1, day).getTime();
+  //     };
 
-      return parseDate(b.created_at) - parseDate(a.created_at);
-    })
-    : [];
+  //     return parseDate(b.created_at) - parseDate(a.created_at);
+  //   })
+  //   : [];
 
   const getBlogView = async (id: string) => {
     try {
@@ -119,8 +119,8 @@ const Blogs: React.FC = () => {
           <h2>{translations['blog_title']}</h2>
 
           <section className="blog-grid-blogpage">
-            {sortedBlogData && sortedBlogData.length > 0
-              ? sortedBlogData.slice(0, paginate).map((item: BlogType, index: number) => (
+            {blogData && blogData?.length > 0
+              ? [...blogData].reverse().slice(0, paginate).map((item: BlogType, index: number) => (
                 <article
                   onClick={() => {
                     navigate(`/xeberler/${item._id}`);
@@ -157,7 +157,7 @@ const Blogs: React.FC = () => {
               : ''}
           </section>
 
-          {paginate <= sortedBlogData?.length && <PaginateButton handlePaginate={handlePaginate} />}
+          {paginate <= blogData?.length && <PaginateButton handlePaginate={handlePaginate} />}
         </div>
       </div>
     </section>
