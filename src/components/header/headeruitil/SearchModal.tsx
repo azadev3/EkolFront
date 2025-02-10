@@ -254,7 +254,7 @@ const SearchModal = () => {
     },
     {
       id: 555,
-      title: 'Media',
+      title: `${translations['nav_media']}`,
       to: '/',
       icon: <FaAngleDown className="down-icon" />,
       submenu: [

@@ -88,11 +88,13 @@ const PurchaseAnnouncements: React.FC = () => {
       ?.filter((item) => item.title.toLowerCase().includes(searchTerm.toLowerCase()))
       .filter((item) => {
         if (selectedFilter === "all") {
-          return true; // Return all items when "all" is selected
+          return true;
         } else {
           return item.status === selectedFilter;
         }
-      });
+      })
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
 
   const currentItems = hasPurchData && filteredData && filteredData?.slice(indexOfFirstItem, indexOfLastItem);
 
@@ -137,42 +139,10 @@ const PurchaseAnnouncements: React.FC = () => {
     setPurchModal(id);
   };
 
-  // const orderByItems =
-  // hasPurchData && currentItems
-  //   ? currentItems?.sort((a: PurchAnnInterface, b: PurchAnnInterface) => {
-  //       return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-  //     })
-  //   : [];
-
-
-
   const orderByItems =
     hasPurchData && currentItems
-      ? currentItems?.sort((a: PurchAnnInterface, b: PurchAnnInterface) => {
-        const endDateA = new Date(a.end_date).getTime();
-        const endDateB = new Date(b.end_date).getTime();
-        return endDateA - endDateB;
-      })
+      ? [...currentItems].reverse()
       : [];
-
-  // const orderByItems =
-  //   hasPurchData && currentItems
-  //     ? currentItems?.sort((a: PurchAnnInterface, b: PurchAnnInterface) => {
-  //         const endDateA = new Date(a.end_date).getTime();
-  //         const endDateB = new Date(b.end_date).getTime();
-  //         return endDateA - endDateB;
-  //       })
-  //     : [];
-
-  // const orderByItems =
-  // hasPurchData && currentItems
-  //   ? currentItems?.sort((a: PurchAnnInterface, b: PurchAnnInterface) => {
-  //       const endDateA = new Date(a.end_date).getTime();
-  //       const endDateB = new Date(b.end_date).getTime();
-
-  //       return endDateB - endDateA; 
-  //     })
-  //   : [];
 
   const { data: MetaData } = useQuery<MetaDataType>({
     queryKey: ['meta_satinalmaelanlari_key', selectedlang],
