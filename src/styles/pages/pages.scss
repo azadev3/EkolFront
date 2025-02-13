@@ -4654,12 +4654,12 @@
             width: 100%;
             height: auto;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
 
             .input-search {
               width: 100%;
-              max-width: 715px;
+              max-width: 615px;
               display: flex;
               align-items: center;
               justify-content: flex-start;
@@ -4715,34 +4715,65 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            gap: 12px;
-            .link-filter {
-              min-width: 76px;
-              max-width: auto;
+            flex-direction: column-reverse;
+            gap: 36px;
+            .date-range-area {
+              display: flex;
+              width: 100%;
+              align-items: flex-end;
+              justify-content: flex-end;
+              flex-direction: column;
+              gap: 16px;
+              h6 {
+                background-color: #ececec;
+                color: rgba(0, 0, 0, 0.719);
+                font-weight: 500;
+                font-size: 14px;
+                text-align: start;
+                padding: 4px 10px;
+              }
+              .bottom {
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+                gap: 4px;
+              }
+             
+            }
+            .linkeds {
               display: flex;
               align-items: center;
-              justify-content: center;
-              text-align: center;
-              height: 48px;
-              cursor: pointer;
-              transition: 40ms ease-in-out;
-              border-radius: 4px;
-              padding: 12px 16px;
-              border: 1px solid #0000001f;
-              color: #000000cc;
-              font-weight: 400;
-              user-select: none;
-              font-size: 16px;
-              &:hover {
-                background-color: #055448;
-                color: white;
-              }
-              &:active {
-                transform: scale(0.99);
-              }
-              &.active {
-                color: white;
-                background-color: #004238;
+              justify-content: flex-end;
+              gap: 5px;
+              width: 100%;
+              .link-filter {
+                min-width: 76px;
+                max-width: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                height: 48px;
+                cursor: pointer;
+                transition: 40ms ease-in-out;
+                border-radius: 4px;
+                padding: 12px 16px;
+                border: 1px solid #0000001f;
+                color: #000000cc;
+                font-weight: 400;
+                user-select: none;
+                font-size: 16px;
+                &:hover {
+                  background-color: #055448;
+                  color: white;
+                }
+                &:active {
+                  transform: scale(0.99);
+                }
+                &.active {
+                  color: white;
+                  background-color: #004238;
+                }
               }
             }
           }

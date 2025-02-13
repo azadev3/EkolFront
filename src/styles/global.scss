@@ -2143,6 +2143,10 @@ $whitedarktwo: #8b9f9c;
   }
 }
 
+.header-wrapper.scrolled-header .header .logo-header {
+  min-width: 174px !important;
+}
+
 .app {
   width: 100%;
   min-height: 100vh;
@@ -2157,6 +2161,37 @@ $whitedarktwo: #8b9f9c;
 
   &.dark {
     background-color: $maindarkcolor;
+    .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter .date-range-area h6 {
+      background-color: $maindarkcolor;
+      color: $whitedark;
+    }
+    .css-1dune0f-MuiInputBase-input-MuiOutlinedInput-input {
+      color: white !important;
+    }
+    .css-113d811-MuiFormLabel-root-MuiInputLabel-root {
+      color: white !important;
+    }
+    .css-1ysp02-MuiButtonBase-root-MuiIconButton-root {
+      color: $whitedark!important;
+    }
+    .css-19qnlrw-MuiFormLabel-root-MuiInputLabel-root {
+      color: #eeeeee57 !important;
+    }
+    .css-jupps9-MuiInputBase-root-MuiOutlinedInput-root {
+      border: 1px solid $whitedarktwo !important;
+    }
+    .home-page .services-section {
+      background-color: $maindarkcolor;
+    }
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase {
+      background-color: #0000000d;
+    }
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .legal-and-natural-person-checkbox .legal label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .legal-and-natural-person-checkbox .natural label {
+      color: $whitedark !important;
+    }
+    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .request-pdf .input-field, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .request-pdf .input-field {
+      background-color: #d8d8d8;
+    }
     .about-page .partner-section .partners .partners-container .pagination-button span {
       min-width: 117px;
       height: 48px;

@@ -4,7 +4,9 @@
     line-height: 24px !important;
   }
 }
-
+.purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter .linkeds {
+  height: 60px !important;
+}
 @media only screen and (min-width: 1330px) {
   .footer-wrapper .footer .top-footer .footer-navigations {
     grid-template-columns: repeat(6, 1fr) !important;
@@ -39,6 +41,19 @@
 }
 
 @media only screen and (max-width: 1230px) {
+  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .search-area .input-search {
+    max-width: 100% !important;
+  }
+  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement h2 {
+    font-size: 24px !important;
+  }
+  .purch-announcement-wrapper {
+    padding: 0 24px !important;
+  }
   .home-page .services-section {
     width: 100% !important;
   }

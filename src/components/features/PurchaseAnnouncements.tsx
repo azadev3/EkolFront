@@ -11,6 +11,9 @@ import { Baseurl } from "../../Baseurl";
 import moment from "moment";
 import { DefaultMeta, MetaDataType } from "../../routes/Home";
 import { HelmetTag } from "../../main";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { Dayjs } from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 export interface PurchAnnInterface {
   _id: string;
@@ -81,20 +84,36 @@ const PurchaseAnnouncements: React.FC = () => {
     }
   }, []);
 
-  // Search and filter logic
+
+  const [startDate, setStartDate] = React.useState<Dayjs | null>(null);
+  const [endDate, setEndDate] = React.useState<Dayjs | null>(null);
+
+  const handleStartDateChange = (date: Dayjs | null) => {
+    setStartDate(date);
+  };
+
+  const handleEndDateChange = (date: Dayjs | null) => {
+    setEndDate(date);
+  };
+
   const filteredData =
     hasPurchData &&
     purchAnnData
-      ?.filter((item) => item.title.toLowerCase().includes(searchTerm.toLowerCase()))
-      .filter((item) => {
-        if (selectedFilter === "all") {
-          return true;
-        } else {
-          return item.status === selectedFilter;
-        }
+      ?.filter((item) => {
+        // Search filter: Check if title includes search term
+        const matchesSearchTerm = item.title.toLowerCase().includes(searchTerm.toLowerCase());
+
+        // Filter by status (only if not "all")
+        const matchesStatus = selectedFilter === "all" || item.status === selectedFilter;
+
+        // Filter by date range (only if both startDate and endDate are set)
+        const matchesDateRange =
+          (!startDate || !endDate) ||
+          (new Date(item.createdAt) >= new Date(Number(startDate)) && new Date(item.createdAt) <= new Date(Number(endDate)));
+
+        return matchesSearchTerm && matchesStatus && matchesDateRange;
       })
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-
 
   const currentItems = hasPurchData && filteredData && filteredData?.slice(indexOfFirstItem, indexOfLastItem);
 
@@ -157,7 +176,6 @@ const PurchaseAnnouncements: React.FC = () => {
   });
   const hasMeta: MetaDataType = MetaData && Object.values(MetaData)?.length > 0 ? MetaData : DefaultMeta;
 
-
   return (
     <main className="purch-announcement-wrapper">
       <HelmetTag>
@@ -192,14 +210,36 @@ const PurchaseAnnouncements: React.FC = () => {
                 </div>
 
                 <div className="right-filter">
-                  {MainFilterItem.map((filters) => (
-                    <span
-                      onClick={() => handleClickFilter(filters.value)}
-                      className={`link-filter ${selectedFilter === filters.value ? "active" : ""}`}
-                      key={filters.id}>
-                      {filters.title}
-                    </span>
-                  ))}
+                  <div className="date-range-area">
+                    <h6>{translations['siralama_key']}</h6>
+                    <div className="bottom">
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker
+                          format="DD.MM.YYYY"
+                          label={translations['bu_tarixden']}
+                          value={startDate}
+                          onChange={handleStartDateChange}
+                        />
+                        <DatePicker
+                          format="DD.MM.YYYY"
+                          label={translations['bu_tarixe']}
+                          value={endDate}
+                          onChange={handleEndDateChange}
+                        />
+                      </LocalizationProvider>
+                    </div>
+                  </div>
+
+                  <div className="linkeds">
+                    {MainFilterItem.map((filters) => (
+                      <span
+                        onClick={() => handleClickFilter(filters.value)}
+                        className={`link-filter ${selectedFilter === filters.value ? "active" : ""}`}
+                        key={filters.id}>
+                        {filters.title}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </section>
 

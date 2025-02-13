@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Baseurl } from '../../Baseurl';
 import axios from 'axios';
-import { SocialsType } from '../../routeuitils/home/Hero';
 import { useTranslate } from '../../context/TranslateContext';
 import { Logo } from '../header/MobileHeader';
+import { IconType } from '../../routeuitils/home/Contactus';
 
 type FooterNavLinkType = {
   id: string;
@@ -297,10 +297,10 @@ const Footer: React.FC = () => {
     },
   ];
   //socials
-  const { data: SocialsData } = useQuery({
-    queryKey: ['socialData'],
+  const { data: SocialsData } = useQuery<IconType[]>({
+    queryKey: ['socialDataFooter'],
     queryFn: async () => {
-      const response = await axios.get(`${Baseurl}/socialsfront`);
+      const response = await axios.get(`${Baseurl}/get-icon-footer`);
       return response.data;
     },
     staleTime: 900000,
@@ -392,12 +392,12 @@ const Footer: React.FC = () => {
                     key={item?.id}
                     className="footer-nav-link-content">
                     <div className="links-nav-social">
-                      {SocialsData.map((links: SocialsType, i: number) => (
-                        <Link target="_blank" key={i} to={links?.link} className="link-social">
+                      {SocialsData.map((links: IconType, i: number) => (
+                        <Link style={{ backgroundColor: links?.color || '' }} target="_blank" key={i} to={links?.url} className="link-social">
                           <img
-                            src={`https://ekol-server-1.onrender.com${links?.icon}`}
+                            src={`https://ekol-server-1.onrender.com/public/${links?.icon}`}
                             alt={`${links._id}-icon`}
-                            title={links.link}
+                            title={links.url}
                           />
                         </Link>
                       ))}

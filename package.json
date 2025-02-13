@@ -10,10 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@fancyapps/ui": "^5.0.36",
+    "@mui/material": "^6.4.4",
+    "@mui/x-date-pickers": "^7.26.0",
     "@tanstack/react-query": "^5.51.15",
     "@types/react-helmet": "^6.1.11",
     "axios": "^1.7.2",
+    "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
     "dompurify": "^3.1.6",
     "formik": "^2.4.6",
     "moment": "^2.30.1",
