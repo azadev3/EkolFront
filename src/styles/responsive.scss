@@ -455,6 +455,60 @@
 }
 
 @media only screen and (max-width: 968px) {
+  .calculations-page {
+    padding: 0 24px !important;
+  }
+  .calculations-page .calculation-section .calculation .container-calculation .yearly-calculations .yearly-data-item .titledata {
+    font-size: 14px !important;
+  }
+  .calculations-page .calculation-section .calculation .container-calculation h2 {
+    font-size: 32px !important;
+  }
+  .calculations-page .calculation-section .calculation .container-calculation {
+    margin-top: 24px !important;
+  }
+  .calculations-page
+    .calculation-section
+    .calculation
+    .container-calculation
+    .quarterly-calculations
+    .quarterly-data-item
+    .download-file-button {
+    min-width: 115px !important;
+    font-size: 14px !important;
+  }
+  .vacations-inner-section .vacationsinner .container-inner-vac .vacation-top-description .texts .time-and-view article {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    * {
+      font-size: 14px !important;
+    }
+  }
+  .vacations-inner-section .vacationsinner .container-inner-vac .vacation-top-description .request-btn {
+    min-width: unset !important;
+    width: 100%;
+    max-width: unset !important;
+  }
+  .vacations-inner-section .vacationsinner .container-inner-vac .vacation-top-description {
+    padding: 24px !important;
+  }
+  .vacations-request .vacationrequest .container-vacation-request .vacation-top-description .texts .titles {
+    display: none !important;
+  }
+  .vacations-request .vacationrequest .container-vacation-request .form-vac-request form {
+    gap: 12px !important;
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .vacations-request .vacationrequest .container-vacation-request .form-vac-request {
+    padding: 12px !important;
+  }
+  .vacations-request .vacationrequest .container-vacation-request .form-vac-request form .field-file .upload-cv p, .vacations-request .vacationrequest .container-vacation-request .form-vac-request form .field-file .upload-profile p {
+    font-size: 10px !important;
+  }
+  .vacations-inner-section .vacationsinner .container-inner-vac .vacation-top-description .texts .time-and-view article img {
+    display: none !important;
+  }
   .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content:nth-child(6) {
     align-items: flex-start !important;
   }
@@ -632,7 +686,7 @@
   .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content:nth-child(6) {
     align-items: flex-start !important;
   }
-  
+
   .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content .links-nav {
     width: 100% !important;
   }
@@ -1477,7 +1531,6 @@
     height: 100% !important;
   }
 
- 
   .purch-contact-wrapper
     .purch-contact-section
     .purch-contact

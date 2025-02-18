@@ -4067,6 +4067,7 @@ $whitedarktwo: #8b9f9c;
   transition: all 550ms ease-in-out;
 
   .search-modal {
+    z-index: 100000000000000000;
     width: 100%;
     max-width: 800px;
     min-height: 90vh;
@@ -4391,6 +4392,7 @@ $whitedarktwo: #8b9f9c;
     pointer-events: all;
     user-select: auto;
     transform: translateX(0);
+    z-index: 10000000000000000;
   }
 }
 
