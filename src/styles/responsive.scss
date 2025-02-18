@@ -4,7 +4,13 @@
     line-height: 24px !important;
   }
 }
-.purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter .linkeds {
+.purch-announcement-wrapper
+  .purch-announcement-section
+  .purch-announcement
+  .container-purch-announcement
+  .search-and-items
+  .right-filter
+  .linkeds {
   height: 60px !important;
 }
 @media only screen and (min-width: 1330px) {
@@ -15,7 +21,7 @@
 @media only screen and (max-width: 1330px) {
   .footer-wrapper .footer .top-footer .footer-navigations {
     grid-template-columns: repeat(5, 1fr) !important;
-  } 
+  }
   .home-page .services-section {
     width: 100% !important;
   }
@@ -38,13 +44,121 @@
     display: flex !important;
     flex-direction: row !important;
   }
+  .about-page {
+    padding: 0 24px !important;
+  }
+  .about-page .leadership-section .leadership .container-leadership h2 {
+    font-size: 32px !important;
+  }
 }
 
 @media only screen and (max-width: 1230px) {
-  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .search-area .input-search {
+  .about-page .partner-section .partners .partners-container h2 {
+    font-size: 32px !important;
+  }
+  .about-page .structure-section .structure .content-structure h2 {
+    font-size: 32px !important;
+  }
+  .about-page .certificates-section .certificates .container-certificates h2 {
+    font-size: 32px !important;
+  }
+
+  .blog-page-wrapper {
+    padding: 0 24px !important;
+  }
+  .blog-page-wrapper .blogs-section .blogs .container-blogs h2 {
+    font-size: 32px !important;
+  }
+  .blog-page-wrapper .blogs-section .blogs .container-blogs .blog-grid-blogpage {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .blog-inner-page {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .last-blog-inner-page {
+    padding: 0 24px !important;
+  }
+  .last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner h2 {
+    font-size: 32px !important;
+  }
+  .last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left,
+  .last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .right {
+    width: 100% !important;
+  }
+  .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner h2 {
+    font-size: 32px !important;
+  }
+  .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .right {
+    width: 100% !important;
+  }
+  .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left {
+    width: 100% !important;
+  }
+  .dynamic-page-wrapper {
+    padding: 0 24px !important;
+  }
+  .dynamic-page-wrapper .page-section-dynamic .page-route .container-page h2 {
+    font-size: 32px !important;
+  }
+  .carbon-page-wrapper {
+    padding: 0 24px !important;
+  }
+  .carbon-page-wrapper .carbon-section .carbons .container-carbons h2 {
+    font-size: 32px !important;
+  }
+  .NewBlogPage-wrapper {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .about-page .certificates-section .certificates .container-certificates .description-certificates p {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .about-page .lisanse-section .lisanse .container-lisanse .description-area-lisanse p {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .about-page .lisanse-section .lisanse .container-lisanse h2 {
+    font-size: 32px !important;
+  }
+  .NewBlogPage-wrapper .newblogpage-section .blogs-newblogpage .container-newblogpage .newblogpage-grid-blogpage {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .contact-page {
+    padding: 0 24px !important;
+  }
+  .contact-page .contact-section .contact .container-contact h2 {
+    font-size: 32px !important;
+  }
+  .contact-page .contact-section .contact .container-contact .form-area {
+    padding: 18px !important;
+  }
+  .contact-page .contact-section .contact .container-contact .form-area .left-texts h3 {
+    font-size: 24px !important;
+  }
+  .contact-page .contact-section .contact .container-contact .form-area .left-texts p {
+    font-size: 14px !important;
+  }
+  .carier-page {
+    padding: 0 24px !important;
+  }
+  .carier-page .carier-section .carier .container-carier h2 {
+    font-size: 32px !important;
+  }
+  .purch-announcement-wrapper
+    .purch-announcement-section
+    .purch-announcement
+    .container-purch-announcement
+    .search-and-items
+    .search-area
+    .input-search {
     max-width: 100% !important;
   }
-  .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter {
+  .purch-announcement-wrapper
+    .purch-announcement-section
+    .purch-announcement
+    .container-purch-announcement
+    .search-and-items
+    .right-filter {
     max-width: 100% !important;
     width: 100% !important;
   }
@@ -341,15 +455,184 @@
 }
 
 @media only screen and (max-width: 968px) {
+  .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content:nth-child(6) {
+    align-items: flex-start !important;
+  }
+  .blog-page-wrapper .blogs-section .blogs .container-blogs .blog-grid-blogpage {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .activity-page .servicespage-section .servicespage .container-servicespage .container-services-grid {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .activity-page .servicesActivity-section .servicesActivity .container-servicesActivity h2 {
+    font-size: 32px !important;
+  }
+  .activity-page
+    .servicesActivity-section
+    .servicesActivity
+    .container-servicesActivity
+    .container-services
+    .service-items
+    .service-image-container {
+    height: 220px !important;
+  }
+  .activity-page
+    .servicesActivity-section
+    .servicesActivity
+    .container-servicesActivity
+    .container-services
+    .service-items
+    .navigator-content
+    .swiper-button-next {
+    right: -0.5rem !important;
+  }
+  .activity-page
+    .servicesActivity-section
+    .servicesActivity
+    .container-servicesActivity
+    .container-services
+    .service-items
+    .navigator-content
+    .swiper-button-prev {
+    left: -0.5rem !important;
+  }
+  .activity-page .servicespage-section .servicespage .container-servicespage h2 {
+    font-size: 32px !important;
+  }
+  .activity-page .servicespage-section .servicespage .container-servicespage .container-services-grid .item-service .texts .top-text h2 {
+    font-size: 16px !important;
+  }
+  .about-page .who-we-are-section .whoweare .container-whoweare .image-container {
+    height: 250px !important;
+  }
+  .about-page .who-we-are-section .whoweare .container-whoweare .description-container {
+    padding: 24px !important;
+    width: calc(100% - 12px) !important;
+    gap: 4px !important;
+  }
+  .about-page .who-we-are-section .whoweare .container-whoweare h2 {
+    font-size: 32px !important;
+  }
+  .ourworks-section .works .container-works h2 {
+    font-size: 32px !important;
+  }
+  .ourworks-section .works .container-works .grid-works {
+    flex-direction: column !important;
+  }
+  .ourworks-section .works .container-works .grid-works .navigation-content {
+    width: 100% !important;
+  }
+  .ourworks-section .works .container-works .grid-works .navigation-description-content {
+    width: 100% !important;
+  }
+  .ourworks-section .works .container-works .grid-works .navigation-description-content .images-for-description {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .about-page .partner-section .partners .partners-container .content-partners {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .about-page .who-we-are-section .whoweare .container-whoweare .description-container ul li {
+    font-size: 13px !important;
+  }
+  .blog-inner-page
+    .blog-inner-content-section
+    .blogs-inner
+    .container-blogs-inner
+    .col-blogs-inner
+    .contents
+    .left
+    .description-content-images {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .about-page .images-section-gallery-page .images .container-images .content-images {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .about-page .innerimage-section .innerimages .container-innerimages .grid-innerimages {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .about-page .innerimage-section .innerimages .container-innerimages h2 {
+    font-size: 32px !important;
+  }
+  .about-page .gallery-section .gallery .container-gallery .grid-select-page {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .about-page .gallery-section .gallery .container-gallery .grid-select-page .item-gallery-select {
+    height: 200px !important;
+  }
+  .activity-page .social-life-section .sociallife .container-sociallife .container-descriptions .wrapperimg-carousel {
+    height: 200px !important;
+  }
+  .about-page .gallery-section .gallery .container-gallery .grid-select-page .item-gallery-select .title-select {
+    font-size: 21px !important;
+  }
+  .about-page .gallery-section .gallery .container-gallery h2 {
+    font-size: 32px !important;
+  }
+  .about-page .videos-section .videos .container-videos .videos-content-grid {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .about-page .videos-section .videos .container-videos h2 {
+    font-size: 32px !important;
+  }
+  .activity-page .social-life-section .sociallife .container-sociallife h2 {
+    font-size: 32px !important;
+  }
+  .activity-page .social-life-section .sociallife .container-sociallife .container-descriptions .wrapperimg-carousel .swiper-slide h5 {
+    font-size: 16px !important;
+  }
+  .NewBlogPage-wrapper .newblogpage-section .blogs-newblogpage .container-newblogpage .newblogpage-grid-blogpage {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+
+  .carier-page .carier-section .carier .container-carier .carier-content-area .content-carier .general-information .why-ekol-section {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .carier-page .carier-section .carier .container-carier .carier-content-area .content-carier .vacations .vacations-grid {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .carier-page
+    .carier-section
+    .carier
+    .container-carier
+    .carier-content-area
+    .content-carier
+    .general-information
+    .recruitment-process
+    .process {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .carier-page
+    .carier-section
+    .carier
+    .container-carier
+    .carier-content-area
+    .content-carier
+    .general-information
+    .why-ekol-section
+    .grid-ekol-item {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .about-page .leadership-section .leadership .container-leadership .grid-leadership {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+
   .footer-wrapper .footer .top-footer .footer-navigations {
     width: 100% !important;
   }
   .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content {
     align-items: flex-start !important;
   }
+  .footer-wrapper .footer .top-footer .left-logo-and-description .logo-footer {
+    min-width: unset !important;
+  }
   .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content .title-nav {
     text-align: start !important;
   }
+  .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content:nth-child(6) {
+    align-items: flex-start !important;
+  }
+  
   .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content .links-nav {
     width: 100% !important;
   }
@@ -1015,7 +1298,81 @@
 }
 
 @media only screen and (max-width: 568px) {
-  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .company-and-voen, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .requested-person-name-surname, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .mobile-and-job-tel-number, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .other-email, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .country-and-job, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .enterprise-name-and-part, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .typeofrequest, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .company-and-voen, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .requested-person-name-surname, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .mobile-and-job-tel-number, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .other-email, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .country-and-job, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .enterprise-name-and-part, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .typeofrequest {
+  .about-page .partner-section .partners .partners-container .content-partners {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .carier-page
+    .carier-section
+    .carier
+    .container-carier
+    .carier-content-area
+    .content-carier
+    .general-information
+    .why-ekol-section
+    .grid-ekol-item {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .carier-page
+    .carier-section
+    .carier
+    .container-carier
+    .carier-content-area
+    .content-carier
+    .general-information
+    .recruitment-process
+    .process {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .company-and-voen,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-legal
+    .requested-person-name-surname,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-legal
+    .mobile-and-job-tel-number,
+  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .other-email,
+  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .country-and-job,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-legal
+    .enterprise-name-and-part,
+  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .typeofrequest,
+  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .company-and-voen,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-natural
+    .requested-person-name-surname,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-natural
+    .mobile-and-job-tel-number,
+  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .other-email,
+  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .country-and-job,
+  .purch-contact-wrapper
+    .purch-contact-section
+    .purch-contact
+    .container-purch-contact
+    .form-for-purchase
+    .form-natural
+    .enterprise-name-and-part,
+  .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .typeofrequest {
     flex-direction: column !important;
   }
   .app .page-navigator .currentpage {
@@ -1119,12 +1476,8 @@
   .home-page .hero-wrapper .hero {
     height: 100% !important;
   }
-  .about-page .certificates-section .certificates .container-certificates .description-certificates p {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  .about-page .lisanse-section .lisanse .container-lisanse .description-area-lisanse p {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
+
+ 
   .purch-contact-wrapper
     .purch-contact-section
     .purch-contact

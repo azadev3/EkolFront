@@ -20,11 +20,11 @@
   justify-content: flex-start !important;
 }
 .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content .links-nav .link {
-  text-align: end !important;
+  text-align: start !important;
 }
 .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content .title-nav {
   width: 100% !important;
-  text-align: end !important;
+  text-align: start !important;
 }
 
 .created_at_service {
@@ -195,7 +195,7 @@
 }
 .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content {
   &:nth-child(6) {
-    align-items: flex-end !important;
+    align-items: flex-start !important;
   }
 }
 .home-page .contact-us-section .contact-us .map-contact .contact-information-box .contact-datas .information-box .left-icon img {
@@ -4896,7 +4896,7 @@ $whitedarktwo: #8b9f9c;
 }
 .about-page .lisanse-section .lisanse .container-lisanse .description-area-lisanse p {
   display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
+  grid-template-columns: repeat(4, 1fr);
   justify-items: flex-start !important;
   align-items: flex-start !important;
   gap: 28px !important;
@@ -4933,7 +4933,7 @@ $whitedarktwo: #8b9f9c;
 }
 .about-page .certificates-section .certificates .container-certificates .description-certificates p {
   display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
+  grid-template-columns: repeat(4, 1fr);
   gap: 28px !important;
 }
 .about-page .gallery-section .gallery .container-gallery .grid-select-page .item-gallery-select .title-select {
@@ -5354,7 +5354,7 @@ $whitedarktwo: #8b9f9c;
 
 .footer-wrapper .footer .top-footer .footer-navigations .footer-nav-link-content .links-nav .link {
   text-wrap: wrap !important;
-  text-align: end !important;
+  text-align: start !important;
   width: 100% !important;
 }
 .footer-wrapper .footer .top-footer .footer-navigations {
