@@ -141,7 +141,7 @@ const Blogs: React.FC = () => {
                   )}
 
                   <div className="descriptions-blog">
-                    <span>{item?.created_at || ''}</span>
+                    <span>{item?.created_at?.split("-")?.join(".") || ''}</span>
                     <h4>{item?.title}</h4>
                     <div className="description">
                       <p>{item?.slogan}</p>
