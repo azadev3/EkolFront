@@ -13,6 +13,7 @@ import Loader from '../../Loader';
 import { useTranslate } from '../../context/TranslateContext';
 import { DefaultMeta, MetaDataType } from '../../routes/Home';
 import { HelmetTag } from '../../main';
+import moment from 'moment';
 
 const Blogs: React.FC = () => {
   //pagination
@@ -141,7 +142,14 @@ const Blogs: React.FC = () => {
                   )}
 
                   <div className="descriptions-blog">
-                    <span>{item?.created_at?.split("-")?.join(".") || ''}</span>
+                    <span>
+                      {item?.created_at
+                        ? moment(item.created_at, ["DD.MM.YYYY", moment.ISO_8601]).isValid() &&
+                          /^\d{2}\.\d{2}\.\d{4}$/.test(item.created_at)
+                          ? item.created_at
+                          : moment(item.created_at).format("DD.MM.YYYY")
+                        : ''}
+                    </span>                    
                     <h4>{item?.title}</h4>
                     <div className="description">
                       <p>{item?.slogan}</p>
