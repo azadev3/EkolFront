@@ -147,7 +147,7 @@ const App: React.FC = () => {
         <Route path="/xeberler/:blogtitle" element={<BlogInner />} />
         <Route path="/carbon_calculate" element={<CarcbonCalculate />} />
         <Route
-          path="/xeberler/en-son-xeberler/:lastblogtitle"
+          path="/xeberler/:lastblogtitle"
           element={
             <div className="last-blog-inner-page">
               <LastBlogInner />

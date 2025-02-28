@@ -1352,6 +1352,15 @@
 }
 
 @media only screen and (max-width: 568px) {
+
+  .blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left .content-inner-blog-image-wrapper {
+    max-height: auto !important;
+    height: auto !important;
+  }
+  .last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left .content-inner-blog-image-wrapper {
+    height: auto !important;
+    max-height: auto !important;
+  }
   .about-page .partner-section .partners .partners-container .content-partners {
     grid-template-columns: repeat(1, 1fr) !important;
   }

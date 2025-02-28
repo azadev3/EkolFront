@@ -209,7 +209,7 @@ const LastBlogInner: React.FC = () => {
                   {sortedLastBlog && sortedLastBlog?.length > 0
                     ? sortedLastBlog?.map((item: LastBlogType) => (
                       <Link
-                        to={`/xeberler/en-son-xeberler/${item?._id}`}
+                        to={`/xeberler/${item?._id}`}
                         key={item?._id}
                         onClick={() => getBlogView(item?._id || '')}
                         className="item-last-blog">
