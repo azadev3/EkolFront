@@ -18,6 +18,7 @@ import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import { DefaultMeta, MetaDataType } from "../../routes/Home";
 import { HelmetTag } from "../../main";
+import moment from "moment";
 
 type LastBlogType = {
   _id: number;
@@ -185,7 +186,12 @@ const NewBlogInner: React.FC = () => {
 
                 <div className="description-content">
                   <span className="time-span">
-                    {innerBlogItem && innerBlogItem?.created_at}
+                    {innerBlogItem?.created_at
+                      ? moment(innerBlogItem?.created_at, ["DD.MM.YYYY", moment.ISO_8601]).isValid() &&
+                        /^\d{2}\.\d{2}\.\d{4}$/.test(innerBlogItem?.created_at)
+                        ? innerBlogItem?.created_at
+                        : moment(innerBlogItem?.created_at).format("DD.MM.YYYY")
+                      : ''}
                   </span>
                   {innerBlogItem && innerBlogItem.description && (
                     <div
@@ -244,7 +250,12 @@ const NewBlogInner: React.FC = () => {
 
                         <div className="time-and-icon">
                           <span className="time">
-                            {item?.created_at}
+                            {item?.created_at
+                              ? moment(item?.created_at, ["DD.MM.YYYY", moment.ISO_8601]).isValid() &&
+                                /^\d{2}\.\d{2}\.\d{4}$/.test(item?.created_at)
+                                ? item?.created_at
+                                : moment(item?.created_at).format("DD.MM.YYYY")
+                              : ''}
                           </span>
                           <img src="/arrow.svg" alt="arrow-icon" />
                         </div>

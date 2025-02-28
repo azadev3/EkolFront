@@ -14,6 +14,7 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import { HelmetTag } from "../../main";
+import moment from "moment";
 
 type LastBlogType = {
   _id?: string;
@@ -162,7 +163,14 @@ const LastBlogInner: React.FC = () => {
                 </div>
 
                 <div className="description-content">
-                  <span className="time-span">{lastBlogItem ? lastBlogItem.created_at : ""}</span>
+                  <span className="time-span">
+                    {lastBlogItem?.created_at
+                      ? moment(lastBlogItem?.created_at, ["DD.MM.YYYY", moment.ISO_8601]).isValid() &&
+                        /^\d{2}\.\d{2}\.\d{4}$/.test(lastBlogItem?.created_at)
+                        ? lastBlogItem?.created_at
+                        : moment(lastBlogItem?.created_at).format("DD.MM.YYYY")
+                      : ''}
+                  </span>
                   {lastBlogItem && lastBlogItem.description && (
                     <div className="description-area" dangerouslySetInnerHTML={{ __html: lastBlogItem?.description }} />
                   )}
@@ -216,7 +224,14 @@ const LastBlogInner: React.FC = () => {
                         <div className="title">{item?.title}</div>
 
                         <div className="time-and-icon">
-                          <span className="time">{item?.created_at ? item?.created_at : ""}</span>
+                          <span className="time">
+                            {item?.created_at
+                              ? moment(item?.created_at, ["DD.MM.YYYY", moment.ISO_8601]).isValid() &&
+                                /^\d{2}\.\d{2}\.\d{4}$/.test(item?.created_at)
+                                ? item?.created_at
+                                : moment(item?.created_at).format("DD.MM.YYYY")
+                              : ''}
+                          </span>
                           <img src="/arrow.svg" alt="arrow-icon" />
                         </div>
                       </Link>
