@@ -28,6 +28,11 @@ export type BlogType = {
    image: string;
    view: string;
    slogan: string;
+   slug: {
+      az: string;
+      en: string;
+      ru: string;
+   }
 };
 
 const BlogSection: React.FC = () => {
@@ -73,7 +78,7 @@ const BlogSection: React.FC = () => {
                   .map((item: BlogType, index: number) => (
                      <article
                         onClick={() => {
-                           navigate(`/xeberler/${item._id}`);
+                           navigate(item.slug ? `/xeberler/${selectedlang}/${item?.slug[selectedlang as keyof typeof item.slug]}` : '');
                         }}
                         className="blog-item"
                         key={index}>
@@ -98,7 +103,7 @@ const BlogSection: React.FC = () => {
                               <p>{item?.slogan}</p>
                            </div>
                            <div className="show-more-btn">
-                              <Link to={`/xeberler/${index.toString()}`}>{translations['etrafli_oxu']}</Link>
+                              <Link to={item.slug ? `/xeberler/${selectedlang}/${item?.slug[selectedlang as keyof typeof item.slug]}` : ''}>{translations['etrafli_oxu']}</Link>
                            </div>
                         </div>
                      </article>

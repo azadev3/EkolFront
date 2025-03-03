@@ -22,6 +22,12 @@ type LastBlogType = {
   description: string;
   image: string;
   created_at: string;
+  slug: {
+    az: string;
+    en: string;
+    ru: string;
+  },
+  slogan: string
 };
 
 const LastNewBlogInner: React.FC = () => {
@@ -195,7 +201,7 @@ const LastNewBlogInner: React.FC = () => {
                 <div className="grid-last-blog">
                   {sortedLastBlog && sortedLastBlog?.length > 0
                     ? sortedLastBlog?.map((item: LastBlogType) => (
-                      <Link to={`/bloq/en-son-bloqlar/${item._id}`} key={item?._id} className="item-last-blog">
+                      <Link to={item.slug ? `/bloq/${selectedlang}/${item?.slug[selectedlang as keyof typeof item.slug]}` : ''} key={item?._id} className="item-last-blog">
                         <div className="title">{item?.title}</div>
 
                         <div className="time-and-icon">

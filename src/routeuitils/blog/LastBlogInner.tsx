@@ -23,6 +23,12 @@ type LastBlogType = {
   image: string;
   created_at: string;
   view: string;
+  slogan: string;
+  slug: {
+    az: string;
+    en: string;
+    ru: string;
+  }
 };
 
 const LastBlogInner: React.FC = () => {
@@ -217,7 +223,7 @@ const LastBlogInner: React.FC = () => {
                   {sortedLastBlog && sortedLastBlog?.length > 0
                     ? sortedLastBlog?.map((item: LastBlogType) => (
                       <Link
-                        to={`/xeberler/${item?._id}`}
+                        to={item.slug ? `/xeberler/${selectedlang}/${item?.slug[selectedlang as keyof typeof item.slug]}` : ''}
                         key={item?._id}
                         onClick={() => getBlogView(item?._id || '')}
                         className="item-last-blog">

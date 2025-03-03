@@ -109,7 +109,7 @@ const NewBlog: React.FC = () => {
               ? sortedBlogData?.slice(0, paginate)?.map((item: BlogType, index: number) => (
                 <article
                   onClick={() => {
-                    navigate(`/bloq/${item._id}`);
+                    navigate(item.slug ? `/bloq/${selectedlang}/${item?.slug[selectedlang as keyof typeof item.slug]}` : '');
                   }}
                   className={`newblogpage-item-blogpage ${item?.image === "" ? "noimg" : ""}`}
                   key={index}>
@@ -127,7 +127,7 @@ const NewBlog: React.FC = () => {
                     <h4>{item?.title}</h4>
                     <p>{item?.slogan}</p>
                     <div className="show-more-btn">
-                      <Link to={`/bloq/${item._id}`}>{translations['etrafli_oxu']}</Link>
+                      <Link to={item.slug ? `/bloq/${selectedlang}/${item?.slug[selectedlang as keyof typeof item.slug]}` : ''}>{translations['etrafli_oxu']}</Link>
                     </div>
                   </div>
                 </article>

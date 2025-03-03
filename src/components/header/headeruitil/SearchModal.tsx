@@ -769,7 +769,7 @@ const SearchModal = () => {
                     <div
                       className="link-el"
                       onClick={() => {
-                        navigate(`/xeberler/${item?._id}`);
+                        navigate(item.slug ? `/xeberler/${lang}/${item?.slug[lang as keyof typeof item.slug]}` : '');
                         setSearchModal(false);
                       }}
                       key={item?._id}>

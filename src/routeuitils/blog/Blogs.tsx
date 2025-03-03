@@ -124,7 +124,7 @@ const Blogs: React.FC = () => {
               ? [...blogData].reverse().slice(0, paginate).map((item: BlogType, index: number) => (
                 <article
                   onClick={() => {
-                    navigate(`/xeberler/${item._id}`);
+                    navigate(item.slug ? `/xeberler/${selectedlang}/${item?.slug[selectedlang as keyof typeof item.slug]}` : '');
                     getBlogView(item?._id || '')
                   }}
                   className={`blog-item-blogpage ${item?.image === '' ? 'noimgblog' : ''}`}
@@ -149,13 +149,13 @@ const Blogs: React.FC = () => {
                           ? item.created_at
                           : moment(item.created_at).format("DD.MM.YYYY")
                         : ''}
-                    </span>                    
+                    </span>
                     <h4>{item?.title}</h4>
                     <div className="description">
                       <p>{item?.slogan}</p>
                     </div>
                     <div className="show-more-btn">
-                      <Link to={`/xeberler/${item?._id}`}
+                      <Link to={item.slug ? `/xeberler/${selectedlang}/${item?.slug[selectedlang as keyof typeof item.slug]}` : ''}
                         onClick={() => getBlogView(item?._id || '')}
                       >{translations['etrafli_oxu']}</Link>
                     </div>

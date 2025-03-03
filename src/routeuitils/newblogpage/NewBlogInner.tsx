@@ -25,13 +25,19 @@ type LastBlogType = {
   title: string;
   description: string;
   image: string;
+  slug: {
+    az: string;
+    en: string;
+    ru: string;
+  },
+  slogan: string;
   created_at: string;
 };
 
 const NewBlogInner: React.FC = () => {
+  const { langed, sluged } = useParams<{ langed: 'az' | 'en' | 'ru'; sluged: string }>();
   const { translations } = useTranslate();
 
-  const { newblogtitle } = useParams<{ newblogtitle: string }>();
   const selectedlang = useRecoilValue(SelectedLanguageState);
   const navigate = useNavigate();
 
@@ -40,7 +46,7 @@ const NewBlogInner: React.FC = () => {
     data: newBlogDatasInner,
     isLoading: blogLoading,
     error: blogError,
-  } = useQuery({
+  } = useQuery<BlogType[]>({
     queryKey: ["newBlogDatasInner", selectedlang],
     queryFn: async () => {
       try {
@@ -102,13 +108,16 @@ const NewBlogInner: React.FC = () => {
     staleTime: 9000000,
   });
 
-  // Formatted createdAt date
-  // const DateDisplay = ({ createdAt }: { createdAt: string }) => {
-  //   const formattedDate = moment(createdAt).locale("tr").format("DD MMM YYYY");
-  //   return <span>{formattedDate}</span>;
-  // };
+  const innerBlogItem = newBlogDatasInner?.find(
+    (item) => item?.slug && item.slug[langed as keyof typeof item.slug] === sluged
+  );
+  React.useEffect(() => {
+    if (innerBlogItem) {
+      navigate(innerBlogItem.slug ? `/bloq/${selectedlang}/${innerBlogItem?.slug[selectedlang as keyof typeof innerBlogItem.slug]}` : '', { replace: true });
+    }
+  }, [selectedlang, navigate, innerBlogItem]);
 
-  const innerBlogItem = newBlogDatasInner?.find((item: BlogType) => item._id === newblogtitle?.toString());
+
   //open fancybox images
   const [open, setOpen] = React.useState(false);
   const [currentImageIndex, setCurrentImageIndex] = React.useState<number | null>(null);
@@ -243,7 +252,7 @@ const NewBlogInner: React.FC = () => {
                   {sortedLastBlog && sortedLastBlog?.length > 0
                     ? sortedLastBlog?.map((item: LastBlogType) => (
                       <Link
-                        to={`/bloq/en-son-bloqlar/${item._id}`}
+                        to={item.slug ? `/bloq/${selectedlang}/${item?.slug[selectedlang as keyof typeof item.slug]}` : ''}
                         key={uuidv4()}
                         className="item-last-blog">
                         <div className="title">{item.title}</div>

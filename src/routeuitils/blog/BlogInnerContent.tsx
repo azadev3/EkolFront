@@ -40,12 +40,19 @@ type LastBlogType = {
   image: string;
   created_at: string;
   view: string;
+  slogan: string;
+  slug: {
+    az: string;
+    en: string;
+    ru: string;
+  }
 };
 
 const BlogInnerContent: React.FC = () => {
-  const { translations } = useTranslate();
 
-  const { blogtitle } = useParams<{ blogtitle: string }>();
+  const { lang, slug } = useParams<{ lang: 'az' | 'en' | 'ru'; slug: string }>();
+
+  const { translations } = useTranslate();
   const selectedlang = useRecoilValue(SelectedLanguageState);
   const navigate = useNavigate();
   // Fetch blog data
@@ -54,7 +61,7 @@ const BlogInnerContent: React.FC = () => {
     isLoading: blogLoading,
     error: blogError,
     refetch: BlogRefetch,
-  } = useQuery({
+  } = useQuery<BlogType[]>({
     queryKey: ["blogDatasInner", selectedlang],
     queryFn: async () => {
       try {
@@ -105,8 +112,15 @@ const BlogInnerContent: React.FC = () => {
     staleTime: 9000000,
   });
 
-  const innerBlogItem: BlogType =
-    blogDatas && blogDatas?.find((item: BlogType) => item._id === blogtitle);
+  const innerBlogItem = blogDatas?.find(
+    (item) => item?.slug && item.slug[lang as keyof typeof item.slug] === slug
+  );
+
+  React.useEffect(() => {
+    if (innerBlogItem) {
+      navigate(innerBlogItem.slug ? `/xeberler/${selectedlang}/${innerBlogItem?.slug[selectedlang as keyof typeof innerBlogItem.slug]}` : '', { replace: true });
+    }
+  }, [selectedlang, navigate, innerBlogItem]);
 
   //open fancybox images
   const [open, setOpen] = React.useState(false);
@@ -162,6 +176,8 @@ const BlogInnerContent: React.FC = () => {
   if (blogError || lastBlogsError) {
     return "Bir problem oldu";
   }
+
+  if (!blogDatas) return <Loader />;
 
   return (
     <section className="blog-inner-content-section">
@@ -251,7 +267,7 @@ const BlogInnerContent: React.FC = () => {
                   {sortedLastBlogs && sortedLastBlogs?.length > 0
                     ? sortedLastBlogs?.map((item: LastBlogType) => (
                       <Link
-                        to={`/xeberler/${item._id}`}
+                        to={item.slug ? `/xeberler/${selectedlang}/${item?.slug[selectedlang as keyof typeof item.slug]}` : ''}
                         onClick={() => getBlogView(item?._id || '')}
                         key={uuidv4()}
                         className="item-last-blog">
