@@ -12,16 +12,40 @@
 .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase {
   border-radius: 24px !important;
 }
-.blog-inner-page .blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left .content-inner-blog-image-wrapper {
+.blog-inner-page
+  .blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .left
+  .content-inner-blog-image-wrapper {
   height: 550px;
   max-height: 550px;
 }
-.last-blog-inner-page .last-blog-inner-content-section .blogs-inner .container-blogs-inner .col-blogs-inner .contents .left .content-inner-blog-image-wrapper {
+.last-blog-inner-page
+  .last-blog-inner-content-section
+  .blogs-inner
+  .container-blogs-inner
+  .col-blogs-inner
+  .contents
+  .left
+  .content-inner-blog-image-wrapper {
   height: 550px;
   max-height: 550px;
+}
+.ourworks-section .works .container-works .grid-works .navigation-description-content .description-content ol li {
+  margin: 1rem !important;
 }
 
-.NewBlogPage-wrapper .newblogpage-section .blogs-newblogpage .container-newblogpage .newblogpage-grid-blogpage .newblogpage-item-blogpage .image-newblogpage img {
+.NewBlogPage-wrapper
+  .newblogpage-section
+  .blogs-newblogpage
+  .container-newblogpage
+  .newblogpage-grid-blogpage
+  .newblogpage-item-blogpage
+  .image-newblogpage
+  img {
   height: auto !important;
 }
 
@@ -1275,7 +1299,7 @@
           transform: translateY(0);
         }
       }
-    
+
       .header {
         width: 100%;
         max-width: 1240px;
@@ -1326,7 +1350,7 @@
                 font-weight: 500;
                 font-size: 17px;
                 letter-spacing: 0.3px;
-    
+
                 &.active {
                   color: #6eb6ab;
                 }
@@ -1361,7 +1385,7 @@
                   transform: translateY(0);
                 }
               }
-    
+
               a {
                 width: 100%;
                 height: auto;
@@ -1388,7 +1412,7 @@
             }
           }
         }
-    
+
         .logo-header {
           min-width: 180px;
           height: 56px;
@@ -1402,7 +1426,7 @@
             object-fit: contain;
           }
         }
-    
+
         .right-header-area {
           display: flex;
           border-bottom: 1px solid #ffffff3d;
@@ -1421,7 +1445,7 @@
               align-items: center;
               justify-content: center;
               gap: 6px;
-    
+
               color: #ffffff;
               text-decoration: none;
               font-weight: 400;
@@ -1437,7 +1461,7 @@
                   left: 0;
                 }
               }
-    
+
               .right-caret {
                 transition: 200ms ease-in-out;
                 &.rotated {
@@ -1446,7 +1470,7 @@
               }
             }
           }
-    
+
           .language-and-search-button {
             display: flex;
             position: relative;
@@ -1476,7 +1500,7 @@
                 object-fit: scale-down;
               }
             }
-    
+
             .select-language {
               width: 70px;
               height: 40px;
@@ -1504,7 +1528,7 @@
               &:focus {
                 outline: 2px solid white;
               }
-    
+
               .dropdown-menu {
                 position: absolute;
                 top: 100%;
@@ -1541,7 +1565,7 @@
               }
             }
           }
-    
+
           .share-media {
             display: flex;
             position: relative;
@@ -1571,7 +1595,7 @@
               font-size: 14px;
               text-wrap: nowrap;
             }
-    
+
             .modal-share {
               position: absolute;
               top: 50px;
@@ -1594,7 +1618,7 @@
               align-items: center;
               justify-items: center;
               grid-template-columns: repeat(1, 1fr);
-    
+
               .icon {
                 width: 40px;
                 min-width: 40px;
@@ -1645,7 +1669,7 @@
               }
             }
           }
-    
+
           .dark-mode-btn {
             cursor: pointer;
             transition: 100ms ease-in-out;
@@ -1706,7 +1730,7 @@
           transform: translateY(0);
         }
       }
-    
+
       .header {
         width: 100%;
         max-width: 1240px;
@@ -1757,7 +1781,7 @@
                 font-weight: 500;
                 font-size: 17px;
                 letter-spacing: 0.3px;
-    
+
                 &.active {
                   color: #6eb6ab;
                 }
@@ -1792,7 +1816,7 @@
                   transform: translateY(0);
                 }
               }
-    
+
               a {
                 width: 100%;
                 height: auto;
@@ -1819,7 +1843,7 @@
             }
           }
         }
-    
+
         .logo-header {
           min-width: 180px;
           height: 56px;
@@ -1833,7 +1857,7 @@
             object-fit: contain;
           }
         }
-    
+
         .right-header-area {
           display: flex;
           border-bottom: 1px solid #ffffff3d;
@@ -1852,7 +1876,7 @@
               align-items: center;
               justify-content: center;
               gap: 6px;
-    
+
               color: #ffffff;
               text-decoration: none;
               font-weight: 400;
@@ -1868,7 +1892,7 @@
                   left: 0;
                 }
               }
-    
+
               .right-caret {
                 transition: 200ms ease-in-out;
                 &.rotated {
@@ -1877,7 +1901,7 @@
               }
             }
           }
-    
+
           .language-and-search-button {
             display: flex;
             position: relative;
@@ -1907,7 +1931,7 @@
                 object-fit: scale-down;
               }
             }
-    
+
             .select-language {
               width: 70px;
               height: 40px;
@@ -1935,7 +1959,7 @@
               &:focus {
                 outline: 2px solid white;
               }
-    
+
               .dropdown-menu {
                 position: absolute;
                 top: 100%;
@@ -1972,7 +1996,7 @@
               }
             }
           }
-    
+
           .share-media {
             display: flex;
             position: relative;
@@ -2002,7 +2026,7 @@
               font-size: 14px;
               text-wrap: nowrap;
             }
-    
+
             .modal-share {
               position: absolute;
               top: 50px;
@@ -2025,7 +2049,7 @@
               align-items: center;
               justify-items: center;
               grid-template-columns: repeat(1, 1fr);
-    
+
               .icon {
                 width: 40px;
                 min-width: 40px;
@@ -2076,7 +2100,7 @@
               }
             }
           }
-    
+
           .dark-mode-btn {
             cursor: pointer;
             transition: 100ms ease-in-out;
@@ -2112,7 +2136,6 @@
 .dynamic-page-wrapper .page-section-dynamic .page-route .container-page .image-area {
   height: 300px !important;
 }
-
 
 .app .header-wrapper .header .left-navigation {
   gap: 11px !important;
@@ -2175,21 +2198,186 @@ $whitedarktwo: #8b9f9c;
 
   &.dark {
     background-color: $maindarkcolor;
-    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .second-responsible-person .check input[type=checkbox], .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .second-responsible-person .check input[type=checkbox] {
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .second-responsible-person
+      .check
+      input[type='checkbox'],
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .second-responsible-person
+      .check
+      input[type='checkbox'] {
       border-color: $whitedarktwo !important;
     }
-    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .second-responsible-person .inner-form h2, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .second-responsible-person .inner-form h2 {
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .second-responsible-person
+      .inner-form
+      h2,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .second-responsible-person
+      .inner-form
+      h2 {
       color: $whitedark;
     }
-    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .second-responsible-person .inner-form.actived, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .second-responsible-person .inner-form.actived {
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .second-responsible-person
+      .inner-form.actived,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .second-responsible-person
+      .inner-form.actived {
       padding: 32px;
       border-radius: 24px;
       border: 1px solid $whitedarktwo;
     }
-    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .second-responsible-person .inner-form .company-and-voen .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .second-responsible-person .inner-form .requested-person-name-surname .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .second-responsible-person .inner-form .mobile-and-job-tel-number .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .second-responsible-person .inner-form .other-email .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .second-responsible-person .inner-form .country-and-job .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .second-responsible-person .inner-form .company-and-voen .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .second-responsible-person .inner-form .requested-person-name-surname .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .second-responsible-person .inner-form .mobile-and-job-tel-number .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .second-responsible-person .inner-form .other-email .input-field label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .second-responsible-person .inner-form .country-and-job .input-field label {
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .second-responsible-person
+      .inner-form
+      .company-and-voen
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .second-responsible-person
+      .inner-form
+      .requested-person-name-surname
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .second-responsible-person
+      .inner-form
+      .mobile-and-job-tel-number
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .second-responsible-person
+      .inner-form
+      .other-email
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .second-responsible-person
+      .inner-form
+      .country-and-job
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .second-responsible-person
+      .inner-form
+      .company-and-voen
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .second-responsible-person
+      .inner-form
+      .requested-person-name-surname
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .second-responsible-person
+      .inner-form
+      .mobile-and-job-tel-number
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .second-responsible-person
+      .inner-form
+      .other-email
+      .input-field
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .second-responsible-person
+      .inner-form
+      .country-and-job
+      .input-field
+      label {
       color: $whitedark;
     }
-    .purch-announcement-wrapper .purch-announcement-section .purch-announcement .container-purch-announcement .search-and-items .right-filter .date-range-area h6 {
+    .purch-announcement-wrapper
+      .purch-announcement-section
+      .purch-announcement
+      .container-purch-announcement
+      .search-and-items
+      .right-filter
+      .date-range-area
+      h6 {
       background-color: $maindarkcolor;
       color: $whitedark;
     }
@@ -2200,7 +2388,7 @@ $whitedarktwo: #8b9f9c;
       color: white !important;
     }
     .css-1ysp02-MuiButtonBase-root-MuiIconButton-root {
-      color: $whitedark!important;
+      color: $whitedark !important;
     }
     .css-19qnlrw-MuiFormLabel-root-MuiInputLabel-root {
       color: #eeeeee57 !important;
@@ -2214,10 +2402,40 @@ $whitedarktwo: #8b9f9c;
     .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase {
       background-color: #0000000d;
     }
-    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .legal-and-natural-person-checkbox .legal label, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .legal-and-natural-person-checkbox .natural label {
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .legal-and-natural-person-checkbox
+      .legal
+      label,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .legal-and-natural-person-checkbox
+      .natural
+      label {
       color: $whitedark !important;
     }
-    .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-legal .request-pdf .input-field, .purch-contact-wrapper .purch-contact-section .purch-contact .container-purch-contact .form-for-purchase .form-natural .request-pdf .input-field {
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-legal
+      .request-pdf
+      .input-field,
+    .purch-contact-wrapper
+      .purch-contact-section
+      .purch-contact
+      .container-purch-contact
+      .form-for-purchase
+      .form-natural
+      .request-pdf
+      .input-field {
       background-color: #d8d8d8;
     }
     .about-page .partner-section .partners .partners-container .pagination-button span {

@@ -22,10 +22,27 @@ interface HeroDataType {
   title: string;
   description: string;
   image: string;
+  mobileImage: string;
 }
 
 const Hero: React.FC = () => {
   const selectedlang = useRecoilValue(SelectedLanguageState);
+
+  const [mobile, setMobile] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    const resizeMobile = () => {
+      if (window.innerWidth <= 568) {
+        setMobile(true);
+      } else {
+        setMobile(false);
+      }
+    }
+
+    resizeMobile();
+    window.addEventListener("resize", resizeMobile);
+    return () => window.removeEventListener("resize", resizeMobile);
+  }, []);
 
   //hero
   const {
@@ -76,12 +93,12 @@ const Hero: React.FC = () => {
           </p>
         ) : (
           <Swiper
-            autoplay={{
-              delay: 1500,
-              pauseOnMouseEnter: false,
-            }}
+            // autoplay={{
+            //   delay: 1500,
+            //   pauseOnMouseEnter: false,
+            // }}
             loop={true}
-            speed={1000}
+            // speed={1000}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
@@ -92,20 +109,22 @@ const Hero: React.FC = () => {
             className="mySwiper">
             {hasHero
               ? heroData.map((item: HeroDataType, index: number) => (
-                  <SwiperSlide key={index}>
-                    <img
-                      src={`https://ekol-server-1.onrender.com${item?.image}`}
-                      alt={`${item?._id}-image`}
-                      loading="lazy"
-                    />
-                    <div className="slide-content">
-                      <div className="left">
-                        <h1 style={{ display: item?.title === '' || item?.title === null ? 'none' : '' }}>{item?.title}</h1>
-                        <p style={{ display: item?.description === '' || item?.description === null ? 'none' : '' }}>{item?.description}</p>
-                      </div>
+                <SwiperSlide key={index}>
+                  <img
+                    src={
+                      mobile ? `https://ekol-server-1.onrender.com${item?.mobileImage}` : `https://ekol-server-1.onrender.com${item?.image}`
+                    }
+                    alt={`${item?._id}-image`}
+                    loading="lazy"
+                  />
+                  <div className="slide-content">
+                    <div className="left">
+                      <h1 style={{ display: item?.title === '' || item?.title === null ? 'none' : '' }}>{item?.title}</h1>
+                      <p style={{ display: item?.description === '' || item?.description === null ? 'none' : '' }}>{item?.description}</p>
                     </div>
-                  </SwiperSlide>
-                ))
+                  </div>
+                </SwiperSlide>
+              ))
               : ""}
 
             <div className="buttons">
