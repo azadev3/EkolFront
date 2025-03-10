@@ -893,62 +893,62 @@
             flex-direction: column;
             gap: 24px;
             .data-map {
-                width: 100%;
+              width: 100%;
+              display: flex;
+              align-items: flex-start;
+              justify-content: flex-start;
+              gap: 12px;
+              .left-icon-area {
+                min-width: 40px;
+                width: 40px;
+                height: 40px;
+                min-height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                background-color: #004238;
+                border-radius: 100px;
+                img {
+                  width: 50%;
+                  height: 50%;
+                  object-fit: scale-down;
+                }
+              }
+              .right-area {
                 display: flex;
                 align-items: flex-start;
                 justify-content: flex-start;
-                gap: 12px;
-                .left-icon-area {
-                    min-width: 40px;
-                    width: 40px;
-                    height: 40px;
-                    min-height: 40px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    overflow: hidden;
-                    background-color: #004238;
-                    border-radius: 100px;
-                    img {
-                        width: 50%;
-                        height: 50%;
-                        object-fit: scale-down;
-                    }
+                flex-direction: column;
+                gap: 2px;
+                .title-main {
+                  color: #000000;
+                  font-weight: 500;
+                  font-size: 16px;
+                  text-align: left;
+                  letter-spacing: -0.2px;
+                  padding-left: 2px;
                 }
-                .right-area {
-                    display: flex;
-                    align-items: flex-start;
-                    justify-content: flex-start;
-                    flex-direction: column;
-                    gap: 2px;
-                    .title-main {
-                        color: #000000;
-                        font-weight: 500;
-                        font-size: 16px;
-                        text-align: left;
-                        letter-spacing: -0.2px;
-                        padding-left: 2px;
-                    }
-                    .others {
-                        max-width: 200px;
-                        width: 100%;
-                        display: flex;
-                        align-items: flex-start;
-                        justify-content: flex-start;
-                        flex-direction: column;
-                        gap: 2px;
-                        .value {
-                            color: #000000CC;
-                            font-weight: 400;
-                            font-size: 14px;
-                            line-height: 21px;
-                            text-align: left;
-                            letter-spacing: -0.2px;
-                            max-width: 200px;
-                            width: 100%;
-                        }
-                    }
+                .others {
+                  max-width: 200px;
+                  width: 100%;
+                  display: flex;
+                  align-items: flex-start;
+                  justify-content: flex-start;
+                  flex-direction: column;
+                  gap: 2px;
+                  .value {
+                    color: #000000cc;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 21px;
+                    text-align: left;
+                    letter-spacing: -0.2px;
+                    max-width: 200px;
+                    width: 100%;
+                  }
                 }
+              }
             }
           }
         }
