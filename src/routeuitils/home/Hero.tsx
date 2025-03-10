@@ -104,6 +104,7 @@ const Hero: React.FC = () => {
             }}
             pagination={{
               clickable: true,
+              dynamicBullets: true,
             }}
             modules={[Pagination, Autoplay]}
             className="mySwiper">

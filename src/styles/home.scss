@@ -120,63 +120,26 @@
         }
       }
 
-      .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next {
-        width: 24px;
-        height: 24px;
-        border: 1px solid #ffffff;
-        padding: 8px;
-        opacity: 80%;
-        background-color: transparent;
-        &::after {
-          content: '';
-          width: 8px;
-          height: 8px;
-          border-radius: 100px;
-          transform: translate(-50%, -50%);
-          left: 50%;
-          top: 50%;
-          position: absolute;
-          z-index: 10;
-          background-color: #ffffff;
-        }
+      .swiper-pagination-fraction,
+      .swiper-pagination-custom,
+      .swiper-horizontal > .swiper-pagination-bullets,
+      .swiper-pagination-bullets.swiper-pagination-horizontal {
+        bottom: 30px;
       }
-      .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev {
-        width: 24px;
-        height: 24px;
-        border: 1px solid #ffffff;
-        padding: 8px;
-        opacity: 80%;
-        background-color: transparent;
-        &::after {
-          content: '';
-          width: 8px;
-          height: 8px;
-          border-radius: 100px;
-          transform: translate(-50%, -50%);
-          left: 50%;
-          top: 50%;
-          position: absolute;
-          z-index: 10;
-          background-color: #ffffff;
-        }
-      }
-
       .swiper-pagination-bullet {
         width: 24px;
         height: 24px;
-        border: 1px solid #ffffff;
+        border: 1px solid #fff;
         background-color: transparent;
-        position: relative;
         padding: 8px;
         border-radius: 50%;
         z-index: 100;
-        bottom: 21px;
         &::after {
           content: '';
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background-color: #ffffff;
+          background-color: #fff;
           position: absolute;
           left: 50%;
           top: 50%;
@@ -189,6 +152,7 @@
       .swiper-pagination-bullet-active::after {
         visibility: visible;
       }
+
       .swiper-slide img {
         display: block;
         width: 100%;
