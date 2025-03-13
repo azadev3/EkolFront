@@ -72,7 +72,7 @@ const Services: React.FC = () => {
                 <SwiperSlide key={index}>
                   <div className="left">
                     <h3>{item?.title}</h3>
-                    <p>{item?.slogan}</p>
+                    <p style={{ color: "black" }}>{item?.slogan}</p>
                     <div
                       onClick={() => {
                         navigate(`/fealiyyet/xidmetler/${item?._id}`);
