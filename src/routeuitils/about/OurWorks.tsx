@@ -144,11 +144,10 @@ const OurWorks: React.FC = () => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlContent, 'text/html');
 
-    // Fazladan <p> etiketlerini kontrol et ve kaldır
     const paragraphs = doc.querySelectorAll('p');
     paragraphs.forEach((p) => {
       if (!p.textContent?.trim()) {
-        p.remove(); // İçeriği boş olan <p> etiketlerini kaldır
+        p.remove();
       }
     });
 
@@ -174,10 +173,10 @@ const OurWorks: React.FC = () => {
           <div className="grid-works">
             <div className="navigation-content">
               {OurWorksInnerData && OurWorksInnerData.length > 0
-                ? [...OurWorksInnerData]?.reverse()?.map((item: OurWorksInnerInterface) => (
+                ? OurWorksInnerData?.map((item: OurWorksInnerInterface) => (
                   <div
                     key={item?._id}
-                    className="item-navigation"
+                    className={`item-navigation ${selectItem === item?._id ? "active" : ""}`}
                     onClick={() => {
                       handleSelectItem(item?._id || '');
                       window.scrollTo(0, 0);
@@ -185,7 +184,8 @@ const OurWorks: React.FC = () => {
                         const el = document.getElementById('navigation_content');
                         el?.scrollIntoView({ behavior: 'smooth' });
                       }
-                    }}>
+                    }}
+                    >
                     <div title={item?.title || ''} className="left-order-num-and-title">
                       <p title={item?.title || ''}>{item?.title}</p>
                     </div>

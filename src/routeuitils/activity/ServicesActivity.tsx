@@ -145,8 +145,8 @@ const ServicesActivity: React.FC = () => {
                         slidesPerView: 4.5,
                       },
                     }}>
-                    {hasServicesData &&
-                      servicesPageData?.map((item) => (
+                    {hasServicesData && servicesPageData &&
+                      [...servicesPageData]?.reverse()?.map((item:any) => (
                         <SwiperSlide
                           className={selectedService === item?._id || selectedServiceTwo === item?._id ? 'actived' : ''}
                           key={item._id}

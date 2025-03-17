@@ -977,6 +977,10 @@
             &:active {
               transform: scale(0.99);
             }
+            &.active {
+              cursor: default;
+              background-color: #efeeee6c;
+            }
           }
         }
 
