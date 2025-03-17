@@ -155,10 +155,10 @@ const Tools: React.FC = () => {
           <div className="grid-works">
             <div className="navigation-content">
               {ToolsInnerData && ToolsInnerData?.length > 0
-                ? [...ToolsInnerData]?.reverse()?.map((item: ToolsInnerInterface) => (
+                ? ToolsInnerData?.map((item: ToolsInnerInterface) => (
                   <div
                     key={item?._id}
-                    className="item-navigation"
+                    className={`item-navigation-tools ${selectItem === item?.title ? "active-tool" : ""}`}
                     onClick={() => {
                       handleSelectItem(item?.title);
                       window.scrollTo(0, 0);

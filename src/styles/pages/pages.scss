@@ -980,6 +980,54 @@
             &.active {
               cursor: default;
               background-color: #efeeee6c;
+            }            
+          }
+          .item-navigation-tools {
+            cursor: pointer;
+            transition: 100ms ease-in-out;
+            border-bottom: 1px solid #d4d4d4;
+            width: 100%;
+            height: auto;
+            padding-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            justify-content: space-between;
+            .left-order-num-and-title {
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              gap: 12px;
+              p {
+                color: #000000e5;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 24px;
+                text-align: start;
+              }
+              span {
+                color: #30b258;
+                font-weight: 500;
+                font-size: 18px;
+              }
+            }
+
+            .arrowimg {
+              width: 24px;
+              height: 24px;
+            }
+            &:nth-last-child(1) {
+              border-bottom: none;
+            }
+            &:hover {
+              background-color: #efeeee;
+            }
+            &:active {
+              transform: scale(0.99);
+            }
+            &.active-tool {
+              cursor: default;
+              background-color: #efeeee6c;
             }
           }
         }
